@@ -14,3 +14,12 @@ Allocation	25.4KiB		63.7KiB		245.1KiB		20.5MiB		3.7MiB		158.1KiB	133.8KiB
 Time1		348ms		2007ms		2313ms			7307ms		3819ms		557ms		1595ms
 Time2		389ms		1412ms		2610ms			6614ms		3149ms		753ms		2064ms
 Time3		299ms		1380ms		1881ms			7905ms		3142ms		577ms		2077ms
+
+
+After XML improvements and other cleanup:
+(Unfortunately, a LOT of stuff got broken here.  GAH!
+
+Allocation	18.4KiB		N/A		N/A			8.6MiB		1.6MiB		N/A		65.0KiB
+Time1		264ms		N/A		N/A			7829ms		4186ms		N/A		2191ms
+Time2		199ms		N/A		N/A			6988ms		3910ms		N/A		1805ms
+Time3		207ms		N/A		N/A			7134ms		3606ms		N/A		2157ms

@@ -156,9 +156,9 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
 						this.m_paintable.AppendRadialGradient(temp);
 						break;
 					}
-					default:
-					  UnityEngine.Debug.LogError("Unexpected tag: " + t_name);
-					  break;
+//					default:
+//					  UnityEngine.Debug.LogError("Unexpected tag: " + t_name);
+//					  break;
 				}
 		}
 	}
