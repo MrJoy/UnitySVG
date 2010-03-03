@@ -18,14 +18,14 @@ public class uSVGPolylineElement : uSVGTransformable, uISVGDrawable {
 		this.m_attrList = attrList;
 		this.m_render = m_render;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, attrList);
-		this.m_listPoints = f_ExtractPoints(this.m_attrList.GetValue("points"));
+		this.m_listPoints = f_ExtractPoints(this.m_attrList.GetValue("POINTS"));
 	}
 	//================================================================================
 	private List<uSVGPoint> f_ExtractPoints(string inputText) {
 		List<uSVGPoint> m_return = new List<uSVGPoint>();
-		List<string> m_lstStr = uSVGStringExtractor.f_ExtractTransformValue(inputText);
+		string[] m_lstStr = uSVGStringExtractor.f_ExtractTransformValue(inputText);
 
-		int len = m_lstStr.Count;
+		int len = m_lstStr.Length;
 		for (int i = 0; i < len -1; i++) {
 			string value1, value2;
 			value1 = m_lstStr[i];

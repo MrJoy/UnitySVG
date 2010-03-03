@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 
-public class XStack<T> {
+// A simple stack implementation to get around the fact that using
+// System.Collections.Generic.Stack<T> pulls in an extra DLL on the webplayer.
+public class LiteStack<T> {
 	private List<T> stack = new List<T>();
 	
 	public void Push(T obj) {
@@ -32,6 +34,6 @@ public class XStack<T> {
 	}
 }
 
-public class XStack : XStack<object> {
+public class LiteStack : LiteStack<object> {
 
 }

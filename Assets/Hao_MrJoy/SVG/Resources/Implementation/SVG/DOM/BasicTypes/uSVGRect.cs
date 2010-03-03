@@ -1,3 +1,4 @@
+// TODO: Look at using UnityEngine.Rect?
 public class uSVGRect {
 	private float m_x;
 	private float m_y;

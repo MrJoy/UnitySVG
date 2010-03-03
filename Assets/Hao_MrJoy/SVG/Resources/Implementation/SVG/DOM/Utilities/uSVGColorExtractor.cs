@@ -2,7 +2,7 @@ using UnityEngine;
 
 public struct uSVGColorExtractor {
 	public static Color aliceblue { get {return change(240, 248, 255);} }
-	public static Color antiquewhite { get {return new Color(250, 235, 215);} }
+	public static Color antiquewhite { get {return change(250, 235, 215);} }
 	public static Color aqua { get {return change( 0, 255, 255);} }
 	public static Color aquamarine { get {return change(127, 255, 212);} }
 	public static Color azure { get {return change(240, 255, 255);} }
@@ -154,7 +154,7 @@ public struct uSVGColorExtractor {
 	}
 	public static Color f_GetColor(string name) {
 		switch(name.ToLower()) {
-			case "aliceblue":
+			case "aliceblue": return aliceblue;
 			case "antiquewhite": return antiquewhite;
 			case "aqua": return aqua;
 			case "aquamarine": return aquamarine;

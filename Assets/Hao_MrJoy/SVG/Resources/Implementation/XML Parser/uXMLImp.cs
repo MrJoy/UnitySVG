@@ -3,7 +3,6 @@ using System.IO;
 public class uXMLImp : SmallXmlParser.IContentHandler {
 	public enum XMLTagState {OPEN, CLOSE, BOTH}
 	
-	//private string m_xmlText;
 	private SmallXmlParser m_parser 	= new SmallXmlParser();
 	private TextReader m_textReader;
 	
@@ -11,7 +10,6 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
 	private string m_currentLineText = "";
 	private XMLTagState m_currentTagState;
 	private AttributeList m_currentList;
-	//private SmallXmlParser.IAttrList m_subCurrentList;
 	
 	private string m_svgText = "";
 
@@ -25,25 +23,13 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
 		m_parser.f_Pause();
 		m_parser.Parse(m_textReader, this);
 	}
-	/**********************************************************************************
-	Private Classes:
-		private void f_CloneAttrsList(Mono.Xml.SmallXmlParser.IAttrList attrs);
-	
-	
-	************************************************************************************/
 	
 	//---------------------------------------------------------
 	//Methods: f_CloneAttrsList
 	//Purpose: create a clone Attribute List from XMLParser Handle for storing.
 	//---------------------------------------------------------
 	private void f_CloneAttrsList(AttributeList attrs) {
-		this.m_currentList = new AttributeList(1);
-		for (int i = 0; i < attrs.Length; i++) {
-			string name = attrs.GetName(i);
-			string value = attrs.GetValue(i);
-			this.m_currentList.Add(name, value);// = (AttributeList)attrs;
-		}
-		
+		this.m_currentList = new AttributeList(attrs);
 	}
 	
 	/**********************************************************************************
@@ -117,7 +103,7 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
 	//---------------------------------------------------------
 
 	public bool f_IsCurrentTagName(string name) {
-		if (name.ToUpper() == this.m_currentName.ToUpper()) {
+		if (name == this.m_currentName) {
 			return true;
 		}
 		return false;		
@@ -219,7 +205,6 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
 		this.m_parser.f_Pause();
 		this.m_currentName = name;
 		this.m_currentLineText = lineText;
-		//this.m_currentList = attrs;
 		f_CloneAttrsList(attrs);
 		this.m_currentTagState = XMLTagState.BOTH;
 	}
@@ -227,13 +212,11 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
 		this.m_parser.f_Pause();
 		this.m_currentName = name;
 		this.m_currentLineText = lineText;
-		//this.m_currentList = attrs;
 		f_CloneAttrsList(attrs);
 		this.m_currentTagState = XMLTagState.OPEN;
 	}
 
 	public void OnEndElement (string name, string lineText) {
-		//Debug.Log(lineText);
 		this.m_parser.f_Pause();
 		this.m_currentName = name;
 		this.m_currentLineText = lineText;

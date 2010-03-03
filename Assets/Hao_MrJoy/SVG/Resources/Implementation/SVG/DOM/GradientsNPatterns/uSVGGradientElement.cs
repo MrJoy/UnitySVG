@@ -31,15 +31,17 @@ public class uSVGGradientElement {
 	/***************************************************************************/
 	private void f_Initialize() {
 		m_gradientUnits = uSVGGradientUnitType.SVG_OBJECT_BOUNDING_BOX;
-		if (this.m_attrList.GetValue("gradientunits", true).ToLower() == "userspaceonuse") {
+		if (this.m_attrList.GetValue("GRADIENTUNITS").ToLower() == "userspaceonuse") {
 			m_gradientUnits = uSVGGradientUnitType.SVG_USER_SPACE_ON_USE;
 		}
 		
 		//------
+		// TODO: It's probably a bug that the value is not innoculated for CaSe 
+		// VaRiAtIoN in GetValue, below:
 		m_spreadMethod = uSVGSpreadMethodTypes.SVG_SPREADMETHOD_PAD;
-		if (this.m_attrList.GetValue("spreadMethod") == "reflect") {
+		if (this.m_attrList.GetValue("SPREADMETHOD") == "reflect") {
 			m_spreadMethod = uSVGSpreadMethodTypes.SVG_SPREADMETHOD_REFLECT;
-		} else if (this.m_attrList.GetValue("spreadMethod") == "repeat") {
+		} else if (this.m_attrList.GetValue("SPREADMETHOD") == "repeat") {
 			m_spreadMethod = uSVGSpreadMethodTypes.SVG_SPREADMETHOD_REPEAT;
 		}
 	}

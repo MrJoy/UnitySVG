@@ -35,56 +35,7 @@ using System.Collections;
 using System.Globalization;
 using System.IO;
 using System.Text;
-//using UnityEngine;
 
-//namespace Mono.Xml {
-/*	internal class DefaultHandler : SmallXmlParser.IContentHandler
-	{
-		public void OnStartParsing (SmallXmlParser parser)
-		{
-		}
-
-		public void OnEndParsing (SmallXmlParser parser)
-		{
-		}
-
-		public void OnStartElement (string name, SmallXmlParser.IAttrList attrs)
-		{
-		}
-
-		public void OnEndElement (string name)
-		{
-		}
-
-		public void OnChars (string s)
-		{
-		}
-
-		public void OnIgnorableWhitespace (string s)
-		{
-		}
-
-		public void OnProcessingInstruction (string name, string text)
-		{
-		}
-	}
-*/
-	//internal class SmallXmlParser
-	
-/*
-// Se lam Class nay lai thay the cho System.IO.TextReader
-public class uTextReader {
-	string m_text;
-	//int i
-	public uTextReader(string text) {
-		this.m_text = text;
-	}
-	public int Peek() {
-		return 
-	}
-}
-
-*/
 public class SmallXmlParser	{
 	public interface IContentHandler {
 		void OnStartParsing (SmallXmlParser parser);
@@ -100,8 +51,8 @@ public class SmallXmlParser	{
 	/***********************************************************************************/
 	IContentHandler handler;
 	TextReader reader;
-	XStack elementNames = new XStack ();
-	XStack xmlSpaces = new XStack ();
+	LiteStack elementNames = new LiteStack ();
+	LiteStack xmlSpaces = new LiteStack ();
 	string xmlSpace;
 	StringBuilder buffer = new StringBuilder (200);
 	char [] nameBuffer = new char [30];
@@ -110,15 +61,9 @@ public class SmallXmlParser	{
 		AttributeList attributes = new AttributeList(1);
 		int line = 1, column;
 		bool resetColumn;
-		private bool isPause;		
-		private bool isEnd;
+		private bool isPause = false;
+		private bool isEnd = false;
 		private string m_line = "";
-
-		public SmallXmlParser ()
-		{
-			this.isEnd = false;
-			this.isPause = false;
-		}
 
 		private Exception Error (string msg)
 		{
@@ -341,8 +286,8 @@ public class SmallXmlParser	{
 			handler = null;
 			reader = null;
 #if CF_1_0
-			elementNames = new XStack ();
-			xmlSpaces = new XStack ();
+			elementNames = new LiteStack ();
+			xmlSpaces = new LiteStack ();
 #else
 			elementNames.Clear ();
 			xmlSpaces.Clear ();
@@ -361,7 +306,6 @@ public class SmallXmlParser	{
 					isWhitespace = true;
 				HandleWhitespaces ();
 			}
-			//Debug.Log(Peek());System.Console.ReadKey();
 			if (Peek () == '<') {
 				f_NewLine();
 				Read ();
@@ -387,10 +331,6 @@ public class SmallXmlParser	{
 						Expect ('>');
 						return;
 					}
-					/*if (ReadName () != "DOCTYPE")
-						throw Error ("Invalid declaration markup.");
-					else
-						throw Error ("This parser does not support document type.");*/
 				case '?': // PIs
 					HandleBufferedContent ();
 					Read ();
@@ -441,7 +381,6 @@ public class SmallXmlParser	{
 					SkipWhitespaces ();
 					if (Peek () == '/') {
 						Read ();
-						//handler.OnEndElement (name);
 					}
 					else {
 						elementNames.Push (name);
@@ -632,8 +571,7 @@ public class SmallXmlParser	{
 		public int Column {
 			get { return column; }
 		}
-	}
-//}
+}
 
 
 

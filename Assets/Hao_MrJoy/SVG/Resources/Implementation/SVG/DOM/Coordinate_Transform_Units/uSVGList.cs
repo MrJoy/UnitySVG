@@ -1,15 +1,14 @@
 using System.Collections;
 
-//namespace Unity.SVG.DOM {
-	/// <summary>
-	/// Base class for all SVG*List-derived classes.
-	/// Note we're using ArrayList (as opposed to deriving from) to hide unneeded ArrayList methods
-	/// Note that a CLR uint is equivalent to an IDL ulong, so uint is used for all index values
-	/// </summary>
-    /// <developer>kevin@kevlindev.com</developer>
-    /// <completed>100</completed>
-	public class uSVGList
-	{
+/// <summary>
+/// Base class for all SVG*List-derived classes.
+/// Note we're using ArrayList (as opposed to deriving from) to hide unneeded ArrayList methods
+/// Note that a CLR uint is equivalent to an IDL ulong, so uint is used for all index values
+/// </summary>
+  /// <developer>kevin@kevlindev.com</developer>
+  /// <completed>100</completed>
+public class uSVGList
+{
 
         private static Hashtable itemOwnerMap;
         protected ArrayList items;
@@ -167,15 +166,6 @@ using System.Collections;
             return items[items.Add(newItem)];
         }
 
-
-
-/*        public IEnumerator GetEnumerator() 
-        {
-            return new uSVGListEnumerator(this);
-        }
-
-*/
-
         /// <summary>
         /// RemoveItem - used to remove an item by value as opposed to by position
         /// </summary>
@@ -191,5 +181,4 @@ using System.Collections;
                 }
             }
         }
-	}
-//}
+}

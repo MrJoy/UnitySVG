@@ -1,7 +1,6 @@
 using System;
 
-//namespace Unity.SVG.DOM {
-	public enum uDOMExceptionType {
+public enum uDOMExceptionType {
 		IndexSizeErr,
 		DomstringSizeErr,
 		HierarchyRequestErr,
@@ -17,16 +16,12 @@ using System;
 		InvalidModificationErr,
 		NamespaceErr,
 		InvalidAccessErr
-	}
+}
 	
 	
-	[Serializable]
-	public class uDOMException : Exception
-	{
-		/*public DomException() : this(DomExceptionType.SVGSHARP_UNDEFINED_ERROR, "Unknown error")
-		{
-		}*/
-
+[Serializable]
+public class uDOMException : Exception
+{
 		protected uDOMException(string msg, Exception innerException) : base(msg, innerException)
 		{
 		}
@@ -56,5 +51,4 @@ using System;
 		{
 			get{return code;}
 		}
-	}
-//}
+}

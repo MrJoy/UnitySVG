@@ -1,16 +1,14 @@
 using System;
 
-//namespace Unity.SVG.DOM {
-	public enum uSVGExceptionType
-	{
+public enum uSVGExceptionType
+{
 		SvgWrongTypeErr, 
 		SvgInvalidValueErr, 
 		SvgMatrixNotInvertable
-	}
+}
 
-	[Serializable]
-	public class uSVGException : uDOMException
-	{
+public class uSVGException : uDOMException
+{
 		public uSVGException(uSVGExceptionType errorCode):this(errorCode, String.Empty, null)
 		{
 			
@@ -37,5 +35,4 @@ using System;
 				return code;
 			}
 		}
-	}
-//}
+}

@@ -1,8 +1,7 @@
 using UnityEngine;
-//using System.Collections;
 
-//namespace Unity.SVG.DOM {
-	public class uSVGMatrix {
+// TODO: Rename Matrix2x3
+public class uSVGMatrix {
 		protected float m_a, m_b, m_c, m_d, m_e, m_f;
 		const double radPerDegree = 2.0 * 3.1415926535 / 360.0;
 		public uSVGMatrix() : this(1, 0, 0, 1, 0, 0)
@@ -83,17 +82,6 @@ using UnityEngine;
 		public uSVGMatrix Translate(float x, float y) {
 			return new uSVGMatrix ( a, b, c, d, a*x + c*y + e, b*x + d*y +f);
 		}
-		/*
-		public uSVGMatrix RotateFromVector(float x, float y) {
-			
-		}
-		public uSVGMatrix FlipX(float x, float y) {
-			
-		}
-		public uSVGMatrix FlipY(float x, float y) {
-			
-		}
-		*/
 		public uSVGMatrix SkewX(float angle) {
 			double ta = Mathf.Tan((float) (angle*radPerDegree));
 			return new uSVGMatrix(	a,					b,
@@ -106,5 +94,4 @@ using UnityEngine;
 									c,					d,
 									e,					f);
 		}
-	}
-//}
+}

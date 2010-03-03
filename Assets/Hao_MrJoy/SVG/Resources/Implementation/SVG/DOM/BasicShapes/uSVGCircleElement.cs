@@ -42,9 +42,9 @@ public class uSVGCircleElement : uSVGTransformable, uISVGDrawable {
 		this.m_attrList = attrList;
 		this.m_render = m_render;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
-		this.m_cx = new uSVGAnimatedLength(attrList.GetValue("cx"));
-		this.m_cy = new uSVGAnimatedLength(attrList.GetValue("cy"));
-		this.m_r = new uSVGAnimatedLength(attrList.GetValue("r"));
+		this.m_cx = new uSVGAnimatedLength(attrList.GetValue("CX"));
+		this.m_cy = new uSVGAnimatedLength(attrList.GetValue("CY"));
+		this.m_r = new uSVGAnimatedLength(attrList.GetValue("R"));
 	}
 	//================================================================================
 	private uSVGGraphicsPath m_graphicsPath;

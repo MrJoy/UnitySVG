@@ -66,4 +66,3 @@ public class uSVGNumber {
 		return bisect;
 	}
 }
-//}

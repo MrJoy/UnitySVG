@@ -72,12 +72,12 @@ public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
 		this.m_attrList = attrList;
 		this.m_render = m_render;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
-		this.m_x = new uSVGAnimatedLength(attrList.GetValue("x"));
-		this.m_y = new uSVGAnimatedLength(attrList.GetValue("y"));
-		this.m_width = new uSVGAnimatedLength(attrList.GetValue("width"));
-		this.m_height = new uSVGAnimatedLength(attrList.GetValue("height"));
-		this.m_rx = new uSVGAnimatedLength(attrList.GetValue("rx"));
-		this.m_ry = new uSVGAnimatedLength(attrList.GetValue("ry"));
+		this.m_x = new uSVGAnimatedLength(attrList.GetValue("X"));
+		this.m_y = new uSVGAnimatedLength(attrList.GetValue("Y"));
+		this.m_width = new uSVGAnimatedLength(attrList.GetValue("WIDTH"));
+		this.m_height = new uSVGAnimatedLength(attrList.GetValue("HEIGHT"));
+		this.m_rx = new uSVGAnimatedLength(attrList.GetValue("RX"));
+		this.m_ry = new uSVGAnimatedLength(attrList.GetValue("RY"));
 	}
 	//================================================================================
 	private uSVGGraphicsPath m_graphicsPath;

@@ -16,8 +16,8 @@ public class uSVGStringExtractor {
 	}
 	//--------------------------------------------------
 	//Extract for Syntax:   translate(700 200) rotate(-30)
+	private static char[] splitPipe = new char[]{'|'};
 	public static Dictionary<string, string> f_ExtractTransformList(string inputText) {
-		
 		Dictionary <string, string> m_return = new Dictionary<string, string>();
 		int i = 0;
 		string m_key = "";
@@ -28,7 +28,7 @@ public class uSVGStringExtractor {
 		inputText = uSVGStringExtractor.f_RemoveMultiSpace(inputText); //Lam sach bot khoang trang;
 		inputText = inputText.Replace(") ",")|");
 		
-		string[] valuesStr = inputText.Split(new char[]{'|'}, System.StringSplitOptions.RemoveEmptyEntries);
+		string[] valuesStr = inputText.Split(splitPipe, System.StringSplitOptions.RemoveEmptyEntries);
 
 		int len = valuesStr.GetLength(0);
 
@@ -43,21 +43,13 @@ public class uSVGStringExtractor {
 	}
 	//--------------------------------------------------
 	//Extract for Syntax:  700 200 -30
-	public static List<string> f_ExtractTransformValue(string inputText) {
-
-		List <string> m_return = new List<string>();
-		int i = 0;
-
-		inputText = inputText.Trim();		
+	private static char[] splitSpaceComma = new char[]{' ',','};
+	public static string[] f_ExtractTransformValue(string inputText) {
+//		inputText = inputText.Trim();		
 		inputText = uSVGStringExtractor.f_RemoveMultiSpace(inputText);
 
-		string[] valuesStr = inputText.Split(new char[]{' ',','}, System.StringSplitOptions.RemoveEmptyEntries);
-
-		int len = valuesStr.GetLength(0);
-		for (i = 0; i < len; i++) {
-			m_return.Add(valuesStr[i]);
-		}
-		return m_return;		
+		string[] values = inputText.Split(splitSpaceComma, System.StringSplitOptions.RemoveEmptyEntries);
+		return values;		
 	}
 	//--------------------------------------------------
 	//Extract for Systax : M100 100 C200 100,...
@@ -91,6 +83,7 @@ public class uSVGStringExtractor {
 	
 	//--------------------------------------------------
 	//Extract for Syntax:  fill: #ffffff; stroke:#000000; stroke-width:0.172
+	private static char[] splitColonSemicolon = new char[]{':',';'};
 	public static void f_ExtractStyleValue(string inputText, 
 					ref Dictionary<string, string> dic) {
 
@@ -98,7 +91,7 @@ public class uSVGStringExtractor {
 		inputText = uSVGStringExtractor.f_RemoveMultiSpace(inputText);
 		inputText = inputText.Replace(" ","");
 
-		string[] valuesStr = inputText.Split(new char[]{':',';'}, System.StringSplitOptions.RemoveEmptyEntries);
+		string[] valuesStr = inputText.Split(splitColonSemicolon, System.StringSplitOptions.RemoveEmptyEntries);
 
 		int len = valuesStr.GetLength(0);
 		for (int i = 0; i < len -1; i++) {

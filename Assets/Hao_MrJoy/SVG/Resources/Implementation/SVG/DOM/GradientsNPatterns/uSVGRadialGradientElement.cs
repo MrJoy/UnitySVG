@@ -41,39 +41,39 @@ public class uSVGRadialGradientElement : uSVGGradientElement {
 		get{return this.m_stopList;}
 	}
 	/***************************************************************************/
-	public uSVGRadialGradientElement(string radialGradElement,
+	public uSVGRadialGradientElement(uXMLImp xmlImp,
 										AttributeList attrList) : base(attrList) {
 		this.m_attrList = attrList;
-		this.m_xmlImp = new uXMLImp(radialGradElement);		
+		this.m_xmlImp = xmlImp;
 		f_Initialize();
 	}
 	/***************************************************************************/
 	private void f_Initialize() {
 		this.m_stopList = new List<uSVGStopElement>();		
-		string temp = this.m_attrList.GetValue("id");
+		string temp = this.m_attrList.GetValue("ID");
 		this.m_id = temp;
 
-		temp = this.m_attrList.GetValue("cx");
+		temp = this.m_attrList.GetValue("CX");
 		if (temp == "") {
 			m_cx = new uSVGAnimatedLength("50%");
 		} else m_cx = new uSVGAnimatedLength(temp);
 
-		temp = this.m_attrList.GetValue("cy");
+		temp = this.m_attrList.GetValue("CY");
 		if (temp == "") {
 			m_cy = new uSVGAnimatedLength("50%");
 		} else m_cy = new uSVGAnimatedLength(temp);
 
-		temp = this.m_attrList.GetValue("r");
+		temp = this.m_attrList.GetValue("R");
 		if (temp == "") {
 			m_r = new uSVGAnimatedLength("50%");
 		} else m_r = new uSVGAnimatedLength(temp);
 
-		temp = this.m_attrList.GetValue("fx");
+		temp = this.m_attrList.GetValue("FX");
 		if (temp == "") {
 			m_fx = new uSVGAnimatedLength("50%");
 		} else m_fx = new uSVGAnimatedLength(temp);
 
-		temp = this.m_attrList.GetValue("fy");
+		temp = this.m_attrList.GetValue("FY");
 		if (temp == "") {
 			m_fy = new uSVGAnimatedLength("50%");
 		} else m_fy = new uSVGAnimatedLength(temp);
@@ -82,16 +82,19 @@ public class uSVGRadialGradientElement : uSVGGradientElement {
 	}
 	//---------------
 	private void f_GetElementList() {
-		while(this.m_xmlImp.f_ReadNextTag()) {
+    bool exitFlag = false;
+    while(!exitFlag && this.m_xmlImp.f_ReadNextTag()) {
+      if(this.m_xmlImp.f_GetCurrentTagState() == uXMLImp.XMLTagState.CLOSE) {
+        exitFlag = true;
+        continue;
+      }
 			string t_name = this.m_xmlImp.f_GetCurrentTagName();
 			AttributeList t_attrList;
-			if (this.m_xmlImp.f_GetCurrentTagState() != uXMLImp.XMLTagState.CLOSE) {
-				if (t_name.ToUpper() == "STOP") {
+				if (t_name == "stop") {
 					t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
 					uSVGStopElement temp = new uSVGStopElement(	t_attrList);	
 					m_stopList.Add(temp);
 				}
-			}
 		}
 	}
 	/***************************************************************************/

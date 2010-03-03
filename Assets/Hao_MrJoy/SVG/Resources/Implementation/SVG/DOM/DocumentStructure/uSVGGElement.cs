@@ -3,36 +3,40 @@ using System.Collections.Generic;
 public class uSVGGElement : uSVGTransformable, uISVGDrawable {
 	//-------------------------------
 	private AttributeList m_attrList;
-	private List<object> m_elementList;
+	private List<object> m_elementList = null;
 	private uXMLImp m_xmlImp;
 	//-------------------------------
 	private uSVGGraphics m_render;
 	//-------------------------------
 	private uSVGPaintable m_paintable;
 	/***********************************************************************************/
-	public uSVGGElement(string gElement,
+	public uSVGGElement(uXMLImp xmlImp,
 						uSVGAnimatedTransformList inheritTransformList,
 						uSVGPaintable inheritPaintable,
 						uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_render = m_render;
-		this.m_xmlImp = new uXMLImp(gElement);		
-		this.m_attrList = this.m_xmlImp.f_GetNextAttrList();
+		this.m_xmlImp = xmlImp;		
+		this.m_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
 		f_Initial();
 	}
 	/***********************************************************************************/
 	private void f_Initial() {
-		m_elementList = new List<object>();
+    m_elementList = new List<object>();
 		this.currentTransformList = new uSVGAnimatedTransformList(
-											this.m_attrList.GetValue("TRANSFORM", true));
+											this.m_attrList.GetValue("TRANSFORM"));
 		f_GetElementList();
 	}
 	/***********************************************************************************/
 	private void f_GetElementList() {
-		while(this.m_xmlImp.f_ReadNextTag()) {
+    bool exitFlag = false;
+    while(!exitFlag && this.m_xmlImp.f_ReadNextTag()) {
+      if(this.m_xmlImp.f_GetCurrentTagState() == uXMLImp.XMLTagState.CLOSE) {
+        exitFlag = true;
+        continue;
+      }
 			string t_name = this.m_xmlImp.f_GetCurrentTagName();
 			AttributeList t_attrList;
-			if (this.m_xmlImp.f_GetCurrentTagState() != uXMLImp.XMLTagState.CLOSE) {
 				switch(t_name.ToUpper()) {
 					case "RECT": {
 						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
@@ -98,22 +102,14 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
 					break;
 					}
 					case "SVG": {
-						string t_string = this.m_xmlImp.f_GetCurrentLineText();
-						string t_restString = "";
-						t_restString = this.m_xmlImp.f_GetUntilCloseTag("svg");
-						t_string += t_restString;
-						m_elementList.Add(new uSVGSVGElement(	t_string,
+						m_elementList.Add(new uSVGSVGElement(	this.m_xmlImp,
 																this.summaryTransformList,
 																this.m_paintable,
 																this.m_render));
 						break;
 					}
 					case "G": {
-						string t_string = this.m_xmlImp.f_GetCurrentLineText();
-						string t_restString = "";
-						t_restString = this.m_xmlImp.f_GetUntilCloseTag("g");
-						t_string += t_restString;
-						m_elementList.Add(new uSVGGElement(	t_string, 
+						m_elementList.Add(new uSVGGElement(	this.m_xmlImp, 
 															this.summaryTransformList,
 															this.m_paintable,
 															this.m_render));
@@ -122,11 +118,7 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
 					//--------
 					case "LINEARGRADIENT": {
 						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						string t_string = this.m_xmlImp.f_GetCurrentLineText();
-						string t_restString = "";
-						t_restString = this.m_xmlImp.f_GetUntilCloseTag("linearGradient");
-						t_string += t_restString;
-						uSVGLinearGradientElement temp = new uSVGLinearGradientElement(t_string,
+						uSVGLinearGradientElement temp = new uSVGLinearGradientElement(this.m_xmlImp,
 																					t_attrList);
 						this.m_paintable.AppendLinearGradient(temp);
 						break;
@@ -134,17 +126,15 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
 					//--------
 					case "RADIALGRADIENT": {
 						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						string t_string = this.m_xmlImp.f_GetCurrentLineText();
-						string t_restString = "";
-						t_restString = this.m_xmlImp.f_GetUntilCloseTag("radialGradient");
-						t_string += t_restString;
-						uSVGRadialGradientElement temp = new uSVGRadialGradientElement(t_string,
+						uSVGRadialGradientElement temp = new uSVGRadialGradientElement(this.m_xmlImp,
 																					t_attrList);
 						this.m_paintable.AppendRadialGradient(temp);
 						break;
 					}
+					default:
+					  UnityEngine.Debug.LogError("Unexpected tag: " + t_name);
+					  break;
 				}
-			}
 		}
 	}	
 	/***********************************************************************************/

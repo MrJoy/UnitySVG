@@ -1,7 +1,4 @@
-//using System.Collections;
-
-//namespace Unity.SVG.DOM {
-	public class uSVGPointList : uSVGList {
+public class uSVGPointList : uSVGList {
 		private ulong m_numberOfItems;
 		/***********************************************************************************/
 		private void f_Clear() {
@@ -122,5 +119,4 @@
         }                  
       }
     }
-  }
-//}
+}

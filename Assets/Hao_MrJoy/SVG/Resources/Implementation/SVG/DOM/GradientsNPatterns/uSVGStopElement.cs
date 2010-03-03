@@ -17,9 +17,9 @@ public class uSVGStopElement {
 	}
 	/***************************************************************************/
 	private void f_Initialize() {
-		m_stopColor = new uSVGColor(this.m_attrList.GetValue("stop-color"));
+		m_stopColor = new uSVGColor(this.m_attrList.GetValue("STOP-COLOR"));
 		//-------
-		string temp = this.m_attrList.GetValue("offset");
+		string temp = this.m_attrList.GetValue("OFFSET");
 		temp = temp.Trim();
 		if (temp != "") {
 			if (temp.EndsWith("%")) {

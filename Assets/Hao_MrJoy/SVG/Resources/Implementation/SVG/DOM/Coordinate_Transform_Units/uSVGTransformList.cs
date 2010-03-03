@@ -1,10 +1,7 @@
-//using UnityEngine;
-//using System.Collections;
 using System.Collections.Generic;
 
 public class uSVGTransformList {
 	private List<uSVGTransform> m_listTransform;
-	//private ulong m_numberOfItems;
 	/*********************************************************************************************/
 	public int numberOfItems {
 		get{return this.m_listTransform.Count;}
@@ -30,7 +27,6 @@ public class uSVGTransformList {
 		m_listTransform = new List<uSVGTransform>();
 		
 		Dictionary<string, string> transformList = uSVGStringExtractor.f_ExtractTransformList(listString);
-		//this.m_numberOfItems = (ulong) transformList.Count;
 		foreach (KeyValuePair<string, string> kvp in transformList) {
 			AppendItem(new uSVGTransform(kvp.Key, kvp.Value));
 		}
@@ -58,12 +54,10 @@ public class uSVGTransformList {
 
 	public void InsertItemBefore(uSVGTransform newItem, int index) {
 		this.m_listTransform.Insert(index, newItem);
-		//return newItem;
 	}
 
 	public void ReplaceItem(uSVGTransform newItem, int index) {
 		this.m_listTransform[index] = newItem;
-		//return newItem;
 	}
 
 	public uSVGTransform CreateSVGTransformFromMatrix(uSVGMatrix matrix) {

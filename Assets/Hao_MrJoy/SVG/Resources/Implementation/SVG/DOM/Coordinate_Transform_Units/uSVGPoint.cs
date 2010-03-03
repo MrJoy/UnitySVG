@@ -1,3 +1,4 @@
+// TODO: Convert to use UnityEngine.Vector2
 public struct uSVGPoint {
 	private float m_x;
 	private float m_y;

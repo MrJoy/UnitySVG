@@ -387,7 +387,7 @@ public class uSVGBasicDraw {
 		
 		// The point on Line Segment[m_pStart, m_pEnd] correlate with m_t
 		
-		XStack<uSVGPointExt> m_stack = new XStack<uSVGPointExt>();
+		LiteStack<uSVGPointExt> m_stack = new LiteStack<uSVGPointExt>();
 		m_stack.Push(m_pEnd); //Push End Point into Stack
 
 		//Array of Change Point

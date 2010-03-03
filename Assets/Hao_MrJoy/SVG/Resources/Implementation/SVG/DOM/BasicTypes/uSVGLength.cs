@@ -1,21 +1,18 @@
-//using System.Collections;
-
-//namespace Unity.SVG.DOM {
-	public enum uSVGLengthType : ushort {
-		SVG_LENGTHTYPE_UNKNOWN = 0,
-		SVG_LENGTHTYPE_NUMBER = 1,
-		SVG_LENGTHTYPE_PERCENTAGE = 2,
-		SVG_LENGTHTYPE_EMS = 3,
-		SVG_LENGTHTYPE_EXS = 4,
-		SVG_LENGTHTYPE_PX = 5,
-		SVG_LENGTHTYPE_CM = 6,
-		SVG_LENGTHTYPE_MM = 7,
-		SVG_LENGTHTYPE_IN = 8,
-		SVG_LENGTHTYPE_PT = 9,
-		SVG_LENGTHTYPE_PC = 10,
-	}
-	/**************************************************************************************************/
-	public class uSVGLength  {
+public enum uSVGLengthType : ushort {
+	SVG_LENGTHTYPE_UNKNOWN = 0,
+	SVG_LENGTHTYPE_NUMBER = 1,
+	SVG_LENGTHTYPE_PERCENTAGE = 2,
+	SVG_LENGTHTYPE_EMS = 3,
+	SVG_LENGTHTYPE_EXS = 4,
+	SVG_LENGTHTYPE_PX = 5,
+	SVG_LENGTHTYPE_CM = 6,
+	SVG_LENGTHTYPE_MM = 7,
+	SVG_LENGTHTYPE_IN = 8,
+	SVG_LENGTHTYPE_PT = 9,
+	SVG_LENGTHTYPE_PC = 10,
+}
+/**************************************************************************************************/
+public class uSVGLength  {
 		private uSVGLengthType m_unitType = 0;
 		private float m_value;
 		private float m_valueInSpecifiedUnits;
@@ -27,7 +24,6 @@
 		public uSVGLengthType unitType {
 			get{ return this.m_unitType;}
 		}
-		//protected DOMString m_valueAsString;
 		/***********************************************************************************/
 		public uSVGLength(ushort unitType, float valueInSpecifiedUnits) {
 			this.NewValueSpecifiedUnits(unitType, valueInSpecifiedUnits);
@@ -49,8 +45,6 @@
 		}
 		public void NewValueSpecifiedUnits(float valueInSpecifiedUnits) {
 			NewValueSpecifiedUnits(0, valueInSpecifiedUnits);
-		}
-		public void ConvertToSpecifiedUnit(ushort unitType) {
 		}
 		public static float GetPXLength(string valueText) {
 			float t_value = 0.0f;
@@ -78,5 +72,4 @@
 					return temp;
 			}
 		}
-	}
-//}
+}

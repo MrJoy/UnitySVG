@@ -51,10 +51,10 @@ public class uSVGLineElement : uSVGTransformable, uISVGDrawable {
 		this.m_attrList = attrList;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
 		this.m_render = m_render;
-		this.m_x1 = new uSVGAnimatedLength(attrList.GetValue("x1"));
-		this.m_y1 = new uSVGAnimatedLength(attrList.GetValue("y1"));
-		this.m_x2 = new uSVGAnimatedLength(attrList.GetValue("x2"));
-		this.m_y2 = new uSVGAnimatedLength(attrList.GetValue("y2"));
+		this.m_x1 = new uSVGAnimatedLength(attrList.GetValue("X1"));
+		this.m_y1 = new uSVGAnimatedLength(attrList.GetValue("Y1"));
+		this.m_x2 = new uSVGAnimatedLength(attrList.GetValue("X2"));
+		this.m_y2 = new uSVGAnimatedLength(attrList.GetValue("Y2"));
 	}
 	/***********************************************************************************/
 	//Thuc thi Interface Drawable

@@ -224,7 +224,6 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 	//-----
 	public void ArcTo(float r1, float r2, float angle,
 				bool largeArcFlag, bool sweepFlag, uSVGPoint p, float width) {
-UnityEngine.Profiler.BeginSample("SVG.SVGGraphicsStroke.ArcTo[0]");
 		float tx, ty, rx, ry;
 		rx = r1;
 		ry = r2;

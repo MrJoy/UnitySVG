@@ -113,7 +113,7 @@ public class uSVGGraphicsFill : uISVGPathDraw {
 	//--------------------------------------------------------------------------------
 	private void Fill(int x, int y) {
 		if (!isInZone(x, y)) return;
-		XStack<uSVGPoint> m_stack = new XStack<uSVGPoint>();
+		LiteStack<uSVGPoint> m_stack = new LiteStack<uSVGPoint>();
 
 		uSVGPoint temp = new uSVGPoint(x, y);
 		this.m_flag[(int)temp.x, (int)temp.y] = m_fillFlag;

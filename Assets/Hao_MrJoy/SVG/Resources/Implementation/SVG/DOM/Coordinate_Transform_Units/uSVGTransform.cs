@@ -50,8 +50,8 @@ public class uSVGTransform {
 	
 	//Chuyen doi 1 day gia tri "a b c d e f" => arr[] = string{a, b, c, d, e, f};
 	public uSVGTransform(string strKey, string strValue) {
-		List<string> valuesStr = uSVGStringExtractor.f_ExtractTransformValue(strValue);
-		int len = valuesStr.Count;
+		string[] valuesStr = uSVGStringExtractor.f_ExtractTransformValue(strValue);
+		int len = valuesStr.Length;
 		float[] values = new float[len];
 
 		for (int i = 0; i<len; i++) {

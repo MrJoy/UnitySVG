@@ -52,12 +52,12 @@ public class uSVGEllipseElement : uSVGTransformable, uISVGDrawable {
 		this.m_attrList = attrList;
 		this.m_render = m_render;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
-		this.m_cx = new uSVGAnimatedLength(attrList.GetValue("cx"));
-		this.m_cy = new uSVGAnimatedLength(attrList.GetValue("cy"));
-		this.m_rx = new uSVGAnimatedLength(attrList.GetValue("rx"));
-		this.m_ry = new uSVGAnimatedLength(attrList.GetValue("ry"));
+		this.m_cx = new uSVGAnimatedLength(attrList.GetValue("CX"));
+		this.m_cy = new uSVGAnimatedLength(attrList.GetValue("CY"));
+		this.m_rx = new uSVGAnimatedLength(attrList.GetValue("RX"));
+		this.m_ry = new uSVGAnimatedLength(attrList.GetValue("RY"));
 		this.currentTransformList = new uSVGAnimatedTransformList(
-										new uSVGTransformList(attrList.GetValue("transform")));
+										new uSVGTransformList(attrList.GetValue("TRANSFORM")));
 	}
 	//================================================================================
 	private uSVGGraphicsPath m_graphicsPath;

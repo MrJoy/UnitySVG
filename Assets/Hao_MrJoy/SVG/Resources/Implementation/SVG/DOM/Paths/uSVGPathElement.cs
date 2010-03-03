@@ -18,28 +18,22 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 	}
 	/***********************************************************************************/
 	private void f_Initial() {
-//UnityEngine.Profiler.BeginSample("SVG.SVGPathElement.Initial[AllocateStuff]");
 		this.currentTransformList = new uSVGAnimatedTransformList(
-											this.m_attrList.GetValue("TRANSFORM", true));
+											this.m_attrList.GetValue("TRANSFORM"));
 		m_segList = new uSVGPathSegList();
 		
 		//-----------
-		string m_d = this.m_attrList.GetValue("d");
-		List<string> m_charList = new List<string>();
-		List<string> m_valueList = new List<string>();
+		string m_d = this.m_attrList.GetValue("D");
 
 		string m_char, m_value;
-		List<string> m_valuesOfChar = new List<string>();
+    List<string> m_charList = new List<string>();
+    List<string> m_valueList = new List<string>();
 
-//UnityEngine.Profiler.EndSample();
-//UnityEngine.Profiler.BeginSample("SVG.SVGPathElement.Initial[ExtractPathList]");
-		uSVGStringExtractor.f_ExtractPathSegList(m_d, ref m_charList, ref m_valueList);		
-//UnityEngine.Profiler.EndSample();
-//UnityEngine.Profiler.BeginSample("SVG.SVGPathElement.Initial[ParsePath]");
+		uSVGStringExtractor.f_ExtractPathSegList(m_d, ref m_charList, ref m_valueList);
 		for(int i = 0; i < m_charList.Count; i++) {
 			m_char = m_charList[i];
 			m_value = m_valueList[i];
-			m_valuesOfChar = uSVGStringExtractor.f_ExtractTransformValue(m_value);
+			string[] m_valuesOfChar = uSVGStringExtractor.f_ExtractTransformValue(m_value);
 			switch (m_char) {
 				case "Z" :
 				case "z" : {

@@ -6,15 +6,11 @@ public class Implement {
 	private	uSVGGraphics m_graphics;
 	private uSVGDocument m_svgDocument;
 
-	//private ArrayList m_listElement = new ArrayList();
-	//private System.Type m_type;
 	/***********************************************************************************/
 	public Implement(TextAsset svgFile) {
 		this.m_SVGFile = svgFile;
 		m_device = new uSVGDevice();
 		m_graphics = new uSVGGraphics(m_device);
-		//m_xmlImplement = new uXMLImp();
-		//m_type = typeof(uSVGRectElement);
 	}
 	/***********************************************************************************/
 	/*-----------------------------------------------------------
