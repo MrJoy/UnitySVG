@@ -6,7 +6,7 @@ public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
 	private uSVGAnimatedLength m_rx;
 	private uSVGAnimatedLength m_ry;	
 	//================================================================================
-	private uISVGGraphics m_render;
+	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
 	private uSVGPaintable m_paintable;
 	//================================================================================
@@ -68,7 +68,7 @@ public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
 	public uSVGRectElement(AttributeList attrList,
 							uSVGAnimatedTransformList inheritTransformList,
 							uSVGPaintable inheritPaintable,
-							uISVGGraphics m_render) : base (inheritTransformList) {
+							uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_attrList = attrList;
 		this.m_render = m_render;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);

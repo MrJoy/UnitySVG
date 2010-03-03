@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class uSVGGraphicsFill : uISVGGraphicsFill{
+public class uSVGGraphicsFill : uISVGPathDraw {
 	//================================================================================
 	private const int m_fillFlag = -1;
 	private float[,] m_neighbor = new float[4, 2] {	{-1.0f, 0.0f},
@@ -9,8 +9,8 @@ public class uSVGGraphicsFill : uISVGGraphicsFill{
 												{1.0f, 0.0f},
 												{0.0f, 1.0f}}; 
 	
-	private uISVGGraphics m_graphics;	
-	private uISVGBasicDraw m_basicDraw;
+	private uSVGGraphics m_graphics;	
+	private uSVGBasicDraw m_basicDraw;
 	
 	private int m_flagStep;
 	private int[,] m_flag;
@@ -24,7 +24,7 @@ public class uSVGGraphicsFill : uISVGGraphicsFill{
 	private int m_subW, m_subH;
 	
 	//================================================================================
-	public uSVGGraphicsFill(uISVGGraphics graphics) {
+	public uSVGGraphicsFill(uSVGGraphics graphics) {
 		this.m_graphics = graphics;
 		this.m_flagStep = 0;
 		this.m_width = 0;

@@ -2,8 +2,8 @@ using UnityEngine;
 public class Implement {
 	private TextAsset m_SVGFile;
 	private Texture2D m_texture = null;
-	private	uISVGDevice m_device;
-	private	uISVGGraphics m_graphics;
+	private	uSVGDevice m_device;
+	private	uSVGGraphics m_graphics;
 	private uSVGDocument m_svgDocument;
 
 	//private ArrayList m_listElement = new ArrayList();
@@ -11,7 +11,7 @@ public class Implement {
 	/***********************************************************************************/
 	public Implement(TextAsset svgFile) {
 		this.m_SVGFile = svgFile;
-		m_device = new uSVGDeviceImp();
+		m_device = new uSVGDevice();
 		m_graphics = new uSVGGraphics(m_device);
 		//m_xmlImplement = new uXMLImp();
 		//m_type = typeof(uSVGRectElement);

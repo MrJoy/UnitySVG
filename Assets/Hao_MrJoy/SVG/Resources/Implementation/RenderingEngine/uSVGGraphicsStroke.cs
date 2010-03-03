@@ -1,12 +1,12 @@
 using UnityEngine;
-public class uSVGGraphicsStroke : uISVGGraphicsStroke {
-	private uISVGGraphics		m_graphics;
-	private uISVGBasicDraw		m_basicDraw;
+public class uSVGGraphicsStroke : uISVGPathDraw {
+	private uSVGGraphics		m_graphics;
+	private uSVGBasicDraw		m_basicDraw;
 	private float m_width;
 	private bool isUseWidth = false;
 	
 	//================================================================================
-	public uSVGGraphicsStroke(uISVGGraphics graphics) {
+	public uSVGGraphicsStroke(uSVGGraphics graphics) {
 		this.m_graphics = graphics;
 
 		//Basic Draw

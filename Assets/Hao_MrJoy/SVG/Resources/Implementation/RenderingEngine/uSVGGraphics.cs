@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class uSVGGraphics : uISVGGraphics{
+public class uSVGGraphics {
 	//================================================================================
-	private uISVGDevice m_device;
+	private uSVGDevice m_device;
 
-	private uISVGGraphicsFill m_graphicsFill;
-	private uISVGGraphicsStroke m_graphicsStroke;
+	private uSVGGraphicsFill m_graphicsFill;
+	private uSVGGraphicsStroke m_graphicsStroke;
 	
 	private int m_width, m_height;
 	
@@ -26,7 +26,7 @@ public class uSVGGraphics : uISVGGraphics{
 		this.m_graphicsStroke = new uSVGGraphicsStroke(this);
 	}
 	//-----
-	public uSVGGraphics(uISVGDevice device) {
+	public uSVGGraphics(uSVGDevice device) {
 		this.m_device = device;
 		this.m_graphicsFill = new uSVGGraphicsFill(this);
 		this.m_graphicsStroke = new uSVGGraphicsStroke(this);

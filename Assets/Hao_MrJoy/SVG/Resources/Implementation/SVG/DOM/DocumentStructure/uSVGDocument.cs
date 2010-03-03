@@ -5,7 +5,7 @@ public class uSVGDocument : uXMLImp {
 	private string m_domain;
 	private string m_url;
 	private uSVGSVGElement m_rootElement = null;
-	private uISVGGraphics m_render;
+	private uSVGGraphics m_render;
 	/***********************************************************************************/
 	public uSVGSVGElement rootElement {
 		get {
@@ -22,7 +22,7 @@ public class uSVGDocument : uXMLImp {
 	//m_nodeByTagName la 1 dictionary de luu tru cac Element ton tai ben trong 1 SVG Document
 	//private Dictionary<string, uSVGElement> m_nodeByTagName = new Dictionary<string, uSVGElement>();
 	/***********************************************************************************/
-	public uSVGDocument(string originalDocument, uISVGGraphics m_render):base(originalDocument) {
+	public uSVGDocument(string originalDocument, uSVGGraphics m_render):base(originalDocument) {
 		this.m_render = m_render;
 	}
 }

@@ -19,13 +19,13 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
 	//-------------------------------
 	private uSVGPaintable m_paintable;
 	//-------------------------------
-	private uISVGGraphics m_render;
+	private uSVGGraphics m_render;
 
 	/***********************************************************************************/
 	public uSVGSVGElement(	string svgElement,
 							uSVGAnimatedTransformList inheritTransformList,
 							uSVGPaintable inheritPaintable,
-							uISVGGraphics m_render) : base (inheritTransformList) {
+							uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_render = m_render;
 		this.m_xmlImp = new uXMLImp(svgElement);
 		this.m_attrList = this.m_xmlImp.f_GetNextAttrList();

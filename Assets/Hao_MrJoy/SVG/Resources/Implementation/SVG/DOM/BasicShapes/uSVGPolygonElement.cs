@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class uSVGPolygonElement : uSVGTransformable, uISVGDrawable {
 	private List<uSVGPoint> m_listPoints;
 	//================================================================================
-	private uISVGGraphics m_render;
+	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
 	private uSVGPaintable m_paintable;
 	//================================================================================
@@ -14,7 +14,7 @@ public class uSVGPolygonElement : uSVGTransformable, uISVGDrawable {
 	public uSVGPolygonElement(	AttributeList attrList,
 								uSVGAnimatedTransformList inheritTransformList,
 								uSVGPaintable inheritPaintable,
-								uISVGGraphics m_render) : base (inheritTransformList) {
+								uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_attrList = attrList;
 		this.m_render = m_render;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, attrList);

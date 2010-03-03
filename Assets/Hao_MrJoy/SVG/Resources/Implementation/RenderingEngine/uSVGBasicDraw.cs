@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public delegate void SetPixelDelegate(int x, int y);
 
-public class uSVGBasicDraw : uISVGBasicDraw {
+public class uSVGBasicDraw {
 	//================================================================================
 	private struct uSVGPointExt {
 		private float m_delta;

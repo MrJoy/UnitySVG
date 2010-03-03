@@ -3,14 +3,14 @@ using System.Collections.Generic;
 public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 	private uSVGPathSegList m_segList;
 	/***********************************************************************************/
-	private uISVGGraphics m_render;
+	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
 	private uSVGPaintable m_paintable;
 	/***********************************************************************************/
 	public uSVGPathElement(AttributeList attrList,
 							uSVGAnimatedTransformList inheritTransformList,
 							uSVGPaintable inheritPaintable,
-							uISVGGraphics m_render) : base (inheritTransformList) {
+							uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_attrList = attrList;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, attrList);
 		this.m_render = m_render;
@@ -18,6 +18,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 	}
 	/***********************************************************************************/
 	private void f_Initial() {
+//UnityEngine.Profiler.BeginSample("SVG.SVGPathElement.Initial[AllocateStuff]");
 		this.currentTransformList = new uSVGAnimatedTransformList(
 											this.m_attrList.GetValue("TRANSFORM", true));
 		m_segList = new uSVGPathSegList();
@@ -27,10 +28,14 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 		List<string> m_charList = new List<string>();
 		List<string> m_valueList = new List<string>();
 
-		uSVGStringExtractor.f_ExtractPathSegList(m_d, ref m_charList, ref m_valueList);
-		
 		string m_char, m_value;
 		List<string> m_valuesOfChar = new List<string>();
+
+//UnityEngine.Profiler.EndSample();
+//UnityEngine.Profiler.BeginSample("SVG.SVGPathElement.Initial[ExtractPathList]");
+		uSVGStringExtractor.f_ExtractPathSegList(m_d, ref m_charList, ref m_valueList);		
+//UnityEngine.Profiler.EndSample();
+//UnityEngine.Profiler.BeginSample("SVG.SVGPathElement.Initial[ParsePath]");
 		for(int i = 0; i < m_charList.Count; i++) {
 			m_char = m_charList[i];
 			m_value = m_valueList[i];

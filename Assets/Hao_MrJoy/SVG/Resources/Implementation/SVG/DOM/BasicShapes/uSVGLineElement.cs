@@ -4,7 +4,7 @@ public class uSVGLineElement : uSVGTransformable, uISVGDrawable {
 	private uSVGAnimatedLength m_x2;
 	private uSVGAnimatedLength m_y2;
 	/***********************************************************************************/
-	private uISVGGraphics m_render;
+	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
 	private uSVGPaintable m_paintable;
 	/***********************************************************************************/
@@ -47,7 +47,7 @@ public class uSVGLineElement : uSVGTransformable, uISVGDrawable {
 	public uSVGLineElement(	AttributeList attrList,
 							uSVGAnimatedTransformList inheritTransformList,
 							uSVGPaintable inheritPaintable,
-							uISVGGraphics m_render) : base (inheritTransformList) {
+							uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_attrList = attrList;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
 		this.m_render = m_render;
