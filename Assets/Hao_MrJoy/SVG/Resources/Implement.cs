@@ -31,11 +31,19 @@ public class Implement {
 	Use: ta bat dau doc du lieu de do vao uSVGDocument
 	-------------------------------------------------------------*/
 	public void f_StartProcess() {
+Profiler.BeginSample("SVG.Implement.StartProcess[CreateEmptySVGDocument]");
 		f_CreateEmptySVGDocument();
+Profiler.EndSample();
+Profiler.BeginSample("SVG.Implement.StartProcess[GetRootElement]");
 		uSVGSVGElement m_rootSVGElement = this.m_svgDocument.rootElement;
+Profiler.EndSample();
 		this.m_graphics.SetColor(Color.white);
+Profiler.BeginSample("SVG.Implement.StartProcess[RenderSVGElement]");
 		m_rootSVGElement.f_Render();
+Profiler.EndSample();
+Profiler.BeginSample("SVG.Implement.StartProcess[RenderGraphics]");
 		this.m_texture = m_graphics.Render();
+Profiler.EndSample();
 	}
 	/***********************************************************************************/
 	public void f_NewSVGFile(TextAsset svgFile) {
