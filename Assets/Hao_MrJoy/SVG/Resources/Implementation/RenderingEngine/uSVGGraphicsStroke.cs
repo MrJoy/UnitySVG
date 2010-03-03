@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+
 public class uSVGGraphicsStroke : uISVGPathDraw {
 	private uSVGGraphics		m_graphics;
 	private uSVGBasicDraw		m_basicDraw;
@@ -235,8 +237,8 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 		double trx2, try2, tx2, ty2;
 		float temp1, temp2;
 		float m_radian = (angle * Mathf.PI / 180.0f);
-		float m_CosRadian = Mathf.Cos(m_radian);
-		float m_SinRadian = Mathf.Sin(m_radian);
+		float m_CosRadian = (float)Math.Cos(m_radian);
+		float m_SinRadian = (float)Math.Sin(m_radian);
 		temp1 = (p1.x - p2.x)/2.0f;
 		temp2 = (p1.y - p2.y)/2.0f;
 		tx = ( m_CosRadian * temp1) + (m_SinRadian * temp2);
@@ -250,8 +252,8 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 		
 		double radiiCheck = tx2/trx2 + ty2/try2;
 		if (radiiCheck > 1) {
-		rx = Mathf.Sqrt((float)radiiCheck) * rx;
-		ry = Mathf.Sqrt((float)radiiCheck) * ry;
+		rx = (float)Math.Sqrt((float)radiiCheck) * rx;
+		ry = (float)Math.Sqrt((float)radiiCheck) * ry;
 		trx2 = rx * rx;
 		try2 = ry * ry;
 		}
@@ -261,7 +263,7 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 		tm1 = (tm1 < 0) ? 0 : tm1;
 
 		float tm2;
-		tm2 = (largeArcFlag == sweepFlag) ? -Mathf.Sqrt((float)tm1) : Mathf.Sqrt((float)tm1);
+		tm2 = (largeArcFlag == sweepFlag) ? -(float)Math.Sqrt((float)tm1) : (float)Math.Sqrt((float)tm1);
 
 		float tcx, tcy;
 		tcx = tm2 * ((rx * ty) / ry);
@@ -278,15 +280,15 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 		float m_angle, m_delta;
 		
 		float tp, n;
-		n = Mathf.Sqrt((ux * ux) + (uy * uy));
+		n = (float)Math.Sqrt((ux * ux) + (uy * uy));
 		tp = ux;
-		m_angle = (uy < 0) ? -Mathf.Acos(tp/n):Mathf.Acos(tp/n);	
+		m_angle = (uy < 0) ? -(float)Math.Acos(tp/n):(float)Math.Acos(tp/n);	
 		m_angle = m_angle * 180.0f / Mathf.PI;
 		m_angle %= 360f;
 			
-		n =  Mathf.Sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy));
+		n =  (float)Math.Sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy));
 		tp = ux * vx + uy * vy;
-		m_delta = (ux * vy - uy * vx < 0) ? -Mathf.Acos(tp/n):Mathf.Acos(tp/n);
+		m_delta = (ux * vy - uy * vx < 0) ? -(float)Math.Acos(tp/n):(float)Math.Acos(tp/n);
 		m_delta = m_delta * 180.0f / Mathf.PI;
 		
 		if (!sweepFlag && m_delta > 0) {
@@ -305,11 +307,11 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 
 		for(int i = 0; i <= number; i++) {
 			float t_angle = (deltaT * i + m_angle) * Mathf.PI / 180.0f;
-			m_controlPoint1.x = m_CosRadian * rx * Mathf.Cos(t_angle) - 
-						m_SinRadian * ry * Mathf.Sin(t_angle)
+			m_controlPoint1.x = m_CosRadian * rx * (float)Math.Cos(t_angle) - 
+						m_SinRadian * ry * (float)Math.Sin(t_angle)
 						+ cx; 
-			m_controlPoint1.y = m_SinRadian * rx * Mathf.Cos(t_angle) + 
-						m_CosRadian * ry * Mathf.Sin(t_angle)
+			m_controlPoint1.y = m_SinRadian * rx * (float)Math.Cos(t_angle) + 
+						m_CosRadian * ry * (float)Math.Sin(t_angle)
 					+ cy;
 			if ((m_controlPoint1.x != p1.x) && (m_controlPoint1.y != p1.y)) {
 				i = number + 1;
@@ -319,11 +321,11 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 		
 		for(int i = number; i >= 0; i--) {
 			float t_angle = (deltaT * i + m_angle) * Mathf.PI / 180.0f;
-			m_controlPoint2.x = m_CosRadian * rx * Mathf.Cos(t_angle) - 
-						m_SinRadian * ry * Mathf.Sin(t_angle)
+			m_controlPoint2.x = m_CosRadian * rx * (float)Math.Cos(t_angle) - 
+						m_SinRadian * ry * (float)Math.Sin(t_angle)
 						+ cx; 
-			m_controlPoint2.y = m_SinRadian * rx * Mathf.Cos(t_angle) + 
-						m_CosRadian * ry * Mathf.Sin(t_angle)
+			m_controlPoint2.y = m_SinRadian * rx * (float)Math.Cos(t_angle) + 
+						m_CosRadian * ry * (float)Math.Sin(t_angle)
 					+ cy;
 			if ((m_controlPoint2.x != p2.x) && (m_controlPoint2.y != p2.y)) {
 				i = -1;

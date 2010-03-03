@@ -1,10 +1,10 @@
 public class uSVGStopElement {
-	private uSVGAnimatedNumber m_offset;
+	private uSVGNumber m_offset;
 	private uSVGColor m_stopColor;
 	/***************************************************************************/
 	private AttributeList m_attrList;
 	/***************************************************************************/
-	public uSVGAnimatedNumber offset {
+	public uSVGNumber offset {
 		get{return this.m_offset;}
 	}
 	public uSVGColor stopColor {
@@ -29,6 +29,6 @@ public class uSVGStopElement {
 				temp = m_value.ToString();
 			}			
 		}
-		this.m_offset = new uSVGAnimatedNumber(temp);
+		this.m_offset = new uSVGNumber(temp);
 	}
 }

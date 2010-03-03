@@ -16,7 +16,7 @@ public class uSVGGraphicsPath {
 	//-----
 	private uSVGFillRuleTypes m_fillRule = uSVGFillRuleTypes.SVG_NONE_ZERO;
 	//-----
-	private uSVGAnimatedTransformList m_transformList;
+	private uSVGTransformList m_transformList;
 	private uSVGMatrix m_matrixTransform;
 	//-----
 	private List<object> m_listObject;
@@ -30,7 +30,7 @@ public class uSVGGraphicsPath {
 	public uSVGMatrix matrixTransform {
 		get{
 			if (this.m_matrixTransform == null) {
-				this.m_matrixTransform = this.m_transformList.animVal.Consolidate().matrix;
+				this.m_matrixTransform = this.m_transformList.Consolidate().matrix;
 			}
 			return this.m_matrixTransform;
 		}
@@ -39,8 +39,8 @@ public class uSVGGraphicsPath {
 	public float transformAngle {
 		get{
 			float m_angle = 0.0f;
-			for (int i = 0; i < this.m_transformList.animVal.numberOfItems; i++ ) {
-				uSVGTransform m_temp =this.m_transformList.animVal.GetItem(i);
+			for (int i = 0; i < this.m_transformList.numberOfItems; i++ ) {
+				uSVGTransform m_temp =this.m_transformList.GetItem(i);
 				if (m_temp.type == uSVGTransformType.SVG_TRANSFORM_ROTATE)  {
 					m_angle += m_temp.angle;
 				}
@@ -49,7 +49,7 @@ public class uSVGGraphicsPath {
 		}
 	}
 	//-----
-	public uSVGAnimatedTransformList transformList {
+	public uSVGTransformList transformList {
 		get{ return this.m_transformList;}
 		set{ this.m_transformList = value;}
 	}
@@ -60,7 +60,7 @@ public class uSVGGraphicsPath {
 		this.needSetFirstPoint	= true;
 		this.m_boundTopLeft 	= new uSVGPoint(+10000f, +10000f);
 		this.m_boundBottomRight	= new uSVGPoint(-10000f, -10000f);
-		this.m_transformList 	= new uSVGAnimatedTransformList();
+		this.m_transformList 	= new uSVGTransformList();
 		this.m_listObject		= new List<object>();
 		this.m_listType			= new List<string>();
 		
@@ -77,7 +77,7 @@ public class uSVGGraphicsPath {
 		this.m_boundTopLeft 	= new uSVGPoint(+10000f, +10000f);
 		this.m_boundBottomRight	= new uSVGPoint(-10000f, -10000f);
 		this.m_fillRule = uSVGFillRuleTypes.SVG_NONE_ZERO;
-		this.m_transformList 	= new uSVGAnimatedTransformList();
+		this.m_transformList 	= new uSVGTransformList();
 		this.m_listObject.Clear();
 		this.m_listType.Clear();
 	}
@@ -171,26 +171,26 @@ public class uSVGGraphicsPath {
 	}
 	//-----
 	public void Add(uSVGRectElement rectElement) {
-		f_SetFirstPoint(new uSVGPoint(rectElement.x.animVal.value, rectElement.y.animVal.value));
-		f_SetLastPoint(new uSVGPoint(rectElement.x.animVal.value, rectElement.y.animVal.value));
+		f_SetFirstPoint(new uSVGPoint(rectElement.x.value, rectElement.y.value));
+		f_SetLastPoint(new uSVGPoint(rectElement.x.value, rectElement.y.value));
 		
 		m_listType.Add("rect");
 		m_listObject.Add(rectElement);
 	}
 	//-----
 	public void Add(uSVGCircleElement circleElement) {
-		f_SetFirstPoint(new uSVGPoint(circleElement.cx.animVal.value, circleElement.cy.animVal.value));
-		f_SetLastPoint(new uSVGPoint(circleElement.cx.animVal.value, circleElement.cy.animVal.value));
+		f_SetFirstPoint(new uSVGPoint(circleElement.cx.value, circleElement.cy.value));
+		f_SetLastPoint(new uSVGPoint(circleElement.cx.value, circleElement.cy.value));
 
 		m_listType.Add("circle");
 		m_listObject.Add(circleElement);
 	}
 	//-----
 	public void Add(uSVGEllipseElement ellipseElement) {
-		f_SetFirstPoint(new uSVGPoint(ellipseElement.cx.animVal.value,
-															ellipseElement.cy.animVal.value));
-		f_SetLastPoint(new uSVGPoint(ellipseElement.cx.animVal.value,
-															ellipseElement.cy.animVal.value));
+		f_SetFirstPoint(new uSVGPoint(ellipseElement.cx.value,
+															ellipseElement.cy.value));
+		f_SetLastPoint(new uSVGPoint(ellipseElement.cx.value,
+															ellipseElement.cy.value));
 		
 		m_listType.Add("ellipse");
 		m_listObject.Add(ellipseElement);
@@ -289,10 +289,10 @@ public class uSVGGraphicsPath {
 					uSVGRectElement m_rectElement = m_listObject[i] as uSVGRectElement;
 					m_listPoints = new List<uSVGPoint>();
 
-					x = m_rectElement.x.animVal.value;
-					y = m_rectElement.y.animVal.value;
-					width = m_rectElement.width.animVal.value;
-					height = m_rectElement.height.animVal.value;
+					x = m_rectElement.x.value;
+					y = m_rectElement.y.value;
+					width = m_rectElement.width.value;
+					height = m_rectElement.height.value;
 					m_listPoints.Add(new uSVGPoint(x, y));
 					m_listPoints.Add(new uSVGPoint(x + width, y));
 					m_listPoints.Add(new uSVGPoint(x + width, y + height));
@@ -303,21 +303,21 @@ public class uSVGGraphicsPath {
 					uSVGCircleElement m_circleElement = m_listObject[i] as uSVGCircleElement;
 					m_listPoints = new List<uSVGPoint>();
 
-					cx = m_circleElement.cx.animVal.value;
-					cy = m_circleElement.cy.animVal.value;
+					cx = m_circleElement.cx.value;
+					cy = m_circleElement.cy.value;
 					m_listPoints.Add(new uSVGPoint(cx, cy));
-					r = m_circleElement.r.animVal.value;
+					r = m_circleElement.r.value;
 					f_ResetLimitPoints(m_listPoints, r, r);
 				break;
 				case "ellipse":
 					uSVGEllipseElement m_ellipseElement = m_listObject[i] as uSVGEllipseElement;
 					m_listPoints = new List<uSVGPoint>();
 
-					cx = m_ellipseElement.cx.animVal.value;
-					cy = m_ellipseElement.cy.animVal.value;
+					cx = m_ellipseElement.cx.value;
+					cy = m_ellipseElement.cy.value;
 					m_listPoints.Add(new uSVGPoint(cx, cy));
-					rx = m_ellipseElement.rx.animVal.value;
-					ry = m_ellipseElement.ry.animVal.value;
+					rx = m_ellipseElement.rx.value;
+					ry = m_ellipseElement.ry.value;
 					f_ResetLimitPoints(m_listPoints, rx, ry);
 				break;
 				//-----
@@ -454,16 +454,16 @@ public class uSVGGraphicsPath {
 	private void f_RenderRectElement(uSVGRectElement m_rectElement,
 																	uISVGPathDraw m_pathDraw) {
 		uSVGPoint p1, p2, p3, p4;
-		float tx = m_rectElement.x.animVal.value;
-		float ty = m_rectElement.y.animVal.value;
-		float tw = m_rectElement.width.animVal.value;
-		float th = m_rectElement.height.animVal.value;
+		float tx = m_rectElement.x.value;
+		float ty = m_rectElement.y.value;
+		float tw = m_rectElement.width.value;
+		float th = m_rectElement.height.value;
 		p1 = new uSVGPoint(tx, ty);
 		p2 = new uSVGPoint(tx + tw, ty);
 		p3 = new uSVGPoint(tx + tw, ty + th);
 		p4 = new uSVGPoint(tx, ty + th);
 
-		if (m_rectElement.rx.animVal.value == 0.0f && m_rectElement.ry.animVal.value == 0.0f ) {
+		if (m_rectElement.rx.value == 0.0f && m_rectElement.ry.value == 0.0f ) {
 			p1 = p1.MatrixTransform(this.matrixTransform);
 			p2 = p2.MatrixTransform(this.matrixTransform);
 			p3 = p3.MatrixTransform(this.matrixTransform);
@@ -471,8 +471,8 @@ public class uSVGGraphicsPath {
 			
 			m_pathDraw.Rect(p1, p2, p3, p4);
 		} else {
-			float t_rx = m_rectElement.rx.animVal.value;
-			float t_ry = m_rectElement.ry.animVal.value;
+			float t_rx = m_rectElement.rx.value;
+			float t_ry = m_rectElement.ry.value;
 			t_rx = (t_rx == 0.0f) ? t_ry : t_rx;
 			t_ry = (t_ry == 0.0f) ? t_rx : t_ry;
 			
@@ -512,9 +512,9 @@ public class uSVGGraphicsPath {
 	private void f_RenderCircleElement(uSVGCircleElement m_circleElement,
 																uISVGPathDraw m_pathDraw) {
 		uSVGPoint p;
-		p = new uSVGPoint(m_circleElement.cx.animVal.value, m_circleElement.cy.animVal.value);
+		p = new uSVGPoint(m_circleElement.cx.value, m_circleElement.cy.value);
 		p = p.MatrixTransform(this.matrixTransform);
-		m_pathDraw.Circle(p, m_circleElement.r.animVal.value);
+		m_pathDraw.Circle(p, m_circleElement.r.value);
 	}
 	//--------------------------------------------------------------------------------
 	//Method: f_RenderEllipseElement
@@ -522,11 +522,11 @@ public class uSVGGraphicsPath {
 	private void f_RenderEllipseElement(uSVGEllipseElement m_ellipseElement,
 																	uISVGPathDraw m_pathDraw) {
 		uSVGPoint p;
-		p = new uSVGPoint(m_ellipseElement.cx.animVal.value, m_ellipseElement.cy.animVal.value);
+		p = new uSVGPoint(m_ellipseElement.cx.value, m_ellipseElement.cy.value);
 		p = p.MatrixTransform(this.matrixTransform);
 		float m_angle = this.transformAngle;
-		m_pathDraw.Ellipse(p, m_ellipseElement.rx.animVal.value,
-								m_ellipseElement.ry.animVal.value, m_angle);
+		m_pathDraw.Ellipse(p, m_ellipseElement.rx.value,
+								m_ellipseElement.ry.value, m_angle);
 					
 	}
 	//--------------------------------------------------------------------------------

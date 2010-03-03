@@ -1,50 +1,50 @@
 public class uSVGCircleElement : uSVGTransformable, uISVGDrawable {
 		
-	private uSVGAnimatedLength m_cx;
-	private uSVGAnimatedLength m_cy;
-	private uSVGAnimatedLength m_r;
+	private uSVGLength m_cx;
+	private uSVGLength m_cy;
+	private uSVGLength m_r;
 	//================================================================================
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
 	private uSVGPaintable m_paintable;
 	//================================================================================
-	public uSVGAnimatedLength cx {
+	public uSVGLength cx {
 		get {
 			if (this.m_cx == null) {
-				this.m_cx = new uSVGAnimatedLength(0);
+				this.m_cx = new uSVGLength(0);
 			}
 			return this.m_cx;
 		}
 	}
 
-	public uSVGAnimatedLength cy {
+	public uSVGLength cy {
 		get {
 			if (this.m_cy == null) {
-				this.m_cy = new uSVGAnimatedLength(0);
+				this.m_cy = new uSVGLength(0);
 			}
 			return this.m_cy;
 		}
 	}
 
-	public uSVGAnimatedLength r {
+	public uSVGLength r {
 		get {
 			if (this.m_r == null) {
-				this.m_r = new uSVGAnimatedLength(100);
+				this.m_r = new uSVGLength(100);
 			}
 			return this.m_r;
 		}
 	}
 	//================================================================================
 	public uSVGCircleElement(AttributeList attrList,
-							uSVGAnimatedTransformList inheritTransformList,
+							uSVGTransformList inheritTransformList,
 							uSVGPaintable inheritPaintable,
 							uSVGGraphics m_render) : base (inheritTransformList)  {
 		this.m_attrList = attrList;
 		this.m_render = m_render;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
-		this.m_cx = new uSVGAnimatedLength(attrList.GetValue("CX"));
-		this.m_cy = new uSVGAnimatedLength(attrList.GetValue("CY"));
-		this.m_r = new uSVGAnimatedLength(attrList.GetValue("R"));
+		this.m_cx = new uSVGLength(attrList.GetValue("CX"));
+		this.m_cy = new uSVGLength(attrList.GetValue("CY"));
+		this.m_r = new uSVGLength(attrList.GetValue("R"));
 	}
 	//================================================================================
 	private uSVGGraphicsPath m_graphicsPath;
@@ -63,7 +63,7 @@ public class uSVGCircleElement : uSVGTransformable, uISVGDrawable {
 	}
 	//================================================================================
 	//Thuc thi Interface Drawable
-	public void f_BeforeRender (uSVGAnimatedTransformList transformList) {
+	public void f_BeforeRender (uSVGTransformList transformList) {
 		this.inheritTransformList = transformList;
 	}
 	//------

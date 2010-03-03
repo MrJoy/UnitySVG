@@ -12,7 +12,7 @@ public class uSVGPolylineElement : uSVGTransformable, uISVGDrawable {
 	}
 	//================================================================================
 	public uSVGPolylineElement(	AttributeList attrList,
-								uSVGAnimatedTransformList inheritTransformList,
+								uSVGTransformList inheritTransformList,
 								uSVGPaintable inheritPaintable,
 								uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_attrList = attrList;
@@ -55,7 +55,7 @@ public class uSVGPolylineElement : uSVGTransformable, uISVGDrawable {
 	}
 	//************************************************************************************
 	//Thuc thi Interface Drawable
-	public void f_BeforeRender (uSVGAnimatedTransformList transformList) {
+	public void f_BeforeRender (uSVGTransformList transformList) {
 		this.inheritTransformList = transformList;
 	}
 	//------

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
 public class uSVGLinearGradientElement : uSVGGradientElement {
-	private uSVGAnimatedLength m_x1;
-	private uSVGAnimatedLength m_y1;
-	private uSVGAnimatedLength m_x2;
-	private uSVGAnimatedLength m_y2;
+	private uSVGLength m_x1;
+	private uSVGLength m_y1;
+	private uSVGLength m_x2;
+	private uSVGLength m_y2;
 	//---------
 	private string m_id;
 	private uXMLImp m_xmlImp;
@@ -15,19 +15,19 @@ public class uSVGLinearGradientElement : uSVGGradientElement {
 	public string id {
 		get{ return this.m_id;}
 	}
-	public uSVGAnimatedLength x1 {
+	public uSVGLength x1 {
 		get{return this.m_x1;}
 	}
 	
-	public uSVGAnimatedLength y1 {
+	public uSVGLength y1 {
 		get{return this.m_y1;}
 	}
 	
-	public uSVGAnimatedLength x2 {
+	public uSVGLength x2 {
 		get{return this.m_x2;}
 	}
 	
-	public uSVGAnimatedLength y2 {
+	public uSVGLength y2 {
 		get{return this.m_y2;}
 	}
 
@@ -54,23 +54,23 @@ public class uSVGLinearGradientElement : uSVGGradientElement {
 		
 		temp = this.m_attrList.GetValue("X1");
 		if (temp == "") {
-			m_x1 = new uSVGAnimatedLength("0%");
-		} else m_x1 = new uSVGAnimatedLength(temp);
+			m_x1 = new uSVGLength("0%");
+		} else m_x1 = new uSVGLength(temp);
 
 		temp = this.m_attrList.GetValue("Y1");
 		if (temp == "") {
-			m_y1 = new uSVGAnimatedLength("0%");
-		} else m_y1 = new uSVGAnimatedLength(temp);
+			m_y1 = new uSVGLength("0%");
+		} else m_y1 = new uSVGLength(temp);
 		
 		temp = this.m_attrList.GetValue("X2");
 		if (temp == "") {
-			m_x2 = new uSVGAnimatedLength("100%");
-		} else m_x2 = new uSVGAnimatedLength(temp);
+			m_x2 = new uSVGLength("100%");
+		} else m_x2 = new uSVGLength(temp);
 
 		temp = this.m_attrList.GetValue("Y2");
 		if (temp == "") {
-			m_y2 = new uSVGAnimatedLength("0%");
-		} else m_y2 = new uSVGAnimatedLength(temp);
+			m_y2 = new uSVGLength("0%");
+		} else m_y2 = new uSVGLength(temp);
 		
 		f_GetElementList();
 	}

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
 public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
-	private uSVGAnimatedLength m_width;
-	private uSVGAnimatedLength m_height;
+	private uSVGLength m_width;
+	private uSVGLength m_height;
 	private string m_contentScriptType;
 	private string m_contentStyleType;
 	
@@ -21,15 +21,15 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
 
 	/***********************************************************************************/
 	public uSVGSVGElement(	uXMLImp xmlImp,
-							uSVGAnimatedTransformList inheritTransformList,
+							uSVGTransformList inheritTransformList,
 							uSVGPaintable inheritPaintable,
 							uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_render = m_render;
 		this.m_xmlImp = xmlImp;
 		this.m_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
-		this.m_width = new uSVGAnimatedLength(m_attrList.GetValue("WIDTH"));
-		this.m_height = new uSVGAnimatedLength(m_attrList.GetValue("HEIGHT"));
+		this.m_width = new uSVGLength(m_attrList.GetValue("WIDTH"));
+		this.m_height = new uSVGLength(m_attrList.GetValue("HEIGHT"));
 		f_Initial();
 	}
 	/***********************************************************************************/
@@ -44,8 +44,8 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
 		
 		//Tao currentTransformList va add cai transform dau tien vao, do la cai VIEWBOX.
 		uSVGTransform temp = CreateSVGTransformFromMatrix(m_cachedViewBoxTransform);
-		uSVGAnimatedTransformList t_currentTransformList = new uSVGAnimatedTransformList();		
-		t_currentTransformList.animVal.AppendItem(temp);
+		uSVGTransformList t_currentTransformList = new uSVGTransformList();		
+		t_currentTransformList.AppendItem(temp);
 
 		this.currentTransformList = t_currentTransformList;
 
@@ -175,7 +175,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
 		}
 	}
 	/***********************************************************************************/
-	public void f_BeforeRender(uSVGAnimatedTransformList transformList) {
+	public void f_BeforeRender(uSVGTransformList transformList) {
 		
 		this.inheritTransformList = transformList;
 		
@@ -188,7 +188,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
 	}
 
 	public void f_Render() {
-		this.m_render.SetSize(this.m_width.animVal.value, this.m_height.animVal.value);
+		this.m_render.SetSize(this.m_width.value, this.m_height.value);
 		for (int i = 0; i < m_elementList.Count; i++) {
 			uISVGDrawable temp = m_elementList[i] as uISVGDrawable;
 			if (temp != null) {
@@ -249,8 +249,8 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
 			float w = 0.0f;
 			float h = 0.0f;
 			
-			float attrWidth = this.m_width.animVal.value;
-			float attrHeight = this.m_height.animVal.value;
+			float attrWidth = this.m_width.value;
+			float attrHeight = this.m_height.value;
 
 			if (m_attrList.GetValue("VIEWBOX") != "") {
 				uSVGRect r = this.m_viewport;

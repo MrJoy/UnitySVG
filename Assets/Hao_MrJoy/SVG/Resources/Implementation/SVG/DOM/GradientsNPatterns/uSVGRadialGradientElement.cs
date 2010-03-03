@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 public class uSVGRadialGradientElement : uSVGGradientElement {
 	
-	private uSVGAnimatedLength m_cx;
-	private uSVGAnimatedLength m_cy;
-	private uSVGAnimatedLength m_r;
-	private uSVGAnimatedLength m_fx;
-	private uSVGAnimatedLength m_fy;
+	private uSVGLength m_cx;
+	private uSVGLength m_cy;
+	private uSVGLength m_r;
+	private uSVGLength m_fx;
+	private uSVGLength m_fy;
 	//---------
 	private string m_id;
 	private uXMLImp m_xmlImp;
@@ -17,19 +17,19 @@ public class uSVGRadialGradientElement : uSVGGradientElement {
 	public string id {
 		get{ return this.m_id;}
 	}
-	public uSVGAnimatedLength cx {
+	public uSVGLength cx {
 		get{return this.m_cx;}
 	}
-	public uSVGAnimatedLength cy {
+	public uSVGLength cy {
 		get{return this.m_cy;}
 	}
-		public uSVGAnimatedLength r {
+		public uSVGLength r {
 		get{return this.m_r;}
 	}
-		public uSVGAnimatedLength fx {
+		public uSVGLength fx {
 		get{return this.m_fx;}
 	}
-		public uSVGAnimatedLength fy {
+		public uSVGLength fy {
 		get{return this.m_fy;}
 	}
 	
@@ -55,28 +55,28 @@ public class uSVGRadialGradientElement : uSVGGradientElement {
 
 		temp = this.m_attrList.GetValue("CX");
 		if (temp == "") {
-			m_cx = new uSVGAnimatedLength("50%");
-		} else m_cx = new uSVGAnimatedLength(temp);
+			m_cx = new uSVGLength("50%");
+		} else m_cx = new uSVGLength(temp);
 
 		temp = this.m_attrList.GetValue("CY");
 		if (temp == "") {
-			m_cy = new uSVGAnimatedLength("50%");
-		} else m_cy = new uSVGAnimatedLength(temp);
+			m_cy = new uSVGLength("50%");
+		} else m_cy = new uSVGLength(temp);
 
 		temp = this.m_attrList.GetValue("R");
 		if (temp == "") {
-			m_r = new uSVGAnimatedLength("50%");
-		} else m_r = new uSVGAnimatedLength(temp);
+			m_r = new uSVGLength("50%");
+		} else m_r = new uSVGLength(temp);
 
 		temp = this.m_attrList.GetValue("FX");
 		if (temp == "") {
-			m_fx = new uSVGAnimatedLength("50%");
-		} else m_fx = new uSVGAnimatedLength(temp);
+			m_fx = new uSVGLength("50%");
+		} else m_fx = new uSVGLength(temp);
 
 		temp = this.m_attrList.GetValue("FY");
 		if (temp == "") {
-			m_fy = new uSVGAnimatedLength("50%");
-		} else m_fy = new uSVGAnimatedLength(temp);
+			m_fy = new uSVGLength("50%");
+		} else m_fy = new uSVGLength(temp);
 		
 		f_GetElementList();
 	}

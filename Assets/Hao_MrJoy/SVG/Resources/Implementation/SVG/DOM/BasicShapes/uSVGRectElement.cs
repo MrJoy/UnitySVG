@@ -1,83 +1,83 @@
 public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
-	private uSVGAnimatedLength m_x;
-	private uSVGAnimatedLength m_y;
-	private uSVGAnimatedLength m_width;
-	private uSVGAnimatedLength m_height;
-	private uSVGAnimatedLength m_rx;
-	private uSVGAnimatedLength m_ry;	
+	private uSVGLength m_x;
+	private uSVGLength m_y;
+	private uSVGLength m_width;
+	private uSVGLength m_height;
+	private uSVGLength m_rx;
+	private uSVGLength m_ry;	
 	//================================================================================
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
 	private uSVGPaintable m_paintable;
 	//================================================================================
-	public uSVGAnimatedLength x {
+	public uSVGLength x {
 		get {
 			if (this.m_x == null) {
-				this.m_x = new uSVGAnimatedLength(0);
+				this.m_x = new uSVGLength(0);
 			}
 			return this.m_x;
 			}
 		}
 
-	public uSVGAnimatedLength y {
+	public uSVGLength y {
 		get {
 			if (this.m_y == null) {
-				this.m_y = new uSVGAnimatedLength(0);
+				this.m_y = new uSVGLength(0);
 			}
 			return this.m_y;
 		}
 	}
 
-	public uSVGAnimatedLength width {
+	public uSVGLength width {
 		get {
 			if (this.m_width == null) {
-				this.m_width =  new uSVGAnimatedLength(100);
+				this.m_width =  new uSVGLength(100);
 			}
 			return this.m_width;
 		}
 	}
 		
-	public uSVGAnimatedLength height {
+	public uSVGLength height {
 		get {
 			if (this.m_height == null) {
-				this.m_height =  new uSVGAnimatedLength(100);
+				this.m_height =  new uSVGLength(100);
 			}
 			return this.m_height;
 		}
 	}
 
 
-	public uSVGAnimatedLength rx {
+	public uSVGLength rx {
 		get {
 			if (this.m_rx == null) {
-				this.m_rx = new uSVGAnimatedLength(0);
+				this.m_rx = new uSVGLength(0);
 			}
 			return this.m_rx;
 		}
 	}	
 
-	public uSVGAnimatedLength ry {
+	public uSVGLength ry {
 		get {
 			if (this.m_ry == null) {
-				this.m_ry = new uSVGAnimatedLength(0);
+				this.m_ry = new uSVGLength(0);
 			}
 			return this.m_ry;
 		}
 	}
 	//================================================================================
 	public uSVGRectElement(AttributeList attrList,
-							uSVGAnimatedTransformList inheritTransformList,
+							uSVGTransformList inheritTransformList,
 							uSVGPaintable inheritPaintable,
 							uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_attrList = attrList;
 		this.m_render = m_render;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
-		this.m_x = new uSVGAnimatedLength(attrList.GetValue("X"));
-		this.m_y = new uSVGAnimatedLength(attrList.GetValue("Y"));
-		this.m_width = new uSVGAnimatedLength(attrList.GetValue("WIDTH"));
-		this.m_height = new uSVGAnimatedLength(attrList.GetValue("HEIGHT"));
-		this.m_rx = new uSVGAnimatedLength(attrList.GetValue("RX"));
-		this.m_ry = new uSVGAnimatedLength(attrList.GetValue("RY"));
+		this.m_x = new uSVGLength(attrList.GetValue("X"));
+		this.m_y = new uSVGLength(attrList.GetValue("Y"));
+		this.m_width = new uSVGLength(attrList.GetValue("WIDTH"));
+		this.m_height = new uSVGLength(attrList.GetValue("HEIGHT"));
+		this.m_rx = new uSVGLength(attrList.GetValue("RX"));
+		this.m_ry = new uSVGLength(attrList.GetValue("RY"));
 	}
 	//================================================================================
 	private uSVGGraphicsPath m_graphicsPath;
@@ -96,7 +96,7 @@ public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
 	}
 	//================================================================================	
 	//Thuc thi Interface Drawable
-	public void f_BeforeRender (uSVGAnimatedTransformList transformList) {
+	public void f_BeforeRender (uSVGTransformList transformList) {
 		this.inheritTransformList = transformList;
 	}
 	//------

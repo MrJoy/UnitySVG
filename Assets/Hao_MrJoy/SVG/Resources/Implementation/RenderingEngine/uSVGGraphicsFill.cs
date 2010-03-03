@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 public class uSVGGraphicsFill : uISVGPathDraw {
@@ -186,8 +187,8 @@ public class uSVGGraphicsFill : uISVGPathDraw {
 		if (m_boundBottomRight.x >= this.m_width) m_boundBottomRight.x = this.m_width - 1f;
 		if (m_boundBottomRight.y >= this.m_height) m_boundBottomRight.y = this.m_height - 1f;
 		
-		this.m_subW = (int)Mathf.Abs((int)m_boundTopLeft.x - (int)m_boundBottomRight.x) + 1 + (2*1);
-		this.m_subH = (int)Mathf.Abs((int)m_boundTopLeft.y - (int)m_boundBottomRight.y) + 1 + (2*1);
+		this.m_subW = (int)Math.Abs((int)m_boundTopLeft.x - (int)m_boundBottomRight.x) + 1 + (2*1);
+		this.m_subH = (int)Math.Abs((int)m_boundTopLeft.y - (int)m_boundBottomRight.y) + 1 + (2*1);
 
 		this.m_inZoneL = (int)m_boundTopLeft.x -1;
 		this.m_inZoneT = (int)m_boundTopLeft.y -1;

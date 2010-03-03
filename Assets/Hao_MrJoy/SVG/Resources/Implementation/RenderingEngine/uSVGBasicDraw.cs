@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public delegate void SetPixelDelegate(int x, int y);
@@ -62,7 +63,7 @@ public class uSVGBasicDraw {
 	//Methods: Line
 	//--------------------------------------------------------------------------------
 	public void Line(int x0, int y0, int x1, int y1) {
-		bool steep = (Mathf.Abs(y1 - y0) > Mathf.Abs(x1 - x0));
+		bool steep = (Math.Abs(y1 - y0) > Math.Abs(x1 - x0));
 		if (steep) {
 			Swap(ref x0, ref y0);
 			Swap(ref x1, ref  y1);
@@ -74,7 +75,7 @@ public class uSVGBasicDraw {
 		}
 
 		int deltax = x1 - x0;
-		int deltay = Mathf.Abs(y1 - y0);
+		int deltay = Math.Abs(y1 - y0);
 		int error = -(deltax + 1) / 2;
 		int ystep;
 		int y = y0;
@@ -155,8 +156,8 @@ public class uSVGBasicDraw {
 		MoveTo(fPoint);
 		for (int i = 1; i <= m_delta; i++) {
 			temp = i * m_angle;
-			tx = radius * Mathf.Sin(temp) + x0;
-			ty = radius * Mathf.Cos(temp) + y0;
+			tx = radius * (float)Math.Sin(temp) + x0;
+			ty = radius * (float)Math.Cos(temp) + y0;
 			uSVGPoint tPoint = new uSVGPoint(tx, ty);
 			LineTo(tPoint);
 		}
@@ -174,19 +175,19 @@ public class uSVGBasicDraw {
 	//Methods: Ellipse
 	//--------------------------------------------------------------------------------
 	private void Ellipse(int cx, int cy, int rx, int ry, float angle) {
-		float chuvi = 2f * Mathf.PI * Mathf.Sqrt(rx * rx + ry*ry);
+		float chuvi = 2f * Mathf.PI * (float)Math.Sqrt(rx * rx + ry*ry);
 		int steps = (int) (chuvi / 3f);
 		if (steps > 50) steps = 50;
 		float beta = (float)angle / 180.0f * Mathf.PI;
-		float sinbeta = Mathf.Sin(beta);
-		float cosbeta = Mathf.Cos(beta);
+		float sinbeta = (float)Math.Sin(beta);
+		float cosbeta = (float)Math.Cos(beta);
 		
 		steps = 360 / steps;
 		
 		int i = 0;
 		float alpha = (float)i / 180.0f * Mathf.PI;
-		float sinalpha = Mathf.Sin(alpha);
-		float cosalpha = Mathf.Cos(alpha);
+		float sinalpha = (float)Math.Sin(alpha);
+		float cosalpha = (float)Math.Cos(alpha);
 
 		float m_x = cx + (rx * cosalpha * cosbeta - ry * sinalpha * sinbeta);
 		float m_y = cy + (rx * cosalpha * sinbeta + ry * sinalpha * cosbeta);
@@ -197,8 +198,8 @@ public class uSVGBasicDraw {
 
 		for (i = 1; i < 360; i += steps) {
 			alpha = (float)i / 180.0f * Mathf.PI;
-			sinalpha = Mathf.Sin(alpha);
-			cosalpha = Mathf.Cos(alpha);
+			sinalpha = (float)Math.Sin(alpha);
+			cosalpha = (float)Math.Cos(alpha);
 
 			m_x = cx + (rx * cosalpha * cosbeta - ry * sinalpha * sinbeta);
 			m_y = cy + (rx * cosalpha * sinbeta + ry * sinalpha * cosbeta);
@@ -224,8 +225,8 @@ public class uSVGBasicDraw {
 		double trx2, try2, tx2, ty2;
 		float temp1, temp2;
 		float m_radian = (angle * Mathf.PI / 180.0f);
-		float m_CosRadian = Mathf.Cos(m_radian);
-		float m_SinRadian = Mathf.Sin(m_radian);
+		float m_CosRadian = (float)Math.Cos(m_radian);
+		float m_SinRadian = (float)Math.Sin(m_radian);
 		temp1 = (p1.x - p2.x)/2.0f;
 		temp2 = (p1.y - p2.y)/2.0f;
 		tx = ( m_CosRadian * temp1) + (m_SinRadian * temp2);
@@ -239,8 +240,8 @@ public class uSVGBasicDraw {
 
 		double radiiCheck = tx2/trx2 + ty2/try2;
 		if (radiiCheck > 1) {
-		rx = Mathf.Sqrt((float)radiiCheck) * rx;
-		ry = Mathf.Sqrt((float)radiiCheck) * ry;
+		rx = (float)(float)Math.Sqrt((float)radiiCheck) * rx;
+		ry = (float)Math.Sqrt((float)radiiCheck) * ry;
 		trx2 = rx * rx;
 		try2 = ry * ry;
 		}
@@ -250,7 +251,7 @@ public class uSVGBasicDraw {
 		tm1 = (tm1 < 0) ? 0 : tm1;
 
 		float tm2;
-		tm2 = (largeArcFlag == sweepFlag) ? -Mathf.Sqrt((float)tm1) : Mathf.Sqrt((float)tm1);
+		tm2 = (largeArcFlag == sweepFlag) ? -(float)Math.Sqrt((float)tm1) : (float)Math.Sqrt((float)tm1);
 
 		
 		float tcx, tcy;
@@ -268,19 +269,19 @@ public class uSVGBasicDraw {
 		float m_angle, m_delta;
 		
 		float p, n, t;
-		n = Mathf.Sqrt((ux * ux) + (uy * uy));
+		n = (float)Math.Sqrt((ux * ux) + (uy * uy));
 		p = ux;
-		m_angle = (uy < 0) ? -Mathf.Acos(p/n):Mathf.Acos(p/n);	
+		m_angle = (uy < 0) ? -(float)Math.Acos(p/n):(float)Math.Acos(p/n);	
 		m_angle = m_angle * 180.0f / Mathf.PI;
 		m_angle %= 360f;
 			
-		n =  Mathf.Sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy));
+		n =  (float)Math.Sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy));
 		p = ux * vx + uy * vy;
 		t = p/n;
-		if ((Mathf.Abs(t) >= 0.99999f)  && (Mathf.Abs(t) < 1.000009f)){
+		if ((Math.Abs(t) >= 0.99999f)  && (Math.Abs(t) < 1.000009f)){
 			if (t>0) t = 1f; else t= -1f;
 		}
-		m_delta = (ux * vy - uy * vx < 0) ? -Mathf.Acos(t) : Mathf.Acos(t);
+		m_delta = (ux * vy - uy * vx < 0) ? -(float)Math.Acos(t) : (float)Math.Acos(t);
 
 		m_delta = m_delta * 180.0f / Mathf.PI;
 
@@ -299,11 +300,11 @@ public class uSVGBasicDraw {
 		float t_angle;
 		for(int i = 0; i <= number; i++) {
 			t_angle = (deltaT * i + m_angle) * Mathf.PI / 180.0f;
-			m_point.x = m_CosRadian * rx * Mathf.Cos(t_angle) - 
-						m_SinRadian * ry * Mathf.Sin(t_angle)
+			m_point.x = m_CosRadian * rx * (float)Math.Cos(t_angle) - 
+						m_SinRadian * ry * (float)Math.Sin(t_angle)
 						+ cx; 
-			m_point.y = m_SinRadian * rx * Mathf.Cos(t_angle) + 
-						m_CosRadian * ry * Mathf.Sin(t_angle)
+			m_point.y = m_SinRadian * rx * (float)Math.Cos(t_angle) + 
+						m_CosRadian * ry * (float)Math.Sin(t_angle)
 					+ cy;
 			LineTo(m_point);
 		}
@@ -339,7 +340,7 @@ public class uSVGBasicDraw {
 		float m_up, m_under, m_distance;
 		m_up = ((a.y - c.y) * (b.x - a.x)) - ((a.x - c.x) * (b.y - a.y));
 		m_under = ((b.x - a.x) * (b.x - a.x)) + ((b.y - a.y) * (b.y - a.y));
-		m_distance = Mathf.Abs(m_up / m_under) * Mathf.Sqrt(m_under);
+		m_distance = Math.Abs(m_up / m_under) * (float)Math.Sqrt(m_under);
 		return m_distance;
 	}
 

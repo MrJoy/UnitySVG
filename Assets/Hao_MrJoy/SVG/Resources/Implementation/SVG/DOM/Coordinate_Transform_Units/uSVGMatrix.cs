@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 // TODO: Rename Matrix2x3
 public class uSVGMatrix {
@@ -72,8 +73,8 @@ public class uSVGMatrix {
 									e,				f);
 		}
 		public uSVGMatrix Rotate(float angle) {
-			double ca = Mathf.Cos((float)(angle * radPerDegree));
-			double sa = Mathf.Sin((float)(angle * radPerDegree));
+			double ca = (float)Math.Cos((float)(angle * radPerDegree));
+			double sa = (float)Math.Sin((float)(angle * radPerDegree));
 			
 			return new uSVGMatrix(	(float) (a*ca + c*sa),	(float) (b*ca + d*sa),
 									(float) (c*ca - a*sa),	(float) (d*ca - b*sa),
@@ -83,13 +84,13 @@ public class uSVGMatrix {
 			return new uSVGMatrix ( a, b, c, d, a*x + c*y + e, b*x + d*y +f);
 		}
 		public uSVGMatrix SkewX(float angle) {
-			double ta = Mathf.Tan((float) (angle*radPerDegree));
+			double ta = Math.Tan((float) (angle*radPerDegree));
 			return new uSVGMatrix(	a,					b,
 									(float) (c + a*ta),	(float) (d + b*ta),
 									e,					f);
 		}
 		public uSVGMatrix SkewY(float angle) {
-			double ta = Mathf.Tan((float) (angle*radPerDegree));
+			double ta = Math.Tan((float) (angle*radPerDegree));
 			return new uSVGMatrix(	(float) (a + c*ta),	(float) (b + d*ta),
 									c,					d,
 									e,					f);

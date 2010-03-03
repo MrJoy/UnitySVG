@@ -8,7 +8,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 	private uSVGPaintable m_paintable;
 	/***********************************************************************************/
 	public uSVGPathElement(AttributeList attrList,
-							uSVGAnimatedTransformList inheritTransformList,
+							uSVGTransformList inheritTransformList,
 							uSVGPaintable inheritPaintable,
 							uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_attrList = attrList;
@@ -18,7 +18,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 	}
 	/***********************************************************************************/
 	private void f_Initial() {
-		this.currentTransformList = new uSVGAnimatedTransformList(
+		this.currentTransformList = new uSVGTransformList(
 											this.m_attrList.GetValue("TRANSFORM"));
 		m_segList = new uSVGPathSegList();
 		
@@ -335,7 +335,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 	}
 	//================================================================================
 	//Thuc thi Interface Drawable
-	public void f_BeforeRender (uSVGAnimatedTransformList transformList) {
+	public void f_BeforeRender (uSVGTransformList transformList) {
 		this.inheritTransformList = transformList;
 		for (int i = 0; i < this.m_segList.numberOfItems; i++) {
 			uISVGDrawable temp = this.m_segList.GetItem(i) as uISVGDrawable;

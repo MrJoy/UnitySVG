@@ -11,7 +11,7 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
 	private uSVGPaintable m_paintable;
 	/***********************************************************************************/
 	public uSVGGElement(uXMLImp xmlImp,
-						uSVGAnimatedTransformList inheritTransformList,
+						uSVGTransformList inheritTransformList,
 						uSVGPaintable inheritPaintable,
 						uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_render = m_render;
@@ -23,7 +23,7 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
 	/***********************************************************************************/
 	private void f_Initial() {
     m_elementList = new List<object>();
-		this.currentTransformList = new uSVGAnimatedTransformList(
+		this.currentTransformList = new uSVGTransformList(
 											this.m_attrList.GetValue("TRANSFORM"));
 		f_GetElementList();
 	}
@@ -150,7 +150,7 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
 		}
 	}	
 	/***********************************************************************************/
-	public void f_BeforeRender(uSVGAnimatedTransformList transformList) {		
+	public void f_BeforeRender(uSVGTransformList transformList) {		
 		this.inheritTransformList = transformList;		
 		for (int i = 0; i < m_elementList.Count; i++) {
 			uISVGDrawable temp = m_elementList[i] as uISVGDrawable;

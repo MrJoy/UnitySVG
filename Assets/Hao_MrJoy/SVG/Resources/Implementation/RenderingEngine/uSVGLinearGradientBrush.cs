@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 public class uSVGLinearGradientBrush {
 	private uSVGLinearGradientElement m_linearGradElement;
@@ -27,10 +28,10 @@ public class uSVGLinearGradientBrush {
 	
 	/*********************************************************************************/
 	private void f_Initialize() {
-		this.m_x1 = this.m_linearGradElement.x1.animVal.value;
-		this.m_y1 = this.m_linearGradElement.y1.animVal.value;
-		this.m_x2 = this.m_linearGradElement.x2.animVal.value;
-		this.m_y2 = this.m_linearGradElement.y2.animVal.value;
+		this.m_x1 = this.m_linearGradElement.x1.value;
+		this.m_y1 = this.m_linearGradElement.y1.value;
+		this.m_x2 = this.m_linearGradElement.x2.value;
+		this.m_y2 = this.m_linearGradElement.y2.value;
 
 		this.m_stopColorList = new List<Color>();
 		this.m_stopOffsetList = new List<float>();
@@ -50,7 +51,7 @@ public class uSVGLinearGradientBrush {
 		m_stopOffsetList.Add(0f);
 		int i = 0;
 		for (i = 0; i < m_length; i++) {
-			float t_offset = m_stopList[i].offset.animVal;
+			float t_offset = m_stopList[i].offset.value;
 			if ((t_offset > m_stopOffsetList[m_stopOffsetList.Count - 1])  && (t_offset <= 100f)) {
 				m_stopColorList.Add(m_stopList[i].stopColor.color);
 				m_stopOffsetList.Add(t_offset);
@@ -106,11 +107,11 @@ public class uSVGLinearGradientBrush {
 		}
 
 
-		float d1 = Mathf.Sqrt((this.m_x1 - cx) * (this.m_x1 - cx) + 
+		float d1 = (float)Math.Sqrt((this.m_x1 - cx) * (this.m_x1 - cx) + 
 								(this.m_y1 - cy) * (this.m_y1 - cy));
-		float d2 = Mathf.Sqrt((this.m_x2 - cx) * (this.m_x2 - cx) + 
+		float d2 = (float)Math.Sqrt((this.m_x2 - cx) * (this.m_x2 - cx) + 
 								(this.m_y2 - cy) * (this.m_y2 - cy));
-		float dd = Mathf.Sqrt((this.m_x2 - this.m_x1) * (this.m_x2 - this.m_x1) + 
+		float dd = (float)Math.Sqrt((this.m_x2 - this.m_x1) * (this.m_x2 - this.m_x1) + 
 					(this.m_y2 - this.m_y1) * (this.m_y2 - this.m_y1));
 		//-1 trai, 0 giua, 1 phai
 		int vt = 0;
@@ -144,19 +145,19 @@ public class uSVGLinearGradientBrush {
 	//-----
 	private void f_SetGradientVector(uSVGGraphicsPath graphicsPath) {
 		uSVGRect bound = graphicsPath.GetBound();
-		if (this.m_linearGradElement.x1.animVal.unitType == uSVGLengthType.SVG_LENGTHTYPE_PERCENTAGE) {
+		if (this.m_linearGradElement.x1.unitType == uSVGLengthType.SVG_LENGTHTYPE_PERCENTAGE) {
 			this.m_x1 = bound.x + (bound.width * this.m_x1 / 100f);
 		}
 		
-		if (this.m_linearGradElement.y1.animVal.unitType == uSVGLengthType.SVG_LENGTHTYPE_PERCENTAGE) {
+		if (this.m_linearGradElement.y1.unitType == uSVGLengthType.SVG_LENGTHTYPE_PERCENTAGE) {
 			this.m_y1 = bound.y + (bound.height * this.m_y1 / 100f);
 		}
 		
-		if (this.m_linearGradElement.x2.animVal.unitType == uSVGLengthType.SVG_LENGTHTYPE_PERCENTAGE) {
+		if (this.m_linearGradElement.x2.unitType == uSVGLengthType.SVG_LENGTHTYPE_PERCENTAGE) {
 			this.m_x2 = bound.x + (bound.width * this.m_x2 / 100f);
 		}
 		
-		if (this.m_linearGradElement.y2.animVal.unitType == uSVGLengthType.SVG_LENGTHTYPE_PERCENTAGE) {
+		if (this.m_linearGradElement.y2.unitType == uSVGLengthType.SVG_LENGTHTYPE_PERCENTAGE) {
 			this.m_y2 = bound.y + (bound.height * this.m_y2 / 100f);
 		}
 

@@ -11,7 +11,7 @@ public enum uSVGGradientUnitType : ushort {
 }
 public class uSVGGradientElement {
 	private uSVGGradientUnitType 		m_gradientUnits;
-	private uSVGAnimatedTransformList 	m_gradientTransfrom;
+	private uSVGTransformList 	m_gradientTransfrom;
 	private uSVGSpreadMethodTypes		m_spreadMethod;
 	/***************************************************************************/
 	private AttributeList m_attrList;

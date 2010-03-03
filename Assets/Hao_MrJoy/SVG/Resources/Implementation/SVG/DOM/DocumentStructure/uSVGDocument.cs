@@ -8,7 +8,7 @@ public class uSVGDocument : uXMLImp {
 			if (m_rootElement == null) {
 			  while(!f_IsCurrentTagName("svg"))
 			    f_ReadNextTag();
-				m_rootElement = new uSVGSVGElement(this, new uSVGAnimatedTransformList(),
+				m_rootElement = new uSVGSVGElement(this, new uSVGTransformList(),
 														 new uSVGPaintable(), this.m_render);
 			}
 			return this.m_rootElement;

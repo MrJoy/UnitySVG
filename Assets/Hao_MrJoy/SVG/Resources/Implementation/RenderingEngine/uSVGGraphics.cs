@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class uSVGGraphics {
@@ -118,7 +119,7 @@ public class uSVGGraphics {
 			return false;
 		}
 
-		cy1 = m_ihalf1 * dtx / Mathf.Sqrt(temp) + p1.y;
+		cy1 = m_ihalf1 * dtx / (float)Math.Sqrt(temp) + p1.y;
 		if (dtx == 0) {
 			if (dty > 0) {
 				cx1 = p1.x - m_ihalf1;
@@ -129,7 +130,7 @@ public class uSVGGraphics {
 			cx1 = (-(cy1 - p1.y) * dty) / dtx + p1.x;
 		}
 
-		cy2 = -(m_ihalf2 * dtx / Mathf.Sqrt(temp)) + p1.y;
+		cy2 = -(m_ihalf2 * dtx / (float)Math.Sqrt(temp)) + p1.y;
 		if (dtx == 0) {
 			if (dty > 0) {
 				cx2 = p1.x + m_ihalf2;
@@ -144,7 +145,7 @@ public class uSVGGraphics {
 		dty = p1.y - p2.y;
 		temp = dtx * dtx + dty * dty;		
 
-		cy3 = m_ihalf1 * dtx / Mathf.Sqrt(temp) + p2.y;
+		cy3 = m_ihalf1 * dtx / (float)Math.Sqrt(temp) + p2.y;
 		if (dtx == 0) {
 			if (dty > 0) {
 				cx3 = p2.x - m_ihalf1;
@@ -155,7 +156,7 @@ public class uSVGGraphics {
 			cx3 = (-(cy3 - p2.y) * dty) / dtx + p2.x;
 		}
 		
-		cy4 = -(m_ihalf2 * dtx / Mathf.Sqrt(temp)) + p2.y;
+		cy4 = -(m_ihalf2 * dtx / (float)Math.Sqrt(temp)) + p2.y;
 		
 		if (dtx == 0) {
 			if (dty > 0) {
@@ -177,7 +178,7 @@ public class uSVGGraphics {
 		if (t1 * t2 > 0) {
 			//bi lech
 			if (m_ihalf1 != m_ihalf2) {
-				cy3 = m_ihalf2 * dtx / Mathf.Sqrt(temp) + p2.y;
+				cy3 = m_ihalf2 * dtx / (float)Math.Sqrt(temp) + p2.y;
 				if (dtx == 0) {
 					if (dty > 0) {
 						cx3 = p2.x - m_ihalf2;
@@ -188,7 +189,7 @@ public class uSVGGraphics {
 					cx3 = (-(cy3 - p2.y) * dty) / dtx + p2.x;
 				}
 		
-				cy4 = -(m_ihalf1 * dtx / Mathf.Sqrt(temp)) + p2.y;
+				cy4 = -(m_ihalf1 * dtx / (float)Math.Sqrt(temp)) + p2.y;
 		
 				if (dtx == 0) {
 					if (dty > 0) {
@@ -295,12 +296,12 @@ public class uSVGGraphics {
 		vt1 = new uSVGPoint(p2.x - p1.x, p2.y - p1.y);
 		vt2 = new uSVGPoint(p4.x - p3.x, p4.y - p3.y);
 		float t1 = vt1.x*vt2.x + vt1.y*vt2.y;
-		float gtvt1 = Mathf.Sqrt(vt1.x * vt1.x + vt1.y*vt1.y);
-		float gtvt2 = Mathf.Sqrt(vt2.x * vt2.x + vt2.y*vt2.y);
+		float gtvt1 = (float)Math.Sqrt(vt1.x * vt1.x + vt1.y*vt1.y);
+		float gtvt2 = (float)Math.Sqrt(vt2.x * vt2.x + vt2.y*vt2.y);
 		float t2 = gtvt1 * gtvt2;
 		float cosAngle = t1/t2;
 		
-		return (Mathf.Acos(cosAngle));
+		return ((float)Math.Acos(cosAngle));
 	}
 	//================================================================================
 	//--------------------------------------------------------------------------------
@@ -343,17 +344,6 @@ public class uSVGGraphics {
 	//-----
 	public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4, float width) {
 		this.m_graphicsStroke.Rect(p1, p2, p3, p4, width);
-		/*
-		if ((int)width == 1) {
-			Rect(p1, p2, p3, p4);
-		}
-		uSVGPoint[] points = new uSVGPoint[4];
-		points[0] = p1;
-		points[1] = p2;
-		points[2] = p3;
-		points[3] = p4;
-		Polygon(points, width);
-		*/
 	}
 	//-----
 	public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
@@ -392,78 +382,6 @@ public class uSVGGraphics {
 			return;
 		}
 		this.m_graphicsStroke.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, width);
-		/*
-		Line(p1, p2, width); Line(p3, p4, width); Line(p5, p6, width); Line(p7, p8, width);
-		uSVGPoint m_p1 = new uSVGPoint(0f, 0f);
-		uSVGPoint m_p2 = new uSVGPoint(0f, 0f);
-		uSVGPoint m_p3 = new uSVGPoint(0f, 0f);
-		uSVGPoint m_p4 = new uSVGPoint(0f, 0f);
-
-		GetThickLine(p1, p2, width,
-					ref m_p1, ref m_p2, ref m_p3, ref m_p4);
-					
-		uSVGPoint m_p5 = new uSVGPoint(0f, 0f);
-		uSVGPoint m_p6 = new uSVGPoint(0f, 0f);
-		uSVGPoint m_p7 = new uSVGPoint(0f, 0f);
-		uSVGPoint m_p8 = new uSVGPoint(0f, 0f);
-
-		//-------
-		GetThickLine(p3, p4, width,
-					ref m_p5, ref m_p6, ref m_p7, ref m_p8);
-		
-		this.m_graphicsFill.BeginSubBuffer();
-		this.m_graphicsFill.MoveTo4Path(m_p4);
-		this.m_graphicsFill.ArcTo4Path(r1 + (width/2f), r2 + (width/2f),
-									angle, false, true, m_p6);
-		this.m_graphicsFill.LineTo4Path(m_p5);
-		this.m_graphicsFill.ArcTo4Path(r1 - (width/2f), r2 - (width/2f),
-									angle, false, false, m_p3);
-		this.m_graphicsFill.LineTo4Path(m_p4);
-		this.m_graphicsFill.EndSubBuffer();
-		
-		//-------
-		GetThickLine(p5, p6, width,
-					ref m_p1, ref m_p2, ref m_p3, ref m_p4);
-					
-		this.m_graphicsFill.BeginSubBuffer();
-		this.m_graphicsFill.MoveTo4Path(m_p8);
-		this.m_graphicsFill.ArcTo4Path(r1 + (width/2f), r2 + (width/2f),
-									angle, false, true, m_p2);
-		this.m_graphicsFill.LineTo4Path(m_p1);
-		this.m_graphicsFill.ArcTo4Path(r1 - (width/2f), r2 - (width/2f),
-									angle, false, false, m_p7);
-		this.m_graphicsFill.LineTo4Path(m_p8);
-		this.m_graphicsFill.EndSubBuffer();
-		
-		//----------
-		GetThickLine(p7, p8, width,
-					ref m_p5, ref m_p6, ref m_p7, ref m_p8);
-		
-		this.m_graphicsFill.BeginSubBuffer();
-		this.m_graphicsFill.MoveTo4Path(m_p4);
-		this.m_graphicsFill.ArcTo4Path(r1 + (width/2f), r2 + (width/2f),
-									angle, false, true, m_p6);
-		this.m_graphicsFill.LineTo4Path(m_p5);
-		this.m_graphicsFill.ArcTo4Path(r1 - (width/2f), r2 - (width/2f),
-									angle, false, false, m_p3);
-		this.m_graphicsFill.LineTo4Path(m_p4);
-		this.m_graphicsFill.EndSubBuffer();
-		
-		//-------
-		GetThickLine(p1, p2, width,
-					ref m_p1, ref m_p2, ref m_p3, ref m_p4);
-					
-		this.m_graphicsFill.BeginSubBuffer();
-		this.m_graphicsFill.MoveTo4Path(m_p8);
-		this.m_graphicsFill.ArcTo4Path(r1 + (width/2f), r2 + (width/2f),
-									angle, false, true, m_p2);
-		this.m_graphicsFill.LineTo4Path(m_p1);
-		this.m_graphicsFill.ArcTo4Path(r1 - (width/2f), r2 - (width/2f),
-									angle, false, false, m_p7);
-		this.m_graphicsFill.LineTo4Path(m_p8);
-		this.m_graphicsFill.EndSubBuffer();
-		*/
-		
 	}
 	//-----
 	public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4, 

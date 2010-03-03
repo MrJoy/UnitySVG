@@ -1,63 +1,62 @@
 
 public class uSVGEllipseElement : uSVGTransformable, uISVGDrawable {
-	private uSVGAnimatedLength m_cx;
-	private uSVGAnimatedLength m_cy;
-	private uSVGAnimatedLength m_rx;
-	private uSVGAnimatedLength m_ry;
+	private uSVGLength m_cx;
+	private uSVGLength m_cy;
+	private uSVGLength m_rx;
+	private uSVGLength m_ry;
 	//================================================================================
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
 	private uSVGPaintable m_paintable;
 	//================================================================================
-	public uSVGAnimatedLength cx {
+	public uSVGLength cx {
 		get {
 			if (this.m_cx == null) {
-				this.m_cx = new uSVGAnimatedLength(0);
+				this.m_cx = new uSVGLength(0);
 			}
 			return this.m_cx;
 		}
 	}
 
-	public uSVGAnimatedLength cy {
+	public uSVGLength cy {
 		get {
 			if (this.m_cy == null) {
-				this.m_cy = new uSVGAnimatedLength(0);
+				this.m_cy = new uSVGLength(0);
 			}
 			return this.m_cy;
 		}
 	}
 
-	public uSVGAnimatedLength rx {
+	public uSVGLength rx {
 		get {
 			if (this.m_rx == null) {
-				this.m_rx = new uSVGAnimatedLength(100);
+				this.m_rx = new uSVGLength(100);
 			}
 			return this.m_rx;
 		}
 	}	
 
-	public uSVGAnimatedLength ry {
+	public uSVGLength ry {
 		get {
 			if (this.m_ry == null) {
-				this.m_ry = new uSVGAnimatedLength(100);
+				this.m_ry = new uSVGLength(100);
 			}
 			return this.m_ry;
 		}
 	}
 	//================================================================================
 	public uSVGEllipseElement(AttributeList attrList,
-							uSVGAnimatedTransformList inheritTransformList,
+							uSVGTransformList inheritTransformList,
 							uSVGPaintable inheritPaintable,
 							uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_attrList = attrList;
 		this.m_render = m_render;
 		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
-		this.m_cx = new uSVGAnimatedLength(attrList.GetValue("CX"));
-		this.m_cy = new uSVGAnimatedLength(attrList.GetValue("CY"));
-		this.m_rx = new uSVGAnimatedLength(attrList.GetValue("RX"));
-		this.m_ry = new uSVGAnimatedLength(attrList.GetValue("RY"));
-		this.currentTransformList = new uSVGAnimatedTransformList(
-										new uSVGTransformList(attrList.GetValue("TRANSFORM")));
+		this.m_cx = new uSVGLength(attrList.GetValue("CX"));
+		this.m_cy = new uSVGLength(attrList.GetValue("CY"));
+		this.m_rx = new uSVGLength(attrList.GetValue("RX"));
+		this.m_ry = new uSVGLength(attrList.GetValue("RY"));
+		this.currentTransformList = new uSVGTransformList(attrList.GetValue("TRANSFORM"));
 	}
 	//================================================================================
 	private uSVGGraphicsPath m_graphicsPath;
@@ -76,7 +75,7 @@ public class uSVGEllipseElement : uSVGTransformable, uISVGDrawable {
 	}
 	//================================================================================
 	//Thuc thi Interface Drawable
-	public void f_BeforeRender (uSVGAnimatedTransformList transformList) {
+	public void f_BeforeRender (uSVGTransformList transformList) {
 		this.inheritTransformList = transformList;
 	}
 	//------

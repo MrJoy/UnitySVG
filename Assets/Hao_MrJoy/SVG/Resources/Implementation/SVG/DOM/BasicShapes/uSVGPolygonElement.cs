@@ -12,7 +12,7 @@ public class uSVGPolygonElement : uSVGTransformable, uISVGDrawable {
 	}
 	//================================================================================
 	public uSVGPolygonElement(	AttributeList attrList,
-								uSVGAnimatedTransformList inheritTransformList,
+								uSVGTransformList inheritTransformList,
 								uSVGPaintable inheritPaintable,
 								uSVGGraphics m_render) : base (inheritTransformList) {
 		this.m_attrList = attrList;
@@ -57,7 +57,7 @@ public class uSVGPolygonElement : uSVGTransformable, uISVGDrawable {
 	}
 	//================================================================================	
 	//Thuc thi Interface Drawable
-	public void f_BeforeRender (uSVGAnimatedTransformList transformList) {
+	public void f_BeforeRender (uSVGTransformList transformList) {
 		this.inheritTransformList = transformList;
 	}
 	//------
