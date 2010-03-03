@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+	"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1024" height="1024" viewBox="0 0 500 400"
+	xmlns="http://www.w3.org/2000/svg" version="1.1">
+	<title>Example triangle01- simple example of a 'path'</title>
+	<desc>Picture showing a simple example of path data
+		using both a "C" and an "S" command,
+		along with annotations showing the control points
+		and end points</desc>
+	<path stroke-width="10" stroke="blue" d="M 100 200 C 100 100 250,300 250,200 S400,300 400,200"/>
+</svg>

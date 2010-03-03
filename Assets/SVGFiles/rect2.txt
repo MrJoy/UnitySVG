@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+	"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1000px" height="1000px" viewBox="0 0 1000 1000"
+	xmlns="http://www.w3.org/2000/svg" version="1.1">
+	<g transform="translate(200 400) rotate(-30)">
+		<rect x="0" y="0" width="400" height="200" stroke-width="10"
+		stroke="purple" fill="none" />
+	</g>
+	<g transform="translate(200 400)">
+		<rect x="0" y="0" width="400" height="200" stroke-width="30"
+		stroke="blue" fill="none" stroke-linejoin="round"/>
+	</g>
+</svg>

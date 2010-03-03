@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1000" height="1000" viewBox="0 0 1200 1200"
+     xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <desc>Example polygon01 - star and hexagon</desc>
+
+	<defs>
+      <linearGradient id="MyGradient">
+        <stop offset="5%" stop-color="#F60" />
+        <stop offset="25%" stop-color="#FF6" />
+        <stop offset="50%" stop-color="#F36" />
+        <stop offset="95%" stop-color="#FFF" />
+      </linearGradient>
+      <linearGradient id="MyGradient1" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2 = "1200" y2="1200">
+        <stop offset="30%" stop-color="#000" />
+        <stop offset="70%" stop-color="#F00" />
+      </linearGradient>
+  </defs>
+  <!-- Show outline of canvas using 'rect' element -->
+  <rect x1="1" y1="1" width="1198" height="1198" fill="url(#MyGradient1)" stroke="blue"/>  
+  <g transform="rotate(30)">
+  <polygon fill="url(#MyGradient)" stroke="blue" stroke-width="5"
+            points="850,75  958,137.5 958,262.5
+                    850,325 742,262.6 742,137.5" />
+    </g>
+  <polyline fill="url(#MyGradient)" stroke="blue" stroke-width="10" 
+			points="50,375 150,375 150,325 250,325 250,375 350,375 350,250 450,250 450,375 550,375 550,175 650,175 650,375 750,375 750,100 850,100 850,375 950,375 950,25 1050,25 1050,375 1150,375" />
+			
+	<g transform="translate(500, 500) rotate(30)">
+	<rect x="100" y="100" width="400" height="200" rx="50" fill="url(#MyGradient)" stroke="blue"
+	stroke-width="20"/>
+	</g>
+	<ellipse transform="translate(400 200) rotate(-30)" rx="250" ry="100" fill="url(#MyGradient)" stroke="red" stroke-width = "50"/>
+	<circle cx="600" cy="200" r="100" stroke="blue" stroke-width="50" fill="url(#MyGradient)"/>
+</svg>
+
