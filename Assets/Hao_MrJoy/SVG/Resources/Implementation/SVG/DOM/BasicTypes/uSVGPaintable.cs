@@ -196,42 +196,31 @@ public class uSVGPaintable{
 	}
 	//-----
 	public bool IsSolidFill() {
-		if (this.m_fillColor == null) return false;
-		if (this.m_fillColor.colorType == uSVGColorTypes.SVG_COLORTYPE_NONE) {
-			return false;
-		}
-		return true;
+		if (this.m_fillColor == null) 
+		  return false;
+		else
+		  return (this.m_fillColor.colorType != SVGColorType.SVG_COLORTYPE_NONE);
 	}
 	//-----
 	public bool IsFill() {
-		if (this.m_fillColor == null) {
-			if (IsLinearGradiantFill()) return true;
-			if (IsRadialGradiantFill()) return true;
-			return false;
-		}
-		if (this.m_fillColor.colorType == uSVGColorTypes.SVG_COLORTYPE_NONE) {
-			return false;
-		}
-		return true;
+		if (this.m_fillColor == null)
+			return (IsLinearGradiantFill() || IsRadialGradiantFill());
+		else
+		  return (this.m_fillColor.colorType != SVGColorType.SVG_COLORTYPE_NONE);
 	}
 	//-----
 	//Tuc la Fill hien tai
 	public bool IsFillX() {
-		if (this.m_fillColor == null) {
-			if (IsLinearGradiantFill()) return true;
-			if (IsRadialGradiantFill()) return true;
-			return false;
-		}
-		if (this.m_fillColor.colorType == uSVGColorTypes.SVG_COLORTYPE_UNKNOWN) {
-			return false;
-		}
-		return true;
+		if (this.m_fillColor == null)
+			return (IsLinearGradiantFill() || IsRadialGradiantFill());
+		else
+		  return (this.m_fillColor.colorType != SVGColorType.SVG_COLORTYPE_UNKNOWN);
 	}
 	//-----
 	public bool IsStroke() {
 		if (this.m_strokeColor == null) return false;
-		if ((this.m_strokeColor.colorType == uSVGColorTypes.SVG_COLORTYPE_UNKNOWN) ||	
-			(this.m_strokeColor.colorType == uSVGColorTypes.SVG_COLORTYPE_NONE)) {
+		if ((this.m_strokeColor.colorType == SVGColorType.SVG_COLORTYPE_UNKNOWN) ||	
+			(this.m_strokeColor.colorType == SVGColorType.SVG_COLORTYPE_NONE)) {
 			return false;
 		}
 		return true;

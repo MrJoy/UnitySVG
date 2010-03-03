@@ -119,8 +119,7 @@ public class uSVGGraphicsFill : uISVGPathDraw {
 		this.m_flag[(int)temp.x, (int)temp.y] = m_fillFlag;
 		m_stack.Push(temp);
 
-		while(true) {
-			if (m_stack.Count > 0) {
+    while(m_stack.Count > 0) {
 				temp = m_stack.Pop();
 				for(int t = 0; t < 4; t++) {
 					float tx, ty;
@@ -133,9 +132,6 @@ public class uSVGGraphicsFill : uISVGPathDraw {
 						}
 					}
 				}			
-			} else {
-				break;
-			}
 		}
 	}
 	//-----

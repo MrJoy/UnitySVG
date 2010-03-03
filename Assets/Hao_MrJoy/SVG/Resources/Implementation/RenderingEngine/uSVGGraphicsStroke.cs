@@ -216,15 +216,15 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 	//--------------------------------------------------------------------------------
 	public void ArcTo(float r1, float r2, float angle,
 				bool largeArcFlag, bool sweepFlag, uSVGPoint p) {
-		if ((this.isUseWidth) && ((int)this.m_width > 1)) {
+		if ((this.isUseWidth) && ((int)this.m_width > 1))
 			ArcTo(r1, r2, angle, largeArcFlag, sweepFlag, p, this.m_width);
-			return;
-		}
-		this.m_basicDraw.ArcTo(r1, r2, angle, largeArcFlag, sweepFlag, p);
+		else
+		  this.m_basicDraw.ArcTo(r1, r2, angle, largeArcFlag, sweepFlag, p);
 	}
 	//-----
 	public void ArcTo(float r1, float r2, float angle,
 				bool largeArcFlag, bool sweepFlag, uSVGPoint p, float width) {
+UnityEngine.Profiler.BeginSample("SVG.SVGGraphicsStroke.ArcTo[0]");
 		float tx, ty, rx, ry;
 		rx = r1;
 		ry = r2;

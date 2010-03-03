@@ -158,25 +158,22 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
 		}
 	}
 	public void f_Render() {
-
-		UnityEngine.Color m_color = new UnityEngine.Color(0f, 0f, 0f);
-		if (this.m_paintable.strokeColor != null) {
-			m_color = this.m_paintable.strokeColor.color;
-		}
-		
+		UnityEngine.Color m_color = UnityEngine.Color.black;
+		bool use_m_color = false;
 		if ((this.m_paintable.IsFill() == true) && (this.m_paintable.IsLinearGradiantFill() == false)) {
 			m_color = this.m_paintable.fillColor.color;
+			use_m_color = true;
+		} else if (this.m_paintable.strokeColor != null) {
+			m_color = this.m_paintable.strokeColor.color;
+			use_m_color = true;
 		}
+		
 		
 		for (int i = 0; i < m_elementList.Count; i++) {
 			uISVGDrawable temp = m_elementList[i] as uISVGDrawable;
 			if (temp != null) {
-				if (this.m_paintable.strokeColor != null) {
+			  if(use_m_color)
 					this.m_render.SetColor(m_color);
-				}
-				if ((this.m_paintable.IsFill() == true) && (this.m_paintable.IsLinearGradiantFill() == false)) {
-					this.m_render.SetColor(m_color);
-				}
 				temp.f_Render();
 			}
 		}
