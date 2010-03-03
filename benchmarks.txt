@@ -17,9 +17,17 @@ Time3		299ms		1380ms		1881ms			7905ms		3142ms		577ms		2077ms
 
 
 After XML improvements and other cleanup:
-(Unfortunately, a LOT of stuff got broken here.  GAH!
+(Unfortunately, a LOT of stuff got broken here.  GAH!)
 
 Allocation	18.4KiB		N/A		N/A			8.6MiB		1.6MiB		N/A		65.0KiB
 Time1		264ms		N/A		N/A			7829ms		4186ms		N/A		2191ms
 Time2		199ms		N/A		N/A			6988ms		3910ms		N/A		1805ms
 Time3		207ms		N/A		N/A			7134ms		3606ms		N/A		2157ms
+
+
+After bug fixes:
+
+Allocation	18.4KiB		44.4KiB		131.0KiB		8.6MiB		1.6MiB		68.6KiB		65.1KiB
+Time1		200ms		1595ms		2726ms			6412ms		3569ms		667ms		1722ms
+Time2		272ms		3874ms		3543ms			6608ms		3610ms		606ms		1521ms
+Time3		198ms		3891ms		3350ms			6201ms		3365ms		615ms		1981ms

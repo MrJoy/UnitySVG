@@ -84,7 +84,7 @@ public class uSVGLinearGradientElement : uSVGGradientElement {
       }
 			string t_name = this.m_xmlImp.f_GetCurrentTagName();
 			AttributeList t_attrList;
-				if (t_name == "STOP") {
+				if (t_name == "stop") {
 					t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
 					uSVGStopElement temp = new uSVGStopElement(	t_attrList);	
 					m_stopList.Add(temp);

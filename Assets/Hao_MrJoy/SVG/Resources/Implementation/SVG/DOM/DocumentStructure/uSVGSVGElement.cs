@@ -156,6 +156,18 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
 						this.m_paintable.AppendRadialGradient(temp);
 						break;
 					}
+					case "DEFS": {
+					  f_GetElementList();
+					  break;
+					}
+					case "TITLE": {
+					  f_GetElementList();
+					  break;
+					}
+					case "DESC": {
+					  f_GetElementList();
+					  break;
+					}
 //					default:
 //					  UnityEngine.Debug.LogError("Unexpected tag: " + t_name);
 //					  break;

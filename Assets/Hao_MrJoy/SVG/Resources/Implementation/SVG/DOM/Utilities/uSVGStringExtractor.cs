@@ -45,7 +45,7 @@ public class uSVGStringExtractor {
 	//Extract for Syntax:  700 200 -30
 	private static char[] splitSpaceComma = new char[]{' ',','};
 	public static string[] f_ExtractTransformValue(string inputText) {
-//		inputText = inputText.Trim();		
+		inputText = inputText.Trim();		
 		inputText = uSVGStringExtractor.f_RemoveMultiSpace(inputText);
 
 		string[] values = inputText.Split(splitSpaceComma, System.StringSplitOptions.RemoveEmptyEntries);
