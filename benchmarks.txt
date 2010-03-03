@@ -1,0 +1,7 @@
+Initial version as posted to the wiki:
+
+File		none.txt	arc1.txt	lineargradient1.txt	tiger.txt	lion.txt	test1.txt	rect1.txt
+Allocation	25.4KiB		30.3MiB		16.0MiB			82.3MiB		34.2MiB		5.7MiB		34.5MiB
+Time1		368ms		2634ms		2683ms			7700ms		5162ms		950ms		2672ms
+Time2		312ms		1826ms		2076ms			7681ms		3609ms		931ms		2582ms
+Time3		358ms		1669ms		2778ms			9394ms		4439ms		972ms		2987ms
