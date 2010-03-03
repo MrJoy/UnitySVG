@@ -5,17 +5,21 @@ public delegate void SetPixelDelegate(int x, int y);
 
 public class uSVGBasicDraw : uISVGBasicDraw {
 	//================================================================================
-	private class uSVGPointExt : uSVGPoint{
+	private struct uSVGPointExt {
 		private float m_delta;
+		private uSVGPoint m_point;
 		public float t {
 			get {
 				return this.m_delta;
 			}
 		}
-		public uSVGPointExt(float x, float y, float t) : base(x, y) {
-			this.m_delta = t;
+		public uSVGPoint point {
+		  get {
+		    return this.m_point;
+		  }
 		}
-		public uSVGPointExt(uSVGPoint point, float t) : base(point.x, point.y) {
+		public uSVGPointExt(uSVGPoint point, float t) {
+		  this.m_point = point;
 			this.m_delta = t;
 		}
 	}
@@ -398,9 +402,9 @@ public class uSVGBasicDraw : uISVGBasicDraw {
 			m_pMid = new uSVGPointExt(evalFunction(m_tm, p1, p2, p3, p4), m_tm);
 	
 			//Calculate Distance from Middle Point to the Flatnet
-			float dist = Distance(	(uSVGPoint)m_pStart,
-									(uSVGPoint)m_stack.Peek(),
-									(uSVGPoint)m_pMid);
+			float dist = Distance(	m_pStart.point,
+									((uSVGPointExt)m_stack.Peek()).point,
+									m_pMid.point);
 
 			//flag = true, Curve Segment must be drawn, else continue calculate other middle point.
 			bool flag = false;
@@ -413,9 +417,9 @@ public class uSVGBasicDraw : uISVGBasicDraw {
 	
 					uSVGPointExt m_q = new uSVGPointExt(evalFunction(mm, p1, p2, p3, p4), mm);
 					m_limitList[i] = m_q;
-					dist = Distance((uSVGPoint)m_pStart,
-									(uSVGPoint)m_pMid,
-									(uSVGPoint)m_q);
+					dist = Distance(m_pStart.point,
+									m_pMid.point,
+									m_q.point);
 					if (dist >= m_flatness) {
 						break;
 					} else {
@@ -437,8 +441,8 @@ public class uSVGBasicDraw : uISVGBasicDraw {
 			}
 		
 			if (flag) {
-				LineTo((uSVGPoint)m_pStart);
-				LineTo((uSVGPoint)m_pMid);
+				LineTo(m_pStart.point);
+				LineTo(m_pMid.point);
 				m_pStart = m_stack.Pop();
 		
 				if (m_stack.Count == 0) break;
@@ -452,7 +456,7 @@ public class uSVGBasicDraw : uISVGBasicDraw {
 				t2 = m_tm;
 			}
 		}
-		LineTo(m_pStart);
+		LineTo(m_pStart.point);
 	}
 	//--------------------------------------------------------------------------------
 	//Methods: CubicCurve

@@ -1,4 +1,4 @@
-public class uSVGPoint {
+public struct uSVGPoint {
 	private float m_x;
 	private float m_y;
 

@@ -345,7 +345,7 @@ public class uSVGGraphicsPath {
 				break;
 				//-----
 				case "moveto":
-					uSVGPoint m_pointMoveTo = m_listObject[i] as uSVGPoint;
+					uSVGPoint m_pointMoveTo = (uSVGPoint)m_listObject[i];
 					m_listPoints = new List<uSVGPoint>();
 
 					cx = m_pointMoveTo.x;
@@ -384,7 +384,7 @@ public class uSVGGraphicsPath {
 				break;
 				//-----
 				case "lineto":
-					uSVGPoint m_pointlineTo = m_listObject[i] as uSVGPoint;
+					uSVGPoint m_pointlineTo = (uSVGPoint)m_listObject[i];
 					m_listPoints = new List<uSVGPoint>();
 
 					cx = m_pointlineTo.x;
@@ -648,7 +648,7 @@ public class uSVGGraphicsPath {
 				break;
 				//-----
 				case "moveto":
-					f_RenderMoveTo((m_listObject[i] as uSVGPoint), m_pathDraw);
+					f_RenderMoveTo((uSVGPoint)m_listObject[i], m_pathDraw);
 				break;
 				case "arcto":
 					f_RenderArcTo((m_listObject[i] as uSVGGArcAbs), m_pathDraw);
@@ -660,7 +660,7 @@ public class uSVGGraphicsPath {
 					f_RenderQuadraticCurveTo((m_listObject[i] as uSVGGQuadraticAbs), m_pathDraw);
 				break;
 				case "lineto":
-					f_RenderLineTo((m_listObject[i] as uSVGPoint), m_pathDraw);
+					f_RenderLineTo((uSVGPoint)m_listObject[i], m_pathDraw);
 				break;
 			}
 		}
