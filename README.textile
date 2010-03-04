@@ -27,7 +27,7 @@ Essentially, only things involved in rendering static images are supported, with
 
 h1. PERFORMANCE
 
-Pretty awful right now.  See benchmark.txt for specifics.
+Pretty awful right now.  See "benchmarks.txt":http://github.com/MrJoy/UnitySVG/blob/master/benchmarks.txt for specifics.
 
 
 h1. HISTORY
@@ -50,9 +50,9 @@ Please note that it is unlikely _I_ will have time to do much of this, these are
 * See about reusing relevant Unity classes (Vector2, Rect) where appropriate.
 * Document which variant/version of the SVG spec we most closely match, and significant deviations from it.
 * Rigorous regression/compatibility/performance testing (automated, of course).  See:
-** http://wiki.svg.org/index.php/Main_Page
-** http://www.linuxrising.org/svg_test/test_big.html
-** http://croczilla.com/bits_and_pieces/svg/samples/
+** "http://wiki.svg.org/index.php/Main_Page":http://wiki.svg.org/index.php/Main_Page
+** "http://www.linuxrising.org/svg_test/test_big.html":http://www.linuxrising.org/svg_test/test_big.html
+** "http://croczilla.com/bits_and_pieces/svg/samples/":http://croczilla.com/bits_and_pieces/svg/samples/
 * Refactor the document model code to be cleanly / easily usable independent of an actual XML document.
 * Separate XML (and attribute!) parser that uses the SVG DOM API we construct.
 * Some support for foreignObjects to allow blending in noise textures and whatnot.  (Definitely want to use GPU compositing for this...)

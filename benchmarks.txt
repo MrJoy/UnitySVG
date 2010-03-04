@@ -1,33 +1,38 @@
+(These numbers gathered on a late-2009 MacBook Pro w/ 2.26Ghz Core2 Duo, and 3GB
+of 1067Mhz DDR3 RAM running OSX 10.6.1, under Unity 2.6.1)
+
+
 Initial version as posted to the wiki:
 
-File		none.txt	arc1.txt	lineargradient1.txt	tiger.txt	lion.txt	test1.txt	rect1.txt
-Allocation	25.4KiB		30.3MiB		16.0MiB			82.3MiB		34.2MiB		5.7MiB		34.5MiB
-Time1		368ms		2634ms		2683ms			7700ms		5162ms		950ms		2672ms
-Time2		312ms		1826ms		2076ms			7681ms		3609ms		931ms		2582ms
-Time3		358ms		1669ms		2778ms			9394ms		4439ms		972ms		2987ms
+File		none	arc1	lineargradient1	tiger	lion	test1		rect1
+Allocation	25.4KiB	30.3MiB	16.0MiB			82.3MiB	34.2MiB	5.7MiB		34.5MiB
+Time1		368ms	2634ms	2683ms			7700ms	5162ms	950ms		2672ms
+Time2		312ms	1826ms	2076ms			7681ms	3609ms	931ms		2582ms
+Time3		358ms	1669ms	2778ms			9394ms	4439ms	972ms		2987ms
 
 
 After converting uSVGPoint to a struct:
-(Note that tiger.txt does virtually all of its allocations in the XML parsing side of things, thus the relatively meager gains)
+(Note that tiger.txt does virtually all of its remaining allocations in the XML 
+parsing side of things, thus the relatively meager gains)
 
-Allocation	25.4KiB		63.7KiB		245.1KiB		20.5MiB		3.7MiB		158.1KiB	133.8KiB
-Time1		348ms		2007ms		2313ms			7307ms		3819ms		557ms		1595ms
-Time2		389ms		1412ms		2610ms			6614ms		3149ms		753ms		2064ms
-Time3		299ms		1380ms		1881ms			7905ms		3142ms		577ms		2077ms
+Allocation	25.4KiB	63.7KiB	245.1KiB		20.5MiB	3.7MiB	158.1KiB	133.8KiB
+Time1		348ms	2007ms	2313ms			7307ms	3819ms	557ms		1595ms
+Time2		389ms	1412ms	2610ms			6614ms	3149ms	753ms		2064ms
+Time3		299ms	1380ms	1881ms			7905ms	3142ms	577ms		2077ms
 
 
 After XML improvements and other cleanup:
 (Unfortunately, a LOT of stuff got broken here.  GAH!)
 
-Allocation	18.4KiB		N/A		N/A			8.6MiB		1.6MiB		N/A		65.0KiB
-Time1		264ms		N/A		N/A			7829ms		4186ms		N/A		2191ms
-Time2		199ms		N/A		N/A			6988ms		3910ms		N/A		1805ms
-Time3		207ms		N/A		N/A			7134ms		3606ms		N/A		2157ms
+Allocation	18.4KiB	N/A		N/A				8.6MiB	1.6MiB	N/A			65.0KiB
+Time1		264ms	N/A		N/A				7829ms	4186ms	N/A			2191ms
+Time2		199ms	N/A		N/A				6988ms	3910ms	N/A			1805ms
+Time3		207ms	N/A		N/A				7134ms	3606ms	N/A			2157ms
 
 
 After bug fixes:
 
-Allocation	18.4KiB		44.4KiB		131.0KiB		8.6MiB		1.6MiB		68.6KiB		65.1KiB
-Time1		200ms		1595ms		2726ms			6412ms		3569ms		667ms		1722ms
-Time2		272ms		3874ms		3543ms			6608ms		3610ms		606ms		1521ms
-Time3		198ms		3891ms		3350ms			6201ms		3365ms		615ms		1981ms
+Allocation	18.4KiB	44.4KiB	131.0KiB		8.6MiB	1.6MiB	68.6KiB		65.1KiB
+Time1		200ms	1595ms	2726ms			6412ms	3569ms	667ms		1722ms
+Time2		272ms	3874ms	3543ms			6608ms	3610ms	606ms		1521ms
+Time3		198ms	3891ms	3350ms			6201ms	3365ms	615ms		1981ms
