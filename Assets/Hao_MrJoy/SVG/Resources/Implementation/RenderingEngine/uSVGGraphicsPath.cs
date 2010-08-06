@@ -84,17 +84,8 @@ public class uSVGGraphicsPath {
 	//--------------------------------------------------------------------------------
 	//Method: f_ResetLimitPoints
 	//--------------------------------------------------------------------------------
-	private void f_ResetLimitPoints(uSVGPoint[] points) {
-		int m_length = points.GetLength(0);
-		for (int i = 0; i < m_length; i++) {
-			if (points[i].x < this.m_boundTopLeft.x) this.m_boundTopLeft.x = points[i].x;
-			if (points[i].y < this.m_boundTopLeft.y) this.m_boundTopLeft.y = points[i].y;
 
-			if (points[i].x > this.m_boundBottomRight.x) this.m_boundBottomRight.x = points[i].x;
-			if (points[i].y > this.m_boundBottomRight.y) this.m_boundBottomRight.y = points[i].y;
-		}
 	}
-	//-----
 	private void f_ResetLimitPoints(List<uSVGPoint> points) {
 		int m_length = points.Count;
 		for (int i = 0; i < m_length; i++) {
@@ -103,21 +94,6 @@ public class uSVGGraphicsPath {
 
 			if (points[i].x > this.m_boundBottomRight.x) this.m_boundBottomRight.x = points[i].x;
 			if (points[i].y > this.m_boundBottomRight.y) this.m_boundBottomRight.y = points[i].y;
-		}
-	}
-	//-----
-	private void f_ResetLimitPoints(uSVGPoint[] points, float deltax, float deltay) {
-		int m_length = points.GetLength(0);
-		for (int i = 0; i < m_length; i++) {
-			if ((points[i].x - deltax) < this.m_boundTopLeft.x)
-											this.m_boundTopLeft.x = points[i].x - deltax;
-			if ((points[i].y - deltay) < this.m_boundTopLeft.y)
-											this.m_boundTopLeft.y = points[i].y - deltay;
-
-			if ((points[i].x + deltax) > this.m_boundBottomRight.x)
-											this.m_boundBottomRight.x = points[i].x + deltax;
-			if ((points[i].y + deltay) > this.m_boundBottomRight.y) 
-											this.m_boundBottomRight.y = points[i].y + deltay;
 		}
 	}
 	//-----
