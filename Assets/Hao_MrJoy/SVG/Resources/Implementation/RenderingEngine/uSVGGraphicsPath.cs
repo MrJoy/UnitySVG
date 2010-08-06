@@ -248,6 +248,7 @@ public class uSVGGraphicsPath {
 	//Method: GetBound
 	//--------------------------------------------------------------------------------
 	public uSVGRect GetBound() {
+Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 		List<uSVGPoint> m_listPoints;
 		float cx, cy, r, rx, ry, x, y, width, height;
 
@@ -370,10 +371,13 @@ public class uSVGGraphicsPath {
 				break;
 			}
 		}
-		return new uSVGRect(this.m_boundTopLeft.x - 1,
+
+		uSVGRect tmp = new uSVGRect(this.m_boundTopLeft.x - 1,
 							this.m_boundTopLeft.y - 1,
 							this.m_boundBottomRight.x - this.m_boundTopLeft.x + 2,
 							this.m_boundBottomRight.y - this.m_boundTopLeft.y + 2);
+Profiler.EndSample();
+    return tmp;
 	}
 	//--------------------------------------------------------------------------------
 	//Method: GetBoundTransformed
