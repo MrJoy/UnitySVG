@@ -84,8 +84,6 @@ public class uSVGGraphicsPath {
 	//--------------------------------------------------------------------------------
 	//Method: f_ResetLimitPoints
 	//--------------------------------------------------------------------------------
-
-	}
 	private void f_ResetLimitPoints(List<uSVGPoint> points) {
 		int m_length = points.Count;
 		for (int i = 0; i < m_length; i++) {
