@@ -271,15 +271,15 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 		for (int i = 0; i < this.m_listObject.Count; i++ ) {
 			switch(this.m_listType[i]) {
 				case SVGPathElementTypes.Polygon:
-					uSVGPolygonElement m_polygonElement = m_listObject[i] as uSVGPolygonElement;
+					uSVGPolygonElement m_polygonElement = (uSVGPolygonElement)m_listObject[i];
 					f_ResetLimitPoints(m_polygonElement.listPoints);
 				break;
 				case SVGPathElementTypes.Polyline:
-					uSVGPolylineElement m_polylineElement = m_listObject[i] as uSVGPolylineElement;
+					uSVGPolylineElement m_polylineElement = (uSVGPolylineElement)m_listObject[i];
 					f_ResetLimitPoints(m_polylineElement.listPoints);
 				break;
 				case SVGPathElementTypes.Rect:
-					uSVGRectElement m_rectElement = m_listObject[i] as uSVGRectElement;
+					uSVGRectElement m_rectElement = (uSVGRectElement)m_listObject[i];
 
 					x = m_rectElement.x.value;
 					y = m_rectElement.y.value;
@@ -291,7 +291,7 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 					f_ResetLimitPoints(x, y + height);
 				break;
 				case SVGPathElementTypes.Circle:
-					uSVGCircleElement m_circleElement = m_listObject[i] as uSVGCircleElement;
+					uSVGCircleElement m_circleElement = (uSVGCircleElement)m_listObject[i];
 
 					cx = m_circleElement.cx.value;
 					cy = m_circleElement.cy.value;
@@ -299,7 +299,7 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 					f_ResetLimitPoints(cx, cy, r, r);
 				break;
 				case SVGPathElementTypes.Ellipse:
-					uSVGEllipseElement m_ellipseElement = m_listObject[i] as uSVGEllipseElement;
+					uSVGEllipseElement m_ellipseElement = (uSVGEllipseElement)m_listObject[i];
 
 					cx = m_ellipseElement.cx.value;
 					cy = m_ellipseElement.cy.value;
@@ -309,14 +309,14 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 				break;
 				//-----
 				case SVGPathElementTypes.CircleTo:
-					uSVGGCircle m_circle = m_listObject[i] as uSVGGCircle;
+					uSVGGCircle m_circle = (uSVGGCircle)m_listObject[i];
 
 					r = m_circle.r;
 					f_ResetLimitPoints(m_circle.point, r, r);
 				break;
 				//-----
 				case SVGPathElementTypes.EllipseTo:
-					uSVGGEllipse m_ellipse = m_listObject[i] as uSVGGEllipse;
+					uSVGGEllipse m_ellipse = (uSVGGEllipse)m_listObject[i];
 
 					rx = m_ellipse.r1;
 					ry = m_ellipse.r2;
@@ -330,14 +330,14 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 				break;
 				//-----
 				case SVGPathElementTypes.ArcTo:
-					uSVGGArcAbs m_gArcAbs = m_listObject[i] as uSVGGArcAbs;
+					uSVGGArcAbs m_gArcAbs = (uSVGGArcAbs)m_listObject[i];
 
           r = (int)m_gArcAbs.r1 + (int)m_gArcAbs.r2;
 					f_ResetLimitPoints(m_gArcAbs.point, r, r);
 				break;
 				//-----
 				case SVGPathElementTypes.CubicCurveTo:
-					uSVGGCubicAbs m_gCubicAbs = m_listObject[i] as uSVGGCubicAbs;
+					uSVGGCubicAbs m_gCubicAbs = (uSVGGCubicAbs)m_listObject[i];
 
 					f_ResetLimitPoints(m_gCubicAbs.p1);
 					f_ResetLimitPoints(m_gCubicAbs.p2);
@@ -345,7 +345,7 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 				break;
 				//-----
 				case SVGPathElementTypes.QuadraticCurveTo:
-					uSVGGQuadraticAbs m_gQuadraticAbs = m_listObject[i] as uSVGGQuadraticAbs;
+					uSVGGQuadraticAbs m_gQuadraticAbs = (uSVGGQuadraticAbs)m_listObject[i];
 
 					f_ResetLimitPoints(m_gQuadraticAbs.p1);
 					f_ResetLimitPoints(m_gQuadraticAbs.p);
