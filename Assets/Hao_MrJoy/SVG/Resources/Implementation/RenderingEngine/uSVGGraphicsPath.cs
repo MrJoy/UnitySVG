@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 //Day la Class duoc dung de Fill va Clip
 public enum uSVGFillRuleTypes : ushort {
@@ -33,8 +34,8 @@ public class uSVGGraphicsPath {
 	private uSVGTransformList m_transformList;
 	private uSVGMatrix m_matrixTransform;
 	//-----
-	private List<object> m_listObject;
-	private List<SVGPathElementTypes> m_listType;
+	private ArrayList m_listObject;
+	private ArrayList m_listType;
 	//================================================================================
 	public uSVGFillRuleTypes fillRule {
 		get{ return this.m_fillRule;}
@@ -75,8 +76,8 @@ public class uSVGGraphicsPath {
 		this.m_boundTopLeft 	= new uSVGPoint(+10000f, +10000f);
 		this.m_boundBottomRight	= new uSVGPoint(-10000f, -10000f);
 		this.m_transformList 	= new uSVGTransformList();
-		this.m_listObject		= new List<object>();
-		this.m_listType			= new List<SVGPathElementTypes>();
+		this.m_listObject		= new ArrayList();
+		this.m_listType			= new ArrayList();
 	}
 	//================================================================================
 
@@ -269,7 +270,7 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 		float cx, cy, r, rx, ry, x, y, width, height;
 
 		for (int i = 0; i < this.m_listObject.Count; i++ ) {
-			switch(this.m_listType[i]) {
+			switch((SVGPathElementTypes)this.m_listType[i]) {
 				case SVGPathElementTypes.Polygon:
 					uSVGPolygonElement m_polygonElement = (uSVGPolygonElement)m_listObject[i];
 					f_ResetLimitPoints(m_polygonElement.listPoints);
@@ -583,7 +584,7 @@ Profiler.EndSample();
 	//--------------------------------------------------------------------------------
 	public void RenderPath(uISVGPathDraw m_pathDraw, bool isClose) {
 		for (int i = 0; i < this.m_listObject.Count; i++ ) {
-			switch(this.m_listType[i]) {
+			switch((SVGPathElementTypes)this.m_listType[i]) {
 				case SVGPathElementTypes.Polygon:
 					f_RenderPolygonElement((m_listObject[i] as uSVGPolygonElement), m_pathDraw);
 					isClose = false;
