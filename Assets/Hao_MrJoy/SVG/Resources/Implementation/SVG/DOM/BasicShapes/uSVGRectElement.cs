@@ -1,10 +1,10 @@
 public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
-	private uSVGLength m_x;
-	private uSVGLength m_y;
-	private uSVGLength m_width;
-	private uSVGLength m_height;
-	private uSVGLength m_rx;
-	private uSVGLength m_ry;	
+	private uSVGLength m_x = new uSVGLength(0);
+	private uSVGLength m_y = new uSVGLength(0);
+	private uSVGLength m_width = new uSVGLength(100);
+	private uSVGLength m_height = new uSVGLength(100);
+	private uSVGLength m_rx = new uSVGLength(0);
+	private uSVGLength m_ry = new uSVGLength(0);
 	//================================================================================
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
@@ -12,36 +12,24 @@ public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
 	//================================================================================
 	public uSVGLength x {
 		get {
-			if (this.m_x == null) {
-				this.m_x = new uSVGLength(0);
-			}
 			return this.m_x;
-			}
 		}
+	}
 
 	public uSVGLength y {
 		get {
-			if (this.m_y == null) {
-				this.m_y = new uSVGLength(0);
-			}
 			return this.m_y;
 		}
 	}
 
 	public uSVGLength width {
 		get {
-			if (this.m_width == null) {
-				this.m_width =  new uSVGLength(100);
-			}
 			return this.m_width;
 		}
 	}
 		
 	public uSVGLength height {
 		get {
-			if (this.m_height == null) {
-				this.m_height =  new uSVGLength(100);
-			}
 			return this.m_height;
 		}
 	}
@@ -49,18 +37,12 @@ public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
 
 	public uSVGLength rx {
 		get {
-			if (this.m_rx == null) {
-				this.m_rx = new uSVGLength(0);
-			}
 			return this.m_rx;
 		}
 	}	
 
 	public uSVGLength ry {
 		get {
-			if (this.m_ry == null) {
-				this.m_ry = new uSVGLength(0);
-			}
 			return this.m_ry;
 		}
 	}

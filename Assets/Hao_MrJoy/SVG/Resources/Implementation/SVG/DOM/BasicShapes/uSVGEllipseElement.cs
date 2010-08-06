@@ -1,9 +1,9 @@
 
 public class uSVGEllipseElement : uSVGTransformable, uISVGDrawable {
-	private uSVGLength m_cx;
-	private uSVGLength m_cy;
-	private uSVGLength m_rx;
-	private uSVGLength m_ry;
+	private uSVGLength m_cx = new uSVGLength(0);
+	private uSVGLength m_cy = new uSVGLength(0);
+	private uSVGLength m_rx = new uSVGLength(100);
+	private uSVGLength m_ry = new uSVGLength(100);
 	//================================================================================
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
@@ -11,36 +11,24 @@ public class uSVGEllipseElement : uSVGTransformable, uISVGDrawable {
 	//================================================================================
 	public uSVGLength cx {
 		get {
-			if (this.m_cx == null) {
-				this.m_cx = new uSVGLength(0);
-			}
 			return this.m_cx;
 		}
 	}
 
 	public uSVGLength cy {
 		get {
-			if (this.m_cy == null) {
-				this.m_cy = new uSVGLength(0);
-			}
 			return this.m_cy;
 		}
 	}
 
 	public uSVGLength rx {
 		get {
-			if (this.m_rx == null) {
-				this.m_rx = new uSVGLength(100);
-			}
 			return this.m_rx;
 		}
 	}	
 
 	public uSVGLength ry {
 		get {
-			if (this.m_ry == null) {
-				this.m_ry = new uSVGLength(100);
-			}
 			return this.m_ry;
 		}
 	}

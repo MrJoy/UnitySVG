@@ -1,8 +1,8 @@
 public class uSVGLineElement : uSVGTransformable, uISVGDrawable {
-	private uSVGLength m_x1;
-	private uSVGLength m_y1;
-	private uSVGLength m_x2;
-	private uSVGLength m_y2;
+	private uSVGLength m_x1 = new uSVGLength(0);
+	private uSVGLength m_y1 = new uSVGLength(0);
+	private uSVGLength m_x2 = new uSVGLength(100);
+	private uSVGLength m_y2 = new uSVGLength(100);
 	/***********************************************************************************/
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
@@ -10,36 +10,24 @@ public class uSVGLineElement : uSVGTransformable, uISVGDrawable {
 	/***********************************************************************************/
 	public uSVGLength x1 {
 		get {
-			if (this.m_x1 == null) {
-				this.m_x1 = new uSVGLength(0);
-			}
 			return this.m_x1;
 		}
 	}
 
 	public uSVGLength y1 {
 		get {
-			if (this.m_y1 == null) {
-				this.m_y1 = new uSVGLength(0);
-			}
 			return this.m_y1;
 		}
 	}
 
 	public uSVGLength x2 {
 		get {
-			if (this.m_x2 == null) {
-				this.m_x2 = new uSVGLength(100);
-			}
 			return this.m_x2;
 		}
 	}
 
 	public uSVGLength y2 {
 		get {
-			if (this.m_y2 == null) {
-				this.m_y2 = new uSVGLength(100);
-			}
 			return this.m_y2;
 		}  			
 	}

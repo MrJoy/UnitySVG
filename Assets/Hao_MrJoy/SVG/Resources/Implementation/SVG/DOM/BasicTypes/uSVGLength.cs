@@ -12,9 +12,8 @@ public enum uSVGLengthType : ushort {
 	SVG_LENGTHTYPE_PC = 10,
 }
 /**************************************************************************************************/
-public class uSVGLength  {
-		private uSVGLengthType m_unitType = 0;
-		private float m_value;
+public struct uSVGLength  {
+		private uSVGLengthType m_unitType;
 		private float m_valueInSpecifiedUnits;
 
 		/***********************************************************************************/
@@ -26,17 +25,19 @@ public class uSVGLength  {
 		}
 		/***********************************************************************************/
 		public uSVGLength(ushort unitType, float valueInSpecifiedUnits) {
-			this.NewValueSpecifiedUnits(unitType, valueInSpecifiedUnits);
+			m_unitType = (uSVGLengthType)unitType;
+			m_valueInSpecifiedUnits = valueInSpecifiedUnits;
 		}
 		public uSVGLength(float valueInSpecifiedUnits) {
-			this.NewValueSpecifiedUnits(0, valueInSpecifiedUnits);
+			m_unitType = (uSVGLengthType)0;
+			m_valueInSpecifiedUnits = valueInSpecifiedUnits;
 		}
 		public uSVGLength(string valueText) {
 			float t_value = 0.0f;
 			uSVGLengthType t_type = uSVGLengthType.SVG_LENGTHTYPE_UNKNOWN;
 			uSVGLengthConvertor.f_ExtractType(valueText, ref t_value, ref t_type);
-			this.m_unitType = t_type;			
-			this.m_valueInSpecifiedUnits = t_value;
+			m_unitType = t_type;			
+			m_valueInSpecifiedUnits = t_value;
 		}
 		/***********************************************************************************/
 		public void NewValueSpecifiedUnits(ushort unitType, float valueInSpecifiedUnits) {

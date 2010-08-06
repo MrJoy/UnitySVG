@@ -1,8 +1,8 @@
 public class uSVGCircleElement : uSVGTransformable, uISVGDrawable {
 		
-	private uSVGLength m_cx;
-	private uSVGLength m_cy;
-	private uSVGLength m_r;
+	private uSVGLength m_cx = new uSVGLength(0);
+	private uSVGLength m_cy = new uSVGLength(0);
+	private uSVGLength m_r = new uSVGLength(100);
 	//================================================================================
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
@@ -10,27 +10,18 @@ public class uSVGCircleElement : uSVGTransformable, uISVGDrawable {
 	//================================================================================
 	public uSVGLength cx {
 		get {
-			if (this.m_cx == null) {
-				this.m_cx = new uSVGLength(0);
-			}
 			return this.m_cx;
 		}
 	}
 
 	public uSVGLength cy {
 		get {
-			if (this.m_cy == null) {
-				this.m_cy = new uSVGLength(0);
-			}
 			return this.m_cy;
 		}
 	}
 
 	public uSVGLength r {
 		get {
-			if (this.m_r == null) {
-				this.m_r = new uSVGLength(100);
-			}
 			return this.m_r;
 		}
 	}
