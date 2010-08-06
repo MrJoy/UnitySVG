@@ -752,7 +752,7 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 		if (m_length > 1) {
 			this.m_basicDraw.MoveTo(points[0]);
 			for(int i = 1; i < m_length; i++ ) {
-				this.m_basicDraw.LineTo(points[1]);
+				this.m_basicDraw.LineTo(points[i]);
 			}
 			this.m_basicDraw.LineTo(points[0]);
 		}
@@ -796,7 +796,7 @@ public class uSVGGraphicsStroke : uISVGPathDraw {
 		if (m_length > 1) {
 			this.m_basicDraw.MoveTo(points[0]);
 			for(int i = 1; i < m_length; i++ ) {
-				this.m_basicDraw.LineTo(points[1]);
+				this.m_basicDraw.LineTo(points[i]);
 			}
 		}
 	}
