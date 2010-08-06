@@ -1,10 +1,10 @@
 public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
-	private uSVGLength m_x = new uSVGLength(0);
-	private uSVGLength m_y = new uSVGLength(0);
-	private uSVGLength m_width = new uSVGLength(100);
-	private uSVGLength m_height = new uSVGLength(100);
-	private uSVGLength m_rx = new uSVGLength(0);
-	private uSVGLength m_ry = new uSVGLength(0);
+	private uSVGLength m_x;
+	private uSVGLength m_y;
+	private uSVGLength m_width;
+	private uSVGLength m_height;
+	private uSVGLength m_rx;
+	private uSVGLength m_ry;
 	//================================================================================
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;

@@ -1,8 +1,7 @@
 public class uSVGCircleElement : uSVGTransformable, uISVGDrawable {
-		
-	private uSVGLength m_cx = new uSVGLength(0);
-	private uSVGLength m_cy = new uSVGLength(0);
-	private uSVGLength m_r = new uSVGLength(100);
+	private uSVGLength m_cx;
+	private uSVGLength m_cy;
+	private uSVGLength m_r;
 	//================================================================================
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;

@@ -1,9 +1,9 @@
 
 public class uSVGEllipseElement : uSVGTransformable, uISVGDrawable {
-	private uSVGLength m_cx = new uSVGLength(0);
-	private uSVGLength m_cy = new uSVGLength(0);
-	private uSVGLength m_rx = new uSVGLength(100);
-	private uSVGLength m_ry = new uSVGLength(100);
+	private uSVGLength m_cx;
+	private uSVGLength m_cy;
+	private uSVGLength m_rx;
+	private uSVGLength m_ry;
 	//================================================================================
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;

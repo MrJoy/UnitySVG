@@ -1,8 +1,8 @@
 public class uSVGLineElement : uSVGTransformable, uISVGDrawable {
-	private uSVGLength m_x1 = new uSVGLength(0);
-	private uSVGLength m_y1 = new uSVGLength(0);
-	private uSVGLength m_x2 = new uSVGLength(100);
-	private uSVGLength m_y2 = new uSVGLength(100);
+	private uSVGLength m_x1;
+	private uSVGLength m_y1;
+	private uSVGLength m_x2;
+	private uSVGLength m_y2;
 	/***********************************************************************************/
 	private uSVGGraphics m_render;
 	private AttributeList m_attrList;
