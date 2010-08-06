@@ -84,31 +84,37 @@ public class uSVGGraphicsPath {
 	//--------------------------------------------------------------------------------
 	//Method: f_ResetLimitPoints
 	//--------------------------------------------------------------------------------
+  private void f_ResetLimitPoints(float x, float y) {
+    if (x < this.m_boundTopLeft.x) this.m_boundTopLeft.x = x;
+    if (y < this.m_boundTopLeft.y) this.m_boundTopLeft.y = y;
+
+    if (x > this.m_boundBottomRight.x) this.m_boundBottomRight.x = x;
+    if (y > this.m_boundBottomRight.y) this.m_boundBottomRight.y = y;
+  }
+  //-----
+  private void f_ResetLimitPoints(float x, float y, float dx, float dy) {
+    if ((x - dx) < this.m_boundTopLeft.x) this.m_boundTopLeft.x = x - dx;
+    if ((y - dy) < this.m_boundTopLeft.y) this.m_boundTopLeft.y = y - dy;
+
+    if ((x + dx) > this.m_boundBottomRight.x) this.m_boundBottomRight.x = x + dx;
+    if ((y + dy) > this.m_boundBottomRight.y) this.m_boundBottomRight.y = y + dy;
+  }
+  //-----
+  private void f_ResetLimitPoints(uSVGPoint point) {
+    f_ResetLimitPoints(point.x, point.y);
+  }
+  //-----
+  private void f_ResetLimitPoints(uSVGPoint point, float deltax, float deltay) {
+    f_ResetLimitPoints(point.x, point.y, deltax, deltay);
+  }
+	//-----
 	private void f_ResetLimitPoints(List<uSVGPoint> points) {
 		int m_length = points.Count;
 		for (int i = 0; i < m_length; i++) {
-			if (points[i].x < this.m_boundTopLeft.x) this.m_boundTopLeft.x = points[i].x;
-			if (points[i].y < this.m_boundTopLeft.y) this.m_boundTopLeft.y = points[i].y;
-
-			if (points[i].x > this.m_boundBottomRight.x) this.m_boundBottomRight.x = points[i].x;
-			if (points[i].y > this.m_boundBottomRight.y) this.m_boundBottomRight.y = points[i].y;
+		  f_ResetLimitPoints(points[i]);
 		}
 	}
-	//-----
-	private void f_ResetLimitPoints(List<uSVGPoint> points, float deltax, float deltay) {
-		int m_length = points.Count;
-		for (int i = 0; i < m_length; i++) {
-			if ((points[i].x - deltax) < this.m_boundTopLeft.x)
-											this.m_boundTopLeft.x = points[i].x - deltax;
-			if ((points[i].y - deltay) < this.m_boundTopLeft.y)
-											this.m_boundTopLeft.y = points[i].y - deltay;
 
-			if ((points[i].x + deltax) > this.m_boundBottomRight.x)
-											this.m_boundBottomRight.x = points[i].x + deltax;
-			if ((points[i].y + deltay) > this.m_boundBottomRight.y) 
-											this.m_boundBottomRight.y = points[i].y + deltay;
-		}
-	}
 	//--------------------------------------------------------------------------------
 	//Method: f_SetFirstPoint
 	//--------------------------------------------------------------------------------
@@ -247,7 +253,6 @@ public class uSVGGraphicsPath {
 	//--------------------------------------------------------------------------------
 	public uSVGRect GetBound() {
 Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
-		List<uSVGPoint> m_listPoints;
 		float cx, cy, r, rx, ry, x, y, width, height;
 
 		for (int i = 0; i < this.m_listObject.Count; i++ ) {
@@ -262,110 +267,81 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 				break;
 				case "rect":
 					uSVGRectElement m_rectElement = m_listObject[i] as uSVGRectElement;
-					m_listPoints = new List<uSVGPoint>();
 
 					x = m_rectElement.x.value;
 					y = m_rectElement.y.value;
 					width = m_rectElement.width.value;
 					height = m_rectElement.height.value;
-					m_listPoints.Add(new uSVGPoint(x, y));
-					m_listPoints.Add(new uSVGPoint(x + width, y));
-					m_listPoints.Add(new uSVGPoint(x + width, y + height));
-					m_listPoints.Add(new uSVGPoint(x, y + height));
-					f_ResetLimitPoints(m_listPoints);
+					f_ResetLimitPoints(x, y);
+					f_ResetLimitPoints(x + width, y);
+					f_ResetLimitPoints(x + width, y + height);
+					f_ResetLimitPoints(x, y + height);
 				break;
 				case "circle":
 					uSVGCircleElement m_circleElement = m_listObject[i] as uSVGCircleElement;
-					m_listPoints = new List<uSVGPoint>();
 
 					cx = m_circleElement.cx.value;
 					cy = m_circleElement.cy.value;
-					m_listPoints.Add(new uSVGPoint(cx, cy));
 					r = m_circleElement.r.value;
-					f_ResetLimitPoints(m_listPoints, r, r);
+					f_ResetLimitPoints(cx, cy, r, r);
 				break;
 				case "ellipse":
 					uSVGEllipseElement m_ellipseElement = m_listObject[i] as uSVGEllipseElement;
-					m_listPoints = new List<uSVGPoint>();
 
 					cx = m_ellipseElement.cx.value;
 					cy = m_ellipseElement.cy.value;
-					m_listPoints.Add(new uSVGPoint(cx, cy));
 					rx = m_ellipseElement.rx.value;
 					ry = m_ellipseElement.ry.value;
-					f_ResetLimitPoints(m_listPoints, rx, ry);
+					f_ResetLimitPoints(cx, cy, rx, ry);
 				break;
 				//-----
 				case "circleto":
 					uSVGGCircle m_circle = m_listObject[i] as uSVGGCircle;
-					m_listPoints = new List<uSVGPoint>();
 
-					cx = m_circle.point.x;
-					cy = m_circle.point.y;
-					m_listPoints.Add(new uSVGPoint(cx, cy));
 					r = m_circle.r;
-					f_ResetLimitPoints(m_listPoints, r, r);
+					f_ResetLimitPoints(m_circle.point, r, r);
 				break;
 				//-----
 				case "ellipseto":
 					uSVGGEllipse m_ellipse = m_listObject[i] as uSVGGEllipse;
-					m_listPoints = new List<uSVGPoint>();
 
-					cx = m_ellipse.point.x;
-					cy = m_ellipse.point.y;
-					m_listPoints.Add(new uSVGPoint(cx, cy));
 					rx = m_ellipse.r1;
 					ry = m_ellipse.r2;
-					f_ResetLimitPoints(m_listPoints, rx, ry);
+					f_ResetLimitPoints(m_ellipse.point, rx, ry);
 				break;
 				//-----
 				case "moveto":
 					uSVGPoint m_pointMoveTo = (uSVGPoint)m_listObject[i];
-					m_listPoints = new List<uSVGPoint>();
 
-					cx = m_pointMoveTo.x;
-					cy = m_pointMoveTo.y;
-					m_listPoints.Add(new uSVGPoint(cx, cy));
-					f_ResetLimitPoints(m_listPoints);
+					f_ResetLimitPoints(m_pointMoveTo);
 				break;
 				//-----
 				case "arcto":
 					uSVGGArcAbs m_gArcAbs = m_listObject[i] as uSVGGArcAbs;
-					m_listPoints = new List<uSVGPoint>();
 
-					m_listPoints.Add(new uSVGPoint(m_gArcAbs.point.x, m_gArcAbs.point.y));
-					f_ResetLimitPoints(m_listPoints,
-											(int)m_gArcAbs.r1 + (int)m_gArcAbs.r2,
-											(int)m_gArcAbs.r1 + (int)m_gArcAbs.r2);
+          r = (int)m_gArcAbs.r1 + (int)m_gArcAbs.r2;
+					f_ResetLimitPoints(m_gArcAbs.point, r, r);
 				break;
 				//-----
 				case "cubiccurveto":
 					uSVGGCubicAbs m_gCubicAbs = m_listObject[i] as uSVGGCubicAbs;
-					m_listPoints = new List<uSVGPoint>();
 
-					m_listPoints.Add(new uSVGPoint(m_gCubicAbs.p1.x, m_gCubicAbs.p1.y));
-					m_listPoints.Add(new uSVGPoint(m_gCubicAbs.p2.x, m_gCubicAbs.p2.y));
-					m_listPoints.Add(new uSVGPoint(m_gCubicAbs.p.x, m_gCubicAbs.p.y));
-					f_ResetLimitPoints(m_listPoints);
+					f_ResetLimitPoints(m_gCubicAbs.p1);
+					f_ResetLimitPoints(m_gCubicAbs.p2);
+					f_ResetLimitPoints(m_gCubicAbs.p);
 				break;
 				//-----
 				case "quadraticcurveto":
 					uSVGGQuadraticAbs m_gQuadraticAbs = m_listObject[i] as uSVGGQuadraticAbs;
-					m_listPoints = new List<uSVGPoint>();
 
-					m_listPoints.Add(new uSVGPoint(m_gQuadraticAbs.p1.x, m_gQuadraticAbs.p1.y));
-					m_listPoints.Add(new uSVGPoint(m_gQuadraticAbs.p.x, m_gQuadraticAbs.p.y));
-					f_ResetLimitPoints(m_listPoints);
+					f_ResetLimitPoints(m_gQuadraticAbs.p1);
+					f_ResetLimitPoints(m_gQuadraticAbs.p);
 				break;
 				//-----
 				case "lineto":
 					uSVGPoint m_pointlineTo = (uSVGPoint)m_listObject[i];
-					m_listPoints = new List<uSVGPoint>();
 
-					cx = m_pointlineTo.x;
-					cy = m_pointlineTo.y;
-					m_listPoints.Add(new uSVGPoint(cx, cy));
-					f_ResetLimitPoints(m_listPoints);
+					f_ResetLimitPoints(m_pointlineTo);
 				break;
 			}
 		}
