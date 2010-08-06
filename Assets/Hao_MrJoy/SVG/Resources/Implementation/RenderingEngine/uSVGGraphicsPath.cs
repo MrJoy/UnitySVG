@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 //Day la Class duoc dung de Fill va Clip
-public enum uSVGFillRuleTypes : ushort{
+public enum uSVGFillRuleTypes : ushort {
 	SVG_NONE_ZERO	= 0,
 	SVG_EVEN_ODD	= 1
 }
