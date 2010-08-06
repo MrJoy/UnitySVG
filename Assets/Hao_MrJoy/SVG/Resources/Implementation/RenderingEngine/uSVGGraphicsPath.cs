@@ -5,6 +5,20 @@ public enum uSVGFillRuleTypes : ushort {
 	SVG_NONE_ZERO	= 0,
 	SVG_EVEN_ODD	= 1
 }
+public enum SVGPathElementTypes : ushort {
+  Polygon = 0,
+  Polyline = 1,
+  Rect = 2,
+  Circle = 3,
+  Ellipse = 4,
+  CircleTo = 5,
+  EllipseTo = 6,
+  MoveTo = 7,
+  ArcTo = 8,
+  CubicCurveTo = 9,
+  QuadraticCurveTo = 10,
+  LineTo = 11
+};
 public class uSVGGraphicsPath {
 	private uSVGPoint m_beginPoint;
 	private uSVGPoint m_endPoint;
@@ -20,7 +34,7 @@ public class uSVGGraphicsPath {
 	private uSVGMatrix m_matrixTransform;
 	//-----
 	private List<object> m_listObject;
-	private List<string> m_listType;
+	private List<SVGPathElementTypes> m_listType;
 	//================================================================================
 	public uSVGFillRuleTypes fillRule {
 		get{ return this.m_fillRule;}
@@ -62,8 +76,7 @@ public class uSVGGraphicsPath {
 		this.m_boundBottomRight	= new uSVGPoint(-10000f, -10000f);
 		this.m_transformList 	= new uSVGTransformList();
 		this.m_listObject		= new List<object>();
-		this.m_listType			= new List<string>();
-		
+		this.m_listType			= new List<SVGPathElementTypes>();
 	}
 	//================================================================================
 
@@ -138,7 +151,7 @@ public class uSVGGraphicsPath {
 		f_SetFirstPoint(polygonElement.listPoints[0]);
 		f_SetLastPoint(polygonElement.listPoints[polygonElement.listPoints.Count - 1]);
 		
-		m_listType.Add("polygon");
+		m_listType.Add(SVGPathElementTypes.Polygon);
 		m_listObject.Add(polygonElement);
 	}
 	//-----
@@ -146,7 +159,7 @@ public class uSVGGraphicsPath {
 		f_SetFirstPoint(polylineElement.listPoints[0]);
 		f_SetLastPoint(polylineElement.listPoints[polylineElement.listPoints.Count - 1]);
 		
-		m_listType.Add("polyline");
+		m_listType.Add(SVGPathElementTypes.Polyline);
 		m_listObject.Add(polylineElement);
 	}
 	//-----
@@ -154,7 +167,7 @@ public class uSVGGraphicsPath {
 		f_SetFirstPoint(new uSVGPoint(rectElement.x.value, rectElement.y.value));
 		f_SetLastPoint(new uSVGPoint(rectElement.x.value, rectElement.y.value));
 		
-		m_listType.Add("rect");
+		m_listType.Add(SVGPathElementTypes.Rect);
 		m_listObject.Add(rectElement);
 	}
 	//-----
@@ -162,7 +175,7 @@ public class uSVGGraphicsPath {
 		f_SetFirstPoint(new uSVGPoint(circleElement.cx.value, circleElement.cy.value));
 		f_SetLastPoint(new uSVGPoint(circleElement.cx.value, circleElement.cy.value));
 
-		m_listType.Add("circle");
+		m_listType.Add(SVGPathElementTypes.Circle);
 		m_listObject.Add(circleElement);
 	}
 	//-----
@@ -172,7 +185,7 @@ public class uSVGGraphicsPath {
 		f_SetLastPoint(new uSVGPoint(ellipseElement.cx.value,
 															ellipseElement.cy.value));
 		
-		m_listType.Add("ellipse");
+		m_listType.Add(SVGPathElementTypes.Ellipse);
 		m_listObject.Add(ellipseElement);
 	}
 	//--------------------------------------------------------------------------------
@@ -180,7 +193,7 @@ public class uSVGGraphicsPath {
 	//--------------------------------------------------------------------------------
 	public void AddCircleTo(uSVGPoint p, float r) {
 		uSVGGCircle gCircle = new uSVGGCircle(p, r);
-		m_listType.Add("circleto");
+		m_listType.Add(SVGPathElementTypes.CircleTo);
 		m_listObject.Add(gCircle);
 	}
 	//--------------------------------------------------------------------------------
@@ -188,7 +201,7 @@ public class uSVGGraphicsPath {
 	//--------------------------------------------------------------------------------
 	public void AddEllipseTo(uSVGPoint p, float r1, float r2, float angle) {
 		uSVGGEllipse gEllipse = new uSVGGEllipse(p, r1, r2, angle);
-		m_listType.Add("ellipseto");
+		m_listType.Add(SVGPathElementTypes.EllipseTo);
 		m_listObject.Add(gEllipse);
 	}
 	//--------------------------------------------------------------------------------
@@ -201,7 +214,7 @@ public class uSVGGraphicsPath {
 		f_SetFirstPoint(t_p);
 		f_SetLastPoint(t_p);
 		
-		m_listType.Add("moveto");
+		m_listType.Add(SVGPathElementTypes.MoveTo);
 		m_listObject.Add(t_p);
 	}
 	//--------------------------------------------------------------------------------
@@ -211,7 +224,7 @@ public class uSVGGraphicsPath {
 								bool largeArcFlag, bool sweepFlag, uSVGPoint p) {
 		f_SetLastPoint(p);
 		uSVGGArcAbs m_svgGArcAbs = new uSVGGArcAbs(r1, r2, angle, largeArcFlag, sweepFlag, p);
-		m_listType.Add("arcto");
+		m_listType.Add(SVGPathElementTypes.ArcTo);
 		m_listObject.Add(m_svgGArcAbs);
 	}
 	//--------------------------------------------------------------------------------
@@ -221,7 +234,7 @@ public class uSVGGraphicsPath {
 
 		f_SetLastPoint(p);
 		uSVGGCubicAbs m_svgGCubicAbs = new uSVGGCubicAbs(p1, p2, p);
-		m_listType.Add("cubiccurveto");
+		m_listType.Add(SVGPathElementTypes.CubicCurveTo);
 		m_listObject.Add(m_svgGCubicAbs);
 	}
 	//--------------------------------------------------------------------------------
@@ -231,7 +244,7 @@ public class uSVGGraphicsPath {
 
 		f_SetLastPoint(p);
 		uSVGGQuadraticAbs m_svgGQuadraticAbs = new uSVGGQuadraticAbs(p1, p);
-		m_listType.Add("quadraticcurveto");
+		m_listType.Add(SVGPathElementTypes.QuadraticCurveTo);
 		m_listObject.Add(m_svgGQuadraticAbs);
 	}
 	//--------------------------------------------------------------------------------
@@ -244,7 +257,7 @@ public class uSVGGraphicsPath {
 		f_SetFirstPoint(t_p);
 		f_SetLastPoint(t_p);
 		
-		m_listType.Add("lineto");
+		m_listType.Add(SVGPathElementTypes.LineTo);
 		m_listObject.Add(t_p);
 	}
 	//================================================================================
@@ -257,15 +270,15 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 
 		for (int i = 0; i < this.m_listObject.Count; i++ ) {
 			switch(this.m_listType[i]) {
-				case "polygon":
+				case SVGPathElementTypes.Polygon:
 					uSVGPolygonElement m_polygonElement = m_listObject[i] as uSVGPolygonElement;
 					f_ResetLimitPoints(m_polygonElement.listPoints);
 				break;
-				case "polyline":
+				case SVGPathElementTypes.Polyline:
 					uSVGPolylineElement m_polylineElement = m_listObject[i] as uSVGPolylineElement;
 					f_ResetLimitPoints(m_polylineElement.listPoints);
 				break;
-				case "rect":
+				case SVGPathElementTypes.Rect:
 					uSVGRectElement m_rectElement = m_listObject[i] as uSVGRectElement;
 
 					x = m_rectElement.x.value;
@@ -277,7 +290,7 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 					f_ResetLimitPoints(x + width, y + height);
 					f_ResetLimitPoints(x, y + height);
 				break;
-				case "circle":
+				case SVGPathElementTypes.Circle:
 					uSVGCircleElement m_circleElement = m_listObject[i] as uSVGCircleElement;
 
 					cx = m_circleElement.cx.value;
@@ -285,7 +298,7 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 					r = m_circleElement.r.value;
 					f_ResetLimitPoints(cx, cy, r, r);
 				break;
-				case "ellipse":
+				case SVGPathElementTypes.Ellipse:
 					uSVGEllipseElement m_ellipseElement = m_listObject[i] as uSVGEllipseElement;
 
 					cx = m_ellipseElement.cx.value;
@@ -295,14 +308,14 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 					f_ResetLimitPoints(cx, cy, rx, ry);
 				break;
 				//-----
-				case "circleto":
+				case SVGPathElementTypes.CircleTo:
 					uSVGGCircle m_circle = m_listObject[i] as uSVGGCircle;
 
 					r = m_circle.r;
 					f_ResetLimitPoints(m_circle.point, r, r);
 				break;
 				//-----
-				case "ellipseto":
+				case SVGPathElementTypes.EllipseTo:
 					uSVGGEllipse m_ellipse = m_listObject[i] as uSVGGEllipse;
 
 					rx = m_ellipse.r1;
@@ -310,20 +323,20 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 					f_ResetLimitPoints(m_ellipse.point, rx, ry);
 				break;
 				//-----
-				case "moveto":
+				case SVGPathElementTypes.MoveTo:
 					uSVGPoint m_pointMoveTo = (uSVGPoint)m_listObject[i];
 
 					f_ResetLimitPoints(m_pointMoveTo);
 				break;
 				//-----
-				case "arcto":
+				case SVGPathElementTypes.ArcTo:
 					uSVGGArcAbs m_gArcAbs = m_listObject[i] as uSVGGArcAbs;
 
           r = (int)m_gArcAbs.r1 + (int)m_gArcAbs.r2;
 					f_ResetLimitPoints(m_gArcAbs.point, r, r);
 				break;
 				//-----
-				case "cubiccurveto":
+				case SVGPathElementTypes.CubicCurveTo:
 					uSVGGCubicAbs m_gCubicAbs = m_listObject[i] as uSVGGCubicAbs;
 
 					f_ResetLimitPoints(m_gCubicAbs.p1);
@@ -331,14 +344,14 @@ Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
 					f_ResetLimitPoints(m_gCubicAbs.p);
 				break;
 				//-----
-				case "quadraticcurveto":
+				case SVGPathElementTypes.QuadraticCurveTo:
 					uSVGGQuadraticAbs m_gQuadraticAbs = m_listObject[i] as uSVGGQuadraticAbs;
 
 					f_ResetLimitPoints(m_gQuadraticAbs.p1);
 					f_ResetLimitPoints(m_gQuadraticAbs.p);
 				break;
 				//-----
-				case "lineto":
+				case SVGPathElementTypes.LineTo:
 					uSVGPoint m_pointlineTo = (uSVGPoint)m_listObject[i];
 
 					f_ResetLimitPoints(m_pointlineTo);
@@ -571,49 +584,49 @@ Profiler.EndSample();
 	public void RenderPath(uISVGPathDraw m_pathDraw, bool isClose) {
 		for (int i = 0; i < this.m_listObject.Count; i++ ) {
 			switch(this.m_listType[i]) {
-				case "polygon":
+				case SVGPathElementTypes.Polygon:
 					f_RenderPolygonElement((m_listObject[i] as uSVGPolygonElement), m_pathDraw);
 					isClose = false;
 				break;
-				case "polyline":
+				case SVGPathElementTypes.Polyline:
 					f_RenderPolylineElement((m_listObject[i] as uSVGPolylineElement),m_pathDraw);
 				break;
-				case "rect":
+				case SVGPathElementTypes.Rect:
 					f_RenderRectElement((m_listObject[i] as uSVGRectElement), m_pathDraw);
 					isClose = false;
 				break;
-				case "circle":
+				case SVGPathElementTypes.Circle:
 					f_RenderCircleElement((m_listObject[i] as uSVGCircleElement), m_pathDraw);
 					isClose = false;
 				break;
-				case "ellipse":
+				case SVGPathElementTypes.Ellipse:
 					f_RenderEllipseElement((m_listObject[i] as uSVGEllipseElement), m_pathDraw);
 					isClose = false;
 				break;
 				//-----
-				case "circleto":
+				case SVGPathElementTypes.CircleTo:
 					f_RenderCircleTo((m_listObject[i] as uSVGGCircle), m_pathDraw);
 					isClose = false;
 				break;
 				//-----
-				case "ellipseto":
+				case SVGPathElementTypes.EllipseTo:
 					f_RenderEllipseTo((m_listObject[i] as uSVGGEllipse), m_pathDraw);
 					isClose = false;
 				break;
 				//-----
-				case "moveto":
+				case SVGPathElementTypes.MoveTo:
 					f_RenderMoveTo((uSVGPoint)m_listObject[i], m_pathDraw);
 				break;
-				case "arcto":
+				case SVGPathElementTypes.ArcTo:
 					f_RenderArcTo((m_listObject[i] as uSVGGArcAbs), m_pathDraw);
 				break;
-				case "cubiccurveto":
+				case SVGPathElementTypes.CubicCurveTo:
 					f_RenderCubicCurveTo((m_listObject[i] as uSVGGCubicAbs), m_pathDraw);
 				break;
-				case "quadraticcurveto":
+				case SVGPathElementTypes.QuadraticCurveTo:
 					f_RenderQuadraticCurveTo((m_listObject[i] as uSVGGQuadraticAbs), m_pathDraw);
 				break;
-				case "lineto":
+				case SVGPathElementTypes.LineTo:
 					f_RenderLineTo((uSVGPoint)m_listObject[i], m_pathDraw);
 				break;
 			}
