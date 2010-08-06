@@ -1,4 +1,4 @@
-(These numbers gathered on a late-2009 MacBook Pro w/ 2.26Ghz Core2 Duo, and 3GB
+(These numbers gathered on a late-2009 MacBook w/ 2.26Ghz Core2 Duo, and 4GB
 of 1067Mhz DDR3 RAM running OSX 10.6.1, under Unity 2.6.1)
 
 
