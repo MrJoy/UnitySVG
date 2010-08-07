@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AE734C96-E7D7-B414-3CE9-65B504090B11}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Irrelevant</RootNamespace>
+    <AssemblyName>Irrelvant</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\..\Applications\Unity_2.6.1\Unity 2.6.1.app\Contents\Frameworks\UnityEngine-Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="Boo.Lang, Version=2.0.0.0, Culture=neutral, PublicKeyToken=32c39770e9a21a67">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Applications\Unity_2.6.1\Unity 2.6.1.app\Contents\Frameworks\MonoCompiler.framework\Boo.Lang.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\SVGFiles\arc1.txt" />
+    <None Include="Assets\SVGFiles\arc2.txt" />
+    <None Include="Assets\SVGFiles\arc3.txt" />
+    <None Include="Assets\SVGFiles\butterfly.txt" />
+    <None Include="Assets\SVGFiles\circle1.txt" />
+    <None Include="Assets\SVGFiles\lineargradient1.txt" />
+    <None Include="Assets\SVGFiles\lines1.txt" />
+    <None Include="Assets\SVGFiles\lion.txt" />
+    <None Include="Assets\SVGFiles\none.txt" />
+    <None Include="Assets\SVGFiles\path1.txt" />
+    <None Include="Assets\SVGFiles\path2.txt" />
+    <None Include="Assets\SVGFiles\path3.txt" />
+    <None Include="Assets\SVGFiles\polyline1.txt" />
+    <None Include="Assets\SVGFiles\polyline2.txt" />
+    <None Include="Assets\SVGFiles\radgrad1.txt" />
+    <None Include="Assets\SVGFiles\rect1.txt" />
+    <None Include="Assets\SVGFiles\rect2.txt" />
+    <None Include="Assets\SVGFiles\test1.txt" />
+    <None Include="Assets\SVGFiles\test2.txt" />
+    <None Include="Assets\SVGFiles\tiger.txt" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGBasicDraw.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGDevice.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGGraphics.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGGraphicsFill.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGGraphicsPath.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGGraphicsStroke.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGLinearGradientBrush.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGRadialGradientBrush.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGArcAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGCircle.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGCubicAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGEllipse.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGQuadraticAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicShapes\SVGCircleElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicShapes\SVGEllipseElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicShapes\SVGLineElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicShapes\SVGPolygonElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicShapes\SVGPolylineElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicShapes\SVGRectElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicTypes\SVGLength.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\GradientsNPatterns\SVGGradientElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\GradientsNPatterns\SVGStopElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegArcRel.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\LiteStack.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\XML Parser\AttributeList.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\XML Parser\SmallXmlParser.cs" />
+    <Compile Include="Assets\Hao_MrJoy\Use\Invoke.cs" />
+    <None Include="Assets\Hao_MrJoy\Use\Shader.shader" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicTypes\SVGPaintable.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicTypes\SVGRect.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicTypes\SVGTransformable.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGList.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGMatrix.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGPoint.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGTransform.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGTransformList.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\DocumentStructure\SVGDocument.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\DocumentStructure\SVGGElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\GradientsNPatterns\SVGLinearGradientElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\GradientsNPatterns\SVGRadialGradientElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSeg.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegArcAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegClosePath.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoCubic.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoCubicAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoCubicRel.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoCubicSmoothAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoCubicSmoothRel.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoQuadratic.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoQuadraticAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoQuadraticRel.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoQuadraticSmoothAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegCurvetoQuadraticSmoothRel.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegLinetoAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegLinetoHorizontalAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegLinetoHorizontalRel.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegLinetoRel.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegLinetoVerticalAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegLinetoVerticalRel.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegList.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegMovetoAbs.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegMovetoRel.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\Interfaces\ISVGDrawable.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\Interfaces\ISVGDrawableSeg.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\DOMException.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\SVGColorExtractor.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\SVGException.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\SVGLengthConvertor.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\SVGStringExtractor.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\XML Parser\SVGParser.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\DocumentStructure\SVGSVGElement.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicTypes\SVGColor.cs" />
+    <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Interface\RenderingEngine\ISVGPathDraw.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Folder Include="Assets\Hao_MrJoy\SVG\Resources\Interface\RenderingEngine\" />
+  </ItemGroup>
+</Project>
