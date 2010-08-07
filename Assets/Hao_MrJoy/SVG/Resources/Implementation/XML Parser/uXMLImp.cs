@@ -8,20 +8,19 @@ public struct Node {
   public string Name;
   public NodeKind Kind;
   public AttributeList Attributes;
-  public int Level;
-  public Node(string n, NodeKind k, AttributeList a, int l) {
+//  public int Level;
+  public Node(string n, NodeKind k, AttributeList a/*, int l*/) {
     Name = n;
     Kind = k;
     Attributes = a;
-    Level = l;
+//    Level = l;
   }
 }
 
 public class uXMLImp : SmallXmlParser.IContentHandler {
-  public enum XMLTagState {OPEN, CLOSE, BOTH}
+//  public enum XMLTagState {OPEN, CLOSE, BOTH}
 
   private SmallXmlParser _parser = new SmallXmlParser();
-  private TextReader _textReader;
 
 //  private string _currentName = "";
 //  private string _currentLineText = "";
@@ -32,8 +31,7 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   public uXMLImp() { }
 
   public uXMLImp(string text) {
-    _textReader = new StringReader(text);
-    _parser.Parse(_textReader, this);
+    _parser.Parse(new StringReader(text), this);
   }
 
   //---------------------------------------------------------
@@ -130,7 +128,7 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   } */
 
   /***********************************************************************************/
-  private int level = 0;
+//  private int level = 0;
   private List<Node> Stream = new List<Node>();
   private int idx = 0;
 
@@ -150,21 +148,21 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   }
 
   public void OnStartParsing(SmallXmlParser parser) { 
-    level = 0;
+//    level = 0;
     idx = 0;
   }
 
 //  public void OnEndParsing(SmallXmlParser parser) { }
 
   public void OnInlineElement(string name, AttributeList attrs) {
-    Stream.Add(new Node(name, NodeKind.Inline, new AttributeList(attrs), level));
+    Stream.Add(new Node(name, NodeKind.Inline, new AttributeList(attrs)/*, level*/));
   }
   public void OnStartElement(string name, AttributeList attrs) {
-    Stream.Add(new Node(name, NodeKind.BlockOpen, new AttributeList(attrs), level++));
+    Stream.Add(new Node(name, NodeKind.BlockOpen, new AttributeList(attrs)/*, level++*/));
   }
 
   public void OnEndElement(string name) {
-    Stream.Add(new Node(name, NodeKind.BlockClose, new AttributeList(), --level));
+    Stream.Add(new Node(name, NodeKind.BlockClose, new AttributeList()/*, --level*/));
   }
 
 //  public void OnChars(string s) { }
