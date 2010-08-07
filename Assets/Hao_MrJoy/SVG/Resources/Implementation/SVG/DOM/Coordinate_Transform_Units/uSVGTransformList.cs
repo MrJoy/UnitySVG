@@ -52,19 +52,7 @@ public class uSVGTransformList {
 		}
 	}
 
-	public void InsertItemBefore(uSVGTransform newItem, int index) {
-		this.m_listTransform.Insert(index, newItem);
-	}
-
-	public void ReplaceItem(uSVGTransform newItem, int index) {
-		this.m_listTransform[index] = newItem;
-	}
-
-	public uSVGTransform CreateSVGTransformFromMatrix(uSVGMatrix matrix) {
-		return new uSVGTransform(matrix);
-	}
 	public uSVGTransform Consolidate() {
-		uSVGTransform result = CreateSVGTransformFromMatrix(totalMatrix);
-		return result;
+		return new uSVGTransform(totalMatrix);
 	}
 }
