@@ -53,23 +53,4 @@ public struct uSVGLength  {
     uSVGLengthConvertor.f_ExtractType(valueText, ref t_value, ref t_type);
     return uSVGLengthConvertor.f_ConvertToPX(t_value, t_type);
   }
-
-  /***********************************************************************************/
-  private float f_GetValue(uSVGLengthType unitType) {
-    float temp = uSVGLengthConvertor.f_ConvertToPX(value, m_unitType);
-    switch (unitType) {
-      case uSVGLengthType.SVG_LENGTHTYPE_IN:
-        return temp / 90.0f;
-      case uSVGLengthType.SVG_LENGTHTYPE_CM:
-        return temp / 35.43307f;
-      case uSVGLengthType.SVG_LENGTHTYPE_MM:
-        return temp / 3.543307f;
-      case uSVGLengthType.SVG_LENGTHTYPE_PT:
-        return temp / 1.25f;
-      case uSVGLengthType.SVG_LENGTHTYPE_PC:
-        return temp / 15.0f;
-      default:
-        return temp;
-    }
-  }
 }
