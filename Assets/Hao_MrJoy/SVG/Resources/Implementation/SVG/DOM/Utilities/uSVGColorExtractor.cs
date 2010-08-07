@@ -152,9 +152,8 @@ public struct uSVGColorExtractor {
   private static Color change(int r, int g, int b) {
     return new Color((float)r/255.0f, (float)g/255.0f, (float)b/255.0f);
   }
-  public static Color GetColor(string name) {
+  public static Color ConstColor(string name) {
     if(name.Length == 0) return Color.black;
-    if(name[0] == '#') return HexColor(name);
 
     switch(name.ToLower()) {
       case "aliceblue": return aliceblue;
@@ -304,7 +303,7 @@ public struct uSVGColorExtractor {
       case "whitesmoke": return whitesmoke;
       case "yellow": return yellow;
       case "yellowgreen": return yellowgreen;
-      default: return HexColor(name);
+      default: return Color.black;
     }
   }
   //------------
@@ -482,7 +481,7 @@ public struct uSVGColorExtractor {
     if(cc >= 0 && cc < 6) return 10 + cc;
     return 0;
   }
-  private static Color HexColor(string colorStr) {
+  public static Color HexColor(string colorStr) {
     int r=0, g=0, b=0;
     if(colorStr.Length > 0) {
       if(colorStr[0] == '#') {
