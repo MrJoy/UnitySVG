@@ -39,7 +39,7 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
     ViewBoxTransform();
 
     //Tao currentTransformList va add cai transform dau tien vao, do la cai VIEWBOX.
-    SVGTransform temp = CreateSVGTransformFromMatrix(_cachedViewBoxTransform);
+    SVGTransform temp = new SVGTransform(_cachedViewBoxTransform);
     SVGTransformList t_currentTransformList = new SVGTransformList();
     t_currentTransformList.AppendItem(temp);
 
@@ -168,38 +168,11 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
     }
   }
   /***********************************************************************************/
-  public SVGNumber CreateSVGNumber() {
-    return new SVGNumber(0.0f);
-  }
-
-  public SVGLength CreateSVGLength() {
-    return new SVGLength(0, 0.0f);
-  }
-
-  public SVGPoint CreateSVGPoint() {
-    return new SVGPoint(0.0f, 0.0f);
-  }
-  public SVGMatrix CreateSVGMatrix() {
-    return new SVGMatrix();
-  }
-
-  public SVGRect CreateSVGRect() {
-    return new SVGRect(0.0f, 0.0f, 0.0f, 0.0f);
-  }
-
-  public SVGTransform CreateSVGTransform() {
-    return new SVGTransform();
-  }
-
-  public SVGTransform CreateSVGTransformFromMatrix(SVGMatrix matrix) {
-    return new SVGTransform(matrix);
-  }
-  /***********************************************************************************/
   private SVGMatrix _cachedViewBoxTransform = null;
   public SVGMatrix ViewBoxTransform() {
     if(this._cachedViewBoxTransform == null) {
 
-      SVGMatrix matrix = CreateSVGMatrix();
+      SVGMatrix matrix = new SVGMatrix();
 
       float x = 0.0f;
       float y = 0.0f;
