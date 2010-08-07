@@ -154,7 +154,7 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
     idx = 0;
   }
 
-  public void OnEndParsing(SmallXmlParser parser) { }
+//  public void OnEndParsing(SmallXmlParser parser) { }
 
   public void OnInlineElement(string name, AttributeList attrs) {
     Stream.Add(new Node(name, NodeKind.Inline, new AttributeList(attrs), level));
@@ -167,9 +167,9 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
     Stream.Add(new Node(name, NodeKind.BlockClose, new AttributeList(), --level));
   }
 
-  public void OnChars(string s) { }
+//  public void OnChars(string s) { }
 
-  public void OnIgnorableWhitespace(string s) { }
+//  public void OnIgnorableWhitespace(string s) { }
 
-  public void OnProcessingInstruction(string name, string text) { }
+//  public void OnProcessingInstruction(string name, string text) { }
 }

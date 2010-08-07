@@ -39,23 +39,23 @@ using System.Text;
 public class SmallXmlParser {
   public interface IContentHandler {
     void OnStartParsing(SmallXmlParser parser);
-    void OnEndParsing(SmallXmlParser parser);
+//    void OnEndParsing(SmallXmlParser parser);
     void OnStartElement(string name, AttributeList attrs);
     void OnEndElement(string name);
     void OnInlineElement(string name, AttributeList attrs);
-    void OnProcessingInstruction(string name, string text);
-    void OnChars(string text);
-    void OnIgnorableWhitespace(string text);
+//    void OnProcessingInstruction(string name, string text);
+//    void OnChars(string text);
+//    void OnIgnorableWhitespace(string text);
   }
 
   IContentHandler handler;
   TextReader reader;
   LiteStack elementNames = new LiteStack();
-  LiteStack xmlSpaces = new LiteStack();
-  string xmlSpace;
+//  LiteStack xmlSpaces = new LiteStack();
+//  string xmlSpace;
   StringBuilder buffer = new StringBuilder(200);
   char [] nameBuffer = new char [30];
-  bool isWhitespace;
+//  bool isWhitespace;
 
   AttributeList attributes = new AttributeList();
   int line = 1, column;
@@ -133,8 +133,8 @@ public class SmallXmlParser {
   {
     while (IsWhitespace (Peek ()))
       buffer.Append ((char) Read ());
-    if (Peek () != '<' && Peek () >= 0)
-      isWhitespace = false;
+//    if (Peek () != '<' && Peek () >= 0)
+//      isWhitespace = false;
   }
 
   public void SkipWhitespaces(bool expected)
@@ -241,7 +241,7 @@ public class SmallXmlParser {
     if (elementNames.Count > 0)
       throw Error (String.Format ("Insufficient close tag: {0}", elementNames.Peek ()));
 
-    handler.OnEndParsing (this);
+//    handler.OnEndParsing (this);
 
     Cleanup ();
   }
@@ -253,19 +253,19 @@ public class SmallXmlParser {
     handler = null;
     reader = null;
     elementNames.Clear ();
-    xmlSpaces.Clear ();
+//    xmlSpaces.Clear ();
     attributes.Clear ();
     buffer.Length = 0;
-    xmlSpace = null;
-    isWhitespace = false;
+//    xmlSpace = null;
+//    isWhitespace = false;
   }
 
   public void ReadContent()
   {
     string name;
     if (IsWhitespace (Peek ())) {
-      if (buffer.Length == 0)
-        isWhitespace = true;
+//      if (buffer.Length == 0)
+//        isWhitespace = true;
       HandleWhitespaces ();
     }
     if (Peek () == '<') {
@@ -306,8 +306,7 @@ public class SmallXmlParser {
             text += "?";
           }
         }
-        handler.OnProcessingInstruction (
-          name, text);
+//        handler.OnProcessingInstruction(name, text);
         Expect ('>');
         return;
       case '/': // end tags
@@ -318,11 +317,11 @@ public class SmallXmlParser {
         name = ReadName ();
         SkipWhitespaces ();
         string expected = (string) elementNames.Pop ();
-        xmlSpaces.Pop ();
-        if (xmlSpaces.Count > 0)
-          xmlSpace = (string) xmlSpaces.Peek ();
-        else
-          xmlSpace = null;
+//        xmlSpaces.Pop ();
+//        if (xmlSpaces.Count > 0)
+//          xmlSpace = (string) xmlSpaces.Peek ();
+//        else
+//          xmlSpace = null;
         if (name != expected)
           throw Error (String.Format ("End tag mismatch: expected {0} but found {1}", expected, name));
         handler.OnEndElement (name);
@@ -340,7 +339,7 @@ public class SmallXmlParser {
         } else {
           handler.OnStartElement (name, attributes);
           elementNames.Push (name);
-          xmlSpaces.Push (xmlSpace);
+//          xmlSpaces.Push (xmlSpace);
         }
         attributes.Clear ();
         Expect ('>');
@@ -355,17 +354,17 @@ public class SmallXmlParser {
   {
     if (buffer.Length == 0)
       return;
-    if (isWhitespace)
-      handler.OnIgnorableWhitespace (buffer.ToString ());
-    else
-      handler.OnChars (buffer.ToString ());
+//    if (isWhitespace)
+//      handler.OnIgnorableWhitespace (buffer.ToString ());
+//    else
+//      handler.OnChars (buffer.ToString ());
     buffer.Length = 0;
-    isWhitespace = false;
+//    isWhitespace = false;
   }
 
   private void ReadCharacters ()
   {
-    isWhitespace = false;
+//    isWhitespace = false;
     while (true) {
       int i = Peek ();
       switch (i) {
@@ -465,8 +464,8 @@ public class SmallXmlParser {
     default:
       throw Error ("Invalid attribute value markup.");
     }
-    if (name == "xml:space")
-      xmlSpace = value;
+//    if (name == "xml:space")
+//      xmlSpace = value;
     a.Add (name, value);
   }
 
