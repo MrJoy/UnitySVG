@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class SVGGraphicsFill : uISVGPathDraw {
+public class SVGGraphicsFill : ISVGPathDraw {
   //================================================================================
   private const int _fillFlag = -1;
   private float[,] _neighbor = new float[4, 2] {  {-1.0f, 0.0f},
