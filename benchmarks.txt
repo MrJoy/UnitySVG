@@ -36,3 +36,11 @@ Allocation	18.4KiB	44.4KiB	131.0KiB		8.6MiB	1.6MiB	68.6KiB		65.1KiB
 Time1		200ms	1595ms	2726ms			6412ms	3569ms	667ms		1722ms
 Time2		272ms	3874ms	3543ms			6608ms	3610ms	606ms		1521ms
 Time3		198ms	3891ms	3350ms			6201ms	3365ms	615ms		1981ms
+
+
+After 2010-08-06 optimization pass:
+
+Allocation	?KiB	?KiB	?????KiB		4.5MiB	?MiB	?KiB		?KiB
+Time1		??ms	??ms	??ms			4515ms	??ms	??ms		?ms
+Time2		??ms	??ms	??ms			4548ms	??ms	??ms		?ms
+Time3		??ms	??1ms	??ms			4530ms	??ms	??ms		?ms
