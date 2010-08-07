@@ -28,8 +28,9 @@ public struct AttributeList {
   }
   //-------------------------------------------------------------------------------------//
   public string GetValue(string name) {
-    if((attrs != null) && attrs.ContainsKey(name))
-      return attrs[name];
+    string outVal;
+    if((attrs != null) && attrs.TryGetValue(name, out outVal))
+      return outVal;
     else
       return "";
     }
