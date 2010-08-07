@@ -39,9 +39,10 @@ Time3		198ms	3891ms	3350ms			6201ms	3365ms	615ms		1981ms
 
 
 After 2010-08-06 optimization pass:
-(Also note that the code produces a DLL about 9% smaller now.)
+(Note that the code produces a DLL about 9% smaller now.  Unfortunately, at 
+least one test image -- lion -- produces incorrect results now.)
 
-Allocation	?KiB	?KiB	?????KiB		4.5MiB	?MiB	?KiB		?KiB
-Time1		??ms	??ms	??ms			4515ms	??ms	??ms		?ms
-Time2		??ms	??ms	??ms			4548ms	??ms	??ms		?ms
-Time3		??ms	??1ms	??ms			4530ms	??ms	??ms		?ms
+Allocation	8.9KiB	18.1KiB	40.2KiB			4.4MiB	0.7MiB	19.3KiB		24.3KiB
+Time1		193ms	1101ms	1958ms			4560ms	3485ms	486ms		1372ms
+Time2		196ms	1098ms	1943ms			4565ms	3494ms	480ms		1370ms
+Time3		196ms	1111ms	1925ms			4572ms	3515ms	478ms		1362ms
