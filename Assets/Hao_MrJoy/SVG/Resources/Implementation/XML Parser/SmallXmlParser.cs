@@ -58,7 +58,7 @@ public class SmallXmlParser  {
   char [] nameBuffer = new char [30];
   bool isWhitespace;
 
-    AttributeList attributes = new AttributeList(1);
+    AttributeList attributes = new AttributeList();
     int line = 1, column;
     bool resetColumn;
     private bool isPause = false;

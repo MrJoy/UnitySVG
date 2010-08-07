@@ -11,14 +11,11 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   private XMLTagState _currentTagState;
   private AttributeList _currentList;
 
-  private string _svgText = "";
-
   /***********************************************************************************/
   public uXMLImp() {
   }
 
   public uXMLImp(string text) {
-    this._svgText = text;
     _textReader = new StringReader(text);
     _parser.Pause();
     _parser.Parse(_textReader, this);
@@ -31,19 +28,6 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   private void CloneAttrsList(AttributeList attrs) {
     this._currentList = new AttributeList(attrs);
   }
-
-  /**********************************************************************************
-  Public Classes:
-    public bool       ReadNextTag();
-    public XMLTagState     GetCurrentTagState();
-    public string       GetCurrentTagName();
-    public void       Reset(string text);
-    public bool       IsCurrentTagName(string name);
-    public int         Length();
-    public IAttrList    GetCurrentAttributesList
-    public IAttrList    GetNextAttrList
-
-  ************************************************************************************/
 
   //---------------------------------------------------------
   //Methods: ReadNextTag
@@ -66,47 +50,11 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   }
 
   //---------------------------------------------------------
-  //Methods: Reset
-  //Purpose: Reset new String.
-  //---------------------------------------------------------
-  public void Reset(string text) {
-    this._svgText = text;
-    _textReader = new StringReader(text);
-    _parser.New();
-    _parser.Pause();
-    _parser.Parse(_textReader, this);
-  }
-  public void Reset() {
-    _textReader = new StringReader(this._svgText);
-    _parser.New();
-    _parser.Pause();
-    _parser.Parse(_textReader, this);
-  }
-  //---------------------------------------------------------
   //Methods: GetCurrentTagName
   //Purpose: return current Tag Name of XML Tag reading.
   //---------------------------------------------------------
   public string GetCurrentTagName() {
-    return this._currentName;
-  }
-  //---------------------------------------------------------
-  //Methods: GetCurrentLineText
-  //Purpose: return current Tag Name of XML Tag reading.
-  //---------------------------------------------------------
-  public string GetCurrentLineText() {
-    return this._currentLineText;
-  }
-
-  //---------------------------------------------------------
-  //Methods: IsCurrentTagName
-  //Purpose: return true when current Tag Name = name.
-  //---------------------------------------------------------
-
-  public bool IsCurrentTagName(string name) {
-    if(name == this._currentName) {
-      return true;
-    }
-    return false;
+    return _currentName;
   }
 
   //---------------------------------------------------------
@@ -124,17 +72,7 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   //---------------------------------------------------------
   public AttributeList GetNextAttrList() {
     ReadNextTag();
-    return this._currentList;
-  }
-
-
-  //---------------------------------------------------------
-  //Methods: Length
-  //Purpose: Return Count of attribute List of current XMLTag.
-  //---------------------------------------------------------
-
-  public int Length() {
-    return this._currentList.Length;
+    return _currentList;
   }
 
   //-----------------------------------------------------------------------------------------//

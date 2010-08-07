@@ -5,17 +5,10 @@ using System.Collections.Generic;
 public struct AttributeList {
   Dictionary<string,string> attrs;
 
-  public AttributeList(int i) {
-    attrs = null;
-  }
-
   public AttributeList(AttributeList a) {
     attrs = new Dictionary<string,string>(a.attrs);
   }
   //-------------------------------------------------------------------------------------//
-  public int Length {
-    get { return(attrs != null) ? attrs.Keys.Count : 0;}
-  }
 
   public void Clear() {
     attrs.Clear();
