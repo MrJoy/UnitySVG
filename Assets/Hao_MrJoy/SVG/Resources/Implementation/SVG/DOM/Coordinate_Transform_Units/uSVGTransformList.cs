@@ -24,12 +24,7 @@ public class uSVGTransformList {
 		m_listTransform = new List<uSVGTransform>();
 	}
 	public uSVGTransformList(string listString) {
-		m_listTransform = new List<uSVGTransform>();
-		
-		Dictionary<string, string> transformList = uSVGStringExtractor.f_ExtractTransformList(listString);
-		foreach (KeyValuePair<string, string> kvp in transformList) {
-			AppendItem(new uSVGTransform(kvp.Key, kvp.Value));
-		}
+		m_listTransform = uSVGStringExtractor.f_ExtractTransformList(listString);
 	}
 	
 	/*********************************************************************************************/

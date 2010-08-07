@@ -19,9 +19,9 @@ public class uSVGStringExtractor {
 	//--------------------------------------------------
 	//Extract for Syntax:   translate(700 200) rotate(-30)
 	private static char[] splitPipe = new char[] {'|', ' ', ')', '\n', '\t', '\r'};
-	public static Dictionary<string, string> f_ExtractTransformList(string inputText) {
+	public static List<uSVGTransform> f_ExtractTransformList(string inputText) {
 Profiler.BeginSample("uSVGStringExtractor.f_ExtractTransformList(string)");
-		Dictionary <string, string> m_return = new Dictionary<string, string>();
+    List<uSVGTransform> m_return = new List<uSVGTransform>();
 
 		string[] valuesStr = inputText.Split(splitPipe, StringSplitOptions.RemoveEmptyEntries);
 
@@ -31,7 +31,7 @@ Profiler.BeginSample("uSVGStringExtractor.f_ExtractTransformList(string)");
 			int vt1 = valuesStr[i].IndexOf('(');
 			string m_key = valuesStr[i].Substring(0, vt1);
 			string m_value = valuesStr[i].Substring(vt1+1);
-			m_return.Add(m_key, m_value);
+			m_return.Add(new uSVGTransform(m_key, m_value));
 		}
 Profiler.EndSample();
 		return m_return;
