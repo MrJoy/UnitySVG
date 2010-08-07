@@ -24,13 +24,13 @@ public class uSVGTransformable {
 		}
 	}
 	public uSVGTransformList summaryTransformList {
-		get{return this.m_summaryTransformList;}
+		get { return m_summaryTransformList; }
 	}
 	public float transformAngle {
-		get{
+		get {
 			float m_angle = 0.0f;
-			for (int i = 0; i < m_summaryTransformList.numberOfItems; i++ ) {
-				uSVGTransform m_temp = m_summaryTransformList.GetItem(i);
+			for (int i = 0; i < m_summaryTransformList.Count; i++ ) {
+				uSVGTransform m_temp = m_summaryTransformList[i];
 				if (m_temp.type == uSVGTransformType.SVG_TRANSFORM_ROTATE)  {
 					m_angle += m_temp.angle;
 				}
@@ -39,10 +39,10 @@ public class uSVGTransformable {
 		}
 	}
 	public uSVGMatrix transformMatrix {
-		get{return this.summaryTransformList.Consolidate().matrix;}
+		get { return summaryTransformList.Consolidate().matrix; }
 	}
 	/*********************************************************************************************/
 	public uSVGTransformable(uSVGTransformList transformList) {
-		this.inheritTransformList = transformList;
+		inheritTransformList = transformList;
 	}
 }

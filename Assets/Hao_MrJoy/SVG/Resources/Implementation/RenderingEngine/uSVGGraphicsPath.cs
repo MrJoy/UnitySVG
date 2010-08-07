@@ -54,8 +54,8 @@ public class uSVGGraphicsPath {
 	public float transformAngle {
 		get{
 			float m_angle = 0.0f;
-			for (int i = 0; i < this.m_transformList.numberOfItems; i++ ) {
-				uSVGTransform m_temp =this.m_transformList.GetItem(i);
+			for (int i = 0; i < m_transformList.Count; i++ ) {
+				uSVGTransform m_temp = m_transformList[i];
 				if (m_temp.type == uSVGTransformType.SVG_TRANSFORM_ROTATE)  {
 					m_angle += m_temp.angle;
 				}

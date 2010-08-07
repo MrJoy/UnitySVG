@@ -3,17 +3,17 @@ using System.Collections.Generic;
 public class uSVGTransformList {
 	private List<uSVGTransform> m_listTransform;
 	/*********************************************************************************************/
-	public int numberOfItems {
-		get{return this.m_listTransform.Count;}
+	public int Count {
+		get{ return m_listTransform.Count; }
 	}
 	public uSVGMatrix totalMatrix {
 		get {
-			if (numberOfItems == 0) {
+			if (m_listTransform.Count == 0) {
 				return new uSVGMatrix(1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
 			} else {
-				uSVGMatrix matrix = GetItem(0).matrix;
-				for (int i = 1; i < numberOfItems; i++ ) {
-					matrix = matrix.Multiply(GetItem(i).matrix);
+				uSVGMatrix matrix = m_listTransform[0].matrix;
+				for (int i = 1; i < m_listTransform.Count; i++) {
+					matrix = matrix.Multiply(m_listTransform[i].matrix);
 				}
 				return matrix;
 			}
@@ -28,23 +28,19 @@ public class uSVGTransformList {
 	}
 	
 	/*********************************************************************************************/
-	public uSVGTransformList AppendItem(uSVGTransform newItem) {
+	public void AppendItem(uSVGTransform newItem) {
 		m_listTransform.Add(newItem);
-		return this;
 	}
-	public uSVGTransformList AppendItems(uSVGTransformList newListItem) {
-		for(int i = 0; i < newListItem.numberOfItems; i++) {
-			uSVGTransform temp = newListItem.GetItem(i);
-			m_listTransform.Add(temp);
-		}
-		return this;
+	public void AppendItems(uSVGTransformList newListItem) {
+	  m_listTransform.AddRange(newListItem.m_listTransform);
 	}
-	public uSVGTransform GetItem(int index) {
-		
-		if ((index < 0) || (index >= numberOfItems)) {
-			throw new uDOMException(uDOMExceptionType.IndexSizeErr);
+	public uSVGTransform this[int index] {
+	  get {
+  		if ((index < 0) || (index >= m_listTransform.Count)) {
+  			throw new uDOMException(uDOMExceptionType.IndexSizeErr);
+  		}
+  		return m_listTransform[index];
 		}
-		return this.m_listTransform[index];
 	}
 
 	public void InsertItemBefore(uSVGTransform newItem, int index) {
