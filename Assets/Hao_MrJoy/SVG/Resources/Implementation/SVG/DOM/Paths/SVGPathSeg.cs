@@ -23,14 +23,9 @@ public enum SVGPathSegTypes : ushort {
 /*************************************************************************************************/
 public abstract class SVGPathSeg {
   protected SVGPathSegList _segList;
-  protected int _segIndex;
-  /***********************************************************************************/
   /***********************************************************************************/
   internal void SetList(SVGPathSegList segList) {
     this._segList = segList;
-  }
-  internal void SetIndex(int segIndex) {
-    this._segIndex = segIndex;
   }
   public SVGPathSeg previousSeg {
     get {

@@ -25,7 +25,7 @@ public class SVGPathSegList {
   //-----------
   public SVGPathSeg AppendItem(SVGPathSeg newItem) {
     this._segList.Add(newItem);
-    SetListAndIndex(newItem, this._segList.Count - 1);
+    SetList(newItem);
     return newItem;
   }
   /***********************************************************************************/
@@ -38,10 +38,8 @@ public class SVGPathSegList {
     }
   }
   /***********************************************************************************/
-  private void SetListAndIndex(SVGPathSeg newItem, int index) {
-    if(newItem != null) {
+  private void SetList(SVGPathSeg newItem) {
+    if(newItem != null)
       newItem.SetList(this);
-      newItem.SetIndex(index);
-    }
   }
 }
