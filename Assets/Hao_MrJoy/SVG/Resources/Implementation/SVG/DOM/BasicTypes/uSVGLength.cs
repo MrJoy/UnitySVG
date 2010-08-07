@@ -43,12 +43,10 @@ public struct uSVGLength  {
     m_value = uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);
   }
   /***********************************************************************************/
-  public void NewValueSpecifiedUnits(ushort unitType, float valueInSpecifiedUnits) {
-    m_unitType = (uSVGLengthType)unitType;
-    m_valueInSpecifiedUnits = valueInSpecifiedUnits;
-  }
   public void NewValueSpecifiedUnits(float valueInSpecifiedUnits) {
-    NewValueSpecifiedUnits(0, valueInSpecifiedUnits);
+    m_unitType = (uSVGLengthType)0;
+    m_valueInSpecifiedUnits = valueInSpecifiedUnits;
+    m_value = uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);
   }
   public static float GetPXLength(string valueText) {
     float t_value = 0.0f;
