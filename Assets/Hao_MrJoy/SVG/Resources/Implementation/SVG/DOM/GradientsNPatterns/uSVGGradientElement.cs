@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public enum uSVGSpreadMethodTypes : ushort {
   SVG_SPREADMETHOD_UNKNOWN  = 0,
   SVG_SPREADMETHOD_PAD    = 1,
@@ -10,26 +12,36 @@ public enum uSVGGradientUnitType : ushort {
   SVG_OBJECT_BOUNDING_BOX    = 1
 }
 public class uSVGGradientElement {
-  private uSVGGradientUnitType     _gradientUnits;
-  private uSVGTransformList   _gradientTransfrom;
-  private uSVGSpreadMethodTypes    _spreadMethod;
+  private uSVGGradientUnitType _gradientUnits;
+  private uSVGTransformList _gradientTransfrom;
+  private uSVGSpreadMethodTypes _spreadMethod;
   /***************************************************************************/
-  private AttributeList _attrList;
+  private string _id;
+  private uXMLImp _xmlImp;
+  private List<uSVGStopElement> _stopList;
+  protected AttributeList _attrList;
   /***************************************************************************/
   public uSVGGradientUnitType gradientUnits {
-    get{ return this._gradientUnits;}
+    get { return _gradientUnits; }
   }
-
   public uSVGSpreadMethodTypes spreadMethod {
-    get{ return this._spreadMethod;}
+    get { return _spreadMethod; }
+  }
+  public string id {
+    get { return _id; }
+  }
+  public int stopCount {
+    get { return _stopList.Count; }
+  }
+  public List<uSVGStopElement> stopList {
+    get { return _stopList; }
   }
   /***************************************************************************/
-  public uSVGGradientElement(AttributeList attrList) {
-    this._attrList = attrList;
-    Initialize();
-  }
-  /***************************************************************************/
-  private void Initialize() {
+  public uSVGGradientElement(uXMLImp xmlImp, AttributeList attrList) {
+    _attrList = attrList;
+    _xmlImp = xmlImp;
+    _stopList = new List<uSVGStopElement>();
+    _id = _attrList.GetValue("id");
     _gradientUnits = uSVGGradientUnitType.SVG_OBJECT_BOUNDING_BOX;
     if(this._attrList.GetValue("gradiantUnits") == "userSpaceOnUse") {
       _gradientUnits = uSVGGradientUnitType.SVG_USER_SPACE_ON_USE;
@@ -44,5 +56,25 @@ public class uSVGGradientElement {
     } else if(this._attrList.GetValue("spreadMethod") == "repeat") {
       _spreadMethod = uSVGSpreadMethodTypes.SVG_SPREADMETHOD_REPEAT;
     }
+
+    GetElementList();
+  }
+
+  /***************************************************************************/
+  protected void GetElementList() {
+    bool exitFlag = false;
+    while(!exitFlag && _xmlImp.Next()) {
+      if(_xmlImp.Node.Kind == NodeKind.BlockClose) {
+        exitFlag = true;
+        continue;
+      }
+      if(_xmlImp.Node.Name == "stop")
+        _stopList.Add(new uSVGStopElement(_xmlImp.Node.Attributes));
+    }
+  }
+
+  public uSVGStopElement GetStopElement(int i) {
+    if((i >= 0) && (i < stopCount)) return this._stopList[i];
+    return null;
   }
 }

@@ -23,13 +23,13 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
   public uSVGSVGElement(  uXMLImp xmlImp,
               uSVGTransformList inheritTransformList,
               uSVGPaintable inheritPaintable,
-              uSVGGraphics _render) : base(inheritTransformList) {
-    this._render = _render;
-    this._xmlImp = xmlImp;
-    this._attrList = this._xmlImp.GetCurrentAttributesList();
-    this._paintable = new uSVGPaintable(inheritPaintable, this._attrList);
-    this._width = new uSVGLength(_attrList.GetValue("width"));
-    this._height = new uSVGLength(_attrList.GetValue("height"));
+              uSVGGraphics r) : base(inheritTransformList) {
+    _render = r;
+    _xmlImp = xmlImp;
+    _attrList = _xmlImp.Node.Attributes;
+    _paintable = new uSVGPaintable(inheritPaintable, _attrList);
+    _width = new uSVGLength(_attrList.GetValue("width"));
+    _height = new uSVGLength(_attrList.GetValue("height"));
     Initial();
   }
   /***********************************************************************************/
@@ -55,123 +55,84 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
   /***********************************************************************************/
   private void GetElementList() {
     bool exitFlag = false;
-    while(!exitFlag && this._xmlImp.ReadNextTag()) {
-      if(this._xmlImp.GetCurrentTagState() == uXMLImp.XMLTagState.CLOSE) {
+    while(!exitFlag && _xmlImp.Next()) {
+      if(_xmlImp.Node.Kind == NodeKind.BlockClose) {
         exitFlag = true;
         continue;
       }
-      string t_name = this._xmlImp.GetCurrentTagName();
-      AttributeList t_attrList;
-        switch(t_name) {
-          case "rect": {
-            t_attrList = this._xmlImp.GetCurrentAttributesList();
-            uSVGRectElement temp = new uSVGRectElement(  t_attrList,
-                                  this.summaryTransformList,
-                                  this._paintable,
-                                   this._render);
-            _elementList.Add(temp);
+      switch(_xmlImp.Node.Name) {
+        case "rect":
+          _elementList.Add(new uSVGRectElement(_xmlImp.Node.Attributes,
+                           summaryTransformList,
+                           _paintable,
+                           _render));
           break;
-          }
-          case "line": {
-            t_attrList = this._xmlImp.GetCurrentAttributesList();
-            uSVGLineElement temp = new uSVGLineElement(  t_attrList,
-                                  this.summaryTransformList,
-                                  this._paintable,
-                                   this._render);
-            _elementList.Add(temp);
+        case "line":
+          _elementList.Add(new uSVGLineElement(_xmlImp.Node.Attributes,
+                           summaryTransformList,
+                           _paintable,
+                           _render));
           break;
-          }
-          case "circle": {
-            t_attrList = this._xmlImp.GetCurrentAttributesList();
-            uSVGCircleElement temp = new uSVGCircleElement(  t_attrList,
-                                  this.summaryTransformList,
-                                  this._paintable,
-                                   this._render);
-            _elementList.Add(temp);
+        case "circle":
+          _elementList.Add(new uSVGCircleElement(_xmlImp.Node.Attributes,
+                           summaryTransformList,
+                           _paintable,
+                           _render));
           break;
-          }
-          case "ellipse": {
-            t_attrList = this._xmlImp.GetCurrentAttributesList();
-            uSVGEllipseElement temp = new uSVGEllipseElement(  t_attrList,
-                                  this.summaryTransformList,
-                                  this._paintable,
-                                   this._render);
-            _elementList.Add(temp);
+        case "ellipse":
+          _elementList.Add(new uSVGEllipseElement(_xmlImp.Node.Attributes,
+                           summaryTransformList,
+                           _paintable,
+                           _render));
           break;
-          }
-          case "polyline": {
-            t_attrList = this._xmlImp.GetCurrentAttributesList();
-            uSVGPolylineElement temp = new uSVGPolylineElement(  t_attrList,
-                                  this.summaryTransformList,
-                                  this._paintable,
-                                   this._render);
-            _elementList.Add(temp);
+        case "polyline":
+          _elementList.Add(new uSVGPolylineElement(_xmlImp.Node.Attributes,
+                           summaryTransformList,
+                           _paintable,
+                           _render));
           break;
-          }
-          case "polygon": {
-            t_attrList = this._xmlImp.GetCurrentAttributesList();
-            uSVGPolygonElement temp = new uSVGPolygonElement(t_attrList,
-                                  this.summaryTransformList,
-                                  this._paintable,
-                                   this._render);
-            _elementList.Add(temp);
+        case "polygon":
+          _elementList.Add(new uSVGPolygonElement(_xmlImp.Node.Attributes,
+                           summaryTransformList,
+                           _paintable,
+                           _render));
           break;
-          }
-          case "path": {
-            t_attrList = this._xmlImp.GetCurrentAttributesList();
-            uSVGPathElement temp = new uSVGPathElement(  t_attrList,
-                                  this.summaryTransformList,
-                                  this._paintable,
-                                   this._render);
-            _elementList.Add(temp);
+        case "path":
+          _elementList.Add(new uSVGPathElement(_xmlImp.Node.Attributes,
+                                               summaryTransformList,
+                                               _paintable,
+                                               _render));
           break;
-          }
-          case "svg": {
-            _elementList.Add(new uSVGSVGElement(  this._xmlImp,
-                                this.summaryTransformList,
-                                this._paintable,
-                                this._render));
-            break;
-          }
-          case "g": {
-            _elementList.Add(new uSVGGElement(  this._xmlImp,
-                              this.summaryTransformList,
-                              this._paintable,
-                              this._render));
-            break;
-          }
-          //--------
-          case "linearGradient": {
-            t_attrList = this._xmlImp.GetCurrentAttributesList();
-            uSVGLinearGradientElement temp = new uSVGLinearGradientElement(this._xmlImp,
-                                          t_attrList);
-            this._paintable.AppendLinearGradient(temp);
-            break;
-          }
-          //--------
-          case "radialGradient": {
-            t_attrList = this._xmlImp.GetCurrentAttributesList();
-            uSVGRadialGradientElement temp = new uSVGRadialGradientElement(this._xmlImp,
-                                          t_attrList);
-            this._paintable.AppendRadialGradient(temp);
-            break;
-          }
-          case "defs": {
-            GetElementList();
-            break;
-          }
-          case "title": {
-            GetElementList();
-            break;
-          }
-          case "desc": {
-            GetElementList();
-            break;
-          }
-//          default:
-//            UnityEngine.Debug.LogError("Unexpected tag: " + t_name);
-//            break;
-        }
+        case "svg":
+          _elementList.Add(new uSVGSVGElement(_xmlImp,
+                           summaryTransformList,
+                           _paintable,
+                           _render));
+          break;
+        case "g":
+          _elementList.Add(new uSVGGElement(_xmlImp,
+                           summaryTransformList,
+                           _paintable,
+                           _render));
+          break;
+        //--------
+        case "linearGradient":
+          _paintable.AppendLinearGradient(new uSVGLinearGradientElement(_xmlImp, _xmlImp.Node.Attributes));
+          break;
+        //--------
+        case "radialGradient":
+          _paintable.AppendRadialGradient(new uSVGRadialGradientElement(_xmlImp, _xmlImp.Node.Attributes));
+          break;
+        case "defs":
+          GetElementList();
+          break;
+        case "title":
+          GetElementList();
+          break;
+        case "desc":
+          GetElementList();
+          break;
+      }
     }
   }
   /***********************************************************************************/

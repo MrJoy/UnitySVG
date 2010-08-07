@@ -6,12 +6,16 @@ public struct AttributeList {
   Dictionary<string,string> attrs;
 
   public AttributeList(AttributeList a) {
-    attrs = new Dictionary<string,string>(a.attrs);
+    if(a.attrs != null)
+      attrs = new Dictionary<string,string>(a.attrs);
+    else
+      attrs = null;
   }
   //-------------------------------------------------------------------------------------//
 
   public void Clear() {
-    attrs.Clear();
+    if(attrs != null)
+      attrs.Clear();
   }
 
   public void Add(string name, string value) {
@@ -26,6 +30,21 @@ public struct AttributeList {
       return outVal;
     else
       return "";
-    }
+  }
 
+  public new string ToString() {
+    if(attrs == null)
+      return "null";
+    else {
+      bool isFirst = true;
+      System.Text.StringBuilder sb = new System.Text.StringBuilder();
+      foreach(KeyValuePair<string,string> kvp in attrs) {
+        if(!isFirst)
+          sb.Append(", ");
+        sb.Append(kvp.Key).Append("=").Append(kvp.Value);
+        isFirst = false;
+      }
+      return sb.ToString();
+    }
+  }
 }

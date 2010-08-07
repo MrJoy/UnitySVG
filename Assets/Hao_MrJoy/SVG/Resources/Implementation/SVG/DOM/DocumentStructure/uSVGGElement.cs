@@ -17,7 +17,7 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
                       uSVGGraphics render) : base(inheritTransformList) {
     _render = render;
     _xmlImp = xmlImp;
-    _attrList = _xmlImp.GetCurrentAttributesList();
+    _attrList = _xmlImp.Node.Attributes;
     _paintable = new uSVGPaintable(inheritPaintable, _attrList);
     _elementList = new List<object>();
     currentTransformList = new uSVGTransformList(_attrList.GetValue("transform"));
@@ -26,50 +26,50 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
   /***********************************************************************************/
   private void GetElementList() {
     bool exitFlag = false;
-    while(!exitFlag && _xmlImp.ReadNextTag()) {
-      if(_xmlImp.GetCurrentTagState() == uXMLImp.XMLTagState.CLOSE) {
+    while(!exitFlag && _xmlImp.Next()) {
+      if(_xmlImp.Node.Kind == NodeKind.BlockClose) {
         exitFlag = true;
         continue;
       }
-      switch(_xmlImp.GetCurrentTagName()) {
+      switch(_xmlImp.Node.Name) {
         case "rect":
-          _elementList.Add(new uSVGRectElement(_xmlImp.GetCurrentAttributesList(),
+          _elementList.Add(new uSVGRectElement(_xmlImp.Node.Attributes,
                                                summaryTransformList,
                                                _paintable,
                                                _render));
           break;
         case "line":
-          _elementList.Add(new uSVGLineElement(_xmlImp.GetCurrentAttributesList(),
+          _elementList.Add(new uSVGLineElement(_xmlImp.Node.Attributes,
                                                summaryTransformList,
                                                _paintable,
                                                _render));
           break;
         case "circle":
-          _elementList.Add(new uSVGCircleElement(_xmlImp.GetCurrentAttributesList(),
+          _elementList.Add(new uSVGCircleElement(_xmlImp.Node.Attributes,
                                                  summaryTransformList,
                                                  _paintable,
                                                  _render));
           break;
         case "ellipse":
-          _elementList.Add(new uSVGEllipseElement(_xmlImp.GetCurrentAttributesList(),
+          _elementList.Add(new uSVGEllipseElement(_xmlImp.Node.Attributes,
                                                   summaryTransformList,
                                                   _paintable,
                                                   _render));
           break;
         case "polyline":
-          _elementList.Add(new uSVGPolylineElement(_xmlImp.GetCurrentAttributesList(),
+          _elementList.Add(new uSVGPolylineElement(_xmlImp.Node.Attributes,
                                                    summaryTransformList,
                                                    _paintable,
                                                    _render));
           break;
         case "polygon":
-          _elementList.Add(new uSVGPolygonElement(_xmlImp.GetCurrentAttributesList(),
+          _elementList.Add(new uSVGPolygonElement(_xmlImp.Node.Attributes,
                                                   summaryTransformList,
                                                   _paintable,
                                                   _render));
           break;
         case "path":
-          _elementList.Add(new uSVGPathElement(_xmlImp.GetCurrentAttributesList(),
+          _elementList.Add(new uSVGPathElement(_xmlImp.Node.Attributes,
                                                summaryTransformList,
                                                _paintable,
                                                _render));
@@ -88,11 +88,11 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
           break;
         //--------
         case "linearGradient":
-          _paintable.AppendLinearGradient(new uSVGLinearGradientElement(_xmlImp, _xmlImp.GetCurrentAttributesList()));
+          _paintable.AppendLinearGradient(new uSVGLinearGradientElement(_xmlImp, _xmlImp.Node.Attributes));
           break;
         //--------
         case "radialGradient":
-          _paintable.AppendRadialGradient(new uSVGRadialGradientElement(_xmlImp, _xmlImp.GetCurrentAttributesList()));
+          _paintable.AppendRadialGradient(new uSVGRadialGradientElement(_xmlImp, _xmlImp.Node.Attributes));
           break;
         case "defs":
           GetElementList();
