@@ -237,7 +237,8 @@ public class SmallXmlParser {
 
     while (Peek () >= 0)
       ReadContent ();
-    HandleBufferedContent ();
+    buffer.Length = 0;
+//    HandleBufferedContent ();
     if (elementNames.Count > 0)
       throw Error (String.Format ("Insufficient close tag: {0}", elementNames.Peek ()));
 
@@ -293,7 +294,8 @@ public class SmallXmlParser {
         }
 //          throw Error ("This parser does not support document type.");
       case '?': // PIs
-        HandleBufferedContent ();
+//        HandleBufferedContent ();
+        buffer.Length = 0;
         Read ();
         name = ReadName ();
         SkipWhitespaces ();
@@ -310,7 +312,8 @@ public class SmallXmlParser {
         Expect ('>');
         return;
       case '/': // end tags
-        HandleBufferedContent ();
+//        HandleBufferedContent ();
+        buffer.Length = 0;
         if (elementNames.Count == 0)
           throw UnexpectedEndError ();
         Read ();
@@ -328,7 +331,8 @@ public class SmallXmlParser {
         Expect ('>');
         return;
       default: // start tags (including empty tags)
-        HandleBufferedContent ();
+//        HandleBufferedContent ();
+        buffer.Length = 0;
         name = ReadName ();
         while (Peek () != '>' && Peek () != '/')
           ReadAttribute (ref attributes);
@@ -350,17 +354,17 @@ public class SmallXmlParser {
       ReadCharacters ();
   }
 
-  private void HandleBufferedContent ()
-  {
-    if (buffer.Length == 0)
-      return;
+///  private void HandleBufferedContent ()
+//  {
+//    if (buffer.Length == 0)
+//      return;
 //    if (isWhitespace)
 //      handler.OnIgnorableWhitespace (buffer.ToString ());
 //    else
 //      handler.OnChars (buffer.ToString ());
-    buffer.Length = 0;
+//    buffer.Length = 0;
 //    isWhitespace = false;
-  }
+//  }
 
   private void ReadCharacters ()
   {
