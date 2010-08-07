@@ -39,7 +39,7 @@ Time3		198ms	3891ms	3350ms			6201ms	3365ms	615ms		1981ms
 
 
 After 2010-08-06 optimization pass:
-(Also note that the code produces a DLL about 6% smaller now.)
+(Also note that the code produces a DLL about 9% smaller now.)
 
 Allocation	?KiB	?KiB	?????KiB		4.5MiB	?MiB	?KiB		?KiB
 Time1		??ms	??ms	??ms			4515ms	??ms	??ms		?ms
