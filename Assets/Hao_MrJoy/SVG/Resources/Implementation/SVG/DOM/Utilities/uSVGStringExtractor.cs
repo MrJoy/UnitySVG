@@ -41,7 +41,7 @@ Profiler.EndSample();
   private static char[] splitSpaceComma = new char[] {' ', ',', '\n', '\t', '\r'};
   public static string[] ExtractTransformValue(string inputText) {
 Profiler.BeginSample("uSVGStringExtractor.ExtractTransformValue(string)");
-    string[] values = inputText.Split(splitSpaceComma, System.StringSplitOptions.RemoveEmptyEntries);
+    string[] values = inputText.Split(splitSpaceComma, StringSplitOptions.RemoveEmptyEntries);
 Profiler.EndSample();
     return values;
   }
@@ -76,23 +76,19 @@ Profiler.EndSample();
 
   //--------------------------------------------------
   //Extract for Syntax:  fill: #ffffff; stroke:#000000; stroke-width:0.172
-  private static char[] splitColonSemicolon = new char[]{':',';'};
+  private static char[] splitColonSemicolon = new char[]{':', ';', ' ', '\n', '\t', '\r'};
   public static void ExtractStyleValue(string inputText, ref Dictionary<string, string> dic) {
-    inputText = inputText.Trim();
-    inputText = uSVGStringExtractor.RemoveMultiSpace(inputText);
-    inputText = inputText.Replace(" ","");
+    string[] valuesStr = inputText.Split(splitColonSemicolon, StringSplitOptions.RemoveEmptyEntries);
 
-    string[] valuesStr = inputText.Split(splitColonSemicolon, System.StringSplitOptions.RemoveEmptyEntries);
-
-    int len = valuesStr.GetLength(0);
-    for(int i = 0; i < len - 1; i++) {
-      dic.Add(valuesStr[i], valuesStr[i+1]);
-      i++;
-    }
+    int len = valuesStr.Length - 1;
+    for(int i = 0; i < len; i += 2)
+      dic.Add(valuesStr[i], valuesStr[i + 1]);
   }
   //--------------------------------------------------
   //Extract for Syntax:   translate(700 200)rotate(-30)
   public static string ExtractUrl4Gradient(string inputText) {
+Profiler.BeginSample("uSVGStringExtractor.ExtractUrl4Gradient(string)");
+    // TODO: Optimize this routine...
     string _return = "";
     inputText = inputText.Trim();
     inputText = uSVGStringExtractor.RemoveMultiSpace(inputText);
@@ -106,6 +102,7 @@ Profiler.EndSample();
     }
 
     _return = inputText.Substring(vt1 + 5, vt2 - vt1 - 5);
+Profiler.EndSample();
     return _return;
   }
 }
