@@ -23,6 +23,9 @@ public class uSVGTransformList {
 	public uSVGTransformList() {
 		m_listTransform = new List<uSVGTransform>();
 	}
+	public uSVGTransformList(int capacity) {
+		m_listTransform = new List<uSVGTransform>(capacity);
+	}
 	public uSVGTransformList(string listString) {
 		m_listTransform = uSVGStringExtractor.f_ExtractTransformList(listString);
 	}

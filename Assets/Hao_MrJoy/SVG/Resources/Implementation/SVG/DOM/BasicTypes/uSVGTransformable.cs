@@ -6,19 +6,22 @@ public class uSVGTransformable {
 	public uSVGTransformList inheritTransformList {
 		get { return m_inheritTransformList; }
 		set {
+      int c = 0;
+      if(m_inheritTransformList != null) c += m_inheritTransformList.Count;
+      if(m_currentTransformList != null) c += m_currentTransformList.Count;
 			m_inheritTransformList = value;
-			m_summaryTransformList = new uSVGTransformList();
-			m_summaryTransformList.AppendItems(m_inheritTransformList);
-			if(m_currentTransformList != null) {
-				m_summaryTransformList.AppendItems(m_currentTransformList);
-			}
+			m_summaryTransformList = new uSVGTransformList(c);
+      if(m_inheritTransformList != null)
+        m_summaryTransformList.AppendItems(m_inheritTransformList);
+      if(m_currentTransformList != null)
+        m_summaryTransformList.AppendItems(m_currentTransformList);
 		}
 	}
 	public uSVGTransformList currentTransformList {
 		get { return m_currentTransformList; }
 		set { 
 			m_currentTransformList = value;
-			m_summaryTransformList = new uSVGTransformList();
+			m_summaryTransformList = new uSVGTransformList(m_inheritTransformList.Count + m_currentTransformList.Count);
 			m_summaryTransformList.AppendItems(m_inheritTransformList);
 			m_summaryTransformList.AppendItems(m_currentTransformList);
 		}
