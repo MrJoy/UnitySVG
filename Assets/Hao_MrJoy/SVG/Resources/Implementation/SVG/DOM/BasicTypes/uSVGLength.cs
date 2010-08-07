@@ -13,45 +13,45 @@ public enum uSVGLengthType : ushort {
 }
 /**************************************************************************************************/
 public struct uSVGLength  {
-  private uSVGLengthType m_unitType;
-  private float m_valueInSpecifiedUnits, m_value;
+  private uSVGLengthType _unitType;
+  private float _valueInSpecifiedUnits, _value;
 
   /***********************************************************************************/
   public float value {
-    get { return m_value; }
+    get { return _value; }
   }
   public uSVGLengthType unitType {
-    get{ return m_unitType; }
+    get{ return _unitType; }
   }
   /***********************************************************************************/
   public uSVGLength(ushort unitType, float valueInSpecifiedUnits) {
-    m_unitType = (uSVGLengthType)unitType;
-    m_valueInSpecifiedUnits = valueInSpecifiedUnits;
-    m_value = uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);
+    _unitType = (uSVGLengthType)unitType;
+    _valueInSpecifiedUnits = valueInSpecifiedUnits;
+    _value = uSVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
   public uSVGLength(float valueInSpecifiedUnits) {
-    m_unitType = (uSVGLengthType)0;
-    m_valueInSpecifiedUnits = valueInSpecifiedUnits;
-    m_value = uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);
+    _unitType = (uSVGLengthType)0;
+    _valueInSpecifiedUnits = valueInSpecifiedUnits;
+    _value = uSVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
   public uSVGLength(string valueText) {
     float t_value = 0.0f;
     uSVGLengthType t_type = uSVGLengthType.SVG_LENGTHTYPE_UNKNOWN;
-    uSVGLengthConvertor.f_ExtractType(valueText, ref t_value, ref t_type);
-    m_unitType = t_type;      
-    m_valueInSpecifiedUnits = t_value;
-    m_value = uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);
+    uSVGLengthConvertor.ExtractType(valueText, ref t_value, ref t_type);
+    _unitType = t_type;
+    _valueInSpecifiedUnits = t_value;
+    _value = uSVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
   /***********************************************************************************/
   public void NewValueSpecifiedUnits(float valueInSpecifiedUnits) {
-    m_unitType = (uSVGLengthType)0;
-    m_valueInSpecifiedUnits = valueInSpecifiedUnits;
-    m_value = uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);
+    _unitType = (uSVGLengthType)0;
+    _valueInSpecifiedUnits = valueInSpecifiedUnits;
+    _value = uSVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
   public static float GetPXLength(string valueText) {
     float t_value = 0.0f;
     uSVGLengthType t_type = uSVGLengthType.SVG_LENGTHTYPE_UNKNOWN;
-    uSVGLengthConvertor.f_ExtractType(valueText, ref t_value, ref t_type);
-    return uSVGLengthConvertor.f_ConvertToPX(t_value, t_type);
+    uSVGLengthConvertor.ExtractType(valueText, ref t_value, ref t_type);
+    return uSVGLengthConvertor.ConvertToPX(t_value, t_type);
   }
 }

@@ -1,32 +1,32 @@
 public class uSVGPathSegLinetoVerticalAbs : uSVGPathSeg, uISVGDrawableSeg  {
-	private float m_y = 0f;
-	//================================================================================
-	public float y {
-		get{ return this.m_y;}
-	}
-	//================================================================================
-	public uSVGPathSegLinetoVerticalAbs(float y) :
-									base(uSVGPathSegTypes.PATHSEG_LINETO_HORIZONTAL_ABS) {
-		this.m_y = y;
-	}
-	//================================================================================
-	public override uSVGPoint currentPoint{
-		get{
-			uSVGPoint m_return = new uSVGPoint(0f,0f);
-			uSVGPathSeg m_prevSeg = previousSeg;
-			if (m_prevSeg != null) {
-				m_return.x = m_prevSeg.currentPoint.x;
-				m_return.y = this.m_y;
-			}
-			return m_return;
-		}
-	}
-	//--------------------------------------------------------------------------------
-	//Method: f_Render
-	//--------------------------------------------------------------------------------
-	public void f_Render (uSVGGraphicsPath m_graphicsPath) {
-		uSVGPoint p;
-		p = currentPoint;
-		m_graphicsPath.AddLineTo(p);
-	}
+  private float _y = 0f;
+  //================================================================================
+  public float y {
+    get{ return this._y;}
+  }
+  //================================================================================
+  public uSVGPathSegLinetoVerticalAbs(float y) :
+                  base(uSVGPathSegTypes.PATHSEG_LINETO_HORIZONTAL_ABS) {
+    this._y = y;
+  }
+  //================================================================================
+  public override uSVGPoint currentPoint{
+    get{
+      uSVGPoint _return = new uSVGPoint(0f,0f);
+      uSVGPathSeg _prevSeg = previousSeg;
+      if(_prevSeg != null) {
+        _return.x = _prevSeg.currentPoint.x;
+        _return.y = this._y;
+      }
+      return _return;
+    }
+  }
+  //--------------------------------------------------------------------------------
+  //Method: Render
+  //--------------------------------------------------------------------------------
+  public void Render(uSVGGraphicsPath _graphicsPath) {
+    uSVGPoint p;
+    p = currentPoint;
+    _graphicsPath.AddLineTo(p);
+  }
 }

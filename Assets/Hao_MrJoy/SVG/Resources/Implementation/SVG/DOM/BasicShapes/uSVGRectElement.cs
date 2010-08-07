@@ -1,122 +1,122 @@
 public class uSVGRectElement : uSVGTransformable, uISVGDrawable {
-	private uSVGLength m_x;
-	private uSVGLength m_y;
-	private uSVGLength m_width;
-	private uSVGLength m_height;
-	private uSVGLength m_rx;
-	private uSVGLength m_ry;
-	//================================================================================
-	private uSVGGraphics m_render;
-	private AttributeList m_attrList;
-	private uSVGPaintable m_paintable;
-	//================================================================================
-	public uSVGLength x {
-		get {
-			return this.m_x;
-		}
-	}
+  private uSVGLength _x;
+  private uSVGLength _y;
+  private uSVGLength _width;
+  private uSVGLength _height;
+  private uSVGLength _rx;
+  private uSVGLength _ry;
+  //================================================================================
+  private uSVGGraphics _render;
+  private AttributeList _attrList;
+  private uSVGPaintable _paintable;
+  //================================================================================
+  public uSVGLength x {
+    get {
+      return this._x;
+    }
+  }
 
-	public uSVGLength y {
-		get {
-			return this.m_y;
-		}
-	}
+  public uSVGLength y {
+    get {
+      return this._y;
+    }
+  }
 
-	public uSVGLength width {
-		get {
-			return this.m_width;
-		}
-	}
-		
-	public uSVGLength height {
-		get {
-			return this.m_height;
-		}
-	}
+  public uSVGLength width {
+    get {
+      return this._width;
+    }
+  }
+
+  public uSVGLength height {
+    get {
+      return this._height;
+    }
+  }
 
 
-	public uSVGLength rx {
-		get {
-			return this.m_rx;
-		}
-	}	
+  public uSVGLength rx {
+    get {
+      return this._rx;
+    }
+  }
 
-	public uSVGLength ry {
-		get {
-			return this.m_ry;
-		}
-	}
-	//================================================================================
-	public uSVGRectElement(AttributeList attrList,
-							uSVGTransformList inheritTransformList,
-							uSVGPaintable inheritPaintable,
-							uSVGGraphics m_render) : base (inheritTransformList) {
-		this.m_attrList = attrList;
-		this.m_render = m_render;
-		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
-		this.m_x = new uSVGLength(attrList.GetValue("X"));
-		this.m_y = new uSVGLength(attrList.GetValue("Y"));
-		this.m_width = new uSVGLength(attrList.GetValue("WIDTH"));
-		this.m_height = new uSVGLength(attrList.GetValue("HEIGHT"));
-		this.m_rx = new uSVGLength(attrList.GetValue("RX"));
-		this.m_ry = new uSVGLength(attrList.GetValue("RY"));
-	}
-	//================================================================================
-	private uSVGGraphicsPath m_graphicsPath;
-	private void f_CreateGraphicsPath() {
-		this.m_graphicsPath = new uSVGGraphicsPath();
-					
-		this.m_graphicsPath.Add(this);
-		this.m_graphicsPath.transformList = this.summaryTransformList;
-	}
-	//-----
-	private void f_Draw() {
-		if (this.m_paintable.strokeColor == null) return;
-		
-		this.m_render.DrawPath(this.m_graphicsPath, this.m_paintable.strokeWidth,
-														this.m_paintable.strokeColor);
-	}
-	//================================================================================	
-	//Thuc thi Interface Drawable
-	public void f_BeforeRender (uSVGTransformList transformList) {
-		this.inheritTransformList = transformList;
-	}
-	//------
-	public void f_Render () {
-		f_CreateGraphicsPath();
-		this.m_render.SetStrokeLineCap(this.m_paintable.strokeLineCap);
-		this.m_render.SetStrokeLineJoin(this.m_paintable.strokeLineJoin);
-		switch(this.m_paintable.GetPaintType()) {
-			case uSVGPaintTypes.SVG_PAINT_SOLID_GRADIENT_FILL : {
-				this.m_render.FillPath(this.m_paintable.fillColor, this.m_graphicsPath);
-				f_Draw();
-				break;
-			}
-			case uSVGPaintTypes.SVG_PAINT_LINEAR_GRADIENT_FILL : {
+  public uSVGLength ry {
+    get {
+      return this._ry;
+    }
+  }
+  //================================================================================
+  public uSVGRectElement(AttributeList attrList,
+              uSVGTransformList inheritTransformList,
+              uSVGPaintable inheritPaintable,
+              uSVGGraphics _render) : base(inheritTransformList) {
+    this._attrList = attrList;
+    this._render = _render;
+    this._paintable = new uSVGPaintable(inheritPaintable, this._attrList);
+    this._x = new uSVGLength(attrList.GetValue("X"));
+    this._y = new uSVGLength(attrList.GetValue("Y"));
+    this._width = new uSVGLength(attrList.GetValue("WIDTH"));
+    this._height = new uSVGLength(attrList.GetValue("HEIGHT"));
+    this._rx = new uSVGLength(attrList.GetValue("RX"));
+    this._ry = new uSVGLength(attrList.GetValue("RY"));
+  }
+  //================================================================================
+  private uSVGGraphicsPath _graphicsPath;
+  private void CreateGraphicsPath() {
+    this._graphicsPath = new uSVGGraphicsPath();
 
-				uSVGLinearGradientBrush m_linearGradBrush = 
-									this.m_paintable.GetLinearGradientBrush(this.m_graphicsPath);
+    this._graphicsPath.Add(this);
+    this._graphicsPath.transformList = this.summaryTransformList;
+  }
+  //-----
+  private void Draw() {
+    if(this._paintable.strokeColor == null)return;
 
-				if (m_linearGradBrush != null) {
-					this.m_render.FillPath(m_linearGradBrush, m_graphicsPath);
-				}
-				f_Draw();
-				break;
-			}
-			case uSVGPaintTypes.SVG_PAINT_RADIAL_GRADIENT_FILL : {
-				uSVGRadialGradientBrush m_radialGradBrush = 
-									this.m_paintable.GetRadialGradientBrush(this.m_graphicsPath);
+    this._render.DrawPath(this._graphicsPath, this._paintable.strokeWidth,
+                            this._paintable.strokeColor);
+  }
+  //================================================================================
+  //Thuc thi Interface Drawable
+  public void BeforeRender(uSVGTransformList transformList) {
+    this.inheritTransformList = transformList;
+  }
+  //------
+  public void Render() {
+    CreateGraphicsPath();
+    this._render.SetStrokeLineCap(this._paintable.strokeLineCap);
+    this._render.SetStrokeLineJoin(this._paintable.strokeLineJoin);
+    switch(this._paintable.GetPaintType()) {
+      case uSVGPaintTypes.SVG_PAINT_SOLID_GRADIENT_FILL : {
+        this._render.FillPath(this._paintable.fillColor.Value, this._graphicsPath);
+        Draw();
+        break;
+      }
+      case uSVGPaintTypes.SVG_PAINT_LINEAR_GRADIENT_FILL : {
 
-				if (m_radialGradBrush != null) {
-					this.m_render.FillPath(m_radialGradBrush, m_graphicsPath);
-				}
-				f_Draw();
-				break;
-			}
-			case uSVGPaintTypes.SVG_PAINT_PATH_DRAW : {
-				f_Draw();
-			break;
-			}
-		}
-	}
+        uSVGLinearGradientBrush _linearGradBrush =
+                  this._paintable.GetLinearGradientBrush(this._graphicsPath);
+
+        if(_linearGradBrush != null) {
+          this._render.FillPath(_linearGradBrush, _graphicsPath);
+        }
+        Draw();
+        break;
+      }
+      case uSVGPaintTypes.SVG_PAINT_RADIAL_GRADIENT_FILL : {
+        uSVGRadialGradientBrush _radialGradBrush =
+                  this._paintable.GetRadialGradientBrush(this._graphicsPath);
+
+        if(_radialGradBrush != null) {
+          this._render.FillPath(_radialGradBrush, _graphicsPath);
+        }
+        Draw();
+        break;
+      }
+      case uSVGPaintTypes.SVG_PAINT_PATH_DRAW : {
+        Draw();
+      break;
+      }
+    }
+  }
 }

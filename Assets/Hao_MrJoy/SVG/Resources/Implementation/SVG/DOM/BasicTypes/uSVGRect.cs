@@ -1,27 +1,27 @@
 // TODO: Look at using UnityEngine.Rect?
 public class uSVGRect {
-	private float m_x;
-	private float m_y;
-	private float m_width;
-	private float m_height;
-	/***********************************************************************************/
-	public float x {
-		get {return this.m_x;}
-	}
-	public float y {
-		get {return this.m_y;}
-	}
-	public float width {
-		get {return this.m_width;}
-	}
-		public float height {
-		get {return this.m_height;}
-	}
-	/***********************************************************************************/
-	public uSVGRect(float x, float y, float width, float height) {
-		this.m_x = x;
-		this.m_y = y;
-		this.m_width = width;
-		this.m_height = height;
-	}
+  private float _x;
+  private float _y;
+  private float _width;
+  private float _height;
+  /***********************************************************************************/
+  public float x {
+    get {return this._x;}
+  }
+  public float y {
+    get {return this._y;}
+  }
+  public float width {
+    get {return this._width;}
+  }
+    public float height {
+    get {return this._height;}
+  }
+  /***********************************************************************************/
+  public uSVGRect(float x, float y, float width, float height) {
+    this._x = x;
+    this._y = y;
+    this._width = width;
+    this._height = height;
+  }
 }

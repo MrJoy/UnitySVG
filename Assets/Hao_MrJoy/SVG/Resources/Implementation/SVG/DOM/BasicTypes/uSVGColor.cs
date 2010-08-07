@@ -11,23 +11,26 @@ public enum SVGColorType : ushort {
   SVG_COLORTYPE_NONE              = 6
 }
 
-public class uSVGColor {
-  public SVGColorType colorType = SVGColorType.SVG_COLORTYPE_UNKNOWN;
-  public Color color = Color.black;
+public struct uSVGColor {
+  public SVGColorType colorType;
+  public Color color;
   /***********************************************************************************/
-  public uSVGColor() {}
-  public uSVGColor(string colorString) {    
-    if (uSVGColorExtractor.IsConstName(colorString) == true) {
+  public uSVGColor(string colorString) {
+    if(uSVGColorExtractor.IsConstName(colorString) == true) {
       colorType = SVGColorType.SVG_COLORTYPE_CONSTNAME;
-    } else if (uSVGColorExtractor.IsHexColor(colorString) == true) {
+    } else if(uSVGColorExtractor.IsHexColor(colorString) == true) {
       colorType = SVGColorType.SVG_COLORTYPE_HEXSTRING;
-    } else if (colorString.ToLower() == "current") {
+    } else if(colorString.ToLower() == "current") {
       colorType = SVGColorType.SVG_COLORTYPE_CURRENTCOLOR;
-    } else if (colorString.ToLower() == "none") {
+    } else if(colorString.ToLower() == "none") {
       colorType = SVGColorType.SVG_COLORTYPE_NONE;
+    } else {
+      colorType = SVGColorType.SVG_COLORTYPE_UNKNOWN;
     }
-    
-    if (colorType != SVGColorType.SVG_COLORTYPE_UNKNOWN)
-      color = uSVGColorExtractor.f_GetColor(colorString);
+
+    if(colorType != SVGColorType.SVG_COLORTYPE_UNKNOWN)
+      color = uSVGColorExtractor.GetColor(colorString);
+    else
+      color = Color.black;
   }
 }

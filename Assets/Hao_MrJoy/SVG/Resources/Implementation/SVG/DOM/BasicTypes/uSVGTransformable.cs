@@ -1,48 +1,48 @@
 public class uSVGTransformable {
-  private uSVGTransformList m_inheritTransformList;
-  private uSVGTransformList m_currentTransformList;
-  private uSVGTransformList m_summaryTransformList;
+  private uSVGTransformList _inheritTransformList;
+  private uSVGTransformList _currentTransformList;
+  private uSVGTransformList _summaryTransformList;
   /**********************************************************************************/
   public uSVGTransformList inheritTransformList {
-    get { return m_inheritTransformList; }
+    get { return _inheritTransformList; }
     set {
       int c = 0;
-      if(m_inheritTransformList != null) c += m_inheritTransformList.Count;
-      if(m_currentTransformList != null) c += m_currentTransformList.Count;
-      m_inheritTransformList = value;
-      m_summaryTransformList = new uSVGTransformList(c);
-      if(m_inheritTransformList != null)
-        m_summaryTransformList.AppendItems(m_inheritTransformList);
-      if(m_currentTransformList != null)
-        m_summaryTransformList.AppendItems(m_currentTransformList);
+      if(_inheritTransformList != null)c += _inheritTransformList.Count;
+      if(_currentTransformList != null)c += _currentTransformList.Count;
+      _inheritTransformList = value;
+      _summaryTransformList = new uSVGTransformList(c);
+      if(_inheritTransformList != null)
+        _summaryTransformList.AppendItems(_inheritTransformList);
+      if(_currentTransformList != null)
+        _summaryTransformList.AppendItems(_currentTransformList);
     }
   }
   public uSVGTransformList currentTransformList {
-    get { return m_currentTransformList; }
-    set { 
-      m_currentTransformList = value;
+    get { return _currentTransformList; }
+    set {
+      _currentTransformList = value;
       int c = 0;
-      if(m_inheritTransformList != null) c += m_inheritTransformList.Count;
-      if(m_currentTransformList != null) c += m_currentTransformList.Count;
-      m_summaryTransformList = new uSVGTransformList(c);
-      if(m_inheritTransformList != null)
-        m_summaryTransformList.AppendItems(m_inheritTransformList);
-      if(m_currentTransformList != null)
-        m_summaryTransformList.AppendItems(m_currentTransformList);
+      if(_inheritTransformList != null)c += _inheritTransformList.Count;
+      if(_currentTransformList != null)c += _currentTransformList.Count;
+      _summaryTransformList = new uSVGTransformList(c);
+      if(_inheritTransformList != null)
+        _summaryTransformList.AppendItems(_inheritTransformList);
+      if(_currentTransformList != null)
+        _summaryTransformList.AppendItems(_currentTransformList);
     }
   }
   public uSVGTransformList summaryTransformList {
-    get { return m_summaryTransformList; }
+    get { return _summaryTransformList; }
   }
   public float transformAngle {
     get {
-      float m_angle = 0.0f;
-      for(int i = 0; i < m_summaryTransformList.Count; i++ ) {
-        uSVGTransform m_temp = m_summaryTransformList[i];
-        if(m_temp.type == uSVGTransformType.SVG_TRANSFORM_ROTATE) 
-          m_angle += m_temp.angle;
+      float _angle = 0.0f;
+      for(int i = 0; i < _summaryTransformList.Count; i++ ) {
+        uSVGTransform _temp = _summaryTransformList[i];
+        if(_temp.type == uSVGTransformType.SVG_TRANSFORM_ROTATE)
+          _angle += _temp.angle;
       }
-      return m_angle;
+      return _angle;
     }
   }
   public uSVGMatrix transformMatrix {

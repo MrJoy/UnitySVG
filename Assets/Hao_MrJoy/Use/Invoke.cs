@@ -18,13 +18,13 @@ public class Invoke : MonoBehaviour {
 			
 			w.Reset();
 			w.Start();
-			m_implement.f_StartProcess();
+			m_implement.StartProcess();
 			w.Stop();
 			long p = w.ElapsedMilliseconds;
 			
 			w.Reset();
 			w.Start();
-			renderer.material.mainTexture = m_implement.f_GetTexture();	
+			renderer.material.mainTexture = m_implement.GetTexture();	
 			w.Stop();
 			long r = w.ElapsedMilliseconds;
 			UnityEngine.Debug.Log("Construction: " + Format(c) + ", Processing: " + Format(p) + ", Rendering: " + Format(r));

@@ -2,7 +2,7 @@ using System.Collections;
 
 /// <summary>
 /// Base class for all SVG*List-derived classes.
-/// Note we're using ArrayList (as opposed to deriving from) to hide unneeded ArrayList methods
+/// Note we're using ArrayList(as opposed to deriving from)to hide unneeded ArrayList methods
 /// Note that a CLR uint is equivalent to an IDL ulong, so uint is used for all index values
 /// </summary>
   /// <developer>kevin@kevlindev.com</developer>
@@ -16,11 +16,11 @@ public class uSVGList
         /// <summary>
         /// uSVGList constructor
         /// </summary>
-		public uSVGList()
-		{
+    public uSVGList()
+    {
             itemOwnerMap = new Hashtable();
-			items = new ArrayList();
-		}
+      items = new ArrayList();
+    }
 
 
         /// <summary>
@@ -28,7 +28,7 @@ public class uSVGList
         /// </summary>
         public uint NumberOfItems
         {
-            get { return (uint) items.Count; }
+            get { return(uint)items.Count; }
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ public class uSVGList
         {
             // Note that we cannot use ArrayList's Clear method since we need to
             // remove all items from the itemOwnerMap
-            while ( items.Count > 0 ) RemoveItem(0);
+            while( items.Count > 0 )RemoveItem(0);
         }
 
         /// <summary>
@@ -59,11 +59,11 @@ public class uSVGList
         /// <returns></returns>
         public object GetItem(uint index)
         {
-            if ( index < 0 || items.Count <= index )
+            if( index < 0 || items.Count <= index )
                 throw new uDOMException(uDOMExceptionType.IndexSizeErr);
-                
 
-            return items[(int) index];
+
+            return items[(int)index];
         }
 
         /// <summary>
@@ -74,16 +74,16 @@ public class uSVGList
         /// <returns></returns>
         public object InsertItemBefore(object newItem, uint index)
         {
-            if ( index < 0 || items.Count <= index )
+            if( index < 0 || items.Count <= index )
                 throw new uDOMException(uDOMExceptionType.IndexSizeErr);
-                
+
 
             // cache cast
-            int i = (int) index;
+            int i = (int)index;
 
             // if newItem exists in a list, remove it from that list
-            if ( uSVGList.itemOwnerMap.ContainsKey(newItem) )
-                ((uSVGList) uSVGList.itemOwnerMap[newItem]).RemoveItem(newItem);
+            if( uSVGList.itemOwnerMap.ContainsKey(newItem))
+               ((uSVGList)uSVGList.itemOwnerMap[newItem]).RemoveItem(newItem);
 
             // insert item into this list
             items.Insert(i, newItem);
@@ -102,14 +102,14 @@ public class uSVGList
         /// <returns></returns>
         public object ReplaceItem(object newItem, uint index)
         {
-            if ( index < 0 || items.Count <= index )
-				throw new uDOMException(uDOMExceptionType.IndexSizeErr);
+            if( index < 0 || items.Count <= index )
+        throw new uDOMException(uDOMExceptionType.IndexSizeErr);
             // cache cast
-            int i = (int) index;
+            int i = (int)index;
 
             // if newItem exists in a list, remove it from that list
-            if ( uSVGList.itemOwnerMap.ContainsKey(newItem) )
-                ((uSVGList) uSVGList.itemOwnerMap[newItem]).RemoveItem(newItem);
+            if( uSVGList.itemOwnerMap.ContainsKey(newItem))
+               ((uSVGList)uSVGList.itemOwnerMap[newItem]).RemoveItem(newItem);
 
             // remove oldItem from itemOwnerMap
             uSVGList.itemOwnerMap.Remove(items[i]);
@@ -128,12 +128,12 @@ public class uSVGList
         /// <returns></returns>
         public object RemoveItem(uint index)
         {
-            if ( index < 0 || items.Count <= index )
+            if( index < 0 || items.Count <= index )
                 throw new uDOMException(uDOMExceptionType.IndexSizeErr);
-                
+
 
             // cache cast
-            int i = (int) index;
+            int i = (int)index;
 
             // save removed item so we can return it
             object result = items[i];
@@ -156,8 +156,8 @@ public class uSVGList
         public object AppendItem(object newItem)
         {
             // if item exists in a list, remove it from that list
-            if ( uSVGList.itemOwnerMap.ContainsKey(newItem) )
-                ((uSVGList) uSVGList.itemOwnerMap[newItem]).RemoveItem(newItem);
+            if( uSVGList.itemOwnerMap.ContainsKey(newItem))
+               ((uSVGList)uSVGList.itemOwnerMap[newItem]).RemoveItem(newItem);
 
             // update the itemOwnerMap to associate newItem with this list
             uSVGList.itemOwnerMap[newItem] = this;
@@ -172,11 +172,11 @@ public class uSVGList
         /// <param name="item"></param>
         private void RemoveItem(object item)
         {
-            for ( int i = 0; i < items.Count; i++ )
+            for( int i = 0; i < items.Count; i++ )
             {
-                if ( items[i] == item )
+                if( items[i] == item )
                 {
-                    RemoveItem((uint) i);
+                    RemoveItem((uint)i);
                     break;
                 }
             }

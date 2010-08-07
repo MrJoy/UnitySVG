@@ -98,19 +98,19 @@ public class uSVGGraphicsPath {
   //Method: ExpandBounds
   //--------------------------------------------------------------------------------
   private void ExpandBounds(float x, float y) {
-    if(x < boundUL.x) boundUL.x = x;
-    if(y < boundUL.y) boundUL.y = y;
+    if(x < boundUL.x)boundUL.x = x;
+    if(y < boundUL.y)boundUL.y = y;
 
-    if(x > boundBR.x) boundBR.x = x;
-    if(y > boundBR.y) boundBR.y = y;
+    if(x > boundBR.x)boundBR.x = x;
+    if(y > boundBR.y)boundBR.y = y;
   }
   //-----
   private void ExpandBounds(float x, float y, float dx, float dy) {
-    if((x - dx) < boundUL.x) boundUL.x = x - dx;
-    if((y - dy) < boundUL.y) boundUL.y = y - dy;
+    if((x - dx) < boundUL.x)boundUL.x = x - dx;
+    if((y - dy) < boundUL.y)boundUL.y = y - dy;
 
-    if((x + dx) > boundBR.x) boundBR.x = x + dx;
-    if((y + dy) > boundBR.y) boundBR.y = y + dy;
+    if((x + dx) > boundBR.x)boundBR.x = x + dx;
+    if((y + dy) > boundBR.y)boundBR.y = y + dy;
   }
   //-----
   private void ExpandBounds(uSVGPoint point) {
@@ -256,7 +256,7 @@ public class uSVGGraphicsPath {
 Profiler.BeginSample("uSVGGraphicsPath.GetBound()");
     float cx, cy, r, rx, ry, x, y, width, height;
 
-    for (int i = 0; i < listObject.Count; i++ ) {
+    for(int i = 0; i < listObject.Count; i++ ) {
       switch((SVGPathElementTypes)listType[i]) {
         case SVGPathElementTypes.Polygon:
           uSVGPolygonElement polygonElement = (uSVGPolygonElement)listObject[i];
@@ -318,7 +318,7 @@ Profiler.BeginSample("uSVGGraphicsPath.GetBound()");
         case SVGPathElementTypes.ArcTo:
           uSVGGArcAbs gArcAbs = (uSVGGArcAbs)listObject[i];
 
-          r = (int)gArcAbs.r1 + (int)gArcAbs.r2;
+          r = (int)gArcAbs.r1 +(int)gArcAbs.r2;
           ExpandBounds(gArcAbs.point, r, r);
           break;
         //-----
@@ -400,8 +400,8 @@ Profiler.EndSample();
       t_rx = (t_rx == 0.0f) ? t_ry : t_rx;
       t_ry = (t_ry == 0.0f) ? t_rx : t_ry;
 
-      t_rx = (t_rx > (tw * 0.5f - 2f)) ? (tw * 0.5f - 2f) : t_rx;
-      t_ry = (t_ry > (th * 0.5f - 2f)) ? (th * 0.5f - 2f) : t_ry;
+      t_rx = (t_rx >(tw * 0.5f - 2f)) ? (tw * 0.5f - 2f) : t_rx;
+      t_ry = (t_ry >(th * 0.5f - 2f)) ? (th * 0.5f - 2f) : t_ry;
 
       float angle = transformAngle;
 

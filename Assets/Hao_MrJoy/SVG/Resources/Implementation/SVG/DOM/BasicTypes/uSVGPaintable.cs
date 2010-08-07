@@ -1,273 +1,273 @@
 using System.Collections.Generic;
 public enum uSVGStrokeLineCapTypes {
-	UNKNOWN, BUTT, ROUND, SQUARE
+  UNKNOWN, BUTT, ROUND, SQUARE
 }
 public enum uSVGStrokeLineJoinTypes {
-	UNKNOWN, MITER, ROUND, BEVEL
+  UNKNOWN, MITER, ROUND, BEVEL
 }
 
 public enum uSVGPaintTypes {
-	SVG_PAINT_SOLID_GRADIENT_FILL,
-	SVG_PAINT_LINEAR_GRADIENT_FILL,
-	SVG_PAINT_RADIAL_GRADIENT_FILL,
-	SVG_PAINT_PATH_DRAW,
-	SVG_NODRAW
+  SVG_PAINT_SOLID_GRADIENT_FILL,
+  SVG_PAINT_LINEAR_GRADIENT_FILL,
+  SVG_PAINT_RADIAL_GRADIENT_FILL,
+  SVG_PAINT_PATH_DRAW,
+  SVG_NODRAW
 }
 
 public class uSVGPaintable{
 
-	/***********************************************************************************/
-	private uSVGColor m_fillColor;
-	private uSVGColor m_strokeColor;
-	private uSVGLength m_strokeWidth;
-	private bool isStrokeWidth = false;
-	private uSVGStrokeLineCapTypes m_strokeLineCap = uSVGStrokeLineCapTypes.UNKNOWN;
-	private uSVGStrokeLineJoinTypes m_strokeLineJoin = uSVGStrokeLineJoinTypes.UNKNOWN;
-	
-	//-----------
-	private List<uSVGLinearGradientElement> m_linearGradList;
-	private List<uSVGRadialGradientElement> m_radialGradList;
-	private string m_gradientID = "";
-	
-	/***********************************************************************************/
-	public uSVGColor fillColor {
-		get{return this.m_fillColor;}
-	}
-	public uSVGColor strokeColor {
-		get{
-			if (IsStroke()) return this.m_strokeColor;
-			else return null;
-		}
-	}
-	public float strokeWidth {
-		get{return this.m_strokeWidth.value;}
-	}
-	public uSVGStrokeLineCapTypes strokeLineCap {
-		get{ return this.m_strokeLineCap;}
-	}
-	public uSVGStrokeLineJoinTypes strokeLineJoin {
-		get{ return this.m_strokeLineJoin;}
-	}
-	
-	public List<uSVGLinearGradientElement> linearGradList {
-		get{ return this.m_linearGradList;}
-	}
-	public List<uSVGRadialGradientElement> radialGradList {
-		get{ return this.m_radialGradList;}
-	}
-	
-	public string gradientID {
-		get{ return this.m_gradientID;}
-	}
-	/***********************************************************************************/
-	public uSVGPaintable() {
-		this.m_fillColor = new uSVGColor();
-		this.m_strokeColor = new uSVGColor();
-		this.m_strokeWidth = new uSVGLength("1");
-		this.m_linearGradList = new List<uSVGLinearGradientElement>();
-		this.m_radialGradList = new List<uSVGRadialGradientElement>();
-	}
-	public uSVGPaintable(AttributeList attrList) {
-		this.m_linearGradList = new List<uSVGLinearGradientElement>();
-		this.m_radialGradList = new List<uSVGRadialGradientElement>(); 
-		f_Initialize(attrList);
-	}
-	public uSVGPaintable(uSVGPaintable inheritPaintable, AttributeList attrList) {
-		this.m_linearGradList = inheritPaintable.linearGradList;
-		this.m_radialGradList = inheritPaintable.radialGradList;;
-		f_Initialize(attrList);
+  /***********************************************************************************/
+  private uSVGColor? _fillColor;
+  private uSVGColor? _strokeColor;
+  private uSVGLength _strokeWidth;
+  private bool isStrokeWidth = false;
+  private uSVGStrokeLineCapTypes _strokeLineCap = uSVGStrokeLineCapTypes.UNKNOWN;
+  private uSVGStrokeLineJoinTypes _strokeLineJoin = uSVGStrokeLineJoinTypes.UNKNOWN;
 
-		if (IsFillX() == false) {
-			if (inheritPaintable.IsLinearGradiantFill()) {
-				this.m_gradientID = inheritPaintable.gradientID;
-			} else if (inheritPaintable.IsRadialGradiantFill()) {
-				this.m_gradientID = inheritPaintable.gradientID;
-			} else this.m_fillColor = inheritPaintable.fillColor;
-		}
-		if (!IsStroke() && inheritPaintable.IsStroke()) {
-			this.m_strokeColor = inheritPaintable.strokeColor;
-		}
-		
-		if (m_strokeLineCap == uSVGStrokeLineCapTypes.UNKNOWN) {
-			m_strokeLineCap = inheritPaintable.strokeLineCap;
-		}
+  //-----------
+  private List<uSVGLinearGradientElement> _linearGradList;
+  private List<uSVGRadialGradientElement> _radialGradList;
+  private string _gradientID = "";
 
-		if (m_strokeLineJoin == uSVGStrokeLineJoinTypes.UNKNOWN) {
-			m_strokeLineJoin = inheritPaintable.strokeLineJoin;
-		}
-		
-		if (isStrokeWidth == false) 
-			this.m_strokeWidth.NewValueSpecifiedUnits(inheritPaintable.strokeWidth);
-	}
-	/***********************************************************************************/
-	//Khoi tao
-	private void f_Initialize(AttributeList attrList) {
-		isStrokeWidth = false;
+  /***********************************************************************************/
+  public uSVGColor? fillColor {
+    get{return this._fillColor;}
+  }
+  public uSVGColor? strokeColor {
+    get{
+      if(IsStroke())return this._strokeColor;
+      else return null;
+    }
+  }
+  public float strokeWidth {
+    get{return this._strokeWidth.value;}
+  }
+  public uSVGStrokeLineCapTypes strokeLineCap {
+    get{ return this._strokeLineCap;}
+  }
+  public uSVGStrokeLineJoinTypes strokeLineJoin {
+    get{ return this._strokeLineJoin;}
+  }
 
-		if (attrList.GetValue("FILL").IndexOf("url") >= 0) {
-			m_gradientID = uSVGStringExtractor.f_ExtractUrl4Gradient(attrList.GetValue("FILL"));
-		} else {
-			m_fillColor = new uSVGColor(attrList.GetValue("FILL"));
-		}
-		m_strokeColor = new uSVGColor(attrList.GetValue("STROKE"));
-		
-		if (attrList.GetValue("STROKE-WIDTH") != "") {
-			this.isStrokeWidth = true;
-		}
-		m_strokeWidth = new uSVGLength(attrList.GetValue("STROKE-WIDTH"));
-		
+  public List<uSVGLinearGradientElement> linearGradList {
+    get{ return this._linearGradList;}
+  }
+  public List<uSVGRadialGradientElement> radialGradList {
+    get{ return this._radialGradList;}
+  }
 
-		SetStrokeLineCap(attrList.GetValue("STROKE-LINECAP"));
-		SetStrokeLineJoin(attrList.GetValue("STROKE-LINEJOIN"));
+  public string gradientID {
+    get{ return this._gradientID;}
+  }
+  /***********************************************************************************/
+  public uSVGPaintable() {
+    this._fillColor = new uSVGColor();
+    this._strokeColor = new uSVGColor();
+    this._strokeWidth = new uSVGLength("1");
+    this._linearGradList = new List<uSVGLinearGradientElement>();
+    this._radialGradList = new List<uSVGRadialGradientElement>();
+  }
+  public uSVGPaintable(AttributeList attrList) {
+    this._linearGradList = new List<uSVGLinearGradientElement>();
+    this._radialGradList = new List<uSVGRadialGradientElement>();
+    Initialize(attrList);
+  }
+  public uSVGPaintable(uSVGPaintable inheritPaintable, AttributeList attrList) {
+    this._linearGradList = inheritPaintable.linearGradList;
+    this._radialGradList = inheritPaintable.radialGradList;;
+    Initialize(attrList);
 
-		if (attrList.GetValue("STROKE-WIDTH") == "") this.m_strokeWidth.NewValueSpecifiedUnits(1f);
-		f_Style(attrList.GetValue("STYLE"));
-		//style="fill: #ffffff; stroke:#000000; stroke-width:0.172"
-	}
-	/***********************************************************************************/
-	//Di Phan Tich Style
-	private void f_Style(string styleString) {
-		Dictionary<string, string> m_dictionary = new Dictionary<string, string>();
-		uSVGStringExtractor.f_ExtractStyleValue(styleString, ref m_dictionary);
-		if (m_dictionary.ContainsKey("fill")) {
-			if (m_dictionary["fill"].IndexOf("url") >= 0) {
-				m_gradientID = uSVGStringExtractor.f_ExtractUrl4Gradient(m_dictionary["fill"]);
-			} else {
-				m_fillColor = new uSVGColor(m_dictionary["fill"]);
-			}
-		}
-		if (m_dictionary.ContainsKey("stroke")) {
-			m_strokeColor = new uSVGColor(m_dictionary["stroke"]);
-		}
-		if (m_dictionary.ContainsKey("stroke-width")) {
-			this.isStrokeWidth = true;
-			m_strokeWidth = new uSVGLength(m_dictionary["stroke-width"]);
-		}
-		
-		if (m_dictionary.ContainsKey("stroke-linecap")) {
-			SetStrokeLineCap(m_dictionary["stroke-linecap"]);
-		}
-		if (m_dictionary.ContainsKey("stroke-linejoin")) {
-			SetStrokeLineJoin(m_dictionary["stroke-linejoin"]);
-		}
-	}
-	/***********************************************************************************/
-	private void SetStrokeLineCap(string lineCapType) {
-		switch (lineCapType) {
-			case "butt" : 	m_strokeLineCap = uSVGStrokeLineCapTypes.BUTT;	break;
-			case "round" :	m_strokeLineCap = uSVGStrokeLineCapTypes.ROUND;	break;
-			case "square" : m_strokeLineCap = uSVGStrokeLineCapTypes.SQUARE;break;
-		}
-	}
-	private void SetStrokeLineJoin(string lineCapType) {
-		switch (lineCapType) {
-			case "miter" : 	m_strokeLineJoin = uSVGStrokeLineJoinTypes.MITER;	break;
-			case "round" :	m_strokeLineJoin = uSVGStrokeLineJoinTypes.ROUND;	break;
-			case "bevel" : 	m_strokeLineJoin = uSVGStrokeLineJoinTypes.BEVEL;	break;
-		}
-	}
-	/***********************************************************************************/
-	public bool IsLinearGradiantFill() {
-		if (this.m_gradientID == "") {
-			return false;
-		}
-		bool flag = false;
-		for (int i=0; i < this.m_linearGradList.Count; i++) {
-			if (this.m_linearGradList[i].id == this.m_gradientID) {
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}
-	//-----
-	public bool IsRadialGradiantFill() {
-		if (this.m_gradientID == "") {
-			return false;
-		}
-		bool flag = false;
-		for (int i=0; i < this.m_radialGradList.Count; i++) {
-			if (this.m_radialGradList[i].id == this.m_gradientID) {
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}
-	//-----
-	public bool IsSolidFill() {
-		if (this.m_fillColor == null) 
-		  return false;
-		else
-		  return (this.m_fillColor.colorType != SVGColorType.SVG_COLORTYPE_NONE);
-	}
-	//-----
-	public bool IsFill() {
-		if (this.m_fillColor == null)
-			return (IsLinearGradiantFill() || IsRadialGradiantFill());
-		else
-		  return (this.m_fillColor.colorType != SVGColorType.SVG_COLORTYPE_NONE);
-	}
-	//-----
-	//Tuc la Fill hien tai
-	public bool IsFillX() {
-		if (this.m_fillColor == null)
-			return (IsLinearGradiantFill() || IsRadialGradiantFill());
-		else
-		  return (this.m_fillColor.colorType != SVGColorType.SVG_COLORTYPE_UNKNOWN);
-	}
-	//-----
-	public bool IsStroke() {
-		if (this.m_strokeColor == null) return false;
-		if ((this.m_strokeColor.colorType == SVGColorType.SVG_COLORTYPE_UNKNOWN) ||	
-			(this.m_strokeColor.colorType == SVGColorType.SVG_COLORTYPE_NONE)) {
-			return false;
-		}
-		return true;
-	}
-	//-----
-	public uSVGPaintTypes GetPaintType() {
-		if (IsLinearGradiantFill()) {
-			return uSVGPaintTypes.SVG_PAINT_LINEAR_GRADIENT_FILL;
-		}
-		if (IsRadialGradiantFill()) {
-			return uSVGPaintTypes.SVG_PAINT_RADIAL_GRADIENT_FILL;
-		} 
-		if (IsSolidFill()) {
-			return uSVGPaintTypes.SVG_PAINT_SOLID_GRADIENT_FILL;
-		}
-		if (IsStroke()) {
-			return uSVGPaintTypes.SVG_PAINT_PATH_DRAW;
-		}
-		
-		return uSVGPaintTypes.SVG_NODRAW;
-	}
-	//----------------------
-	//Cong danh sach cac LinearGradient vao trong Paintable
-	public void AppendLinearGradient(uSVGLinearGradientElement linearGradElement) {
-		this.m_linearGradList.Add(linearGradElement);
-	}
-	//----------------------
-	//Cong danh sach cac RadialGradient vao trong Paintable
-	public void AppendRadialGradient(uSVGRadialGradientElement radialGradElement) {
-		this.m_radialGradList.Add(radialGradElement);
-	}
-	//----------------------
-	public uSVGLinearGradientBrush GetLinearGradientBrush(uSVGGraphicsPath graphicsPath) {
-		for (int i=0; i < this.m_linearGradList.Count; i++) {
-			if (this.m_linearGradList[i].id == this.m_gradientID) {
-				return new uSVGLinearGradientBrush(this.m_linearGradList[i], graphicsPath);
-			}
-		}
-		return null;
-	}
-	//----------------------
-	public uSVGRadialGradientBrush GetRadialGradientBrush(uSVGGraphicsPath graphicsPath) {
-		for (int i=0; i < this.m_radialGradList.Count; i++) {
-			if (this.m_radialGradList[i].id == this.m_gradientID) {
-				return new uSVGRadialGradientBrush(this.m_radialGradList[i], graphicsPath);
-			}
-		}
-		return null;
-	}
+    if(IsFillX() == false) {
+      if(inheritPaintable.IsLinearGradiantFill()) {
+        this._gradientID = inheritPaintable.gradientID;
+      } else if(inheritPaintable.IsRadialGradiantFill()) {
+        this._gradientID = inheritPaintable.gradientID;
+      } else this._fillColor = inheritPaintable.fillColor;
+    }
+    if(!IsStroke()&& inheritPaintable.IsStroke()) {
+      this._strokeColor = inheritPaintable.strokeColor;
+    }
+
+    if(_strokeLineCap == uSVGStrokeLineCapTypes.UNKNOWN) {
+      _strokeLineCap = inheritPaintable.strokeLineCap;
+    }
+
+    if(_strokeLineJoin == uSVGStrokeLineJoinTypes.UNKNOWN) {
+      _strokeLineJoin = inheritPaintable.strokeLineJoin;
+    }
+
+    if(isStrokeWidth == false)
+      this._strokeWidth.NewValueSpecifiedUnits(inheritPaintable.strokeWidth);
+  }
+  /***********************************************************************************/
+  //Khoi tao
+  private void Initialize(AttributeList attrList) {
+    isStrokeWidth = false;
+
+    if(attrList.GetValue("FILL").IndexOf("url") >= 0) {
+      _gradientID = uSVGStringExtractor.ExtractUrl4Gradient(attrList.GetValue("FILL"));
+    } else {
+      _fillColor = new uSVGColor(attrList.GetValue("FILL"));
+    }
+    _strokeColor = new uSVGColor(attrList.GetValue("STROKE"));
+
+    if(attrList.GetValue("STROKE-WIDTH") != "") {
+      this.isStrokeWidth = true;
+    }
+    _strokeWidth = new uSVGLength(attrList.GetValue("STROKE-WIDTH"));
+
+
+    SetStrokeLineCap(attrList.GetValue("STROKE-LINECAP"));
+    SetStrokeLineJoin(attrList.GetValue("STROKE-LINEJOIN"));
+
+    if(attrList.GetValue("STROKE-WIDTH") == "")this._strokeWidth.NewValueSpecifiedUnits(1f);
+    Style(attrList.GetValue("STYLE"));
+    //style="fill: #ffffff; stroke:#000000; stroke-width:0.172"
+  }
+  /***********************************************************************************/
+  //Di Phan Tich Style
+  private void Style(string styleString) {
+    Dictionary<string, string> _dictionary = new Dictionary<string, string>();
+    uSVGStringExtractor.ExtractStyleValue(styleString, ref _dictionary);
+    if(_dictionary.ContainsKey("fill")) {
+      if(_dictionary["fill"].IndexOf("url") >= 0) {
+        _gradientID = uSVGStringExtractor.ExtractUrl4Gradient(_dictionary["fill"]);
+      } else {
+        _fillColor = new uSVGColor(_dictionary["fill"]);
+      }
+    }
+    if(_dictionary.ContainsKey("stroke")) {
+      _strokeColor = new uSVGColor(_dictionary["stroke"]);
+    }
+    if(_dictionary.ContainsKey("stroke-width")) {
+      this.isStrokeWidth = true;
+      _strokeWidth = new uSVGLength(_dictionary["stroke-width"]);
+    }
+
+    if(_dictionary.ContainsKey("stroke-linecap")) {
+      SetStrokeLineCap(_dictionary["stroke-linecap"]);
+    }
+    if(_dictionary.ContainsKey("stroke-linejoin")) {
+      SetStrokeLineJoin(_dictionary["stroke-linejoin"]);
+    }
+  }
+  /***********************************************************************************/
+  private void SetStrokeLineCap(string lineCapType) {
+    switch(lineCapType) {
+      case "butt" :   _strokeLineCap = uSVGStrokeLineCapTypes.BUTT;  break;
+      case "round" :  _strokeLineCap = uSVGStrokeLineCapTypes.ROUND;  break;
+      case "square" : _strokeLineCap = uSVGStrokeLineCapTypes.SQUARE;break;
+    }
+  }
+  private void SetStrokeLineJoin(string lineCapType) {
+    switch(lineCapType) {
+      case "miter" :   _strokeLineJoin = uSVGStrokeLineJoinTypes.MITER;  break;
+      case "round" :  _strokeLineJoin = uSVGStrokeLineJoinTypes.ROUND;  break;
+      case "bevel" :   _strokeLineJoin = uSVGStrokeLineJoinTypes.BEVEL;  break;
+    }
+  }
+  /***********************************************************************************/
+  public bool IsLinearGradiantFill() {
+    if(this._gradientID == "") {
+      return false;
+    }
+    bool flag = false;
+    for(int i=0; i < this._linearGradList.Count; i++) {
+      if(this._linearGradList[i].id == this._gradientID) {
+        flag = true;
+        break;
+      }
+    }
+    return flag;
+  }
+  //-----
+  public bool IsRadialGradiantFill() {
+    if(this._gradientID == "") {
+      return false;
+    }
+    bool flag = false;
+    for(int i=0; i < this._radialGradList.Count; i++) {
+      if(this._radialGradList[i].id == this._gradientID) {
+        flag = true;
+        break;
+      }
+    }
+    return flag;
+  }
+  //-----
+  public bool IsSolidFill() {
+    if(this._fillColor == null)
+      return false;
+    else
+      return(this._fillColor.Value.colorType != SVGColorType.SVG_COLORTYPE_NONE);
+  }
+  //-----
+  public bool IsFill() {
+    if(this._fillColor == null)
+      return(IsLinearGradiantFill()|| IsRadialGradiantFill());
+    else
+      return(this._fillColor.Value.colorType != SVGColorType.SVG_COLORTYPE_NONE);
+  }
+  //-----
+  //Tuc la Fill hien tai
+  public bool IsFillX() {
+    if(this._fillColor == null)
+      return(IsLinearGradiantFill()|| IsRadialGradiantFill());
+    else
+      return(this._fillColor.Value.colorType != SVGColorType.SVG_COLORTYPE_UNKNOWN);
+  }
+  //-----
+  public bool IsStroke() {
+    if(this._strokeColor == null)return false;
+    if((this._strokeColor.Value.colorType == SVGColorType.SVG_COLORTYPE_UNKNOWN)||
+     (this._strokeColor.Value.colorType == SVGColorType.SVG_COLORTYPE_NONE)) {
+      return false;
+    }
+    return true;
+  }
+  //-----
+  public uSVGPaintTypes GetPaintType() {
+    if(IsLinearGradiantFill()) {
+      return uSVGPaintTypes.SVG_PAINT_LINEAR_GRADIENT_FILL;
+    }
+    if(IsRadialGradiantFill()) {
+      return uSVGPaintTypes.SVG_PAINT_RADIAL_GRADIENT_FILL;
+    }
+    if(IsSolidFill()) {
+      return uSVGPaintTypes.SVG_PAINT_SOLID_GRADIENT_FILL;
+    }
+    if(IsStroke()) {
+      return uSVGPaintTypes.SVG_PAINT_PATH_DRAW;
+    }
+
+    return uSVGPaintTypes.SVG_NODRAW;
+  }
+  //----------------------
+  //Cong danh sach cac LinearGradient vao trong Paintable
+  public void AppendLinearGradient(uSVGLinearGradientElement linearGradElement) {
+    this._linearGradList.Add(linearGradElement);
+  }
+  //----------------------
+  //Cong danh sach cac RadialGradient vao trong Paintable
+  public void AppendRadialGradient(uSVGRadialGradientElement radialGradElement) {
+    this._radialGradList.Add(radialGradElement);
+  }
+  //----------------------
+  public uSVGLinearGradientBrush GetLinearGradientBrush(uSVGGraphicsPath graphicsPath) {
+    for(int i=0; i < this._linearGradList.Count; i++) {
+      if(this._linearGradList[i].id == this._gradientID) {
+        return new uSVGLinearGradientBrush(this._linearGradList[i], graphicsPath);
+      }
+    }
+    return null;
+  }
+  //----------------------
+  public uSVGRadialGradientBrush GetRadialGradientBrush(uSVGGraphicsPath graphicsPath) {
+    for(int i=0; i < this._radialGradList.Count; i++) {
+      if(this._radialGradList[i].id == this._gradientID) {
+        return new uSVGRadialGradientBrush(this._radialGradList[i], graphicsPath);
+      }
+    }
+    return null;
+  }
 }

@@ -1,53 +1,53 @@
 public class uSVGPathSegArcRel : uSVGPathSeg, uISVGDrawableSeg  {
-	private float m_x			= 0f;
-	private float m_y			= 0f;
-	private float m_r1			= 0f;
-	private float m_r2			= 0f;
-	private float m_angle		= 0f;
-	private bool m_largeArcFlag	= false;
-	private bool m_sweepFlag	= false;
-	//================================================================================
-	private uSVGGraphics m_render;
-	private uSVGTransformable m_transformable;
-	//================================================================================
-	public float x {
-		get{ return this.m_x;}
-	}
-	//-----
-	public float y {
-		get{ return this.m_y;}
-	}
-	//================================================================================
-	public uSVGPathSegArcRel(float r1, float r2, float angle,
-							bool largeArcFlag, bool sweepFlag,
-							float x, float y) : base(uSVGPathSegTypes.PATHSEG_ARC_REL) {
-		this.m_r1 = r1;
-		this.m_r2 = r2;
-		this.m_angle = angle;
-		this.m_largeArcFlag = largeArcFlag;
-		this.m_sweepFlag = sweepFlag;
-		this.m_x = x;
-		this.m_y = y;
-	}
-	//================================================================================
-	public override uSVGPoint currentPoint{
-		get{
-			uSVGPoint m_return = new uSVGPoint(0f,0f);
-			uSVGPathSeg m_prevSeg = previousSeg;
-			if (m_prevSeg != null) {
-				m_return.x = m_prevSeg.currentPoint.x + this.m_x;
-				m_return.y = m_prevSeg.currentPoint.y + this.m_y;
-			}
-			return m_return;
-		}
-	}
-	//--------------------------------------------------------------------------------
-	//Method: f_Render
-	//--------------------------------------------------------------------------------
-	public void f_Render(uSVGGraphicsPath m_graphicsPath) {
-		uSVGPoint p;
-		p = currentPoint;
-		m_graphicsPath.AddArcTo(this.m_r1, this.m_r2, this.m_angle,
-						this.m_largeArcFlag, this.m_sweepFlag, p);
-	}
+  private float _x      = 0f;
+  private float _y      = 0f;
+  private float _r1      = 0f;
+  private float _r2      = 0f;
+  private float _angle    = 0f;
+  private bool _largeArcFlag  = false;
+  private bool _sweepFlag  = false;
+  //================================================================================
+  private uSVGGraphics _render;
+  private uSVGTransformable _transformable;
+  //================================================================================
+  public float x {
+    get{ return this._x;}
+  }
+  //-----
+  public float y {
+    get{ return this._y;}
+  }
+  //================================================================================
+  public uSVGPathSegArcRel(float r1, float r2, float angle,
+              bool largeArcFlag, bool sweepFlag,
+              float x, float y) : base(uSVGPathSegTypes.PATHSEG_ARC_REL) {
+    this._r1 = r1;
+    this._r2 = r2;
+    this._angle = angle;
+    this._largeArcFlag = largeArcFlag;
+    this._sweepFlag = sweepFlag;
+    this._x = x;
+    this._y = y;
+  }
+  //================================================================================
+  public override uSVGPoint currentPoint{
+    get{
+      uSVGPoint _return = new uSVGPoint(0f,0f);
+      uSVGPathSeg _prevSeg = previousSeg;
+      if(_prevSeg != null) {
+        _return.x = _prevSeg.currentPoint.x + this._x;
+        _return.y = _prevSeg.currentPoint.y + this._y;
+      }
+      return _return;
+    }
+  }
+  //--------------------------------------------------------------------------------
+  //Method: Render
+  //--------------------------------------------------------------------------------
+  public void Render(uSVGGraphicsPath _graphicsPath) {
+    uSVGPoint p;
+    p = currentPoint;
+    _graphicsPath.AddArcTo(this._r1, this._r2, this._angle,
+            this._largeArcFlag, this._sweepFlag, p);
+  }
 }

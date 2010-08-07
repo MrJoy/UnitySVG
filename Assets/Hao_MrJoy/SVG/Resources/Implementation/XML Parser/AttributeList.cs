@@ -14,21 +14,21 @@ public struct AttributeList {
   }
   //-------------------------------------------------------------------------------------//
   public int Length {
-    get { return (attrs != null) ? attrs.Keys.Count : 0;}
+    get { return(attrs != null) ? attrs.Keys.Count : 0;}
   }
 
-  public void Clear () {
+  public void Clear() {
     attrs.Clear();
   }
 
-  public void Add (string name, string value) {
+  public void Add(string name, string value) {
     if(attrs == null)
       attrs = new Dictionary<string,string>();
     attrs[name.ToUpper()] = value;
   }
   //-------------------------------------------------------------------------------------//
-  public string GetValue (string name) {
-    if((attrs != null) && attrs.ContainsKey(name))
+  public string GetValue(string name) {
+    if((attrs != null)&& attrs.ContainsKey(name))
       return attrs[name];
     else
       return "";

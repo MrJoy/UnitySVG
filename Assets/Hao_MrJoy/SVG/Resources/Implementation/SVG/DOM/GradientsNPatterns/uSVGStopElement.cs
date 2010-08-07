@@ -1,34 +1,34 @@
 public class uSVGStopElement {
-	private uSVGNumber m_offset;
-	private uSVGColor m_stopColor;
-	/***************************************************************************/
-	private AttributeList m_attrList;
-	/***************************************************************************/
-	public uSVGNumber offset {
-		get{return this.m_offset;}
-	}
-	public uSVGColor stopColor {
-		get{return this.m_stopColor;}
-	}
-	/***************************************************************************/
-	public uSVGStopElement (AttributeList attrList) {
-		this.m_attrList = attrList;
-		f_Initialize();
-	}
-	/***************************************************************************/
-	private void f_Initialize() {
-		m_stopColor = new uSVGColor(this.m_attrList.GetValue("STOP-COLOR"));
-		//-------
-		string temp = this.m_attrList.GetValue("OFFSET");
-		temp = temp.Trim();
-		if (temp != "") {
-			if (temp.EndsWith("%")) {
-				temp = temp.TrimEnd(new char[1]{'%'});
-			} else {
-				float m_value = uSVGNumber.ParseToFloat(temp) * 100;
-				temp = m_value.ToString();
-			}			
-		}
-		this.m_offset = new uSVGNumber(temp);
-	}
+  private uSVGNumber _offset;
+  private uSVGColor _stopColor;
+  /***************************************************************************/
+  private AttributeList _attrList;
+  /***************************************************************************/
+  public uSVGNumber offset {
+    get{return this._offset;}
+  }
+  public uSVGColor stopColor {
+    get{return this._stopColor;}
+  }
+  /***************************************************************************/
+  public uSVGStopElement(AttributeList attrList) {
+    this._attrList = attrList;
+    Initialize();
+  }
+  /***************************************************************************/
+  private void Initialize() {
+    _stopColor = new uSVGColor(this._attrList.GetValue("STOP-COLOR"));
+    //-------
+    string temp = this._attrList.GetValue("OFFSET");
+    temp = temp.Trim();
+    if(temp != "") {
+      if(temp.EndsWith("%")) {
+        temp = temp.TrimEnd(new char[1]{'%'});
+      } else {
+        float _value = uSVGNumber.ParseToFloat(temp)* 100;
+        temp = _value.ToString();
+      }
+    }
+    this._offset = new uSVGNumber(temp);
+  }
 }

@@ -1,107 +1,107 @@
 using System.Collections.Generic;
 
 public class uSVGRadialGradientElement : uSVGGradientElement {
-	
-	private uSVGLength m_cx;
-	private uSVGLength m_cy;
-	private uSVGLength m_r;
-	private uSVGLength m_fx;
-	private uSVGLength m_fy;
-	//---------
-	private string m_id;
-	private uXMLImp m_xmlImp;
-	private List<uSVGStopElement> m_stopList;
-	//---------
-	private AttributeList m_attrList;
-	/***************************************************************************/
-	public string id {
-		get{ return this.m_id;}
-	}
-	public uSVGLength cx {
-		get{return this.m_cx;}
-	}
-	public uSVGLength cy {
-		get{return this.m_cy;}
-	}
-		public uSVGLength r {
-		get{return this.m_r;}
-	}
-		public uSVGLength fx {
-		get{return this.m_fx;}
-	}
-		public uSVGLength fy {
-		get{return this.m_fy;}
-	}
-	
-	public int stopCount {
-		get{return this.m_stopList.Count;}
-	}
 
-	public List<uSVGStopElement> stopList {
-		get{return this.m_stopList;}
-	}
-	/***************************************************************************/
-	public uSVGRadialGradientElement(uXMLImp xmlImp,
-										AttributeList attrList) : base(attrList) {
-		this.m_attrList = attrList;
-		this.m_xmlImp = xmlImp;
-		f_Initialize();
-	}
-	/***************************************************************************/
-	private void f_Initialize() {
-		this.m_stopList = new List<uSVGStopElement>();		
-		string temp = this.m_attrList.GetValue("ID");
-		this.m_id = temp;
+  private uSVGLength _cx;
+  private uSVGLength _cy;
+  private uSVGLength _r;
+  private uSVGLength _fx;
+  private uSVGLength _fy;
+  //---------
+  private string _id;
+  private uXMLImp _xmlImp;
+  private List<uSVGStopElement> _stopList;
+  //---------
+  private AttributeList _attrList;
+  /***************************************************************************/
+  public string id {
+    get{ return this._id;}
+  }
+  public uSVGLength cx {
+    get{return this._cx;}
+  }
+  public uSVGLength cy {
+    get{return this._cy;}
+  }
+    public uSVGLength r {
+    get{return this._r;}
+  }
+    public uSVGLength fx {
+    get{return this._fx;}
+  }
+    public uSVGLength fy {
+    get{return this._fy;}
+  }
 
-		temp = this.m_attrList.GetValue("CX");
-		if (temp == "") {
-			m_cx = new uSVGLength("50%");
-		} else m_cx = new uSVGLength(temp);
+  public int stopCount {
+    get{return this._stopList.Count;}
+  }
 
-		temp = this.m_attrList.GetValue("CY");
-		if (temp == "") {
-			m_cy = new uSVGLength("50%");
-		} else m_cy = new uSVGLength(temp);
+  public List<uSVGStopElement> stopList {
+    get{return this._stopList;}
+  }
+  /***************************************************************************/
+  public uSVGRadialGradientElement(uXMLImp xmlImp,
+                    AttributeList attrList) : base(attrList) {
+    this._attrList = attrList;
+    this._xmlImp = xmlImp;
+    Initialize();
+  }
+  /***************************************************************************/
+  private void Initialize() {
+    this._stopList = new List<uSVGStopElement>();
+    string temp = this._attrList.GetValue("ID");
+    this._id = temp;
 
-		temp = this.m_attrList.GetValue("R");
-		if (temp == "") {
-			m_r = new uSVGLength("50%");
-		} else m_r = new uSVGLength(temp);
+    temp = this._attrList.GetValue("CX");
+    if(temp == "") {
+      _cx = new uSVGLength("50%");
+    } else _cx = new uSVGLength(temp);
 
-		temp = this.m_attrList.GetValue("FX");
-		if (temp == "") {
-			m_fx = new uSVGLength("50%");
-		} else m_fx = new uSVGLength(temp);
+    temp = this._attrList.GetValue("CY");
+    if(temp == "") {
+      _cy = new uSVGLength("50%");
+    } else _cy = new uSVGLength(temp);
 
-		temp = this.m_attrList.GetValue("FY");
-		if (temp == "") {
-			m_fy = new uSVGLength("50%");
-		} else m_fy = new uSVGLength(temp);
-		
-		f_GetElementList();
-	}
-	//---------------
-	private void f_GetElementList() {
+    temp = this._attrList.GetValue("R");
+    if(temp == "") {
+      _r = new uSVGLength("50%");
+    } else _r = new uSVGLength(temp);
+
+    temp = this._attrList.GetValue("FX");
+    if(temp == "") {
+      _fx = new uSVGLength("50%");
+    } else _fx = new uSVGLength(temp);
+
+    temp = this._attrList.GetValue("FY");
+    if(temp == "") {
+      _fy = new uSVGLength("50%");
+    } else _fy = new uSVGLength(temp);
+
+    GetElementList();
+  }
+  //---------------
+  private void GetElementList() {
     bool exitFlag = false;
-    while(!exitFlag && this.m_xmlImp.f_ReadNextTag()) {
-      if(this.m_xmlImp.f_GetCurrentTagState() == uXMLImp.XMLTagState.CLOSE) {
+    while(!exitFlag && this._xmlImp.ReadNextTag()) {
+      if(this._xmlImp.GetCurrentTagState() == uXMLImp.XMLTagState.CLOSE) {
         exitFlag = true;
         continue;
       }
-			string t_name = this.m_xmlImp.f_GetCurrentTagName();
-			AttributeList t_attrList;
-				if (t_name == "stop") {
-					t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-					uSVGStopElement temp = new uSVGStopElement(	t_attrList);	
-					m_stopList.Add(temp);
-				}
-		}
-	}
-	/***************************************************************************/
-	public uSVGStopElement GetStopElement(int i) {
-		if ((i >=0 ) && (i < stopCount)) {
-			return this.m_stopList[i];
-		}
-		return null;
-	}
+      string t_name = this._xmlImp.GetCurrentTagName();
+      AttributeList t_attrList;
+        if(t_name == "stop") {
+          t_attrList = this._xmlImp.GetCurrentAttributesList();
+          uSVGStopElement temp = new uSVGStopElement(  t_attrList);
+          _stopList.Add(temp);
+        }
+    }
+  }
+  /***************************************************************************/
+  public uSVGStopElement GetStopElement(int i) {
+    if((i >=0 )&&(i < stopCount)) {
+      return this._stopList[i];
+    }
+    return null;
+  }
 }

@@ -1,275 +1,275 @@
 using System.Collections.Generic;
 
 public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
-	private uSVGLength m_width;
-	private uSVGLength m_height;
-	private string m_contentScriptType;
-	private string m_contentStyleType;
-	
-	private uSVGRect m_viewport;
+  private uSVGLength _width;
+  private uSVGLength _height;
+  private string _contentScriptType;
+  private string _contentStyleType;
 
-	private float currentScale;
-	private uSVGPoint currentTranslate;
-	//-------------------------------
-	private AttributeList m_attrList;
-	private List<object> m_elementList;
-	private uXMLImp m_xmlImp;
-	//-------------------------------
-	private uSVGPaintable m_paintable;
-	//-------------------------------
-	private uSVGGraphics m_render;
+  private uSVGRect _viewport;
 
-	/***********************************************************************************/
-	public uSVGSVGElement(	uXMLImp xmlImp,
-							uSVGTransformList inheritTransformList,
-							uSVGPaintable inheritPaintable,
-							uSVGGraphics m_render) : base (inheritTransformList) {
-		this.m_render = m_render;
-		this.m_xmlImp = xmlImp;
-		this.m_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-		this.m_paintable = new uSVGPaintable(inheritPaintable, this.m_attrList);
-		this.m_width = new uSVGLength(m_attrList.GetValue("WIDTH"));
-		this.m_height = new uSVGLength(m_attrList.GetValue("HEIGHT"));
-		f_Initial();
-	}
-	/***********************************************************************************/
-	private void f_Initial() {
-		//trich cac gia tri cua thuoc tinh VIEWBOX va chua vao trong m_viewport
-		f_SetViewBox();
-		m_elementList = new List<object>();
-		
-		//Viewbox transform se lay thuoc tinh VIEWBOX de tao ra 1 transform
-		//va transform nay se chua trong m_cachedViewBoxTransform
-		ViewBoxTransform();
-		
-		//Tao currentTransformList va add cai transform dau tien vao, do la cai VIEWBOX.
-		uSVGTransform temp = CreateSVGTransformFromMatrix(m_cachedViewBoxTransform);
-		uSVGTransformList t_currentTransformList = new uSVGTransformList();		
-		t_currentTransformList.AppendItem(temp);
+  private float currentScale;
+  private uSVGPoint currentTranslate;
+  //-------------------------------
+  private AttributeList _attrList;
+  private List<object> _elementList;
+  private uXMLImp _xmlImp;
+  //-------------------------------
+  private uSVGPaintable _paintable;
+  //-------------------------------
+  private uSVGGraphics _render;
 
-		this.currentTransformList = t_currentTransformList;
+  /***********************************************************************************/
+  public uSVGSVGElement(  uXMLImp xmlImp,
+              uSVGTransformList inheritTransformList,
+              uSVGPaintable inheritPaintable,
+              uSVGGraphics _render) : base(inheritTransformList) {
+    this._render = _render;
+    this._xmlImp = xmlImp;
+    this._attrList = this._xmlImp.GetCurrentAttributesList();
+    this._paintable = new uSVGPaintable(inheritPaintable, this._attrList);
+    this._width = new uSVGLength(_attrList.GetValue("WIDTH"));
+    this._height = new uSVGLength(_attrList.GetValue("HEIGHT"));
+    Initial();
+  }
+  /***********************************************************************************/
+  private void Initial() {
+    //trich cac gia tri cua thuoc tinh VIEWBOX va chua vao trong _viewport
+    SetViewBox();
+    _elementList = new List<object>();
 
-		//Get all element between <SVG>...</SVG>
-		f_GetElementList();
-	}
-	/***********************************************************************************/
-	private void f_GetElementList() {
+    //Viewbox transform se lay thuoc tinh VIEWBOX de tao ra 1 transform
+    //va transform nay se chua trong _cachedViewBoxTransform
+    ViewBoxTransform();
+
+    //Tao currentTransformList va add cai transform dau tien vao, do la cai VIEWBOX.
+    uSVGTransform temp = CreateSVGTransformFromMatrix(_cachedViewBoxTransform);
+    uSVGTransformList t_currentTransformList = new uSVGTransformList();
+    t_currentTransformList.AppendItem(temp);
+
+    this.currentTransformList = t_currentTransformList;
+
+    //Get all element between <SVG>...</SVG>
+    GetElementList();
+  }
+  /***********************************************************************************/
+  private void GetElementList() {
     bool exitFlag = false;
-    while(!exitFlag && this.m_xmlImp.f_ReadNextTag()) {
-      if(this.m_xmlImp.f_GetCurrentTagState() == uXMLImp.XMLTagState.CLOSE) {
+    while(!exitFlag && this._xmlImp.ReadNextTag()) {
+      if(this._xmlImp.GetCurrentTagState() == uXMLImp.XMLTagState.CLOSE) {
         exitFlag = true;
         continue;
       }
-			string t_name = this.m_xmlImp.f_GetCurrentTagName();
-			AttributeList t_attrList;
-				switch(t_name.ToUpper()) {
-					case "RECT": {
-						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						uSVGRectElement temp = new uSVGRectElement(	t_attrList,
-																	this.summaryTransformList,
-																	this.m_paintable,
-								 									this.m_render);	
-						m_elementList.Add(temp);
-					break;
-					}
-					case "LINE": {
-						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						uSVGLineElement temp = new uSVGLineElement(	t_attrList,
-																	this.summaryTransformList,
-																	this.m_paintable,
-								 									this.m_render);	
-						m_elementList.Add(temp);
-					break;
-					}
-					case "CIRCLE": {
-						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						uSVGCircleElement temp = new uSVGCircleElement(	t_attrList,
-																	this.summaryTransformList,
-																	this.m_paintable,
-								 									this.m_render);	
-						m_elementList.Add(temp);
-					break;
-					}
-					case "ELLIPSE": {
-						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						uSVGEllipseElement temp = new uSVGEllipseElement(	t_attrList,
-																	this.summaryTransformList,
-																	this.m_paintable,
-								 									this.m_render);	
-						m_elementList.Add(temp);
-					break;
-					}
-					case "POLYLINE": {
-						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						uSVGPolylineElement temp = new uSVGPolylineElement(	t_attrList,
-																	this.summaryTransformList,
-																	this.m_paintable,
-								 									this.m_render);	
-						m_elementList.Add(temp);
-					break;
-					}
-					case "POLYGON": {
-						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						uSVGPolygonElement temp = new uSVGPolygonElement(t_attrList,
-																	this.summaryTransformList,
-																	this.m_paintable,
-								 									this.m_render);	
-						m_elementList.Add(temp);
-					break;
-					}
-					case "PATH": {
-						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						uSVGPathElement temp = new uSVGPathElement(	t_attrList,
-																	this.summaryTransformList,
-																	this.m_paintable,
-								 									this.m_render);	
-						m_elementList.Add(temp);
-					break;
-					}
-					case "SVG": {
-						m_elementList.Add(new uSVGSVGElement(	this.m_xmlImp,
-																this.summaryTransformList,
-																this.m_paintable,
-																this.m_render));
-						break;
-					}
-					case "G": {
-						m_elementList.Add(new uSVGGElement(	this.m_xmlImp, 
-															this.summaryTransformList,
-															this.m_paintable,
-															this.m_render));
-						break;
-					}
-					//--------
-					case "LINEARGRADIENT": {
-						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						uSVGLinearGradientElement temp = new uSVGLinearGradientElement(this.m_xmlImp,
-																					t_attrList);
-						this.m_paintable.AppendLinearGradient(temp);
-						break;
-					}
-					//--------
-					case "RADIALGRADIENT": {
-						t_attrList = this.m_xmlImp.f_GetCurrentAttributesList();
-						uSVGRadialGradientElement temp = new uSVGRadialGradientElement(this.m_xmlImp,
-																					t_attrList);
-						this.m_paintable.AppendRadialGradient(temp);
-						break;
-					}
-					case "DEFS": {
-					  f_GetElementList();
-					  break;
-					}
-					case "TITLE": {
-					  f_GetElementList();
-					  break;
-					}
-					case "DESC": {
-					  f_GetElementList();
-					  break;
-					}
-//					default:
-//					  UnityEngine.Debug.LogError("Unexpected tag: " + t_name);
-//					  break;
-				}
-		}
-	}
-	/***********************************************************************************/
-	public void f_BeforeRender(uSVGTransformList transformList) {
-		
-		this.inheritTransformList = transformList;
-		
-		for (int i = 0; i < m_elementList.Count; i++) {
-			uISVGDrawable temp = m_elementList[i] as uISVGDrawable;
-			if (temp != null) {
-				temp.f_BeforeRender(this.summaryTransformList);
-			}
-		}
-	}
+      string t_name = this._xmlImp.GetCurrentTagName();
+      AttributeList t_attrList;
+        switch(t_name.ToUpper()) {
+          case "RECT": {
+            t_attrList = this._xmlImp.GetCurrentAttributesList();
+            uSVGRectElement temp = new uSVGRectElement(  t_attrList,
+                                  this.summaryTransformList,
+                                  this._paintable,
+                                   this._render);
+            _elementList.Add(temp);
+          break;
+          }
+          case "LINE": {
+            t_attrList = this._xmlImp.GetCurrentAttributesList();
+            uSVGLineElement temp = new uSVGLineElement(  t_attrList,
+                                  this.summaryTransformList,
+                                  this._paintable,
+                                   this._render);
+            _elementList.Add(temp);
+          break;
+          }
+          case "CIRCLE": {
+            t_attrList = this._xmlImp.GetCurrentAttributesList();
+            uSVGCircleElement temp = new uSVGCircleElement(  t_attrList,
+                                  this.summaryTransformList,
+                                  this._paintable,
+                                   this._render);
+            _elementList.Add(temp);
+          break;
+          }
+          case "ELLIPSE": {
+            t_attrList = this._xmlImp.GetCurrentAttributesList();
+            uSVGEllipseElement temp = new uSVGEllipseElement(  t_attrList,
+                                  this.summaryTransformList,
+                                  this._paintable,
+                                   this._render);
+            _elementList.Add(temp);
+          break;
+          }
+          case "POLYLINE": {
+            t_attrList = this._xmlImp.GetCurrentAttributesList();
+            uSVGPolylineElement temp = new uSVGPolylineElement(  t_attrList,
+                                  this.summaryTransformList,
+                                  this._paintable,
+                                   this._render);
+            _elementList.Add(temp);
+          break;
+          }
+          case "POLYGON": {
+            t_attrList = this._xmlImp.GetCurrentAttributesList();
+            uSVGPolygonElement temp = new uSVGPolygonElement(t_attrList,
+                                  this.summaryTransformList,
+                                  this._paintable,
+                                   this._render);
+            _elementList.Add(temp);
+          break;
+          }
+          case "PATH": {
+            t_attrList = this._xmlImp.GetCurrentAttributesList();
+            uSVGPathElement temp = new uSVGPathElement(  t_attrList,
+                                  this.summaryTransformList,
+                                  this._paintable,
+                                   this._render);
+            _elementList.Add(temp);
+          break;
+          }
+          case "SVG": {
+            _elementList.Add(new uSVGSVGElement(  this._xmlImp,
+                                this.summaryTransformList,
+                                this._paintable,
+                                this._render));
+            break;
+          }
+          case "G": {
+            _elementList.Add(new uSVGGElement(  this._xmlImp,
+                              this.summaryTransformList,
+                              this._paintable,
+                              this._render));
+            break;
+          }
+          //--------
+          case "LINEARGRADIENT": {
+            t_attrList = this._xmlImp.GetCurrentAttributesList();
+            uSVGLinearGradientElement temp = new uSVGLinearGradientElement(this._xmlImp,
+                                          t_attrList);
+            this._paintable.AppendLinearGradient(temp);
+            break;
+          }
+          //--------
+          case "RADIALGRADIENT": {
+            t_attrList = this._xmlImp.GetCurrentAttributesList();
+            uSVGRadialGradientElement temp = new uSVGRadialGradientElement(this._xmlImp,
+                                          t_attrList);
+            this._paintable.AppendRadialGradient(temp);
+            break;
+          }
+          case "DEFS": {
+            GetElementList();
+            break;
+          }
+          case "TITLE": {
+            GetElementList();
+            break;
+          }
+          case "DESC": {
+            GetElementList();
+            break;
+          }
+//          default:
+//            UnityEngine.Debug.LogError("Unexpected tag: " + t_name);
+//            break;
+        }
+    }
+  }
+  /***********************************************************************************/
+  public void BeforeRender(uSVGTransformList transformList) {
 
-	public void f_Render() {
-		this.m_render.SetSize(this.m_width.value, this.m_height.value);
-		for (int i = 0; i < m_elementList.Count; i++) {
-			uISVGDrawable temp = m_elementList[i] as uISVGDrawable;
-			if (temp != null) {
-				temp.f_Render();
-			}
-		}
-	}
-	/***********************************************************************************/
-	private void f_SetViewBox() {
-		string attr = this.m_attrList.GetValue("VIEWBOX");
-		if (attr != "") {
-			string[] m_temp = uSVGStringExtractor.f_ExtractTransformValue(attr);
-			if (m_temp.Length == 4) {
-				float x = uSVGNumber.ParseToFloat(m_temp[0]);
-				float y = uSVGNumber.ParseToFloat(m_temp[1]);
-				float w = uSVGNumber.ParseToFloat(m_temp[2]);
-				float h = uSVGNumber.ParseToFloat(m_temp[3]);
-				this.m_viewport = new uSVGRect(x, y, w, h);
-			}
-		}
-	}
-	/***********************************************************************************/
-	public uSVGNumber CreateSVGNumber() {
-		return new uSVGNumber(0.0f);
-	}
-	
-	public uSVGLength CreateSVGLength() {
-		return new uSVGLength(0, 0.0f);
-	}
-	
-	public uSVGPoint CreateSVGPoint() {
-		return new uSVGPoint(0.0f, 0.0f);
-	}
-	public uSVGMatrix CreateSVGMatrix() {
-		return new uSVGMatrix();
-	}
-	
-	public uSVGRect CreateSVGRect() {
-		return new uSVGRect(0.0f, 0.0f, 0.0f, 0.0f);
-	}
-	
-	public uSVGTransform CreateSVGTransform() {
-		return new uSVGTransform();
-	}
-	
-	public uSVGTransform CreateSVGTransformFromMatrix(uSVGMatrix matrix) {
-		return new uSVGTransform(matrix);
-	}
-	/***********************************************************************************/
-	private uSVGMatrix m_cachedViewBoxTransform = null;
-	public uSVGMatrix ViewBoxTransform() {
-		if (this.m_cachedViewBoxTransform == null) {
-			
-			uSVGMatrix matrix = CreateSVGMatrix();
-				
-			float x = 0.0f;
-			float y = 0.0f;
-			float w = 0.0f;
-			float h = 0.0f;
-			
-			float attrWidth = this.m_width.value;
-			float attrHeight = this.m_height.value;
+    this.inheritTransformList = transformList;
 
-			if (m_attrList.GetValue("VIEWBOX") != "") {
-				uSVGRect r = this.m_viewport;
-				x += -r.x;
-				y += -r.y;
-				w = r.width;
-				h = r.height;
-			} else {
-				w = attrWidth;
-				h = attrHeight;
-			}
-			
-			float x_ratio = attrWidth / w;
-			float y_ratio = attrHeight / h;
+    for(int i = 0; i < _elementList.Count; i++) {
+      uISVGDrawable temp = _elementList[i] as uISVGDrawable;
+      if(temp != null) {
+        temp.BeforeRender(this.summaryTransformList);
+      }
+    }
+  }
 
-			matrix = matrix.ScaleNonUniform(x_ratio, y_ratio);
-			matrix = matrix.Translate(x, y);
-			m_cachedViewBoxTransform = matrix;
-		}
-		return this.m_cachedViewBoxTransform;
-	}
+  public void Render() {
+    this._render.SetSize(this._width.value, this._height.value);
+    for(int i = 0; i < _elementList.Count; i++) {
+      uISVGDrawable temp = _elementList[i] as uISVGDrawable;
+      if(temp != null) {
+        temp.Render();
+      }
+    }
+  }
+  /***********************************************************************************/
+  private void SetViewBox() {
+    string attr = this._attrList.GetValue("VIEWBOX");
+    if(attr != "") {
+      string[] _temp = uSVGStringExtractor.ExtractTransformValue(attr);
+      if(_temp.Length == 4) {
+        float x = uSVGNumber.ParseToFloat(_temp[0]);
+        float y = uSVGNumber.ParseToFloat(_temp[1]);
+        float w = uSVGNumber.ParseToFloat(_temp[2]);
+        float h = uSVGNumber.ParseToFloat(_temp[3]);
+        this._viewport = new uSVGRect(x, y, w, h);
+      }
+    }
+  }
+  /***********************************************************************************/
+  public uSVGNumber CreateSVGNumber() {
+    return new uSVGNumber(0.0f);
+  }
+
+  public uSVGLength CreateSVGLength() {
+    return new uSVGLength(0, 0.0f);
+  }
+
+  public uSVGPoint CreateSVGPoint() {
+    return new uSVGPoint(0.0f, 0.0f);
+  }
+  public uSVGMatrix CreateSVGMatrix() {
+    return new uSVGMatrix();
+  }
+
+  public uSVGRect CreateSVGRect() {
+    return new uSVGRect(0.0f, 0.0f, 0.0f, 0.0f);
+  }
+
+  public uSVGTransform CreateSVGTransform() {
+    return new uSVGTransform();
+  }
+
+  public uSVGTransform CreateSVGTransformFromMatrix(uSVGMatrix matrix) {
+    return new uSVGTransform(matrix);
+  }
+  /***********************************************************************************/
+  private uSVGMatrix _cachedViewBoxTransform = null;
+  public uSVGMatrix ViewBoxTransform() {
+    if(this._cachedViewBoxTransform == null) {
+
+      uSVGMatrix matrix = CreateSVGMatrix();
+
+      float x = 0.0f;
+      float y = 0.0f;
+      float w = 0.0f;
+      float h = 0.0f;
+
+      float attrWidth = this._width.value;
+      float attrHeight = this._height.value;
+
+      if(_attrList.GetValue("VIEWBOX") != "") {
+        uSVGRect r = this._viewport;
+        x += -r.x;
+        y += -r.y;
+        w = r.width;
+        h = r.height;
+      } else {
+        w = attrWidth;
+        h = attrHeight;
+      }
+
+      float x_ratio = attrWidth / w;
+      float y_ratio = attrHeight / h;
+
+      matrix = matrix.ScaleNonUniform(x_ratio, y_ratio);
+      matrix = matrix.Translate(x, y);
+      _cachedViewBoxTransform = matrix;
+    }
+    return this._cachedViewBoxTransform;
+  }
 }

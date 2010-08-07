@@ -1,54 +1,54 @@
 using UnityEngine;
 public class Implement {
-	private TextAsset m_SVGFile;
-	private Texture2D m_texture = null;
-	private	uSVGDevice m_device;
-	private	uSVGGraphics m_graphics;
-	private uSVGDocument m_svgDocument;
+  private TextAsset _SVGFile;
+  private Texture2D _texture = null;
+  private  uSVGDevice _device;
+  private  uSVGGraphics _graphics;
+  private uSVGDocument _svgDocument;
 
-	/***********************************************************************************/
-	public Implement(TextAsset svgFile) {
-		this.m_SVGFile = svgFile;
-		m_device = new uSVGDevice();
-		m_graphics = new uSVGGraphics(m_device);
-	}
-	/***********************************************************************************/
-	/*-----------------------------------------------------------
-	Methods: f_CreateEmptySVGDocument
-	Use: tao 1 uSVGDocument trong, day la buoc khoi dau cua viec bat
-	dau phan tich va do du lieu vao trong 1 SVGDocument
-	-------------------------------------------------------------*/
-	private void f_CreateEmptySVGDocument() {
-		m_svgDocument = new uSVGDocument(this.m_SVGFile.text, this.m_graphics);
-	}
-	
-	/*-----------------------------------------------------------
-	Methods: f_StarProcess1
-	Use: ta bat dau doc du lieu de do vao uSVGDocument
-	-------------------------------------------------------------*/
-	public void f_StartProcess() {
+  /***********************************************************************************/
+  public Implement(TextAsset svgFile) {
+    this._SVGFile = svgFile;
+    _device = new uSVGDevice();
+    _graphics = new uSVGGraphics(_device);
+  }
+  /***********************************************************************************/
+  /*-----------------------------------------------------------
+  Methods: CreateEmptySVGDocument
+  Use: tao 1 uSVGDocument trong, day la buoc khoi dau cua viec bat
+  dau phan tich va do du lieu vao trong 1 SVGDocument
+  -------------------------------------------------------------*/
+  private void CreateEmptySVGDocument() {
+    _svgDocument = new uSVGDocument(this._SVGFile.text, this._graphics);
+  }
+
+  /*-----------------------------------------------------------
+  Methods: StarProcess1
+  Use: ta bat dau doc du lieu de do vao uSVGDocument
+  -------------------------------------------------------------*/
+  public void StartProcess() {
 Profiler.BeginSample("SVG.Implement.StartProcess[CreateEmptySVGDocument]");
-		f_CreateEmptySVGDocument();
+    CreateEmptySVGDocument();
 Profiler.EndSample();
 Profiler.BeginSample("SVG.Implement.StartProcess[GetRootElement]");
-		uSVGSVGElement m_rootSVGElement = this.m_svgDocument.rootElement;
+    uSVGSVGElement _rootSVGElement = this._svgDocument.rootElement;
 Profiler.EndSample();
-		this.m_graphics.SetColor(Color.white);
+    this._graphics.SetColor(Color.white);
 Profiler.BeginSample("SVG.Implement.StartProcess[RenderSVGElement]");
-		m_rootSVGElement.f_Render();
+    _rootSVGElement.Render();
 Profiler.EndSample();
 Profiler.BeginSample("SVG.Implement.StartProcess[RenderGraphics]");
-		this.m_texture = m_graphics.Render();
+    this._texture = _graphics.Render();
 Profiler.EndSample();
-	}
-	/***********************************************************************************/
-	public void f_NewSVGFile(TextAsset svgFile) {
-		this.m_SVGFile = svgFile;
-	}
-	public Texture2D f_GetTexture() {
-		if (this.m_texture == null) {
-			return new Texture2D(0, 0, TextureFormat.ARGB32, false);
-		}
-		return this.m_texture;
-	}
+  }
+  /***********************************************************************************/
+  public void NewSVGFile(TextAsset svgFile) {
+    this._SVGFile = svgFile;
+  }
+  public Texture2D GetTexture() {
+    if(this._texture == null) {
+      return new Texture2D(0, 0, TextureFormat.ARGB32, false);
+    }
+    return this._texture;
+  }
 }

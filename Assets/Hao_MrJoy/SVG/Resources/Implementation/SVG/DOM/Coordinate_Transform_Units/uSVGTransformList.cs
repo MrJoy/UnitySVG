@@ -30,7 +30,7 @@ public class uSVGTransformList {
     _listTransform = new List<uSVGTransform>(capacity);
   }
   public uSVGTransformList(string listString) {
-    _listTransform = uSVGStringExtractor.f_ExtractTransformList(listString);
+    _listTransform = uSVGStringExtractor.ExtractTransformList(listString);
   }
 
   /*********************************************************************************************/
@@ -48,7 +48,7 @@ public class uSVGTransformList {
   }
   public uSVGTransform this[int index] {
     get {
-      if((index < 0) || (index >= _listTransform.Count))
+      if((index < 0)||(index >= _listTransform.Count))
         throw new uDOMException(uDOMExceptionType.IndexSizeErr);
       return _listTransform[index];
     }

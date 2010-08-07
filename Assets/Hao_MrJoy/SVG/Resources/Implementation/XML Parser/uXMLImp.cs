@@ -1,234 +1,234 @@
 using System.IO;
 
 public class uXMLImp : SmallXmlParser.IContentHandler {
-	public enum XMLTagState {OPEN, CLOSE, BOTH}
-	
-	private SmallXmlParser m_parser 	= new SmallXmlParser();
-	private TextReader m_textReader;
-	
-	private string m_currentName = "";
-	private string m_currentLineText = "";
-	private XMLTagState m_currentTagState;
-	private AttributeList m_currentList;
-	
-	private string m_svgText = "";
+  public enum XMLTagState {OPEN, CLOSE, BOTH}
 
-	/***********************************************************************************/
-	public uXMLImp (){
-	}
+  private SmallXmlParser _parser   = new SmallXmlParser();
+  private TextReader _textReader;
 
-	public uXMLImp(string text) {
-		this.m_svgText = text;
-		m_textReader = new StringReader(text);
-		m_parser.f_Pause();
-		m_parser.Parse(m_textReader, this);
-	}
-	
-	//---------------------------------------------------------
-	//Methods: f_CloneAttrsList
-	//Purpose: create a clone Attribute List from XMLParser Handle for storing.
-	//---------------------------------------------------------
-	private void f_CloneAttrsList(AttributeList attrs) {
-		this.m_currentList = new AttributeList(attrs);
-	}
-	
-	/**********************************************************************************
-	Public Classes:
-		public bool 			f_ReadNextTag();
-		public XMLTagState 		f_GetCurrentTagState();
-		public string 			f_GetCurrentTagName();
-		public void 			f_Reset(string text);
-		public bool 			f_IsCurrentTagName(string name);
-		public int 				f_Length();
-		public IAttrList		f_GetCurrentAttributesList
-		public IAttrList		f_GetNextAttrList
-	
-	************************************************************************************/
-	
-	//---------------------------------------------------------
-	//Methods: f_ReadNextTag
-	//Purpose: Unpause XMLParser to reading nex Tag.
-	//---------------------------------------------------------
-	public bool f_ReadNextTag() {
-		return m_parser.f_UnPause();
-	}
-	
-	//---------------------------------------------------------
-	//Methods: f_GetCurrentTagState
-	//Purpose: return current XMLTag State
-	//State:
-	//		XMLTagState.OPEN 	: current XMLTag is Opened.
-	//		XMLTagState.CLOSE 	: current XMLTag is Closed. This XMLTag is opened in before XMLTag.
-	//		XMLTagState.BOTH 	: current XMLTag is Open and Closed in the same XMLTag.
-	//---------------------------------------------------------
-	public XMLTagState f_GetCurrentTagState() {
-		return this.m_currentTagState;
-	}
-	
-	//---------------------------------------------------------
-	//Methods: f_Reset
-	//Purpose: Reset new String.
-	//---------------------------------------------------------
-	public void f_Reset(string text) {
-		this.m_svgText = text;
-		m_textReader = new StringReader(text);
-		m_parser.f_New();
-		m_parser.f_Pause();		
-		m_parser.Parse(m_textReader, this);		
-	}
-	public void f_Reset() {
-		m_textReader = new StringReader(this.m_svgText);
-		m_parser.f_New();
-		m_parser.f_Pause();		
-		m_parser.Parse(m_textReader, this);
-	}
-	//---------------------------------------------------------
-	//Methods: f_GetCurrentTagName
-	//Purpose: return current Tag Name of XML Tag reading.
-	//---------------------------------------------------------
-	public string f_GetCurrentTagName() {
-		return this.m_currentName;
-	}
-	//---------------------------------------------------------
-	//Methods: f_GetCurrentLineText
-	//Purpose: return current Tag Name of XML Tag reading.
-	//---------------------------------------------------------
-	public string f_GetCurrentLineText() {
-		return this.m_currentLineText;
-	}
+  private string _currentName = "";
+  private string _currentLineText = "";
+  private XMLTagState _currentTagState;
+  private AttributeList _currentList;
 
-	//---------------------------------------------------------
-	//Methods: f_IsCurrentTagName
-	//Purpose: return true when current Tag Name = name.
-	//---------------------------------------------------------
+  private string _svgText = "";
 
-	public bool f_IsCurrentTagName(string name) {
-		if (name == this.m_currentName) {
-			return true;
-		}
-		return false;		
-	}
-	
-	//---------------------------------------------------------
-	//Methods: f_GetCurrentAttributesList
-	//Purpose: Return current Attributes List.
-	//---------------------------------------------------------
-	
-	public AttributeList f_GetCurrentAttributesList() {
-		return m_currentList;
-	}
+  /***********************************************************************************/
+  public uXMLImp() {
+  }
 
-	//---------------------------------------------------------
-	//Methods: f_ReadFirstElement
-	//Purpose: ....
-	//---------------------------------------------------------
-	public AttributeList f_GetNextAttrList() {
-		f_ReadNextTag();
-		return this.m_currentList;		
-	}
+  public uXMLImp(string text) {
+    this._svgText = text;
+    _textReader = new StringReader(text);
+    _parser.Pause();
+    _parser.Parse(_textReader, this);
+  }
+
+  //---------------------------------------------------------
+  //Methods: CloneAttrsList
+  //Purpose: create a clone Attribute List from XMLParser Handle for storing.
+  //---------------------------------------------------------
+  private void CloneAttrsList(AttributeList attrs) {
+    this._currentList = new AttributeList(attrs);
+  }
+
+  /**********************************************************************************
+  Public Classes:
+    public bool       ReadNextTag();
+    public XMLTagState     GetCurrentTagState();
+    public string       GetCurrentTagName();
+    public void       Reset(string text);
+    public bool       IsCurrentTagName(string name);
+    public int         Length();
+    public IAttrList    GetCurrentAttributesList
+    public IAttrList    GetNextAttrList
+
+  ************************************************************************************/
+
+  //---------------------------------------------------------
+  //Methods: ReadNextTag
+  //Purpose: Unpause XMLParser to reading nex Tag.
+  //---------------------------------------------------------
+  public bool ReadNextTag() {
+    return _parser.UnPause();
+  }
+
+  //---------------------------------------------------------
+  //Methods: GetCurrentTagState
+  //Purpose: return current XMLTag State
+  //State:
+  //    XMLTagState.OPEN   : current XMLTag is Opened.
+  //    XMLTagState.CLOSE   : current XMLTag is Closed. This XMLTag is opened in before XMLTag.
+  //    XMLTagState.BOTH   : current XMLTag is Open and Closed in the same XMLTag.
+  //---------------------------------------------------------
+  public XMLTagState GetCurrentTagState() {
+    return this._currentTagState;
+  }
+
+  //---------------------------------------------------------
+  //Methods: Reset
+  //Purpose: Reset new String.
+  //---------------------------------------------------------
+  public void Reset(string text) {
+    this._svgText = text;
+    _textReader = new StringReader(text);
+    _parser.New();
+    _parser.Pause();
+    _parser.Parse(_textReader, this);
+  }
+  public void Reset() {
+    _textReader = new StringReader(this._svgText);
+    _parser.New();
+    _parser.Pause();
+    _parser.Parse(_textReader, this);
+  }
+  //---------------------------------------------------------
+  //Methods: GetCurrentTagName
+  //Purpose: return current Tag Name of XML Tag reading.
+  //---------------------------------------------------------
+  public string GetCurrentTagName() {
+    return this._currentName;
+  }
+  //---------------------------------------------------------
+  //Methods: GetCurrentLineText
+  //Purpose: return current Tag Name of XML Tag reading.
+  //---------------------------------------------------------
+  public string GetCurrentLineText() {
+    return this._currentLineText;
+  }
+
+  //---------------------------------------------------------
+  //Methods: IsCurrentTagName
+  //Purpose: return true when current Tag Name = name.
+  //---------------------------------------------------------
+
+  public bool IsCurrentTagName(string name) {
+    if(name == this._currentName) {
+      return true;
+    }
+    return false;
+  }
+
+  //---------------------------------------------------------
+  //Methods: GetCurrentAttributesList
+  //Purpose: Return current Attributes List.
+  //---------------------------------------------------------
+
+  public AttributeList GetCurrentAttributesList() {
+    return _currentList;
+  }
+
+  //---------------------------------------------------------
+  //Methods: ReadFirstElement
+  //Purpose: ....
+  //---------------------------------------------------------
+  public AttributeList GetNextAttrList() {
+    ReadNextTag();
+    return this._currentList;
+  }
 
 
-	//---------------------------------------------------------
-	//Methods: f_Length
-	//Purpose: Return Count of attribute List of current XMLTag.
-	//---------------------------------------------------------
+  //---------------------------------------------------------
+  //Methods: Length
+  //Purpose: Return Count of attribute List of current XMLTag.
+  //---------------------------------------------------------
 
-	public int f_Length() {
-		return this.m_currentList.Length;
-	}
-	
-	//-----------------------------------------------------------------------------------------//
-	//Cac Functions lien qua den xu ly SVG Document
-	//-----------------------------------------------------------------------------------------//
-	//---------------------------------------------------------
-	//Methods: f_ReadFirstElement
-	//Purpose: ....
-	//---------------------------------------------------------
+  public int Length() {
+    return this._currentList.Length;
+  }
 
-	public string f_ReadFirstElement(string name) {
-		int level = 0;
-		string m_return = "";
-		if ((this.m_currentName == name) && (this.m_currentTagState == XMLTagState.OPEN)) {
-			level++;
-			m_return += m_currentLineText;
-		}
-		while (f_ReadNextTag()) {			
-			if (this.m_currentName == name) {
-				if (this.m_currentTagState == XMLTagState.OPEN) level++;
-				else if (this.m_currentTagState == XMLTagState.CLOSE) {
-					level--;
-					if (level == 0) {
-						m_return += m_currentLineText;
-						break;
-					}
-				}
-			}
-			
-			if (level > 0)
-				m_return += m_currentLineText;
-		}
-		return m_return;
-	}
-	//---------------------------------------------------------
-	//Methods: f_GetUntilCloseTag
-	//Purpose: ....
-	//---------------------------------------------------------
-	public string f_GetUntilCloseTag(string name) {
-		int level = 1;
-		string m_return = "";
-		while (f_ReadNextTag()) {			
-			if (this.m_currentName == name) {
-				if (this.m_currentTagState == XMLTagState.OPEN) level++;
-				else if (this.m_currentTagState == XMLTagState.CLOSE) {
-					level--;
-					if (level == 0) {
-						m_return += m_currentLineText;
-						break;
-					}
-				}
-			}
-			
-			if (level > 0)
-				m_return += m_currentLineText;
-		}
-		return m_return;
-	}
+  //-----------------------------------------------------------------------------------------//
+  //Cac Functions lien qua den xu ly SVG Document
+  //-----------------------------------------------------------------------------------------//
+  //---------------------------------------------------------
+  //Methods: ReadFirstElement
+  //Purpose: ....
+  //---------------------------------------------------------
 
-	/***********************************************************************************/
-	public void OnStartParsing (SmallXmlParser parser)	{
-	}
+  public string ReadFirstElement(string name) {
+    int level = 0;
+    string _return = "";
+    if((this._currentName == name)&&(this._currentTagState == XMLTagState.OPEN)) {
+      level++;
+      _return += _currentLineText;
+    }
+    while(ReadNextTag()) {
+      if(this._currentName == name) {
+        if(this._currentTagState == XMLTagState.OPEN)level++;
+        else if(this._currentTagState == XMLTagState.CLOSE) {
+          level--;
+          if(level == 0) {
+            _return += _currentLineText;
+            break;
+          }
+        }
+      }
 
-	public void OnEndParsing (SmallXmlParser parser) {	
-	}
+      if(level > 0)
+        _return += _currentLineText;
+    }
+    return _return;
+  }
+  //---------------------------------------------------------
+  //Methods: GetUntilCloseTag
+  //Purpose: ....
+  //---------------------------------------------------------
+  public string GetUntilCloseTag(string name) {
+    int level = 1;
+    string _return = "";
+    while(ReadNextTag()) {
+      if(this._currentName == name) {
+        if(this._currentTagState == XMLTagState.OPEN)level++;
+        else if(this._currentTagState == XMLTagState.CLOSE) {
+          level--;
+          if(level == 0) {
+            _return += _currentLineText;
+            break;
+          }
+        }
+      }
 
-	public void OnStartEndElement (string name, AttributeList attrs, string lineText) {
-		this.m_parser.f_Pause();
-		this.m_currentName = name;
-		this.m_currentLineText = lineText;
-		f_CloneAttrsList(attrs);
-		this.m_currentTagState = XMLTagState.BOTH;
-	}
-	public void OnStartElement (string name, AttributeList attrs, string lineText) {
-		this.m_parser.f_Pause();
-		this.m_currentName = name;
-		this.m_currentLineText = lineText;
-		f_CloneAttrsList(attrs);
-		this.m_currentTagState = XMLTagState.OPEN;
-	}
+      if(level > 0)
+        _return += _currentLineText;
+    }
+    return _return;
+  }
 
-	public void OnEndElement (string name, string lineText) {
-		this.m_parser.f_Pause();
-		this.m_currentName = name;
-		this.m_currentLineText = lineText;
-		this.m_currentTagState = XMLTagState.CLOSE;
-	}
+  /***********************************************************************************/
+  public void OnStartParsing(SmallXmlParser parser) {
+  }
 
-	public void OnChars (string s) {
-	}
+  public void OnEndParsing(SmallXmlParser parser) {
+  }
 
-	public void OnIgnorableWhitespace (string s) {
-	}
+  public void OnStartEndElement(string name, AttributeList attrs, string lineText) {
+    this._parser.Pause();
+    this._currentName = name;
+    this._currentLineText = lineText;
+    CloneAttrsList(attrs);
+    this._currentTagState = XMLTagState.BOTH;
+  }
+  public void OnStartElement(string name, AttributeList attrs, string lineText) {
+    this._parser.Pause();
+    this._currentName = name;
+    this._currentLineText = lineText;
+    CloneAttrsList(attrs);
+    this._currentTagState = XMLTagState.OPEN;
+  }
 
-	public void OnProcessingInstruction (string name, string text) {
-	}
+  public void OnEndElement(string name, string lineText) {
+    this._parser.Pause();
+    this._currentName = name;
+    this._currentLineText = lineText;
+    this._currentTagState = XMLTagState.CLOSE;
+  }
+
+  public void OnChars(string s) {
+  }
+
+  public void OnIgnorableWhitespace(string s) {
+  }
+
+  public void OnProcessingInstruction(string name, string text) {
+  }
 }
