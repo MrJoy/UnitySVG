@@ -17,17 +17,17 @@ public static class SVGStringExtractor {
   }
   //--------------------------------------------------
   //Extract for Syntax:   translate(700 200)rotate(-30)
-  private static char[] splitPipe = new char[] { '|', ' ', ')', '\n', '\t', '\r' };
+  private static char[] splitPipe = new char[] { ')' };
   public static List<SVGTransform> ExtractTransformList(string inputText) {
     List<SVGTransform> _return = new List<SVGTransform>();
-    
+
     string[] valuesStr = inputText.Split(splitPipe, StringSplitOptions.RemoveEmptyEntries);
-    
+
     int len = valuesStr.Length;
     for(int i = 0; i < len; i++) {
       int vt1 = valuesStr[i].IndexOf('(');
-      string _key = valuesStr[i].Substring(0, vt1);
-      string _value = valuesStr[i].Substring(vt1 + 1);
+      string _key = valuesStr[i].Substring(0, vt1).Trim();
+      string _value = valuesStr[i].Substring(vt1 + 1).Trim();
       _return.Add(new SVGTransform(_key, _value));
     }
     return _return;
