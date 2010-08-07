@@ -24,11 +24,11 @@ public struct AttributeList {
   public void Add(string name, string value) {
     if(attrs == null)
       attrs = new Dictionary<string,string>();
-    attrs[name.ToUpper()] = value;
+    attrs[name] = value;
   }
   //-------------------------------------------------------------------------------------//
   public string GetValue(string name) {
-    if((attrs != null)&& attrs.ContainsKey(name))
+    if((attrs != null) && attrs.ContainsKey(name))
       return attrs[name];
     else
       return "";

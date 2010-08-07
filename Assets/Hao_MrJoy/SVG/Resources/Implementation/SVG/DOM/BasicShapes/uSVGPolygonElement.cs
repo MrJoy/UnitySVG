@@ -18,7 +18,7 @@ public class uSVGPolygonElement : uSVGTransformable, uISVGDrawable {
     this._attrList = attrList;
     this._render = _render;
     this._paintable = new uSVGPaintable(inheritPaintable, attrList);
-    this._listPoints = ExtractPoints(this._attrList.GetValue("POINTS"));
+    this._listPoints = ExtractPoints(this._attrList.GetValue("points"));
   }
   //================================================================================
   private List<uSVGPoint> ExtractPoints(string inputText) {

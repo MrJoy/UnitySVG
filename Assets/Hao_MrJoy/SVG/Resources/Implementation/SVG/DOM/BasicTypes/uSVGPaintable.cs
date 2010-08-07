@@ -104,24 +104,22 @@ public class uSVGPaintable{
   private void Initialize(AttributeList attrList) {
     isStrokeWidth = false;
 
-    if(attrList.GetValue("FILL").IndexOf("url") >= 0) {
-      _gradientID = uSVGStringExtractor.ExtractUrl4Gradient(attrList.GetValue("FILL"));
+    if(attrList.GetValue("fill").IndexOf("url") >= 0) {
+      _gradientID = uSVGStringExtractor.ExtractUrl4Gradient(attrList.GetValue("fill"));
     } else {
-      _fillColor = new uSVGColor(attrList.GetValue("FILL"));
+      _fillColor = new uSVGColor(attrList.GetValue("fill"));
     }
-    _strokeColor = new uSVGColor(attrList.GetValue("STROKE"));
+    _strokeColor = new uSVGColor(attrList.GetValue("stroke"));
 
-    if(attrList.GetValue("STROKE-WIDTH") != "") {
-      this.isStrokeWidth = true;
-    }
-    _strokeWidth = new uSVGLength(attrList.GetValue("STROKE-WIDTH"));
+    if(attrList.GetValue("stroke-width") != "") isStrokeWidth = true;
+    _strokeWidth = new uSVGLength(attrList.GetValue("stroke-width"));
 
 
-    SetStrokeLineCap(attrList.GetValue("STROKE-LINECAP"));
-    SetStrokeLineJoin(attrList.GetValue("STROKE-LINEJOIN"));
+    SetStrokeLineCap(attrList.GetValue("stroke-linecap"));
+    SetStrokeLineJoin(attrList.GetValue("stroke-linejoin"));
 
-    if(attrList.GetValue("STROKE-WIDTH") == "")this._strokeWidth.NewValueSpecifiedUnits(1f);
-    Style(attrList.GetValue("STYLE"));
+    if(attrList.GetValue("stroke-width") == "") _strokeWidth.NewValueSpecifiedUnits(1f);
+    Style(attrList.GetValue("style"));
     //style="fill: #ffffff; stroke:#000000; stroke-width:0.172"
   }
   /***********************************************************************************/

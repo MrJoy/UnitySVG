@@ -28,8 +28,8 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
     this._xmlImp = xmlImp;
     this._attrList = this._xmlImp.GetCurrentAttributesList();
     this._paintable = new uSVGPaintable(inheritPaintable, this._attrList);
-    this._width = new uSVGLength(_attrList.GetValue("WIDTH"));
-    this._height = new uSVGLength(_attrList.GetValue("HEIGHT"));
+    this._width = new uSVGLength(_attrList.GetValue("width"));
+    this._height = new uSVGLength(_attrList.GetValue("height"));
     Initial();
   }
   /***********************************************************************************/
@@ -62,8 +62,8 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
       }
       string t_name = this._xmlImp.GetCurrentTagName();
       AttributeList t_attrList;
-        switch(t_name.ToUpper()) {
-          case "RECT": {
+        switch(t_name) {
+          case "rect": {
             t_attrList = this._xmlImp.GetCurrentAttributesList();
             uSVGRectElement temp = new uSVGRectElement(  t_attrList,
                                   this.summaryTransformList,
@@ -72,7 +72,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
             _elementList.Add(temp);
           break;
           }
-          case "LINE": {
+          case "line": {
             t_attrList = this._xmlImp.GetCurrentAttributesList();
             uSVGLineElement temp = new uSVGLineElement(  t_attrList,
                                   this.summaryTransformList,
@@ -81,7 +81,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
             _elementList.Add(temp);
           break;
           }
-          case "CIRCLE": {
+          case "circle": {
             t_attrList = this._xmlImp.GetCurrentAttributesList();
             uSVGCircleElement temp = new uSVGCircleElement(  t_attrList,
                                   this.summaryTransformList,
@@ -90,7 +90,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
             _elementList.Add(temp);
           break;
           }
-          case "ELLIPSE": {
+          case "ellipse": {
             t_attrList = this._xmlImp.GetCurrentAttributesList();
             uSVGEllipseElement temp = new uSVGEllipseElement(  t_attrList,
                                   this.summaryTransformList,
@@ -99,7 +99,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
             _elementList.Add(temp);
           break;
           }
-          case "POLYLINE": {
+          case "polyline": {
             t_attrList = this._xmlImp.GetCurrentAttributesList();
             uSVGPolylineElement temp = new uSVGPolylineElement(  t_attrList,
                                   this.summaryTransformList,
@@ -108,7 +108,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
             _elementList.Add(temp);
           break;
           }
-          case "POLYGON": {
+          case "polygon": {
             t_attrList = this._xmlImp.GetCurrentAttributesList();
             uSVGPolygonElement temp = new uSVGPolygonElement(t_attrList,
                                   this.summaryTransformList,
@@ -117,7 +117,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
             _elementList.Add(temp);
           break;
           }
-          case "PATH": {
+          case "path": {
             t_attrList = this._xmlImp.GetCurrentAttributesList();
             uSVGPathElement temp = new uSVGPathElement(  t_attrList,
                                   this.summaryTransformList,
@@ -126,14 +126,14 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
             _elementList.Add(temp);
           break;
           }
-          case "SVG": {
+          case "svg": {
             _elementList.Add(new uSVGSVGElement(  this._xmlImp,
                                 this.summaryTransformList,
                                 this._paintable,
                                 this._render));
             break;
           }
-          case "G": {
+          case "g": {
             _elementList.Add(new uSVGGElement(  this._xmlImp,
                               this.summaryTransformList,
                               this._paintable,
@@ -141,7 +141,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
             break;
           }
           //--------
-          case "LINEARGRADIENT": {
+          case "linearGradient": {
             t_attrList = this._xmlImp.GetCurrentAttributesList();
             uSVGLinearGradientElement temp = new uSVGLinearGradientElement(this._xmlImp,
                                           t_attrList);
@@ -149,22 +149,22 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
             break;
           }
           //--------
-          case "RADIALGRADIENT": {
+          case "radialGradient": {
             t_attrList = this._xmlImp.GetCurrentAttributesList();
             uSVGRadialGradientElement temp = new uSVGRadialGradientElement(this._xmlImp,
                                           t_attrList);
             this._paintable.AppendRadialGradient(temp);
             break;
           }
-          case "DEFS": {
+          case "defs": {
             GetElementList();
             break;
           }
-          case "TITLE": {
+          case "title": {
             GetElementList();
             break;
           }
-          case "DESC": {
+          case "desc": {
             GetElementList();
             break;
           }
@@ -198,7 +198,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
   }
   /***********************************************************************************/
   private void SetViewBox() {
-    string attr = this._attrList.GetValue("VIEWBOX");
+    string attr = this._attrList.GetValue("viewBox");
     if(attr != "") {
       string[] _temp = uSVGStringExtractor.ExtractTransformValue(attr);
       if(_temp.Length == 4) {
@@ -252,7 +252,7 @@ public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
       float attrWidth = this._width.value;
       float attrHeight = this._height.value;
 
-      if(_attrList.GetValue("VIEWBOX") != "") {
+      if(_attrList.GetValue("viewBox") != "") {
         uSVGRect r = this._viewport;
         x += -r.x;
         y += -r.y;

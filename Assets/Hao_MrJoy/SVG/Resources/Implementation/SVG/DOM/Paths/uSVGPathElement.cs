@@ -19,11 +19,11 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
   /***********************************************************************************/
   private void Initial() {
     this.currentTransformList = new uSVGTransformList(
-                      this._attrList.GetValue("TRANSFORM"));
+                      this._attrList.GetValue("transform"));
     _segList = new uSVGPathSegList();
 
     //-----------
-    string _d = this._attrList.GetValue("D");
+    string _d = this._attrList.GetValue("d");
 
     List<char> _charList = new List<char>();
     List<string> _valueList = new List<string>();

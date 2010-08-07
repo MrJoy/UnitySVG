@@ -39,10 +39,10 @@ public class uSVGLineElement : uSVGTransformable, uISVGDrawable {
     this._attrList = attrList;
     this._paintable = new uSVGPaintable(inheritPaintable, this._attrList);
     this._render = _render;
-    this._x1 = new uSVGLength(attrList.GetValue("X1"));
-    this._y1 = new uSVGLength(attrList.GetValue("Y1"));
-    this._x2 = new uSVGLength(attrList.GetValue("X2"));
-    this._y2 = new uSVGLength(attrList.GetValue("Y2"));
+    this._x1 = new uSVGLength(attrList.GetValue("x1"));
+    this._y1 = new uSVGLength(attrList.GetValue("y1"));
+    this._x2 = new uSVGLength(attrList.GetValue("x2"));
+    this._y2 = new uSVGLength(attrList.GetValue("y2"));
   }
   /***********************************************************************************/
   //Thuc thi Interface Drawable

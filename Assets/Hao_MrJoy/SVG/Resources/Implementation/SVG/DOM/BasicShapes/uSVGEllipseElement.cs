@@ -40,11 +40,11 @@ public class uSVGEllipseElement : uSVGTransformable, uISVGDrawable {
     this._attrList = attrList;
     this._render = _render;
     this._paintable = new uSVGPaintable(inheritPaintable, this._attrList);
-    this._cx = new uSVGLength(attrList.GetValue("CX"));
-    this._cy = new uSVGLength(attrList.GetValue("CY"));
-    this._rx = new uSVGLength(attrList.GetValue("RX"));
-    this._ry = new uSVGLength(attrList.GetValue("RY"));
-    this.currentTransformList = new uSVGTransformList(attrList.GetValue("TRANSFORM"));
+    this._cx = new uSVGLength(attrList.GetValue("cx"));
+    this._cy = new uSVGLength(attrList.GetValue("cy"));
+    this._rx = new uSVGLength(attrList.GetValue("rx"));
+    this._ry = new uSVGLength(attrList.GetValue("ry"));
+    this.currentTransformList = new uSVGTransformList(attrList.GetValue("transform"));
   }
   //================================================================================
   private uSVGGraphicsPath _graphicsPath;

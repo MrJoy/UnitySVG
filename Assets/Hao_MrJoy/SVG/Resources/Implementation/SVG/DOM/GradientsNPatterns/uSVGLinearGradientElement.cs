@@ -49,25 +49,25 @@ public class uSVGLinearGradientElement : uSVGGradientElement {
   private void Initialize() {
     this._stopList = new List<uSVGStopElement>();
 
-    string temp = this._attrList.GetValue("ID");
+    string temp = this._attrList.GetValue("id");
     this._id = temp;
 
-    temp = this._attrList.GetValue("X1");
+    temp = this._attrList.GetValue("x1");
     if(temp == "") {
       _x1 = new uSVGLength("0%");
     } else _x1 = new uSVGLength(temp);
 
-    temp = this._attrList.GetValue("Y1");
+    temp = this._attrList.GetValue("y1");
     if(temp == "") {
       _y1 = new uSVGLength("0%");
     } else _y1 = new uSVGLength(temp);
 
-    temp = this._attrList.GetValue("X2");
+    temp = this._attrList.GetValue("x2");
     if(temp == "") {
       _x2 = new uSVGLength("100%");
     } else _x2 = new uSVGLength(temp);
 
-    temp = this._attrList.GetValue("Y2");
+    temp = this._attrList.GetValue("y2");
     if(temp == "") {
       _y2 = new uSVGLength("0%");
     } else _y2 = new uSVGLength(temp);

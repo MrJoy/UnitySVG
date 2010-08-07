@@ -20,7 +20,7 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
     _attrList = _xmlImp.GetCurrentAttributesList();
     _paintable = new uSVGPaintable(inheritPaintable, _attrList);
     _elementList = new List<object>();
-    currentTransformList = new uSVGTransformList(_attrList.GetValue("TRANSFORM"));
+    currentTransformList = new uSVGTransformList(_attrList.GetValue("transform"));
     GetElementList();
   }
   /***********************************************************************************/
@@ -31,76 +31,76 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
         exitFlag = true;
         continue;
       }
-      switch(_xmlImp.GetCurrentTagName().ToUpper()) {
-        case "RECT":
+      switch(_xmlImp.GetCurrentTagName()) {
+        case "rect":
           _elementList.Add(new uSVGRectElement(_xmlImp.GetCurrentAttributesList(),
                                                summaryTransformList,
                                                _paintable,
                                                _render));
           break;
-        case "LINE":
+        case "line":
           _elementList.Add(new uSVGLineElement(_xmlImp.GetCurrentAttributesList(),
                                                summaryTransformList,
                                                _paintable,
                                                _render));
           break;
-        case "CIRCLE":
+        case "circle":
           _elementList.Add(new uSVGCircleElement(_xmlImp.GetCurrentAttributesList(),
                                                  summaryTransformList,
                                                  _paintable,
                                                  _render));
           break;
-        case "ELLIPSE":
+        case "ellipse":
           _elementList.Add(new uSVGEllipseElement(_xmlImp.GetCurrentAttributesList(),
                                                   summaryTransformList,
                                                   _paintable,
                                                   _render));
           break;
-        case "POLYLINE":
+        case "polyline":
           _elementList.Add(new uSVGPolylineElement(_xmlImp.GetCurrentAttributesList(),
                                                    summaryTransformList,
                                                    _paintable,
                                                    _render));
           break;
-        case "POLYGON":
+        case "polygon":
           _elementList.Add(new uSVGPolygonElement(_xmlImp.GetCurrentAttributesList(),
                                                   summaryTransformList,
                                                   _paintable,
                                                   _render));
           break;
-        case "PATH":
+        case "path":
           _elementList.Add(new uSVGPathElement(_xmlImp.GetCurrentAttributesList(),
                                                summaryTransformList,
                                                _paintable,
                                                _render));
           break;
-        case "SVG":
+        case "svg":
           _elementList.Add(new uSVGSVGElement(_xmlImp,
                            summaryTransformList,
                            _paintable,
                            _render));
           break;
-        case "G":
+        case "g":
           _elementList.Add(new uSVGGElement(_xmlImp,
                            summaryTransformList,
                            _paintable,
                            _render));
           break;
         //--------
-        case "LINEARGRADIENT":
+        case "linearGradient":
           _paintable.AppendLinearGradient(new uSVGLinearGradientElement(_xmlImp, _xmlImp.GetCurrentAttributesList()));
           break;
         //--------
-        case "RADIALGRADIENT":
+        case "radialGradient":
           _paintable.AppendRadialGradient(new uSVGRadialGradientElement(_xmlImp, _xmlImp.GetCurrentAttributesList()));
           break;
-        case "DEFS":
+        case "defs":
           GetElementList();
           break;
-        case "TITLE":
+        case "title":
           GetElementList();
           break;
-        case "DESC":
+        case "desc":
           GetElementList();
           break;
 //          default:

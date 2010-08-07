@@ -50,30 +50,30 @@ public class uSVGRadialGradientElement : uSVGGradientElement {
   /***************************************************************************/
   private void Initialize() {
     this._stopList = new List<uSVGStopElement>();
-    string temp = this._attrList.GetValue("ID");
+    string temp = this._attrList.GetValue("id");
     this._id = temp;
 
-    temp = this._attrList.GetValue("CX");
+    temp = this._attrList.GetValue("cx");
     if(temp == "") {
       _cx = new uSVGLength("50%");
     } else _cx = new uSVGLength(temp);
 
-    temp = this._attrList.GetValue("CY");
+    temp = this._attrList.GetValue("cy");
     if(temp == "") {
       _cy = new uSVGLength("50%");
     } else _cy = new uSVGLength(temp);
 
-    temp = this._attrList.GetValue("R");
+    temp = this._attrList.GetValue("r");
     if(temp == "") {
       _r = new uSVGLength("50%");
     } else _r = new uSVGLength(temp);
 
-    temp = this._attrList.GetValue("FX");
+    temp = this._attrList.GetValue("fx");
     if(temp == "") {
       _fx = new uSVGLength("50%");
     } else _fx = new uSVGLength(temp);
 
-    temp = this._attrList.GetValue("FY");
+    temp = this._attrList.GetValue("fy");
     if(temp == "") {
       _fy = new uSVGLength("50%");
     } else _fy = new uSVGLength(temp);
