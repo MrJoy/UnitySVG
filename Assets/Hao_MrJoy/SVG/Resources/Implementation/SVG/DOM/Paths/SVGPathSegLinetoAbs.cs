@@ -10,7 +10,7 @@ public class SVGPathSegLinetoAbs : SVGPathSeg, ISVGDrawableSeg {
     get{ return this._y;}
   }
   //================================================================================
-  public SVGPathSegLinetoAbs(float x, float y) : base(SVGPathSegTypes.LineTo_Abs) {
+  public SVGPathSegLinetoAbs(float x, float y) : base() {
     this._x = x;
     this._y = y;
   }

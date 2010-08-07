@@ -20,8 +20,7 @@ public class SVGPathSegCurvetoQuadraticAbs : SVGPathSegCurvetoQuadratic, ISVGDra
     get{ return this._y1;}
   }
   //================================================================================
-  public SVGPathSegCurvetoQuadraticAbs(float x1, float y1, float x, float y)
-                    : base(SVGPathSegTypes.CurveTo_Quadratic_Abs) {
+  public SVGPathSegCurvetoQuadraticAbs(float x1, float y1, float x, float y) : base() {
     this._x = x;
     this._y = y;
     this._x1 = x1;

@@ -10,7 +10,7 @@ public class SVGPathSegLinetoRel : SVGPathSeg, ISVGDrawableSeg  {
     get{ return this._y;}
   }
   //================================================================================
-  public SVGPathSegLinetoRel(float x, float y) : base(SVGPathSegTypes.LineTo_Rel) {
+  public SVGPathSegLinetoRel(float x, float y) : base() {
     this._x = x;
     this._y = y;
   }

@@ -5,8 +5,7 @@ public class SVGPathSegLinetoHorizontalAbs : SVGPathSeg, ISVGDrawableSeg  {
     get{ return this._x;}
   }
   //================================================================================
-  public SVGPathSegLinetoHorizontalAbs(float x) :
-                  base(SVGPathSegTypes.LineTo_Horizontal_Abs) {
+  public SVGPathSegLinetoHorizontalAbs(float x) : base() {
     this._x = x;
   }
   //================================================================================

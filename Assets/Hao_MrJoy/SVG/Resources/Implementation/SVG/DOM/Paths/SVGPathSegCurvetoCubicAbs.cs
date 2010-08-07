@@ -30,8 +30,7 @@ public class SVGPathSegCurvetoCubicAbs : SVGPathSegCurvetoCubic, ISVGDrawableSeg
     get{ return this._y2;}
   }
   //================================================================================
-  public SVGPathSegCurvetoCubicAbs(float x1, float y1, float x2, float y2, float x, float y)
-                        : base(SVGPathSegTypes.CurveTo_Cubic_Abs) {
+  public SVGPathSegCurvetoCubicAbs(float x1, float y1, float x2, float y2, float x, float y) : base() {
     this._x = x;
     this._y = y;
     this._x1 = x1;

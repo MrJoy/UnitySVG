@@ -10,7 +10,7 @@ public class SVGPathSegMovetoRel : SVGPathSeg, ISVGDrawableSeg {
     get{ return this._y;}
   }
   //================================================================================
-  public SVGPathSegMovetoRel(float x, float y) : base(SVGPathSegTypes.MoveTo_Rel) {
+  public SVGPathSegMovetoRel(float x, float y) : base() {
     this._x = x;
     this._y = y;
   }

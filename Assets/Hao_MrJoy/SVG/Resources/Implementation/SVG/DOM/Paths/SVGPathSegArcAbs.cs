@@ -17,7 +17,7 @@ public class SVGPathSegArcAbs : SVGPathSeg, ISVGDrawableSeg  {
   //================================================================================
   public SVGPathSegArcAbs(float r1, float r2, float angle,
               bool largeArcFlag, bool sweepFlag,
-              float x, float y) : base(SVGPathSegTypes.Arc_Abs) {
+              float x, float y) : base() {
     this._r1 = r1;
     this._r2 = r2;
     this._angle = angle;

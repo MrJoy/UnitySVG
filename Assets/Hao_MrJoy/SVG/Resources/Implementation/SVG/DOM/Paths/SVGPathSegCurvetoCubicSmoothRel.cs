@@ -20,8 +20,7 @@ public class SVGPathSegCurvetoCubicSmoothRel : SVGPathSegCurvetoCubic, ISVGDrawa
     get{ return this._y2;}
   }
   //================================================================================
-  public SVGPathSegCurvetoCubicSmoothRel(float x2, float y2, float x, float y)
-                    : base(SVGPathSegTypes.CurveTo_Cubic_Smooth_Rel) {
+  public SVGPathSegCurvetoCubicSmoothRel(float x2, float y2, float x, float y) : base() {
     this._x = x;
     this._y = y;
     this._x2 = x2;

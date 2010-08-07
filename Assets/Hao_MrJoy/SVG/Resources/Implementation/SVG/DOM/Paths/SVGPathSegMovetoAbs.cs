@@ -10,7 +10,7 @@ public class SVGPathSegMovetoAbs : SVGPathSeg, ISVGDrawableSeg {
     get{ return this._y;}
   }
   //================================================================================
-  public SVGPathSegMovetoAbs(float x, float y) : base(SVGPathSegTypes.MoveTo_Abs) {
+  public SVGPathSegMovetoAbs(float x, float y) : base() {
     this._x = x;
     this._y = y;
   }

@@ -5,8 +5,7 @@ public class SVGPathSegLinetoVerticalRel : SVGPathSeg, ISVGDrawableSeg  {
     get{ return this._y;}
   }
   //================================================================================
-  public SVGPathSegLinetoVerticalRel(float y) :
-                    base(SVGPathSegTypes.LineTo_Vertical_Rel) {
+  public SVGPathSegLinetoVerticalRel(float y) : base() {
     this._y = y;
   }
   //================================================================================

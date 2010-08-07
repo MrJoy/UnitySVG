@@ -10,8 +10,7 @@ public class SVGPathSegCurvetoQuadraticSmoothAbs : SVGPathSegCurvetoQuadratic, I
     get{ return this._y;}
   }
   //================================================================================
-  public SVGPathSegCurvetoQuadraticSmoothAbs(float x, float y)
-                  : base(SVGPathSegTypes.CurveTo_Quadratic_Smooth_Abs) {
+  public SVGPathSegCurvetoQuadraticSmoothAbs(float x, float y) : base() {
     this._x = x;
     this._y = y;
   }
