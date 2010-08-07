@@ -7,9 +7,6 @@ public class uSVGPathSegArcRel : uSVGPathSeg, uISVGDrawableSeg  {
   private bool _largeArcFlag  = false;
   private bool _sweepFlag  = false;
   //================================================================================
-  private uSVGGraphics _render;
-  private uSVGTransformable _transformable;
-  //================================================================================
   public float x {
     get{ return this._x;}
   }

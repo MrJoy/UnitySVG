@@ -13,7 +13,6 @@ public enum uSVGGradientUnitType : ushort {
 }
 public class uSVGGradientElement {
   private uSVGGradientUnitType _gradientUnits;
-  private uSVGTransformList _gradientTransfrom;
   private uSVGSpreadMethodTypes _spreadMethod;
   /***************************************************************************/
   private string _id;

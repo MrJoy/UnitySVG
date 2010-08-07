@@ -3,13 +3,9 @@ using System.Collections.Generic;
 public class uSVGSVGElement : uSVGTransformable, uISVGDrawable {
   private uSVGLength _width;
   private uSVGLength _height;
-  private string _contentScriptType;
-  private string _contentStyleType;
 
   private uSVGRect _viewport;
 
-  private float currentScale;
-  private uSVGPoint currentTranslate;
   //-------------------------------
   private AttributeList _attrList;
   private List<object> _elementList;
