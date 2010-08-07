@@ -27,33 +27,33 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //Method: StrokeLineCapLeft
   //Ve Line Cap, dau cuoi Left
   //--------------------------------------------------------------------------------
-  private void StrokeLineCapLeft(uSVGPoint p1, uSVGPoint p2, float width) {
+  private void StrokeLineCapLeft(SVGPoint p1, SVGPoint p2, float width) {
     if((int)width == 1)return;
-    if((this._graphics.strokeLineCap == uSVGStrokeLineCapTypes.UNKNOWN)||
-     (this._graphics.strokeLineCap == uSVGStrokeLineCapTypes.BUTT))return;
+    if((this._graphics.strokeLineCap == SVGStrokeLineCapMethod.Unknown)||
+     (this._graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))return;
     if(((p1.x - p2.x)*(p1.x - p2.x)+(p1.y - p2.y)*(p1.y - p2.y)) <= 4f)return;
-    if(this._graphics.strokeLineCap == uSVGStrokeLineCapTypes.ROUND) {
+    if(this._graphics.strokeLineCap == SVGStrokeLineCapMethod.Round) {
       this._graphics.FillCircle(p1, width/2f);
       return;
     }
 
-    uSVGPoint _p1 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p2 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p3 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p4 = new uSVGPoint(0f, 0f);
+    SVGPoint _p1 = new SVGPoint(0f, 0f);
+    SVGPoint _p2 = new SVGPoint(0f, 0f);
+    SVGPoint _p3 = new SVGPoint(0f, 0f);
+    SVGPoint _p4 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(p1, p2, width,
           ref _p1, ref _p2, ref _p3, ref _p4);
 
-    uSVGPoint t_p1 = new uSVGPoint(0f, 0f);
-    uSVGPoint t_p2 = new uSVGPoint(0f, 0f);
-    uSVGPoint t_p3 = new uSVGPoint(0f, 0f);
-    uSVGPoint t_p4 = new uSVGPoint(0f, 0f);
+    SVGPoint t_p1 = new SVGPoint(0f, 0f);
+    SVGPoint t_p2 = new SVGPoint(0f, 0f);
+    SVGPoint t_p3 = new SVGPoint(0f, 0f);
+    SVGPoint t_p4 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(_p2, _p1, width,
           ref t_p1, ref t_p2, ref t_p3, ref t_p4);
 
-    uSVGPoint[] points = new uSVGPoint[4];
+    SVGPoint[] points = new SVGPoint[4];
     points[0] = t_p1;
     points[1] = _p2;
     points[2] = _p1;
@@ -65,34 +65,34 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //Method: StrokeLineCapRight
   //Ve Line Cap, dau cuoi Right
   //--------------------------------------------------------------------------------
-  private void StrokeLineCapRight(uSVGPoint p1, uSVGPoint p2, float width) {
+  private void StrokeLineCapRight(SVGPoint p1, SVGPoint p2, float width) {
     if((int)width == 1)return;
-    if((this._graphics.strokeLineCap == uSVGStrokeLineCapTypes.UNKNOWN)||
-     (this._graphics.strokeLineCap == uSVGStrokeLineCapTypes.BUTT))return;
+    if((this._graphics.strokeLineCap == SVGStrokeLineCapMethod.Unknown)||
+     (this._graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))return;
 
     if(((p1.x - p2.x)*(p1.x - p2.x)+(p1.y - p2.y)*(p1.y - p2.y)) <= 4f)return;
-    if(this._graphics.strokeLineCap == uSVGStrokeLineCapTypes.ROUND) {
+    if(this._graphics.strokeLineCap == SVGStrokeLineCapMethod.Round) {
       this._graphics.FillCircle(p2, width/2f);
       return;
     }
 
-    uSVGPoint _p1 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p2 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p3 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p4 = new uSVGPoint(0f, 0f);
+    SVGPoint _p1 = new SVGPoint(0f, 0f);
+    SVGPoint _p2 = new SVGPoint(0f, 0f);
+    SVGPoint _p3 = new SVGPoint(0f, 0f);
+    SVGPoint _p4 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(p1, p2, width,
           ref _p1, ref _p2, ref _p3, ref _p4);
 
-    uSVGPoint t_p1 = new uSVGPoint(0f, 0f);
-    uSVGPoint t_p2 = new uSVGPoint(0f, 0f);
-    uSVGPoint t_p3 = new uSVGPoint(0f, 0f);
-    uSVGPoint t_p4 = new uSVGPoint(0f, 0f);
+    SVGPoint t_p1 = new SVGPoint(0f, 0f);
+    SVGPoint t_p2 = new SVGPoint(0f, 0f);
+    SVGPoint t_p3 = new SVGPoint(0f, 0f);
+    SVGPoint t_p4 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(_p4, _p3, width,
           ref t_p1, ref t_p2, ref t_p3, ref t_p4);
 
-    uSVGPoint[] points = new uSVGPoint[4];
+    SVGPoint[] points = new SVGPoint[4];
     points[0] = _p4;
     points[1] = t_p2;
     points[2] = t_p4;
@@ -103,39 +103,39 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //Method: StrokeLineJoin
   //Ve LineJoin
   //--------------------------------------------------------------------------------
-  private void StrokeLineJoin(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, float width) {
+  private void StrokeLineJoin(SVGPoint p1, SVGPoint p2, SVGPoint p3, float width) {
     if((int)width == 1)return;
     if(((p1.x - p2.x)*(p1.x - p2.x)+(p1.y - p2.y)*(p1.y - p2.y)) <= 4f)return;
-    if(this._graphics.strokeLineJoin == uSVGStrokeLineJoinTypes.ROUND) {
+    if(this._graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Round) {
       this._graphics.FillCircle(p2, width/2f);
       return;
     }
 
-    if((this._graphics.strokeLineJoin == uSVGStrokeLineJoinTypes.MITER)||
-   (this._graphics.strokeLineJoin == uSVGStrokeLineJoinTypes.UNKNOWN)) {
-      uSVGPoint _p1 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p2 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p3 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p4 = new uSVGPoint(0f, 0f);
+    if((this._graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Miter)||
+   (this._graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Unknown)) {
+      SVGPoint _p1 = new SVGPoint(0f, 0f);
+      SVGPoint _p2 = new SVGPoint(0f, 0f);
+      SVGPoint _p3 = new SVGPoint(0f, 0f);
+      SVGPoint _p4 = new SVGPoint(0f, 0f);
 
       this._graphics.GetThickLine(p1, p2, width,
           ref _p1, ref _p2, ref _p3, ref _p4);
 
 
-      uSVGPoint _p5 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p6 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p7 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p8 = new uSVGPoint(0f, 0f);
+      SVGPoint _p5 = new SVGPoint(0f, 0f);
+      SVGPoint _p6 = new SVGPoint(0f, 0f);
+      SVGPoint _p7 = new SVGPoint(0f, 0f);
+      SVGPoint _p8 = new SVGPoint(0f, 0f);
 
       this._graphics.GetThickLine(p2, p3, width,
           ref _p5, ref _p6, ref _p7, ref _p8);
 
-      uSVGPoint _cp1, _cp2;
+      SVGPoint _cp1, _cp2;
       _cp1 = this._graphics.GetCrossPoint(_p1, _p3, _p5, _p7);
       _cp2 = this._graphics.GetCrossPoint(_p2, _p4, _p6, _p8);
 
 
-      uSVGPoint[] points = new uSVGPoint[8];
+      SVGPoint[] points = new SVGPoint[8];
       points[0] = p2;
       points[1] = _p3;
       points[2] = _cp1;
@@ -148,25 +148,25 @@ public class SVGGraphicsStroke : uISVGPathDraw {
       this._graphics.FillPolygon(points);
       return;
     }
-    if(this._graphics.strokeLineJoin == uSVGStrokeLineJoinTypes.BEVEL) {
-      uSVGPoint _p1 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p2 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p3 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p4 = new uSVGPoint(0f, 0f);
+    if(this._graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Bevel) {
+      SVGPoint _p1 = new SVGPoint(0f, 0f);
+      SVGPoint _p2 = new SVGPoint(0f, 0f);
+      SVGPoint _p3 = new SVGPoint(0f, 0f);
+      SVGPoint _p4 = new SVGPoint(0f, 0f);
 
       this._graphics.GetThickLine(p1, p2, width,
           ref _p1, ref _p2, ref _p3, ref _p4);
 
 
-      uSVGPoint _p5 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p6 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p7 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p8 = new uSVGPoint(0f, 0f);
+      SVGPoint _p5 = new SVGPoint(0f, 0f);
+      SVGPoint _p6 = new SVGPoint(0f, 0f);
+      SVGPoint _p7 = new SVGPoint(0f, 0f);
+      SVGPoint _p8 = new SVGPoint(0f, 0f);
 
       this._graphics.GetThickLine(p2, p3, width,
           ref _p5, ref _p6, ref _p7, ref _p8);
 
-      uSVGPoint[] points = new uSVGPoint[6];
+      SVGPoint[] points = new SVGPoint[6];
       points[0] = p2;
       points[1] = _p3;
       points[2] = _p5;
@@ -182,13 +182,13 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Methods: MoveTo
   //--------------------------------------------------------------------------------
-  public void MoveTo(uSVGPoint p) {
+  public void MoveTo(SVGPoint p) {
     this._basicDraw.MoveTo(p);
   }
   //--------------------------------------------------------------------------------
   //Methods: CircleTo
   //--------------------------------------------------------------------------------
-  public void CircleTo(uSVGPoint p, float r) {
+  public void CircleTo(SVGPoint p, float r) {
     if((this.isUseWidth)&&((int)this._width > 1)) {
       CircleTo(p, r, this._width);
       return;
@@ -196,13 +196,13 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     Circle(p, r);
   }
   //-----
-  public void CircleTo(uSVGPoint p, float r, float width) {
+  public void CircleTo(SVGPoint p, float r, float width) {
     Circle(p, r, width);
   }
   //--------------------------------------------------------------------------------
   //Methods: EllipseTo
   //--------------------------------------------------------------------------------
-  public void EllipseTo(uSVGPoint p, float r1, float r2, float angle) {
+  public void EllipseTo(SVGPoint p, float r1, float r2, float angle) {
     if((this.isUseWidth)&&((int)this._width > 1)) {
       EllipseTo(p, r1, r2, this._width);
       return;
@@ -210,14 +210,14 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     Ellipse(p, r1, r2, angle);
   }
   //-----
-  public void EllipseTo(uSVGPoint p, float r1, float r2, float angle, float width) {
+  public void EllipseTo(SVGPoint p, float r1, float r2, float angle, float width) {
     Ellipse(p, r1, r2, angle, width);
   }
   //--------------------------------------------------------------------------------
   //Methods: ArcTo
   //--------------------------------------------------------------------------------
   public void ArcTo(float r1, float r2, float angle,
-        bool largeArcFlag, bool sweepFlag, uSVGPoint p) {
+        bool largeArcFlag, bool sweepFlag, SVGPoint p) {
     if((this.isUseWidth)&&((int)this._width > 1))
       ArcTo(r1, r2, angle, largeArcFlag, sweepFlag, p, this._width);
     else
@@ -225,12 +225,12 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   }
   //-----
   public void ArcTo(float r1, float r2, float angle,
-        bool largeArcFlag, bool sweepFlag, uSVGPoint p, float width) {
+        bool largeArcFlag, bool sweepFlag, SVGPoint p, float width) {
     float tx, ty, rx, ry;
     rx = r1;
     ry = r2;
-    uSVGPoint p1 = new uSVGPoint(0f, 0f);
-    uSVGPoint p2 = new uSVGPoint(0f, 0f);
+    SVGPoint p1 = new SVGPoint(0f, 0f);
+    SVGPoint p2 = new SVGPoint(0f, 0f);
     p1.SetValue(this._basicDraw.currentPoint);
     p2.SetValue(p);
 
@@ -302,8 +302,8 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     int number = 50;
     float deltaT = _delta  / number;
     //---Get Control Point
-    uSVGPoint _controlPoint1 = new uSVGPoint(0f, 0f);
-    uSVGPoint _controlPoint2 = new uSVGPoint(0f, 0f);
+    SVGPoint _controlPoint1 = new SVGPoint(0f, 0f);
+    SVGPoint _controlPoint2 = new SVGPoint(0f, 0f);
 
     for(int i = 0; i <= number; i++) {
       float t_angle = (deltaT * i + _angle)* Mathf.PI / 180.0f;
@@ -332,18 +332,18 @@ public class SVGGraphicsStroke : uISVGPathDraw {
       }
     }
     //-----
-    uSVGPoint _p1 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p2 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p3 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p4 = new uSVGPoint(0f, 0f);
+    SVGPoint _p1 = new SVGPoint(0f, 0f);
+    SVGPoint _p2 = new SVGPoint(0f, 0f);
+    SVGPoint _p3 = new SVGPoint(0f, 0f);
+    SVGPoint _p4 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(p1, _controlPoint1, width,
         ref _p1, ref _p2, ref _p3, ref _p4);
 
-    uSVGPoint _p5 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p6 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p7 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p8 = new uSVGPoint(0f, 0f);
+    SVGPoint _p5 = new SVGPoint(0f, 0f);
+    SVGPoint _p6 = new SVGPoint(0f, 0f);
+    SVGPoint _p7 = new SVGPoint(0f, 0f);
+    SVGPoint _p8 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(_controlPoint2, p2, width,
           ref _p5, ref _p6, ref _p7, ref _p8);
@@ -358,7 +358,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     t_len1 = (_p1.x - cx)*(_p1.x - cx)+(_p1.y - cy)*(_p1.y - cy);
     t_len2 = (_p2.x - cx)*(_p2.x - cx)+(_p2.y - cy)*(_p2.y - cy);
 
-    uSVGPoint tempPoint = new uSVGPoint(0f, 0f);
+    SVGPoint tempPoint = new SVGPoint(0f, 0f);
     if(t_len1 > t_len2) {
       tempPoint.SetValue(_p1);
       _p1.SetValue(_p2);
@@ -387,7 +387,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Methods: CubicCurveTo
   //--------------------------------------------------------------------------------
-  public void CubicCurveTo(uSVGPoint p1, uSVGPoint p2, uSVGPoint p) {
+  public void CubicCurveTo(SVGPoint p1, SVGPoint p2, SVGPoint p) {
     if((this.isUseWidth)&&((int)this._width > 1)) {
       CubicCurveTo(p1, p2, p, this._width);
       return;
@@ -395,14 +395,14 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     this._basicDraw.CubicCurveTo(p1, p2, p);
   }
   //-----
-  public void CubicCurveTo(uSVGPoint p1, uSVGPoint p2, uSVGPoint p, float width) {
-    uSVGPoint _point = new uSVGPoint(0f, 0f);
+  public void CubicCurveTo(SVGPoint p1, SVGPoint p2, SVGPoint p, float width) {
+    SVGPoint _point = new SVGPoint(0f, 0f);
     _point.SetValue(this._basicDraw.currentPoint);
 
-    uSVGPoint _p1 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p2 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p3 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p4 = new uSVGPoint(0f, 0f);
+    SVGPoint _p1 = new SVGPoint(0f, 0f);
+    SVGPoint _p2 = new SVGPoint(0f, 0f);
+    SVGPoint _p3 = new SVGPoint(0f, 0f);
+    SVGPoint _p4 = new SVGPoint(0f, 0f);
 
     bool temp;
     temp = this._graphics.GetThickLine(_point, p1, width,
@@ -412,23 +412,23 @@ public class SVGGraphicsStroke : uISVGPathDraw {
       return;
     }
 
-    uSVGPoint _p5 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p6 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p7 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p8 = new uSVGPoint(0f, 0f);
+    SVGPoint _p5 = new SVGPoint(0f, 0f);
+    SVGPoint _p6 = new SVGPoint(0f, 0f);
+    SVGPoint _p7 = new SVGPoint(0f, 0f);
+    SVGPoint _p8 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(p1, p2, width,
           ref _p5, ref _p6, ref _p7, ref _p8);
 
-    uSVGPoint _p9 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p10 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p11 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p12 = new uSVGPoint(0f, 0f);
+    SVGPoint _p9 = new SVGPoint(0f, 0f);
+    SVGPoint _p10 = new SVGPoint(0f, 0f);
+    SVGPoint _p11 = new SVGPoint(0f, 0f);
+    SVGPoint _p12 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(p2, p, width,
           ref _p9, ref _p10, ref _p11, ref _p12);
 
-    uSVGPoint _cp1, _cp2, _cp3, _cp4;
+    SVGPoint _cp1, _cp2, _cp3, _cp4;
     _cp1 = this._graphics.GetCrossPoint(_p1, _p3, _p5, _p7);
     _cp2 = this._graphics.GetCrossPoint(_p2, _p4, _p6, _p8);
     _cp3 = this._graphics.GetCrossPoint(_p5, _p7, _p9, _p11);
@@ -452,7 +452,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Methods: QuadraticCurveTo
   //--------------------------------------------------------------------------------
-  public void QuadraticCurveTo(uSVGPoint p1, uSVGPoint p) {
+  public void QuadraticCurveTo(SVGPoint p1, SVGPoint p) {
     if((this.isUseWidth)&&((int)this._width > 1)) {
       QuadraticCurveTo(p1, p, this._width);
       return;
@@ -460,27 +460,27 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     this._basicDraw.QuadraticCurveTo(p1, p);
   }
   //-----
-  public void QuadraticCurveTo(uSVGPoint p1, uSVGPoint p, float width) {
-    uSVGPoint _point = new uSVGPoint(0f, 0f);
+  public void QuadraticCurveTo(SVGPoint p1, SVGPoint p, float width) {
+    SVGPoint _point = new SVGPoint(0f, 0f);
     _point.SetValue(this._basicDraw.currentPoint);
 
-    uSVGPoint _p1 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p2 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p3 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p4 = new uSVGPoint(0f, 0f);
+    SVGPoint _p1 = new SVGPoint(0f, 0f);
+    SVGPoint _p2 = new SVGPoint(0f, 0f);
+    SVGPoint _p3 = new SVGPoint(0f, 0f);
+    SVGPoint _p4 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(_point, p1, width,
         ref _p1, ref _p2, ref _p3, ref _p4);
 
-    uSVGPoint _p5 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p6 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p7 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p8 = new uSVGPoint(0f, 0f);
+    SVGPoint _p5 = new SVGPoint(0f, 0f);
+    SVGPoint _p6 = new SVGPoint(0f, 0f);
+    SVGPoint _p7 = new SVGPoint(0f, 0f);
+    SVGPoint _p8 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(p1, p, width,
           ref _p5, ref _p6, ref _p7, ref _p8);
 
-    uSVGPoint _cp1, _cp2;
+    SVGPoint _cp1, _cp2;
     _cp1 = this._graphics.GetCrossPoint(_p1, _p3, _p5, _p7);
     _cp2 = this._graphics.GetCrossPoint(_p2, _p4, _p6, _p8);
 
@@ -497,7 +497,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Methods: LineTo
   //--------------------------------------------------------------------------------
-  public void LineTo(uSVGPoint p) {
+  public void LineTo(SVGPoint p) {
     if((this.isUseWidth)&&((int)this._width > 1)) {
       LineTo(p, this._width);
       return;
@@ -505,8 +505,8 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     this._basicDraw.LineTo(p);
   }
   //-----
-  public void LineTo(uSVGPoint p, float width) {
-    uSVGPoint _point = new uSVGPoint(0f, 0f);
+  public void LineTo(SVGPoint p, float width) {
+    SVGPoint _point = new SVGPoint(0f, 0f);
     _point.SetValue(this._basicDraw.currentPoint);
     Line(_point, p, width);
     MoveTo(p);
@@ -514,7 +514,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Methods: Line
   //--------------------------------------------------------------------------------
-  public void Line(uSVGPoint p1, uSVGPoint p2) {
+  public void Line(SVGPoint p1, SVGPoint p2) {
     if((this.isUseWidth)&&((int)this._width > 1)) {
       Line(p1, p2, this._width);
       return;
@@ -522,7 +522,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     this._basicDraw.Line(p1, p2);
   }
   //-----
-  public void Line(uSVGPoint p1, uSVGPoint p2, float width) {
+  public void Line(SVGPoint p1, SVGPoint p2, float width) {
     if((int)width == 1) {
       Line(p1, p2);
     } else {
@@ -530,15 +530,15 @@ public class SVGGraphicsStroke : uISVGPathDraw {
         return;
       StrokeLineCapLeft(p1, p2, width);
       StrokeLineCapRight(p1, p2, width);
-      uSVGPoint _p1 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p2 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p3 = new uSVGPoint(0f, 0f);
-      uSVGPoint _p4 = new uSVGPoint(0f, 0f);
+      SVGPoint _p1 = new SVGPoint(0f, 0f);
+      SVGPoint _p2 = new SVGPoint(0f, 0f);
+      SVGPoint _p3 = new SVGPoint(0f, 0f);
+      SVGPoint _p4 = new SVGPoint(0f, 0f);
 
       this._graphics.GetThickLine(p1, p2, width,
           ref _p1, ref _p2, ref _p3, ref _p4);
 
-      uSVGPoint[] points = new uSVGPoint[4];
+      SVGPoint[] points = new SVGPoint[4];
       points[0] = _p1;
       points[1] = _p3;
       points[2] = _p4;
@@ -549,7 +549,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: Rect
   //--------------------------------------------------------------------------------
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
     if((this.isUseWidth)&&((int)this._width > 1)) {
       Rect(p1, p2, p3, p4, this._width);
       return;
@@ -557,11 +557,11 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     this._basicDraw.Rect(p1, p2, p3, p4);
   }
   //-----
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4, float width) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4, float width) {
     if((int)width == 1) {
       Rect(p1, p2, p3, p4);
     }
-    uSVGPoint[] points = new uSVGPoint[4];
+    SVGPoint[] points = new SVGPoint[4];
     points[0] = p1;
     points[1] = p2;
     points[2] = p3;
@@ -571,8 +571,8 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Methods: Rounded Rect
   //--------------------------------------------------------------------------------
-  public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-      uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+      SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
       float r1, float r2, float angle) {
 
     if((this.isUseWidth)&&((int)this._width > 1)) {
@@ -596,8 +596,8 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     this._basicDraw.ArcTo(r1, r2, angle, false, true, p1);
   }
   //-----
-  public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-      uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+      SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
       float r1, float r2, float angle, float width) {
 
     if((int)width == 1) {
@@ -606,18 +606,18 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     }
 
     Line(p1, p2, width); Line(p3, p4, width); Line(p5, p6, width); Line(p7, p8, width);
-    uSVGPoint _p1 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p2 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p3 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p4 = new uSVGPoint(0f, 0f);
+    SVGPoint _p1 = new SVGPoint(0f, 0f);
+    SVGPoint _p2 = new SVGPoint(0f, 0f);
+    SVGPoint _p3 = new SVGPoint(0f, 0f);
+    SVGPoint _p4 = new SVGPoint(0f, 0f);
 
     this._graphics.GetThickLine(p1, p2, width,
           ref _p1, ref _p2, ref _p3, ref _p4);
 
-    uSVGPoint _p5 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p6 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p7 = new uSVGPoint(0f, 0f);
-    uSVGPoint _p8 = new uSVGPoint(0f, 0f);
+    SVGPoint _p5 = new SVGPoint(0f, 0f);
+    SVGPoint _p6 = new SVGPoint(0f, 0f);
+    SVGPoint _p7 = new SVGPoint(0f, 0f);
+    SVGPoint _p8 = new SVGPoint(0f, 0f);
 
     //-------
     this._graphics.GetThickLine(p3, p4, width,
@@ -684,7 +684,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Methods: Circle
   //--------------------------------------------------------------------------------
-  public void Circle(uSVGPoint p, float r) {
+  public void Circle(SVGPoint p, float r) {
     if((this.isUseWidth)&&((int)this._width > 1)) {
       Circle(p, r, this._width);
       return;
@@ -692,15 +692,15 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     this._basicDraw.Circle(p, r);
   }
   //-----
-  public void Circle(uSVGPoint p, float r, float width) {
+  public void Circle(SVGPoint p, float r, float width) {
     if((int)width == 1) {
       Circle(p, r);
     } else {
       int r1 = (int)(width / 2f);
       int r2 = (int)width - r1;
 
-      uSVGPoint[] _points = new uSVGPoint[1];
-      _points[0] = new uSVGPoint(p.x, p.y);
+      SVGPoint[] _points = new SVGPoint[1];
+      _points[0] = new SVGPoint(p.x, p.y);
 
       SVGGraphicsPath _graphicsPath = new SVGGraphicsPath();
       _graphicsPath.AddCircleTo(p, r + r1);
@@ -712,7 +712,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Methods: Ellipse
   //--------------------------------------------------------------------------------
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle) {
     if((this.isUseWidth)&&((int)this._width > 1)) {
       Ellipse(p, rx, ry, angle, this._width);
       return;
@@ -721,15 +721,15 @@ public class SVGGraphicsStroke : uISVGPathDraw {
 
   }
   //-----
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle, float width) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle, float width) {
     if((int)width == 1) {
       Ellipse(p, rx, ry, angle);
     } else {
       int r1 = (int)(width / 2f);
       int r2 = (int)width - r1;
 
-      uSVGPoint[] _points = new uSVGPoint[1];
-      _points[0] = new uSVGPoint(p.x, p.y);
+      SVGPoint[] _points = new SVGPoint[1];
+      _points[0] = new SVGPoint(p.x, p.y);
 
       SVGGraphicsPath _graphicsPath = new SVGGraphicsPath();
       _graphicsPath.AddEllipseTo(p, rx + r1, ry + r1, angle);
@@ -741,7 +741,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: Polygon
   //--------------------------------------------------------------------------------
-  public void Polygon(uSVGPoint[] points) {
+  public void Polygon(SVGPoint[] points) {
 
     if((this.isUseWidth)&&((int)this._width > 1)) {
       Polygon(points, this._width);
@@ -758,7 +758,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     }
   }
   //-----
-  public void Polygon(uSVGPoint[] points, float width) {
+  public void Polygon(SVGPoint[] points, float width) {
     if((int)width == 1) {
       Polygon(points);
       return;
@@ -785,7 +785,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Methods: Polyline
   //--------------------------------------------------------------------------------
-  public void Polyline(uSVGPoint[] points) {
+  public void Polyline(SVGPoint[] points) {
 
     if((this.isUseWidth)&&((int)this._width > 1)) {
       Polyline(points, this._width);
@@ -801,7 +801,7 @@ public class SVGGraphicsStroke : uISVGPathDraw {
     }
   }
   //-----
-  public void Polyline(uSVGPoint[] points, float width) {
+  public void Polyline(SVGPoint[] points, float width) {
     if((int)width == 1) {
       Polygon(points);
       return;

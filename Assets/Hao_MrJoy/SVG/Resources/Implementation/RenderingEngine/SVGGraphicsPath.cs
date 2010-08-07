@@ -21,18 +21,18 @@ public enum SVGPathElementTypes : ushort {
   LineTo = 11
 };
 public class SVGGraphicsPath {
-  private uSVGPoint beginPoint;
-  private uSVGPoint endPoint;
+  private SVGPoint beginPoint;
+  private SVGPoint endPoint;
   //----
-  private uSVGPoint boundUL;
-  private uSVGPoint boundBR;
+  private SVGPoint boundUL;
+  private SVGPoint boundBR;
   //-----
   private bool needSetFirstPoint;
   //-----
   private SVGFillRuleTypes _fillRule = SVGFillRuleTypes.NoneZero;
   //-----
-  private uSVGTransformList _transformList;
-  private uSVGMatrix _matrixTransform;
+  private SVGTransformList _transformList;
+  private SVGMatrix _matrixTransform;
   //-----
   private ArrayList listObject;
   private ArrayList listType;
@@ -42,7 +42,7 @@ public class SVGGraphicsPath {
     set { _fillRule = value; }
   }
   //-----
-  public uSVGMatrix matrixTransform {
+  public SVGMatrix matrixTransform {
     get {
       if(_matrixTransform == null) {
         _matrixTransform = transformList.Consolidate().matrix;
@@ -55,26 +55,26 @@ public class SVGGraphicsPath {
     get {
       float angle = 0.0f;
       for(int i = 0; i < transformList.Count; i++ ) {
-        uSVGTransform temp = transformList[i];
-        if(temp.type == uSVGTransformType.SVG_TRANSFORM_ROTATE)
+        SVGTransform temp = transformList[i];
+        if(temp.type == SVGTransformMode.Rotate)
           angle += temp.angle;
       }
       return angle;
     }
   }
   //-----
-  public uSVGTransformList transformList {
+  public SVGTransformList transformList {
     get { return _transformList; }
     set { _transformList = value; }
   }
   //================================================================================
   public SVGGraphicsPath() {
-    beginPoint        = new uSVGPoint(0f, 0f);
-    endPoint          = new uSVGPoint(0f, 0f);
+    beginPoint        = new SVGPoint(0f, 0f);
+    endPoint          = new SVGPoint(0f, 0f);
     needSetFirstPoint = true;
-    boundUL           = new uSVGPoint(+10000f, +10000f);
-    boundBR           = new uSVGPoint(-10000f, -10000f);
-    transformList     = new uSVGTransformList();
+    boundUL           = new SVGPoint(+10000f, +10000f);
+    boundBR           = new SVGPoint(-10000f, -10000f);
+    transformList     = new SVGTransformList();
     listObject        = new ArrayList();
     listType          = new ArrayList();
   }
@@ -84,11 +84,11 @@ public class SVGGraphicsPath {
   //Method: Reset
   //--------------------------------------------------------------------------------
   public void Reset() {
-    beginPoint        = new uSVGPoint(0f, 0f);
-    endPoint          = new uSVGPoint(0f, 0f);
+    beginPoint        = new SVGPoint(0f, 0f);
+    endPoint          = new SVGPoint(0f, 0f);
     needSetFirstPoint = true;
-    boundUL           = new uSVGPoint(+10000f, +10000f);
-    boundBR           = new uSVGPoint(-10000f, -10000f);
+    boundUL           = new SVGPoint(+10000f, +10000f);
+    boundBR           = new SVGPoint(-10000f, -10000f);
     _fillRule         = SVGFillRuleTypes.NoneZero;
     transformList.Clear();
     listObject.Clear();
@@ -113,15 +113,15 @@ public class SVGGraphicsPath {
     if((y + dy) > boundBR.y)boundBR.y = y + dy;
   }
   //-----
-  private void ExpandBounds(uSVGPoint point) {
+  private void ExpandBounds(SVGPoint point) {
     ExpandBounds(point.x, point.y);
   }
   //-----
-  private void ExpandBounds(uSVGPoint point, float deltax, float deltay) {
+  private void ExpandBounds(SVGPoint point, float deltax, float deltay) {
     ExpandBounds(point.x, point.y, deltax, deltay);
   }
   //-----
-  private void ExpandBounds(List<uSVGPoint> points) {
+  private void ExpandBounds(List<SVGPoint> points) {
     int length = points.Count;
     for(int i = 0; i < length; i++)
       ExpandBounds(points[i]);
@@ -130,7 +130,7 @@ public class SVGGraphicsPath {
   //--------------------------------------------------------------------------------
   //Method: SetFirstPoint
   //--------------------------------------------------------------------------------
-  private void SetFirstPoint(uSVGPoint p) {
+  private void SetFirstPoint(SVGPoint p) {
     if(needSetFirstPoint) {
       beginPoint.SetValue(p);
       needSetFirstPoint = false;
@@ -139,7 +139,7 @@ public class SVGGraphicsPath {
   //--------------------------------------------------------------------------------
   //Method: SetLastPoint
   //--------------------------------------------------------------------------------
-  private void SetLastPoint(uSVGPoint p) {
+  private void SetLastPoint(SVGPoint p) {
     endPoint.SetValue(p);
   }
   //================================================================================
@@ -163,15 +163,15 @@ public class SVGGraphicsPath {
   }
   //-----
   public void Add(SVGRectElement rectElement) {
-    SetFirstPoint(new uSVGPoint(rectElement.x.value, rectElement.y.value));
-    SetLastPoint(new uSVGPoint(rectElement.x.value, rectElement.y.value));
+    SetFirstPoint(new SVGPoint(rectElement.x.value, rectElement.y.value));
+    SetLastPoint(new SVGPoint(rectElement.x.value, rectElement.y.value));
 
     listType.Add(SVGPathElementTypes.Rect);
     listObject.Add(rectElement);
   }
   //-----
   public void Add(SVGCircleElement circleElement) {
-    uSVGPoint p = new uSVGPoint(circleElement.cx.value, circleElement.cy.value);
+    SVGPoint p = new SVGPoint(circleElement.cx.value, circleElement.cy.value);
     SetFirstPoint(p);
     SetLastPoint(p);
 
@@ -180,7 +180,7 @@ public class SVGGraphicsPath {
   }
   //-----
   public void Add(SVGEllipseElement ellipseElement) {
-    uSVGPoint p = new uSVGPoint(ellipseElement.cx.value, ellipseElement.cy.value);
+    SVGPoint p = new SVGPoint(ellipseElement.cx.value, ellipseElement.cy.value);
     SetFirstPoint(p);
     SetLastPoint(p);
 
@@ -190,7 +190,7 @@ public class SVGGraphicsPath {
   //--------------------------------------------------------------------------------
   //Method: AddCircleTo
   //--------------------------------------------------------------------------------
-  public void AddCircleTo(uSVGPoint p, float r) {
+  public void AddCircleTo(SVGPoint p, float r) {
     SVGGCircle gCircle = new SVGGCircle(p, r);
     listType.Add(SVGPathElementTypes.CircleTo);
     listObject.Add(gCircle);
@@ -198,7 +198,7 @@ public class SVGGraphicsPath {
   //--------------------------------------------------------------------------------
   //Method: AddEllipseTo
   //--------------------------------------------------------------------------------
-  public void AddEllipseTo(uSVGPoint p, float r1, float r2, float angle) {
+  public void AddEllipseTo(SVGPoint p, float r1, float r2, float angle) {
     SVGGEllipse gEllipse = new SVGGEllipse(p, r1, r2, angle);
     listType.Add(SVGPathElementTypes.EllipseTo);
     listObject.Add(gEllipse);
@@ -206,7 +206,7 @@ public class SVGGraphicsPath {
   //--------------------------------------------------------------------------------
   //Method: AddMoveTo
   //--------------------------------------------------------------------------------
-  public void AddMoveTo(uSVGPoint p) {
+  public void AddMoveTo(SVGPoint p) {
     SetFirstPoint(p);
     SetLastPoint(p);
 
@@ -217,7 +217,7 @@ public class SVGGraphicsPath {
   //Method: AddArcTo
   //--------------------------------------------------------------------------------
   public void AddArcTo(float r1, float r2, float angle,
-                       bool largeArcFlag, bool sweepFlag, uSVGPoint p) {
+                       bool largeArcFlag, bool sweepFlag, SVGPoint p) {
     SetLastPoint(p);
     SVGGArcAbs svgGArcAbs = new SVGGArcAbs(r1, r2, angle, largeArcFlag, sweepFlag, p);
     listType.Add(SVGPathElementTypes.ArcTo);
@@ -226,7 +226,7 @@ public class SVGGraphicsPath {
   //--------------------------------------------------------------------------------
   //Method: AddCubicCurveTo
   //--------------------------------------------------------------------------------
-  public void AddCubicCurveTo(uSVGPoint p1, uSVGPoint p2, uSVGPoint p) {
+  public void AddCubicCurveTo(SVGPoint p1, SVGPoint p2, SVGPoint p) {
     SetLastPoint(p);
     SVGGCubicAbs svgGCubicAbs = new SVGGCubicAbs(p1, p2, p);
     listType.Add(SVGPathElementTypes.CubicCurveTo);
@@ -235,7 +235,7 @@ public class SVGGraphicsPath {
   //--------------------------------------------------------------------------------
   //Method: AddQuadraticCurveTo
   //--------------------------------------------------------------------------------
-  public void AddQuadraticCurveTo(uSVGPoint p1, uSVGPoint p) {
+  public void AddQuadraticCurveTo(SVGPoint p1, SVGPoint p) {
     SetLastPoint(p);
     SVGGQuadraticAbs svgGQuadraticAbs = new SVGGQuadraticAbs(p1, p);
     listType.Add(SVGPathElementTypes.QuadraticCurveTo);
@@ -244,7 +244,7 @@ public class SVGGraphicsPath {
   //--------------------------------------------------------------------------------
   //Method: AddLineTo
   //--------------------------------------------------------------------------------
-  public void AddLineTo(uSVGPoint p) {
+  public void AddLineTo(SVGPoint p) {
     listType.Add(SVGPathElementTypes.LineTo);
     listObject.Add(p);
   }
@@ -252,7 +252,7 @@ public class SVGGraphicsPath {
   //--------------------------------------------------------------------------------
   //Method: GetBound
   //--------------------------------------------------------------------------------
-  public uSVGRect GetBound() {
+  public SVGRect GetBound() {
 Profiler.BeginSample("uSVGGraphicsPath.GetBound()");
     float cx, cy, r, rx, ry, x, y, width, height;
 
@@ -310,7 +310,7 @@ Profiler.BeginSample("uSVGGraphicsPath.GetBound()");
           break;
         //-----
         case SVGPathElementTypes.MoveTo:
-          uSVGPoint pointMoveTo = (uSVGPoint)listObject[i];
+          SVGPoint pointMoveTo = (SVGPoint)listObject[i];
 
           ExpandBounds(pointMoveTo);
           break;
@@ -338,12 +338,12 @@ Profiler.BeginSample("uSVGGraphicsPath.GetBound()");
           break;
         //-----
         case SVGPathElementTypes.LineTo:
-          ExpandBounds((uSVGPoint)listObject[i]);
+          ExpandBounds((SVGPoint)listObject[i]);
           break;
       }
     }
 
-    uSVGRect tmp = new uSVGRect(boundUL.x - 1, boundUL.y - 1,
+    SVGRect tmp = new SVGRect(boundUL.x - 1, boundUL.y - 1,
                                 boundBR.x - boundUL.x + 2,
                                 boundBR.y - boundUL.y + 2);
 Profiler.EndSample();
@@ -356,7 +356,7 @@ Profiler.EndSample();
   //--------------------------------------------------------------------------------
   private void RenderPolygonElement(SVGPolygonElement polygonElement, uISVGPathDraw pathDraw) {
     int length = polygonElement.listPoints.Count;
-    uSVGPoint[] points = new uSVGPoint[length];
+    SVGPoint[] points = new SVGPoint[length];
 
     for(int i = 0; i < length; i++)
       points[i] = polygonElement.listPoints[i].MatrixTransform(matrixTransform);
@@ -367,7 +367,7 @@ Profiler.EndSample();
   //--------------------------------------------------------------------------------
   private void RenderPolylineElement(SVGPolylineElement polylineElement, uISVGPathDraw pathDraw) {
     int length = polylineElement.listPoints.Count;
-    uSVGPoint[] points = new uSVGPoint[length];
+    SVGPoint[] points = new SVGPoint[length];
 
     for(int i = 0; i < length; i++)
       points[i] = polylineElement.listPoints[i].MatrixTransform(matrixTransform);
@@ -377,15 +377,15 @@ Profiler.EndSample();
   //Method: RenderRectElement
   //--------------------------------------------------------------------------------
   private void RenderRectElement(SVGRectElement rectElement, uISVGPathDraw pathDraw) {
-    uSVGPoint p1, p2, p3, p4;
+    SVGPoint p1, p2, p3, p4;
     float tx = rectElement.x.value;
     float ty = rectElement.y.value;
     float tw = rectElement.width.value;
     float th = rectElement.height.value;
-    p1 = new uSVGPoint(tx, ty);
-    p2 = new uSVGPoint(tx + tw, ty);
-    p3 = new uSVGPoint(tx + tw, ty + th);
-    p4 = new uSVGPoint(tx, ty + th);
+    p1 = new SVGPoint(tx, ty);
+    p2 = new SVGPoint(tx + tw, ty);
+    p3 = new SVGPoint(tx + tw, ty + th);
+    p4 = new SVGPoint(tx, ty + th);
 
     if(rectElement.rx.value == 0.0f && rectElement.ry.value == 0.0f) {
       p1 = p1.MatrixTransform(matrixTransform);
@@ -405,15 +405,15 @@ Profiler.EndSample();
 
       float angle = transformAngle;
 
-      uSVGPoint t_p1 = new uSVGPoint(p1.x + t_rx, p1.y).MatrixTransform(matrixTransform);
-      uSVGPoint t_p2 = new uSVGPoint(p2.x - t_rx, p2.y).MatrixTransform(matrixTransform);
-      uSVGPoint t_p3 = new uSVGPoint(p2.x, p2.y + t_ry).MatrixTransform(matrixTransform);
-      uSVGPoint t_p4 = new uSVGPoint(p3.x, p3.y - t_ry).MatrixTransform(matrixTransform);
+      SVGPoint t_p1 = new SVGPoint(p1.x + t_rx, p1.y).MatrixTransform(matrixTransform);
+      SVGPoint t_p2 = new SVGPoint(p2.x - t_rx, p2.y).MatrixTransform(matrixTransform);
+      SVGPoint t_p3 = new SVGPoint(p2.x, p2.y + t_ry).MatrixTransform(matrixTransform);
+      SVGPoint t_p4 = new SVGPoint(p3.x, p3.y - t_ry).MatrixTransform(matrixTransform);
 
-      uSVGPoint t_p5 = new uSVGPoint(p3.x - t_rx, p3.y).MatrixTransform(matrixTransform);
-      uSVGPoint t_p6 = new uSVGPoint(p4.x + t_rx, p4.y).MatrixTransform(matrixTransform);
-      uSVGPoint t_p7 = new uSVGPoint(p4.x, p4.y - t_ry).MatrixTransform(matrixTransform);
-      uSVGPoint t_p8 = new uSVGPoint(p1.x, p1.y + t_ry).MatrixTransform(matrixTransform);
+      SVGPoint t_p5 = new SVGPoint(p3.x - t_rx, p3.y).MatrixTransform(matrixTransform);
+      SVGPoint t_p6 = new SVGPoint(p4.x + t_rx, p4.y).MatrixTransform(matrixTransform);
+      SVGPoint t_p7 = new SVGPoint(p4.x, p4.y - t_ry).MatrixTransform(matrixTransform);
+      SVGPoint t_p8 = new SVGPoint(p1.x, p1.y + t_ry).MatrixTransform(matrixTransform);
 
       pathDraw.RoundedRect(t_p1, t_p2, t_p3, t_p4, t_p5, t_p6, t_p7, t_p8, t_rx, t_ry, angle);
     }
@@ -422,14 +422,14 @@ Profiler.EndSample();
   //Method: RenderCircleElement
   //--------------------------------------------------------------------------------
   private void RenderCircleElement(SVGCircleElement elem, uISVGPathDraw pathDraw) {
-    uSVGPoint p = new uSVGPoint(elem.cx.value, elem.cy.value).MatrixTransform(matrixTransform);
+    SVGPoint p = new SVGPoint(elem.cx.value, elem.cy.value).MatrixTransform(matrixTransform);
     pathDraw.Circle(p, elem.r.value);
   }
   //--------------------------------------------------------------------------------
   //Method: RenderEllipseElement
   //--------------------------------------------------------------------------------
   private void RenderEllipseElement(SVGEllipseElement elem, uISVGPathDraw pathDraw) {
-    uSVGPoint p = new uSVGPoint(elem.cx.value, elem.cy.value).MatrixTransform(matrixTransform);
+    SVGPoint p = new SVGPoint(elem.cx.value, elem.cy.value).MatrixTransform(matrixTransform);
     pathDraw.Ellipse(p, elem.rx.value, elem.ry.value, transformAngle);
   }
   //--------------------------------------------------------------------------------
@@ -447,7 +447,7 @@ Profiler.EndSample();
   //--------------------------------------------------------------------------------
   //Method: RenderMoveTo
   //--------------------------------------------------------------------------------
-  private void RenderMoveTo(uSVGPoint p, uISVGPathDraw pathDraw) {
+  private void RenderMoveTo(SVGPoint p, uISVGPathDraw pathDraw) {
     pathDraw.MoveTo(p.MatrixTransform(matrixTransform));
   }
   //--------------------------------------------------------------------------------
@@ -471,7 +471,7 @@ Profiler.EndSample();
   //--------------------------------------------------------------------------------
   //Method: RenderLineTo
   //--------------------------------------------------------------------------------
-  private void RenderLineTo(uSVGPoint p, uISVGPathDraw pathDraw) {
+  private void RenderLineTo(SVGPoint p, uISVGPathDraw pathDraw) {
     pathDraw.LineTo(p.MatrixTransform(matrixTransform));
   }
   //================================================================================
@@ -512,7 +512,7 @@ Profiler.EndSample();
           break;
         //-----
         case SVGPathElementTypes.MoveTo:
-          RenderMoveTo((uSVGPoint)listObject[i], pathDraw);
+          RenderMoveTo((SVGPoint)listObject[i], pathDraw);
           break;
         case SVGPathElementTypes.ArcTo:
           RenderArcTo((SVGGArcAbs)listObject[i], pathDraw);
@@ -524,7 +524,7 @@ Profiler.EndSample();
           RenderQuadraticCurveTo((SVGGQuadraticAbs)listObject[i], pathDraw);
           break;
         case SVGPathElementTypes.LineTo:
-          RenderLineTo((uSVGPoint)listObject[i], pathDraw);
+          RenderLineTo((SVGPoint)listObject[i], pathDraw);
           break;
       }
     }

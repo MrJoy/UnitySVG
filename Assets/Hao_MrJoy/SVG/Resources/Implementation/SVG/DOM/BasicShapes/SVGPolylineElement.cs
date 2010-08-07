@@ -1,29 +1,29 @@
 using System.Collections.Generic;
 
-public class SVGPolylineElement : uSVGTransformable, uISVGDrawable {
-  private List<uSVGPoint> _listPoints;
+public class SVGPolylineElement : SVGTransformable, ISVGDrawable {
+  private List<SVGPoint> _listPoints;
   //================================================================================
   private SVGGraphics _render;
   private AttributeList _attrList;
-  private uSVGPaintable _paintable;
+  private SVGPaintable _paintable;
   //================================================================================
-  public List<uSVGPoint> listPoints {
+  public List<SVGPoint> listPoints {
     get{ return this._listPoints;}
   }
   //================================================================================
   public SVGPolylineElement(  AttributeList attrList,
-                uSVGTransformList inheritTransformList,
-                uSVGPaintable inheritPaintable,
+                SVGTransformList inheritTransformList,
+                SVGPaintable inheritPaintable,
                 SVGGraphics _render) : base(inheritTransformList) {
     this._attrList = attrList;
     this._render = _render;
-    this._paintable = new uSVGPaintable(inheritPaintable, attrList);
+    this._paintable = new SVGPaintable(inheritPaintable, attrList);
     this._listPoints = ExtractPoints(this._attrList.GetValue("points"));
   }
   //================================================================================
-  private List<uSVGPoint> ExtractPoints(string inputText) {
-    List<uSVGPoint> _return = new List<uSVGPoint>();
-    string[] _lstStr = uSVGStringExtractor.ExtractTransformValue(inputText);
+  private List<SVGPoint> ExtractPoints(string inputText) {
+    List<SVGPoint> _return = new List<SVGPoint>();
+    string[] _lstStr = SVGStringExtractor.ExtractTransformValue(inputText);
 
     int len = _lstStr.Length;
     for(int i = 0; i < len -1; i++) {
@@ -32,7 +32,7 @@ public class SVGPolylineElement : uSVGTransformable, uISVGDrawable {
       value2 = _lstStr[i+1];
       SVGLength _length1 = new SVGLength(value1);
       SVGLength _length2 = new SVGLength(value2);
-      uSVGPoint _point = new uSVGPoint(_length1.value, _length2.value);
+      SVGPoint _point = new SVGPoint(_length1.value, _length2.value);
       _return.Add(_point);
       i++;
     }
@@ -55,7 +55,7 @@ public class SVGPolylineElement : uSVGTransformable, uISVGDrawable {
   }
   //************************************************************************************
   //Thuc thi Interface Drawable
-  public void BeforeRender(uSVGTransformList transformList) {
+  public void BeforeRender(SVGTransformList transformList) {
     this.inheritTransformList = transformList;
   }
   //------
@@ -64,12 +64,12 @@ public class SVGPolylineElement : uSVGTransformable, uISVGDrawable {
     this._render.SetStrokeLineCap(this._paintable.strokeLineCap);
     this._render.SetStrokeLineJoin(this._paintable.strokeLineJoin);
     switch(this._paintable.GetPaintType()) {
-      case uSVGPaintTypes.SVG_PAINT_SOLID_GRADIENT_FILL : {
+      case SVGPaintMethod.SolidGradientFill : {
         this._render.FillPath(this._paintable.fillColor.Value, this._graphicsPath);
         Draw();
         break;
       }
-      case uSVGPaintTypes.SVG_PAINT_LINEAR_GRADIENT_FILL : {
+      case SVGPaintMethod.LinearGradientFill : {
 
         SVGLinearGradientBrush _linearGradBrush =
                   this._paintable.GetLinearGradientBrush(this._graphicsPath);
@@ -80,7 +80,7 @@ public class SVGPolylineElement : uSVGTransformable, uISVGDrawable {
         Draw();
         break;
       }
-      case uSVGPaintTypes.SVG_PAINT_RADIAL_GRADIENT_FILL : {
+      case SVGPaintMethod.RadialGradientFill : {
         SVGRadialGradientBrush _radialGradBrush =
                   this._paintable.GetRadialGradientBrush(this._graphicsPath);
 
@@ -90,7 +90,7 @@ public class SVGPolylineElement : uSVGTransformable, uISVGDrawable {
         Draw();
         break;
       }
-      case uSVGPaintTypes.SVG_PAINT_PATH_DRAW : {
+      case SVGPaintMethod.PathDraw : {
         Draw();
         break;
       }

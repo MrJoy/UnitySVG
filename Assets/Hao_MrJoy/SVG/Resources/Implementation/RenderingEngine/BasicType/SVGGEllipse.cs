@@ -1,10 +1,10 @@
 public class SVGGEllipse {
-  private uSVGPoint _p;
+  private SVGPoint _p;
   private float _r1;
   private float _r2;
   private float _angle;
   //================================================================================
-  public uSVGPoint point {
+  public SVGPoint point {
     get{ return this._p;}
   }
   //------
@@ -20,8 +20,8 @@ public class SVGGEllipse {
     get{return this._angle;}
   }
   //================================================================================
-  public SVGGEllipse(uSVGPoint p, float r1, float r2, float angle) {
-    this._p = new uSVGPoint(p.x, p.y);
+  public SVGGEllipse(SVGPoint p, float r1, float r2, float angle) {
+    this._p = new SVGPoint(p.x, p.y);
     this._r1 = r1;
     this._r2 = r2;
     this._angle = angle;

@@ -4,7 +4,7 @@ public class Implement {
   private Texture2D _texture = null;
   private  SVGDevice _device;
   private  SVGGraphics _graphics;
-  private uSVGDocument _svgDocument;
+  private SVGDocument _svgDocument;
 
   /***********************************************************************************/
   public Implement(TextAsset svgFile) {
@@ -19,7 +19,7 @@ public class Implement {
   dau phan tich va do du lieu vao trong 1 SVGDocument
   -------------------------------------------------------------*/
   private void CreateEmptySVGDocument() {
-    _svgDocument = new uSVGDocument(this._SVGFile.text, this._graphics);
+    _svgDocument = new SVGDocument(this._SVGFile.text, this._graphics);
   }
 
   /*-----------------------------------------------------------
@@ -31,7 +31,7 @@ Profiler.BeginSample("SVG.Implement.StartProcess[CreateEmptySVGDocument]");
     CreateEmptySVGDocument();
 Profiler.EndSample();
 Profiler.BeginSample("SVG.Implement.StartProcess[GetRootElement]");
-    uSVGSVGElement _rootSVGElement = this._svgDocument.rootElement;
+    SVGSVGElement _rootSVGElement = this._svgDocument.rootElement;
 Profiler.EndSample();
     this._graphics.SetColor(Color.white);
 Profiler.BeginSample("SVG.Implement.StartProcess[RenderSVGElement]");

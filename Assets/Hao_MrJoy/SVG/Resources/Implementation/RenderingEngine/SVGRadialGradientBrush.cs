@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 public class SVGRadialGradientBrush {
-  private uSVGRadialGradientElement _radialGradElement;
+  private SVGRadialGradientElement _radialGradElement;
   //-----
   //Gradient Circle
   private float _cx, _cy, _r, _fx, _fy;
@@ -13,11 +13,11 @@ public class SVGRadialGradientBrush {
   //-----
   private SVGSpreadMethod _spreadMethod;
   /*********************************************************************************/
-  public SVGRadialGradientBrush(uSVGRadialGradientElement radialGradElement) {
+  public SVGRadialGradientBrush(SVGRadialGradientElement radialGradElement) {
     this._radialGradElement = radialGradElement;
     Initialize();
   }
-  public SVGRadialGradientBrush(uSVGRadialGradientElement radialGradElement,
+  public SVGRadialGradientBrush(SVGRadialGradientElement radialGradElement,
                             SVGGraphicsPath graphicsPath) {
     this._radialGradElement = radialGradElement;
     Initialize();
@@ -118,8 +118,8 @@ public class SVGRadialGradientBrush {
   }
   //----
   //Tim giao diem giua duong thang(x,y)->(fx, fy)voi duong tron
-  private uSVGPoint CrossPoint(float x, float y) {
-    uSVGPoint _point = new uSVGPoint(0f, 0f);
+  private SVGPoint CrossPoint(float x, float y) {
+    SVGPoint _point = new SVGPoint(0f, 0f);
 
     float dx = this._fx - x;
     float dy = this._fy - y;
@@ -146,8 +146,8 @@ public class SVGRadialGradientBrush {
       float x2 = (float)((-tb - delta)/(2 * ta));
       float y2 = (float)(a * x2 + b);
 
-      uSVGPoint vt1 = new uSVGPoint(x1 - this._fx, y1 - this._fy);
-      uSVGPoint vt2 = new uSVGPoint(x - this._fx, y - this._fy);
+      SVGPoint vt1 = new SVGPoint(x1 - this._fx, y1 - this._fy);
+      SVGPoint vt2 = new SVGPoint(x - this._fx, y - this._fy);
 
       if(((vt1.x * vt2.x) >= 0)&&((vt1.y * vt2.y) >=0)) {
         _point.x = x1;
@@ -162,7 +162,7 @@ public class SVGRadialGradientBrush {
   //-----
   //Tinh % tai vi tri x,y
   private float Percent(float x, float y) {
-    uSVGPoint _cP = CrossPoint(x, y);
+    SVGPoint _cP = CrossPoint(x, y);
 
     //float d1 = (float)Math.Sqrt((_cP.x - x)*(_cP.x - x)+(_cP.y - y)*(_cP.y - y));
     float d2 = (float)Math.Sqrt((this._fx - x)*(this._fx - x)+
@@ -197,7 +197,7 @@ public class SVGRadialGradientBrush {
   }
   //-----
   private void SetGradientVector(SVGGraphicsPath graphicsPath) {
-    uSVGRect bound = graphicsPath.GetBound();
+    SVGRect bound = graphicsPath.GetBound();
 
     if(this._radialGradElement.cx.unitType == SVGLengthType.Percentage) {
       this._cx = bound.x +(bound.width * this._cx / 100f);
@@ -208,8 +208,8 @@ public class SVGRadialGradientBrush {
     }
 
     if(this._radialGradElement.r.unitType == SVGLengthType.Percentage) {
-      uSVGPoint _p1 = new uSVGPoint(bound.x, bound.y);
-      uSVGPoint _p2 = new uSVGPoint(bound.x + bound.width, bound.y + bound.height);
+      SVGPoint _p1 = new SVGPoint(bound.x, bound.y);
+      SVGPoint _p2 = new SVGPoint(bound.x + bound.width, bound.y + bound.height);
       _p1 = _p1.MatrixTransform(graphicsPath.matrixTransform);
       _p2 = _p2.MatrixTransform(graphicsPath.matrixTransform);
 
@@ -228,7 +228,7 @@ public class SVGRadialGradientBrush {
 
     if((float)Math.Sqrt((this._cx - this._fx)*(this._cx - this._fx)+
            (this._cy - this._fy)*(this._cy - this._fy)) > this._r) {
-      uSVGPoint _cP = CrossPoint(this._cx, this._cy);
+      SVGPoint _cP = CrossPoint(this._cx, this._cy);
       this._fx = _cP.x;
       this._fy = _cP.y;
     }
@@ -236,12 +236,12 @@ public class SVGRadialGradientBrush {
 
 
     if(this._radialGradElement.gradientUnits == SVGGradientUnit.ObjectBoundingBox) {
-      uSVGPoint _point = new uSVGPoint(this._cx, this._cy);
+      SVGPoint _point = new SVGPoint(this._cx, this._cy);
       _point = _point.MatrixTransform(graphicsPath.matrixTransform);
       this._cx = _point.x;
       this._cy = _point.y;
 
-      _point = new uSVGPoint(this._fx, this._fy);
+      _point = new SVGPoint(this._fx, this._fy);
       _point = _point.MatrixTransform(graphicsPath.matrixTransform);
       this._fx = _point.x;
       this._fy = _point.y;

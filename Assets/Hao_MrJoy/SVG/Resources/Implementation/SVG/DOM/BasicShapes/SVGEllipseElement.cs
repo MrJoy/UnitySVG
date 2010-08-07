@@ -1,5 +1,5 @@
 
-public class SVGEllipseElement : uSVGTransformable, uISVGDrawable {
+public class SVGEllipseElement : SVGTransformable, ISVGDrawable {
   private SVGLength _cx;
   private SVGLength _cy;
   private SVGLength _rx;
@@ -7,7 +7,7 @@ public class SVGEllipseElement : uSVGTransformable, uISVGDrawable {
   //================================================================================
   private SVGGraphics _render;
   private AttributeList _attrList;
-  private uSVGPaintable _paintable;
+  private SVGPaintable _paintable;
   //================================================================================
   public SVGLength cx {
     get {
@@ -34,17 +34,17 @@ public class SVGEllipseElement : uSVGTransformable, uISVGDrawable {
   }
   //================================================================================
   public SVGEllipseElement(AttributeList attrList,
-              uSVGTransformList inheritTransformList,
-              uSVGPaintable inheritPaintable,
+              SVGTransformList inheritTransformList,
+              SVGPaintable inheritPaintable,
               SVGGraphics _render) : base(inheritTransformList) {
     this._attrList = attrList;
     this._render = _render;
-    this._paintable = new uSVGPaintable(inheritPaintable, this._attrList);
+    this._paintable = new SVGPaintable(inheritPaintable, this._attrList);
     this._cx = new SVGLength(attrList.GetValue("cx"));
     this._cy = new SVGLength(attrList.GetValue("cy"));
     this._rx = new SVGLength(attrList.GetValue("rx"));
     this._ry = new SVGLength(attrList.GetValue("ry"));
-    this.currentTransformList = new uSVGTransformList(attrList.GetValue("transform"));
+    this.currentTransformList = new SVGTransformList(attrList.GetValue("transform"));
   }
   //================================================================================
   private SVGGraphicsPath _graphicsPath;
@@ -63,7 +63,7 @@ public class SVGEllipseElement : uSVGTransformable, uISVGDrawable {
   }
   //================================================================================
   //Thuc thi Interface Drawable
-  public void BeforeRender(uSVGTransformList transformList) {
+  public void BeforeRender(SVGTransformList transformList) {
     this.inheritTransformList = transformList;
   }
   //------
@@ -72,12 +72,12 @@ public class SVGEllipseElement : uSVGTransformable, uISVGDrawable {
     this._render.SetStrokeLineCap(this._paintable.strokeLineCap);
     this._render.SetStrokeLineJoin(this._paintable.strokeLineJoin);
     switch(this._paintable.GetPaintType()) {
-      case uSVGPaintTypes.SVG_PAINT_SOLID_GRADIENT_FILL : {
+      case SVGPaintMethod.SolidGradientFill : {
         this._render.FillPath(this._paintable.fillColor.Value, this._graphicsPath);
         Draw();
         break;
       }
-      case uSVGPaintTypes.SVG_PAINT_LINEAR_GRADIENT_FILL : {
+      case SVGPaintMethod.LinearGradientFill : {
 
         SVGLinearGradientBrush _linearGradBrush =
                   this._paintable.GetLinearGradientBrush(this._graphicsPath);
@@ -88,7 +88,7 @@ public class SVGEllipseElement : uSVGTransformable, uISVGDrawable {
         Draw();
         break;
       }
-      case uSVGPaintTypes.SVG_PAINT_RADIAL_GRADIENT_FILL : {
+      case SVGPaintMethod.RadialGradientFill : {
         SVGRadialGradientBrush _radialGradBrush =
                   this._paintable.GetRadialGradientBrush(this._graphicsPath);
 
@@ -98,7 +98,7 @@ public class SVGEllipseElement : uSVGTransformable, uISVGDrawable {
         Draw();
         break;
       }
-      case uSVGPaintTypes.SVG_PAINT_PATH_DRAW : {
+      case SVGPaintMethod.PathDraw : {
         Draw();
         break;
       }

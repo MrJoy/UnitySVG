@@ -1,11 +1,11 @@
-public class SVGCircleElement : uSVGTransformable, uISVGDrawable {
+public class SVGCircleElement : SVGTransformable, ISVGDrawable {
   private SVGLength _cx;
   private SVGLength _cy;
   private SVGLength _r;
   //================================================================================
   private SVGGraphics _render;
   private AttributeList _attrList;
-  private uSVGPaintable _paintable;
+  private SVGPaintable _paintable;
   //================================================================================
   public SVGLength cx {
     get {
@@ -26,12 +26,12 @@ public class SVGCircleElement : uSVGTransformable, uISVGDrawable {
   }
   //================================================================================
   public SVGCircleElement(AttributeList attrList,
-              uSVGTransformList inheritTransformList,
-              uSVGPaintable inheritPaintable,
+              SVGTransformList inheritTransformList,
+              SVGPaintable inheritPaintable,
               SVGGraphics _render) : base(inheritTransformList) {
     this._attrList = attrList;
     this._render = _render;
-    this._paintable = new uSVGPaintable(inheritPaintable, this._attrList);
+    this._paintable = new SVGPaintable(inheritPaintable, this._attrList);
     this._cx = new SVGLength(attrList.GetValue("cx"));
     this._cy = new SVGLength(attrList.GetValue("cy"));
     this._r = new SVGLength(attrList.GetValue("r"));
@@ -53,7 +53,7 @@ public class SVGCircleElement : uSVGTransformable, uISVGDrawable {
   }
   //================================================================================
   //Thuc thi Interface Drawable
-  public void BeforeRender(uSVGTransformList transformList) {
+  public void BeforeRender(SVGTransformList transformList) {
     this.inheritTransformList = transformList;
   }
   //------
@@ -62,12 +62,12 @@ public class SVGCircleElement : uSVGTransformable, uISVGDrawable {
     this._render.SetStrokeLineCap(this._paintable.strokeLineCap);
     this._render.SetStrokeLineJoin(this._paintable.strokeLineJoin);
     switch(this._paintable.GetPaintType()) {
-      case uSVGPaintTypes.SVG_PAINT_SOLID_GRADIENT_FILL : {
+      case SVGPaintMethod.SolidGradientFill : {
         this._render.FillPath(this._paintable.fillColor.Value, this._graphicsPath);
         Draw();
         break;
       }
-      case uSVGPaintTypes.SVG_PAINT_LINEAR_GRADIENT_FILL : {
+      case SVGPaintMethod.LinearGradientFill : {
 
         SVGLinearGradientBrush _linearGradBrush =
                   this._paintable.GetLinearGradientBrush(this._graphicsPath);
@@ -78,7 +78,7 @@ public class SVGCircleElement : uSVGTransformable, uISVGDrawable {
         Draw();
         break;
       }
-      case uSVGPaintTypes.SVG_PAINT_RADIAL_GRADIENT_FILL : {
+      case SVGPaintMethod.RadialGradientFill : {
         SVGRadialGradientBrush _radialGradBrush =
                   this._paintable.GetRadialGradientBrush(this._graphicsPath);
 
@@ -88,7 +88,7 @@ public class SVGCircleElement : uSVGTransformable, uISVGDrawable {
         Draw();
         break;
       }
-      case uSVGPaintTypes.SVG_PAINT_PATH_DRAW : {
+      case SVGPaintMethod.PathDraw : {
         Draw();
         break;
       }

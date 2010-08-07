@@ -27,31 +27,31 @@ public struct SVGLength  {
   public SVGLength(ushort unitType, float valueInSpecifiedUnits) {
     _unitType = (SVGLengthType)unitType;
     _valueInSpecifiedUnits = valueInSpecifiedUnits;
-    _value = uSVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
+    _value = SVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
   public SVGLength(float valueInSpecifiedUnits) {
     _unitType = (SVGLengthType)0;
     _valueInSpecifiedUnits = valueInSpecifiedUnits;
-    _value = uSVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
+    _value = SVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
   public SVGLength(string valueText) {
     float t_value = 0.0f;
     SVGLengthType t_type = SVGLengthType.Unknown;
-    uSVGLengthConvertor.ExtractType(valueText, ref t_value, ref t_type);
+    SVGLengthConvertor.ExtractType(valueText, ref t_value, ref t_type);
     _unitType = t_type;
     _valueInSpecifiedUnits = t_value;
-    _value = uSVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
+    _value = SVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
   /***********************************************************************************/
   public void NewValueSpecifiedUnits(float valueInSpecifiedUnits) {
     _unitType = (SVGLengthType)0;
     _valueInSpecifiedUnits = valueInSpecifiedUnits;
-    _value = uSVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
+    _value = SVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
   public static float GetPXLength(string valueText) {
     float t_value = 0.0f;
     SVGLengthType t_type = SVGLengthType.Unknown;
-    uSVGLengthConvertor.ExtractType(valueText, ref t_value, ref t_type);
-    return uSVGLengthConvertor.ConvertToPX(t_value, t_type);
+    SVGLengthConvertor.ExtractType(valueText, ref t_value, ref t_type);
+    return SVGLengthConvertor.ConvertToPX(t_value, t_type);
   }
 }

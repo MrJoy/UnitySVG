@@ -1,8 +1,8 @@
 public class SVGGCircle{
-  private uSVGPoint _p;
+  private SVGPoint _p;
   private float _r;
   //================================================================================
-  public uSVGPoint point {
+  public SVGPoint point {
     get{ return this._p;}
   }
   //------
@@ -10,8 +10,8 @@ public class SVGGCircle{
     get{return this._r;}
   }
   //================================================================================
-  public SVGGCircle(uSVGPoint p, float r) {
-    this._p = new uSVGPoint(p.x, p.y);
+  public SVGGCircle(SVGPoint p, float r) {
+    this._p = new SVGPoint(p.x, p.y);
     this._r = r;
   }
 }

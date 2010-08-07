@@ -78,11 +78,11 @@ public class SVGGraphicsFill : uISVGPathDraw {
     return false;
   }
   //================================================================================
-  private uSVGPoint _boundTopLeft;
-  private  uSVGPoint _boundBottomRight;
+  private SVGPoint _boundTopLeft;
+  private  SVGPoint _boundBottomRight;
   //-----
   //Tinh Bound cho Fill
-  private void ResetLimitPoints(uSVGPoint[] points) {
+  private void ResetLimitPoints(SVGPoint[] points) {
     int _length = points.GetLength(0);
     for(int i = 0; i < _length; i++) {
       if(points[i].x < this._boundTopLeft.x)this._boundTopLeft.x = points[i].x;
@@ -94,7 +94,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
 
   }
   //-----
-  private void ResetLimitPoints(uSVGPoint[] points, int deltax, int deltay) {
+  private void ResetLimitPoints(SVGPoint[] points, int deltax, int deltay) {
     int _length = points.GetLength(0);
     for(int i = 0; i < _length; i++) {
       if((points[i].x - deltax) < this._boundTopLeft.x)
@@ -114,9 +114,9 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   private void Fill(int x, int y) {
     if(!isInZone(x, y))return;
-    LiteStack<uSVGPoint> _stack = new LiteStack<uSVGPoint>();
+    LiteStack<SVGPoint> _stack = new LiteStack<SVGPoint>();
 
-    uSVGPoint temp = new uSVGPoint(x, y);
+    SVGPoint temp = new SVGPoint(x, y);
     this._flag[(int)temp.x, (int)temp.y] = _fillFlag;
     _stack.Push(temp);
 
@@ -129,7 +129,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
           if(isInZone((int)tx, (int)ty)) {
             if(this._flag[(int)tx, (int)ty] == 0) {
               this._flag[(int)tx, (int)ty] = _fillFlag;
-              _stack.Push(new uSVGPoint(tx, ty));
+              _stack.Push(new SVGPoint(tx, ty));
             }
           }
         }
@@ -140,7 +140,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
     Fill((int)x, (int)y);
   }
   //-----
-  public void Fill(uSVGPoint point) {
+  public void Fill(SVGPoint point) {
     Fill((int)point.x, (int)point.y);
   }
   //-----
@@ -149,7 +149,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
     Fill((int)x, (int)y);
   }
   //-----
-  public void Fill(uSVGPoint point, int flagStep) {
+  public void Fill(SVGPoint point, int flagStep) {
     this._flagStep = flagStep;
     Fill((int)point.x, (int)point.y);
   }
@@ -159,8 +159,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   public void BeginSubBuffer() {
 
-    this._boundTopLeft   = new uSVGPoint(+10000f, +10000f);
-    this._boundBottomRight  = new uSVGPoint(-10000f, -10000f);
+    this._boundTopLeft   = new SVGPoint(+10000f, +10000f);
+    this._boundBottomRight  = new SVGPoint(-10000f, -10000f);
 
     this._subW = this._width;
     this._subH = this._height;
@@ -227,7 +227,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
   }
   //-----
   //Fill Solid color, No fill Stroke
-  public void EndSubBuffer(uSVGPoint[] points) {
+  public void EndSubBuffer(SVGPoint[] points) {
 
     PreEndSubBuffer();
 
@@ -244,7 +244,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
   }
   //-----
   //Fill Solid color, with fill Stroke
-  public void EndSubBuffer(uSVGColor? strokePathColor) {
+  public void EndSubBuffer(SVGColor? strokePathColor) {
 
     PreEndSubBuffer();
 
@@ -284,7 +284,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //-----
   //Fill Linear Gradient, with fill Stroke
   public void EndSubBuffer(SVGLinearGradientBrush linearGradientBrush,
-                      uSVGColor? strokePathColor) {
+                      SVGColor? strokePathColor) {
     PreEndSubBuffer();
 
     for(int i = this._inZoneL; i < this._subW + this._inZoneL; i++) {
@@ -326,7 +326,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //-----
   //Fill Radial Gradient, with fill Stroke
   public void EndSubBuffer(SVGRadialGradientBrush radialGradientBrush,
-                      uSVGColor? strokePathColor) {
+                      SVGColor? strokePathColor) {
     PreEndSubBuffer();
 
     for(int i = this._inZoneL; i < this._subW + this._inZoneL; i++) {
@@ -352,8 +352,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: Rect
   //--------------------------------------------------------------------------------
-  private void PreRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4 ) {
-    uSVGPoint[] points = new uSVGPoint[4];
+  private void PreRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4 ) {
+    SVGPoint[] points = new SVGPoint[4];
     points[0] = p1;  points[1] = p2; points[2] = p3;  points[3] = p4;
 
     BeginSubBuffer();
@@ -366,19 +366,19 @@ public class SVGGraphicsFill : uISVGPathDraw {
     this._basicDraw.LineTo(p1);
   }
   //-----
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
     PreRect(p1, p2, p3, p4);
     EndSubBuffer();
   }
   //-----
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-                          uSVGColor? strokeColor) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+                          SVGColor? strokeColor) {
     PreRect(p1, p2, p3, p4);
     EndSubBuffer(strokeColor);
   }
   //-----
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-                          uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+                          SVGColor fillColor, SVGColor? strokeColor) {
     SetColor(fillColor.color);
     PreRect(p1, p2, p3, p4);
     EndSubBuffer(strokeColor);
@@ -386,10 +386,10 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: RoundedRect
   //--------------------------------------------------------------------------------
-  private void PreRoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  private void PreRoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle) {
-    uSVGPoint[] points = new uSVGPoint[8];
+    SVGPoint[] points = new SVGPoint[8];
     points[0] = p1;  points[1] = p2; points[2] = p3;  points[3] = p4;
     points[4] = p5;  points[5] = p6; points[6] = p7;  points[7] = p8;
 
@@ -411,25 +411,25 @@ public class SVGGraphicsFill : uISVGPathDraw {
 
   }
   //-----
-  public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle) {
     PreRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
     EndSubBuffer();
   }
   //-----
-  public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle,
-        uSVGColor? strokeColor) {
+        SVGColor? strokeColor) {
     PreRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
     EndSubBuffer(strokeColor);
   }
   //-----
-  public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle,
-        uSVGColor fillColor, uSVGColor? strokeColor) {
+        SVGColor fillColor, SVGColor? strokeColor) {
     SetColor(fillColor.color);
     PreRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
     EndSubBuffer(strokeColor);
@@ -437,8 +437,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: CircleFill
   //--------------------------------------------------------------------------------
-  private void PreCircle(uSVGPoint p, float r) {
-    uSVGPoint[] points = new uSVGPoint[1];
+  private void PreCircle(SVGPoint p, float r) {
+    SVGPoint[] points = new SVGPoint[1];
     points[0] = p;
     BeginSubBuffer();
     ResetLimitPoints(points, (int)r+2, (int)r+2);
@@ -446,17 +446,17 @@ public class SVGGraphicsFill : uISVGPathDraw {
     this._basicDraw.Circle(p, r);
   }
   //-----
-  public void Circle(uSVGPoint p, float r) {
+  public void Circle(SVGPoint p, float r) {
     PreCircle(p, r);
     EndSubBuffer();
   }
   //-----
-  public void Circle(uSVGPoint p, float r, uSVGColor? strokeColor) {
+  public void Circle(SVGPoint p, float r, SVGColor? strokeColor) {
     PreCircle(p, r);
     EndSubBuffer(strokeColor);
   }
   //-----
-  public void Circle(uSVGPoint p, float r, uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void Circle(SVGPoint p, float r, SVGColor fillColor, SVGColor? strokeColor) {
     SetColor(fillColor.color);
     PreCircle(p, r);
     EndSubBuffer();
@@ -464,8 +464,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: Ellipse
   //--------------------------------------------------------------------------------
-  private void PreEllipse(uSVGPoint p, float rx, float ry, float angle) {
-    uSVGPoint[] points = new uSVGPoint[1];
+  private void PreEllipse(SVGPoint p, float rx, float ry, float angle) {
+    SVGPoint[] points = new SVGPoint[1];
     points[0] = p;
     BeginSubBuffer();
     ResetLimitPoints(points, ((rx > ry) ? (int)rx: (int)ry), ((rx > ry) ? (int)rx: (int)ry));
@@ -473,18 +473,18 @@ public class SVGGraphicsFill : uISVGPathDraw {
     this._basicDraw.Ellipse(p, (int)rx, (int)ry, angle);
   }
   //-----
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle) {
     PreEllipse(p, rx, ry, angle);
     EndSubBuffer();
   }
   //-----
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle, uSVGColor? strokeColor) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle, SVGColor? strokeColor) {
     PreEllipse(p, rx, ry, angle);
     EndSubBuffer(strokeColor);
   }
   //-----
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle,
-                          uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle,
+                          SVGColor fillColor, SVGColor? strokeColor) {
     SetColor(fillColor.color);
     PreEllipse(p, rx, ry, angle);
     EndSubBuffer(strokeColor);
@@ -492,7 +492,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: Polygon.
   //--------------------------------------------------------------------------------
-  private void PrePolygon(uSVGPoint[] points) {
+  private void PrePolygon(SVGPoint[] points) {
     if((points != null)&&(points.GetLength(0) > 0)) {
       BeginSubBuffer();
       ResetLimitPoints(points);
@@ -506,17 +506,17 @@ public class SVGGraphicsFill : uISVGPathDraw {
     }
   }
   //-----
-  public void Polygon(uSVGPoint[] points) {
+  public void Polygon(SVGPoint[] points) {
     PrePolygon(points);
     EndSubBuffer();
   }
   //-----
-  public void Polygon(uSVGPoint[] points, uSVGColor? strokeColor) {
+  public void Polygon(SVGPoint[] points, SVGColor? strokeColor) {
     PrePolygon(points);
     EndSubBuffer(strokeColor);
   }
   //-----
-  public void Polygon(uSVGPoint[] points, uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void Polygon(SVGPoint[] points, SVGColor fillColor, SVGColor? strokeColor) {
     SetColor(fillColor.color);
     PrePolygon(points);
     EndSubBuffer(strokeColor);
@@ -524,15 +524,15 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: Polyline.
   //--------------------------------------------------------------------------------
-  public void Polyline(uSVGPoint[] points) {
+  public void Polyline(SVGPoint[] points) {
     Polygon(points);
   }
   //-----
-  public void Polyline(uSVGPoint[] points, uSVGColor? strokeColor) {
+  public void Polyline(SVGPoint[] points, SVGColor? strokeColor) {
     Polygon(points, strokeColor);
   }
   //-----
-  public void Polyline(uSVGPoint[] points, uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void Polyline(SVGPoint[] points, SVGColor fillColor, SVGColor? strokeColor) {
     Polygon(points, fillColor, strokeColor);
   }
 
@@ -545,19 +545,19 @@ public class SVGGraphicsFill : uISVGPathDraw {
     EndSubBuffer();
   }
   //-----
-  public void FillPath(SVGGraphicsPath graphicsPath, uSVGPoint[] points) {
+  public void FillPath(SVGGraphicsPath graphicsPath, SVGPoint[] points) {
     BeginSubBuffer();
     graphicsPath.RenderPath(this, true);
     EndSubBuffer(points);
   }
   //-----
   //Path Solid Fill
-  public void FillPath(uSVGColor fillColor, SVGGraphicsPath graphicsPath) {
+  public void FillPath(SVGColor fillColor, SVGGraphicsPath graphicsPath) {
     SetColor(fillColor.color);
     FillPath(graphicsPath);
   }
   //-----
-  public void FillPath(uSVGColor fillColor, uSVGColor? strokePathColor,
+  public void FillPath(SVGColor fillColor, SVGColor? strokePathColor,
                                 SVGGraphicsPath graphicsPath) {
     BeginSubBuffer();
     graphicsPath.RenderPath(this, true);
@@ -576,7 +576,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
   }
   //-----
   public void FillPath(SVGLinearGradientBrush linearGradientBrush,
-                                uSVGColor? strokePathColor,
+                                SVGColor? strokePathColor,
                                 SVGGraphicsPath graphicsPath) {
     BeginSubBuffer();
     graphicsPath.RenderPath(this, true);
@@ -595,7 +595,7 @@ public class SVGGraphicsFill : uISVGPathDraw {
   }
   //-----
   public void FillPath(SVGRadialGradientBrush radialGradientBrush,
-                                uSVGColor? strokePathColor,
+                                SVGColor? strokePathColor,
                                 SVGGraphicsPath graphicsPath) {
     BeginSubBuffer();
     graphicsPath.RenderPath(this, true);
@@ -610,8 +610,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: CircleTo
   //--------------------------------------------------------------------------------
-  public void CircleTo(uSVGPoint p, float r) {
-    uSVGPoint[] points = new uSVGPoint[1];
+  public void CircleTo(SVGPoint p, float r) {
+    SVGPoint[] points = new SVGPoint[1];
     points[0] = p;
     ResetLimitPoints(points, (int)r+1, (int)r+1);
 
@@ -621,8 +621,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: EllipseTo
   //--------------------------------------------------------------------------------
-  public void EllipseTo(uSVGPoint p, float rx, float ry, float angle) {
-    uSVGPoint[] points = new uSVGPoint[1];
+  public void EllipseTo(SVGPoint p, float rx, float ry, float angle) {
+    SVGPoint[] points = new SVGPoint[1];
     points[0] = p;
     ResetLimitPoints(points, ((rx > ry) ? (int)rx+2: (int)ry+2), ((rx > ry) ? (int)rx+2: (int)ry+2));
 
@@ -632,8 +632,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: LineTo4Path
   //--------------------------------------------------------------------------------
-  public void LineTo(uSVGPoint p) {
-    uSVGPoint[] points = new uSVGPoint[1];
+  public void LineTo(SVGPoint p) {
+    SVGPoint[] points = new SVGPoint[1];
     points[0] = p;
     ResetLimitPoints(points);
     //---------------
@@ -642,8 +642,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   //--------------------------------------------------------------------------------
   //Method: MoveTo
   //--------------------------------------------------------------------------------
-  public void MoveTo(uSVGPoint p) {
-    uSVGPoint[] points = new uSVGPoint[1];
+  public void MoveTo(SVGPoint p) {
+    SVGPoint[] points = new SVGPoint[1];
     points[0] = p;
     ResetLimitPoints(points);
     //---------------
@@ -655,8 +655,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   /-------------------------------------------------------------------------------*/
   public void ArcTo(float r1, float r2, float angle,
         bool largeArcFlag, bool sweepFlag,
-        uSVGPoint p) {
-    uSVGPoint[] points = new uSVGPoint[1];
+        SVGPoint p) {
+    SVGPoint[] points = new SVGPoint[1];
     points[0] = p;
     ResetLimitPoints(points,
          (r1>r2) ?2*(int)r1+2:2*(int)r2+2,
@@ -667,8 +667,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   /*-------------------------------------------------------------------------------
   //Method: CubicCurveTo4Path
   /-------------------------------------------------------------------------------*/
-  public void CubicCurveTo(uSVGPoint p1, uSVGPoint p2, uSVGPoint p) {
-    uSVGPoint[] points = new uSVGPoint[3];
+  public void CubicCurveTo(SVGPoint p1, SVGPoint p2, SVGPoint p) {
+    SVGPoint[] points = new SVGPoint[3];
     points[0] = p1;
     points[1] = p2;
     points[2] = p;
@@ -680,8 +680,8 @@ public class SVGGraphicsFill : uISVGPathDraw {
   /*-------------------------------------------------------------------------------
   //Method: QuadraticCurveTo4Path
   /-------------------------------------------------------------------------------*/
-  public void QuadraticCurveTo(uSVGPoint p1, uSVGPoint p) {
-    uSVGPoint[] points = new uSVGPoint[2];
+  public void QuadraticCurveTo(SVGPoint p1, SVGPoint p) {
+    SVGPoint[] points = new SVGPoint[2];
     points[0] = p1;
     points[1] = p;
     ResetLimitPoints(points);

@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 public class SVGLinearGradientBrush {
-  private uSVGLinearGradientElement _linearGradElement;
+  private SVGLinearGradientElement _linearGradElement;
   //-----
   //Gradient Vector
   private float _x1, _y1, _x2, _y2;
@@ -12,11 +12,11 @@ public class SVGLinearGradientBrush {
   //-----
   private SVGSpreadMethod _spreadMethod;
   /*********************************************************************************/
-  public SVGLinearGradientBrush(uSVGLinearGradientElement linearGradElement) {
+  public SVGLinearGradientBrush(SVGLinearGradientElement linearGradElement) {
     this._linearGradElement = linearGradElement;
     Initialize();
   }
-  public SVGLinearGradientBrush(uSVGLinearGradientElement linearGradElement,
+  public SVGLinearGradientBrush(SVGLinearGradientElement linearGradElement,
                             SVGGraphicsPath graphicsPath) {
     this._linearGradElement = linearGradElement;
     Initialize();
@@ -144,7 +144,7 @@ public class SVGLinearGradientBrush {
   }
   //-----
   private void SetGradientVector(SVGGraphicsPath graphicsPath) {
-    uSVGRect bound = graphicsPath.GetBound();
+    SVGRect bound = graphicsPath.GetBound();
     if(this._linearGradElement.x1.unitType == SVGLengthType.Percentage) {
       this._x1 = bound.x +(bound.width * this._x1 / 100f);
     }
@@ -162,12 +162,12 @@ public class SVGLinearGradientBrush {
     }
 
     if(this._linearGradElement.gradientUnits == SVGGradientUnit.ObjectBoundingBox) {
-      uSVGPoint _point = new uSVGPoint(this._x1, this._y1);
+      SVGPoint _point = new SVGPoint(this._x1, this._y1);
       _point = _point.MatrixTransform(graphicsPath.matrixTransform);
       this._x1 = _point.x;
       this._y1 = _point.y;
 
-      _point = new uSVGPoint(this._x2, this._y2);
+      _point = new SVGPoint(this._x2, this._y2);
       _point = _point.MatrixTransform(graphicsPath.matrixTransform);
       this._x2 = _point.x;
       this._y2 = _point.y;

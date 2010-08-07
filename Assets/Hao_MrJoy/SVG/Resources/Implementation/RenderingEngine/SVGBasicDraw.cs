@@ -8,27 +8,27 @@ public class SVGBasicDraw {
   //================================================================================
   private struct SVGPointExt {
     private float _delta;
-    private uSVGPoint _point;
+    private SVGPoint _point;
     public float t {
       get {
         return this._delta;
       }
     }
-    public uSVGPoint point {
+    public SVGPoint point {
       get {
         return this._point;
       }
     }
-    public SVGPointExt(uSVGPoint point, float t) {
+    public SVGPointExt(SVGPoint point, float t) {
       this._point = point;
       this._delta = t;
     }
   }
   //================================================================================
-  private uSVGPoint _currentPoint;
+  private SVGPoint _currentPoint;
   public SetPixelDelegate SetPixel;
   //================================================================================
-  public uSVGPoint currentPoint {
+  public SVGPoint currentPoint {
     get{ return this._currentPoint;}
   }
   public SetPixelDelegate SetPixelMethod {
@@ -36,7 +36,7 @@ public class SVGBasicDraw {
   }
   //================================================================================
   public SVGBasicDraw() {
-    this._currentPoint = new uSVGPoint(0f, 0f);
+    this._currentPoint = new SVGPoint(0f, 0f);
   }
   //================================================================================
   //--------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ public class SVGBasicDraw {
     this._currentPoint.y = y;
   }
   //-----
-  public void MoveTo(uSVGPoint p) {
+  public void MoveTo(SVGPoint p) {
     this._currentPoint.SetValue(p);
   }
   //--------------------------------------------------------------------------------
@@ -103,18 +103,18 @@ public class SVGBasicDraw {
     Line((int)x0, (int)y0, (int)x1, (int)y1);
   }
   //-----
-  public void Line(uSVGPoint p1, uSVGPoint p2) {
+  public void Line(SVGPoint p1, SVGPoint p2) {
     Line(p1.x, p1.y, p2.x, p2.y);
   }
   //--------------------------------------------------------------------------------
   //Methods: LineTo
   //--------------------------------------------------------------------------------
   public void LineTo(float x, float y) {
-    uSVGPoint temp = new uSVGPoint(x, y);
+    SVGPoint temp = new SVGPoint(x, y);
     Line(this._currentPoint, temp);
     this._currentPoint.SetValue(temp);
   }
-  public void LineTo(uSVGPoint p) {
+  public void LineTo(SVGPoint p) {
     Line(this._currentPoint, p);
     this._currentPoint.SetValue(p);
   }
@@ -130,11 +130,11 @@ public class SVGBasicDraw {
 
   }
   //-----
-  public void Rect(uSVGPoint p1, uSVGPoint p2) {
+  public void Rect(SVGPoint p1, SVGPoint p2) {
     Rect(p1.x, p1.y, p2.x, p2.y);
   }
   //-----
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
     MoveTo(p1);
     LineTo(p2);LineTo(p3);LineTo(p4);LineTo(p1);
   }
@@ -152,13 +152,13 @@ public class SVGBasicDraw {
     tx = x0;
     ty = radius + y0;
 
-    uSVGPoint fPoint = new uSVGPoint(tx, ty);
+    SVGPoint fPoint = new SVGPoint(tx, ty);
     MoveTo(fPoint);
     for(int i = 1; i <= _delta; i++) {
       temp = i * _angle;
       tx = radius *(float)Math.Sin(temp)+ x0;
       ty = radius *(float)Math.Cos(temp)+ y0;
-      uSVGPoint tPoint = new uSVGPoint(tx, ty);
+      SVGPoint tPoint = new SVGPoint(tx, ty);
       LineTo(tPoint);
     }
     LineTo(fPoint);
@@ -168,7 +168,7 @@ public class SVGBasicDraw {
     Circle((int)x0, (int)y0, r);
   }
   //-----
-  public void Circle(uSVGPoint p, float r) {
+  public void Circle(SVGPoint p, float r) {
     Circle((int)p.x, (int)p.y, r);
   }
   //--------------------------------------------------------------------------------
@@ -212,15 +212,15 @@ public class SVGBasicDraw {
     Ellipse((int)x0, (int)y0, (int)rx, (int)ry, angle);
   }
   //-----
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle) {
     Ellipse((int)p.x, (int)p.y, (int)rx, (int)ry, angle);
   }
   //--------------------------------------------------------------------------------
   //Methods: Arc
   //--------------------------------------------------------------------------------
-  public void Arc(uSVGPoint p1, float rx, float ry, float angle,
+  public void Arc(SVGPoint p1, float rx, float ry, float angle,
         bool largeArcFlag, bool sweepFlag,
-        uSVGPoint p2) {
+        SVGPoint p2) {
     float tx, ty;
     double trx2, try2, tx2, ty2;
     float temp1, temp2;
@@ -296,7 +296,7 @@ public class SVGBasicDraw {
     int number = 100;
     float deltaT = _delta  / number;
 
-    uSVGPoint _point = new uSVGPoint(0, 0);
+    SVGPoint _point = new SVGPoint(0, 0);
     float t_angle;
     for(int i = 0; i <= number; i++) {
       t_angle = (deltaT * i + _angle)* Mathf.PI / 180.0f;
@@ -314,15 +314,15 @@ public class SVGBasicDraw {
   //--------------------------------------------------------------------------------
   public void ArcTo(float r1, float r2, float angle,
         bool largeArcFlag, bool sweepFlag,
-        uSVGPoint p) {
-    uSVGPoint _tempPoint = new uSVGPoint(this._currentPoint.x, this._currentPoint.y);
+        SVGPoint p) {
+    SVGPoint _tempPoint = new SVGPoint(this._currentPoint.x, this._currentPoint.y);
     Arc(_tempPoint, r1, r2, angle, largeArcFlag, sweepFlag, p);
     this._currentPoint.SetValue(p);
   }
   //--------------------------------------------------------------------------------
   //Methods: CubicCurve Process
   //--------------------------------------------------------------------------------
-  private float BelongPosition(uSVGPoint a, uSVGPoint b, uSVGPoint c) {
+  private float BelongPosition(SVGPoint a, SVGPoint b, SVGPoint c) {
     float _up, _under, _r;
     _up = ((a.y - c.y)*(b.x - a.x))-((a.x - c.x)*(b.y - a.y));
     _under = ((b.x - a.x)*(b.x - a.x))+((b.y - a.y)*(b.y - a.y));
@@ -331,12 +331,12 @@ public class SVGBasicDraw {
   }
   //Caculate Distance from c point to line segment [a,b]
   //return d point is the point on that line segment.
-  private int NumberOfLimitForCubic(uSVGPoint a, uSVGPoint b, uSVGPoint c, uSVGPoint d) {
+  private int NumberOfLimitForCubic(SVGPoint a, SVGPoint b, SVGPoint c, SVGPoint d) {
     float _r1 = BelongPosition(a, d, b);
     float _r2 = BelongPosition(a, d, c);
     if((_r1 * _r2) > 0)return 0; else return 1;
   }
-  private float Distance(uSVGPoint a, uSVGPoint b, uSVGPoint c) {
+  private float Distance(SVGPoint a, SVGPoint b, SVGPoint c) {
     float _up, _under, _distance;
     _up = ((a.y - c.y)*(b.x - a.x))-((a.x - c.x)*(b.y - a.y));
     _under = ((b.x - a.x)*(b.x - a.x))+((b.y - a.y)*(b.y - a.y));
@@ -344,9 +344,9 @@ public class SVGBasicDraw {
     return _distance;
   }
 
-  private delegate uSVGPoint EvaluateDelegate(float t, uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4);
-  private uSVGPoint EvaluateForCubic(float t, uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
-    uSVGPoint _return = new uSVGPoint(0, 0);
+  private delegate SVGPoint EvaluateDelegate(float t, SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4);
+  private SVGPoint EvaluateForCubic(float t, SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
+    SVGPoint _return = new SVGPoint(0, 0);
     float b0, b1, b2, b3, b4;
     b0 = (1.0f - t);
     b1 = b0 * b0 * b0;
@@ -358,8 +358,8 @@ public class SVGBasicDraw {
     return _return;
   }
 
-  private uSVGPoint EvaluateForQuadratic(float t, uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
-    uSVGPoint _return = new uSVGPoint(0, 0);
+  private SVGPoint EvaluateForQuadratic(float t, SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
+    SVGPoint _return = new SVGPoint(0, 0);
     float b0, b1, b2, b3;
     b0 = (1.0f - t);
     b1 = b0 * b0;
@@ -370,7 +370,7 @@ public class SVGBasicDraw {
     return _return;
   }
 
-  private void CubicCurve(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4, int numberOfLimit, EvaluateDelegate evalFunction) {
+  private void CubicCurve(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4, int numberOfLimit, EvaluateDelegate evalFunction) {
 
     MoveTo(p1); //MoveTo the first Point;
 
@@ -462,7 +462,7 @@ public class SVGBasicDraw {
   //--------------------------------------------------------------------------------
   //Methods: CubicCurve
   //--------------------------------------------------------------------------------
-  public void CubicCurve(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
+  public void CubicCurve(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
     EvaluateDelegate evalFunction = new EvaluateDelegate(EvaluateForCubic);
     int _temp = NumberOfLimitForCubic(p1, p2, p3, p4);
     CubicCurve(p1, p2, p3, p4, _temp, evalFunction);
@@ -470,16 +470,16 @@ public class SVGBasicDraw {
   //--------------------------------------------------------------------------------
   //Methods: CubicCurveTo
   //--------------------------------------------------------------------------------
-  public void CubicCurveTo(uSVGPoint p1, uSVGPoint p2, uSVGPoint p) {
-    uSVGPoint _tempPoint = new uSVGPoint(this._currentPoint.x, this._currentPoint.y);
+  public void CubicCurveTo(SVGPoint p1, SVGPoint p2, SVGPoint p) {
+    SVGPoint _tempPoint = new SVGPoint(this._currentPoint.x, this._currentPoint.y);
     CubicCurve(_tempPoint, p1, p2, p);
     this._currentPoint.SetValue(p);
   }
   //--------------------------------------------------------------------------------
   //Methods: QuadraticCurve
   //--------------------------------------------------------------------------------
-  public void QuadraticCurve(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3) {
-    uSVGPoint p4 = new uSVGPoint(p2.x, p2.y);
+  public void QuadraticCurve(SVGPoint p1, SVGPoint p2, SVGPoint p3) {
+    SVGPoint p4 = new SVGPoint(p2.x, p2.y);
     EvaluateDelegate evalFunction = new EvaluateDelegate(EvaluateForQuadratic);
     CubicCurve(p1, p2, p3, p4, 0, evalFunction);
     this._currentPoint.SetValue(p3);
@@ -487,8 +487,8 @@ public class SVGBasicDraw {
   //--------------------------------------------------------------------------------
   //Methods: QuadraticCurveTo
   //--------------------------------------------------------------------------------
-  public void QuadraticCurveTo(uSVGPoint p1, uSVGPoint p) {
-    uSVGPoint _tempPoint = new uSVGPoint(this._currentPoint.x, this._currentPoint.y);
+  public void QuadraticCurveTo(SVGPoint p1, SVGPoint p) {
+    SVGPoint _tempPoint = new SVGPoint(this._currentPoint.x, this._currentPoint.y);
     QuadraticCurve(_tempPoint, p1, p);
     this._currentPoint.SetValue(p);
   }

@@ -1,4 +1,4 @@
-public class SVGLineElement : uSVGTransformable, uISVGDrawable {
+public class SVGLineElement : SVGTransformable, ISVGDrawable {
   private SVGLength _x1;
   private SVGLength _y1;
   private SVGLength _x2;
@@ -6,7 +6,7 @@ public class SVGLineElement : uSVGTransformable, uISVGDrawable {
   /***********************************************************************************/
   private SVGGraphics _render;
   private AttributeList _attrList;
-  private uSVGPaintable _paintable;
+  private SVGPaintable _paintable;
   /***********************************************************************************/
   public SVGLength x1 {
     get {
@@ -33,11 +33,11 @@ public class SVGLineElement : uSVGTransformable, uISVGDrawable {
   }
   /***********************************************************************************/
   public SVGLineElement(  AttributeList attrList,
-              uSVGTransformList inheritTransformList,
-              uSVGPaintable inheritPaintable,
+              SVGTransformList inheritTransformList,
+              SVGPaintable inheritPaintable,
               SVGGraphics _render) : base(inheritTransformList) {
     this._attrList = attrList;
-    this._paintable = new uSVGPaintable(inheritPaintable, this._attrList);
+    this._paintable = new SVGPaintable(inheritPaintable, this._attrList);
     this._render = _render;
     this._x1 = new SVGLength(attrList.GetValue("x1"));
     this._y1 = new SVGLength(attrList.GetValue("y1"));
@@ -46,12 +46,12 @@ public class SVGLineElement : uSVGTransformable, uISVGDrawable {
   }
   /***********************************************************************************/
   //Thuc thi Interface Drawable
-  public void BeforeRender(uSVGTransformList transformList) {
+  public void BeforeRender(SVGTransformList transformList) {
     this.inheritTransformList = transformList;
   }
   public void Render() {
-    uSVGPoint p1, p2;
-    uSVGMatrix _matrix = this.transformMatrix;
+    SVGPoint p1, p2;
+    SVGMatrix _matrix = this.transformMatrix;
     if(this._paintable.strokeColor == null)return;
 
     float _width = this._paintable.strokeWidth;
@@ -61,8 +61,8 @@ public class SVGLineElement : uSVGTransformable, uISVGDrawable {
     float ty1 = this._y1.value;
     float tx2 = this._x2.value;
     float ty2 = this._y2.value;
-    p1 = new uSVGPoint(tx1, ty1);
-    p2 = new uSVGPoint(tx2, ty2);
+    p1 = new SVGPoint(tx1, ty1);
+    p2 = new SVGPoint(tx2, ty2);
 
     p1 = p1.MatrixTransform(_matrix);
     p2 = p2.MatrixTransform(_matrix);

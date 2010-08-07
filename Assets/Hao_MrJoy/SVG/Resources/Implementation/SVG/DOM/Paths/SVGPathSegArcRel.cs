@@ -1,4 +1,4 @@
-public class SVGPathSegArcRel : uSVGPathSeg, uISVGDrawableSeg  {
+public class SVGPathSegArcRel : SVGPathSeg, ISVGDrawableSeg  {
   private float _x      = 0f;
   private float _y      = 0f;
   private float _r1      = 0f;
@@ -17,7 +17,7 @@ public class SVGPathSegArcRel : uSVGPathSeg, uISVGDrawableSeg  {
   //================================================================================
   public SVGPathSegArcRel(float r1, float r2, float angle,
               bool largeArcFlag, bool sweepFlag,
-              float x, float y) : base(uSVGPathSegTypes.PATHSEG_ARC_REL) {
+              float x, float y) : base(SVGPathSegTypes.Arc_Rel) {
     this._r1 = r1;
     this._r2 = r2;
     this._angle = angle;
@@ -27,10 +27,10 @@ public class SVGPathSegArcRel : uSVGPathSeg, uISVGDrawableSeg  {
     this._y = y;
   }
   //================================================================================
-  public override uSVGPoint currentPoint{
+  public override SVGPoint currentPoint{
     get{
-      uSVGPoint _return = new uSVGPoint(0f,0f);
-      uSVGPathSeg _prevSeg = previousSeg;
+      SVGPoint _return = new SVGPoint(0f,0f);
+      SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null) {
         _return.x = _prevSeg.currentPoint.x + this._x;
         _return.y = _prevSeg.currentPoint.y + this._y;
@@ -42,7 +42,7 @@ public class SVGPathSegArcRel : uSVGPathSeg, uISVGDrawableSeg  {
   //Method: Render
   //--------------------------------------------------------------------------------
   public void Render(SVGGraphicsPath _graphicsPath) {
-    uSVGPoint p;
+    SVGPoint p;
     p = currentPoint;
     _graphicsPath.AddArcTo(this._r1, this._r2, this._angle,
             this._largeArcFlag, this._sweepFlag, p);

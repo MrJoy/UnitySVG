@@ -1,5 +1,5 @@
 public class SVGGArcAbs  {
-  private uSVGPoint _p;
+  private SVGPoint _p;
   private float _r1;
   private float _r2;
   private float _angle;
@@ -26,12 +26,12 @@ public class SVGGArcAbs  {
     get{return this._sweepFlag;}
   }
   //-----
-  public uSVGPoint point {
+  public SVGPoint point {
     get{return this._p;}
   }
   //================================================================================
   public SVGGArcAbs(float r1, float r2, float angle,
-              bool largeArcFlag, bool sweepFlag, uSVGPoint p) {
+              bool largeArcFlag, bool sweepFlag, SVGPoint p) {
     this._r1 = r1;
     this._r2 = r2;
     this._angle = angle;

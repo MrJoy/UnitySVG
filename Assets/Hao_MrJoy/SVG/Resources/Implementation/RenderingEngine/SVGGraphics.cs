@@ -11,14 +11,14 @@ public class SVGGraphics {
 
   private int _width, _height;
 
-  private uSVGStrokeLineCapTypes   _strokeLineCap    = uSVGStrokeLineCapTypes.UNKNOWN;
-  private uSVGStrokeLineJoinTypes  _strokeLineJoin  = uSVGStrokeLineJoinTypes.UNKNOWN;
+  private SVGStrokeLineCapMethod   _strokeLineCap    = SVGStrokeLineCapMethod.Unknown;
+  private SVGStrokeLineJoinMethod  _strokeLineJoin  = SVGStrokeLineJoinMethod.Unknown;
   //================================================================================
-  public uSVGStrokeLineCapTypes strokeLineCap {
+  public SVGStrokeLineCapMethod strokeLineCap {
     get{ return this._strokeLineCap;}
   }
   //-----
-  public uSVGStrokeLineJoinTypes strokeLineJoin {
+  public SVGStrokeLineJoinMethod strokeLineJoin {
     get{ return this._strokeLineJoin;}
   }
   //================================================================================
@@ -58,13 +58,13 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: SetStrokeLineCap
   //--------------------------------------------------------------------------------
-  public void SetStrokeLineCap(uSVGStrokeLineCapTypes strokeLineCap) {
+  public void SetStrokeLineCap(SVGStrokeLineCapMethod strokeLineCap) {
     this._strokeLineCap = strokeLineCap;
   }
   //--------------------------------------------------------------------------------
   //Method: SetStrokeLineJoin
   //--------------------------------------------------------------------------------
-  public void SetStrokeLineJoin(uSVGStrokeLineJoinTypes strokeLineJoin) {
+  public void SetStrokeLineJoin(SVGStrokeLineJoinMethod strokeLineJoin) {
     this._strokeLineJoin = strokeLineJoin;
   }
   //--------------------------------------------------------------------------------
@@ -90,8 +90,8 @@ public class SVGGraphics {
   //GetThickLine
   //--------------------------------------------------------------------------------
   //Tinh 4 diem 1, 2, 3, 4 cua 1 line voi width
-  public bool GetThickLine(uSVGPoint p1, uSVGPoint p2, float width,
-            ref uSVGPoint rp1, ref uSVGPoint rp2, ref uSVGPoint rp3, ref uSVGPoint rp4) {
+  public bool GetThickLine(SVGPoint p1, SVGPoint p2, float width,
+            ref SVGPoint rp1, ref SVGPoint rp2, ref SVGPoint rp3, ref SVGPoint rp4) {
 
     float cx1, cy1, cx2, cy2, cx3, cy3, cx4, cy4;
     float dtx, dty, temp, _half;
@@ -214,9 +214,9 @@ public class SVGGraphics {
   //GetCrossPoint
   //--------------------------------------------------------------------------------
   //Tinh diem giao nhau giua 2 doan thang
-  public uSVGPoint GetCrossPoint(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
+  public SVGPoint GetCrossPoint(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
 
-    uSVGPoint _return = new uSVGPoint(0f, 0f);
+    SVGPoint _return = new SVGPoint(0f, 0f);
     float a1 = 0f, b1 = 0f, a2 = 0f, b2 = 0f;
 
     float dx1, dy1, dx2, dy2;
@@ -239,8 +239,8 @@ public class SVGGraphics {
 
     //truong hop nam tren duong thang
     if((a1 == a2)&&(b1 == b2)) {
-      uSVGPoint t_p1 = p1;
-      uSVGPoint t_p2 = p1;
+      SVGPoint t_p1 = p1;
+      SVGPoint t_p2 = p1;
       if(dx1 == 0f) {
         if(p2.y < t_p1.y)t_p1=p2;
         if(p3.y < t_p1.y)t_p1=p3;
@@ -291,10 +291,10 @@ public class SVGGraphics {
   //AngleBetween2Vector
   //--------------------------------------------------------------------------------
   //Tinh goc giua 2 vector (p1,p2) (p3,p4);
-  public float AngleBetween2Vector(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
-    uSVGPoint vt1, vt2;
-    vt1 = new uSVGPoint(p2.x - p1.x, p2.y - p1.y);
-    vt2 = new uSVGPoint(p4.x - p3.x, p4.y - p3.y);
+  public float AngleBetween2Vector(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
+    SVGPoint vt1, vt2;
+    vt1 = new SVGPoint(p2.x - p1.x, p2.y - p1.y);
+    vt2 = new SVGPoint(p4.x - p3.x, p4.y - p3.y);
     float t1 = vt1.x*vt2.x + vt1.y*vt2.y;
     float gtvt1 = (float)Math.Sqrt(vt1.x * vt1.x + vt1.y*vt1.y);
     float gtvt2 = (float)Math.Sqrt(vt2.x * vt2.x + vt2.y*vt2.y);
@@ -307,22 +307,22 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: Line
   //--------------------------------------------------------------------------------
-  public void Line(uSVGPoint p1, uSVGPoint p2) {
+  public void Line(SVGPoint p1, SVGPoint p2) {
     this._graphicsStroke.Line(p1, p2);
   }
   //-----
-  public void Line(uSVGPoint p1, uSVGPoint p2, uSVGColor? strokeColor) {
+  public void Line(SVGPoint p1, SVGPoint p2, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     Line(p1, p2);
   }
   //-----
-  public void Line(uSVGPoint p1, uSVGPoint p2, float width) {
+  public void Line(SVGPoint p1, SVGPoint p2, float width) {
     this._graphicsStroke.Line(p1, p2, width);
   }
   //-----
-  public void Line(uSVGPoint p1, uSVGPoint p2, uSVGColor? strokeColor, float width) {
+  public void Line(SVGPoint p1, SVGPoint p2, SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
@@ -331,23 +331,23 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: Rect
   //--------------------------------------------------------------------------------
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
     this._graphicsStroke.Rect(p1, p2, p3, p4);
   }
   //-----
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4, uSVGColor? strokeColor) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     Rect(p1, p2, p3, p4);
   }
   //-----
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4, float width) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4, float width) {
     this._graphicsStroke.Rect(p1, p2, p3, p4, width);
   }
   //-----
-  public void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-                             uSVGColor? strokeColor, float width) {
+  public void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+                             SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
@@ -356,16 +356,16 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: Rounded Rect
   //--------------------------------------------------------------------------------
-  public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-      uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+      SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
       float r1, float r2, float angle) {
 
     this._graphicsStroke.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
   }
   //-----
-  public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-      uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
-      float r1, float r2, float angle, uSVGColor? strokeColor) {
+  public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+      SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
+      float r1, float r2, float angle, SVGColor? strokeColor) {
 
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
@@ -373,8 +373,8 @@ public class SVGGraphics {
     RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
   }
   //-----
-  public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-      uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+      SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
       float r1, float r2, float angle, float width) {
 
     if((int)width == 1) {
@@ -384,9 +384,9 @@ public class SVGGraphics {
     this._graphicsStroke.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, width);
   }
   //-----
-  public void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-      uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
-      float r1, float r2, float angle, uSVGColor? strokeColor, float width) {
+  public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+      SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
+      float r1, float r2, float angle, SVGColor? strokeColor, float width) {
 
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
@@ -396,22 +396,22 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: FillRect
   //--------------------------------------------------------------------------------
-  public void FillRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4) {
+  public void FillRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
     this._graphicsFill.Rect(p1, p2, p3, p4);
   }
   //-----
-  public void FillRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-                          uSVGColor? strokeColor) {
+  public void FillRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+                          SVGColor? strokeColor) {
     this._graphicsFill.Rect(p1, p2, p3, p4, strokeColor);
   }
   //-----
-  public void FillRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-                          uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void FillRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+                          SVGColor fillColor, SVGColor? strokeColor) {
     this._graphicsFill.Rect(p1, p2, p3, p4, fillColor, strokeColor);
   }
   //-----
-  public void FillRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-                        uSVGColor? strokeColor, float width) {
+  public void FillRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+                        SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillRect(p1, p2, p3, p4, strokeColor);
       return;
@@ -422,8 +422,8 @@ public class SVGGraphics {
     Rect(p1, p2, p3, p4, strokeColor, width);
   }
   //-----
-  public void FillRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-                      uSVGColor fillColor, uSVGColor? strokeColor, float width) {
+  public void FillRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+                      SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillRect(p1, p2, p3, p4, fillColor, strokeColor);
       return;
@@ -437,31 +437,31 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: FillRoundedRect
   //--------------------------------------------------------------------------------
-  public void FillRoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void FillRoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle) {
     this._graphicsFill.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
   }
   //-----
-  public void FillRoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void FillRoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle,
-        uSVGColor? strokeColor) {
+        SVGColor? strokeColor) {
     this._graphicsFill.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, strokeColor);
   }
   //-----
-  public void FillRoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void FillRoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle,
-        uSVGColor fillColor, uSVGColor? strokeColor) {
+        SVGColor fillColor, SVGColor? strokeColor) {
     this._graphicsFill.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle,
                                       fillColor, strokeColor);
   }
   //-----
-  public void FillRoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void FillRoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle,
-        uSVGColor? strokeColor, float width) {
+        SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, strokeColor);
       return;
@@ -472,10 +472,10 @@ public class SVGGraphics {
     RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, strokeColor);
   }
   //-----
-  public void FillRoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  public void FillRoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle,
-        uSVGColor fillColor, uSVGColor? strokeColor, float width) {
+        SVGColor fillColor, SVGColor? strokeColor, float width) {
 
     if((int)width == 1) {
       FillRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, strokeColor);
@@ -491,23 +491,23 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: Circle
   //--------------------------------------------------------------------------------
-  public void Circle(uSVGPoint p, float r) {
+  public void Circle(SVGPoint p, float r) {
     this._graphicsStroke.Circle(p, r);
   }
   //-----
-  public void Circle(uSVGPoint p, float r, uSVGColor? strokeColor) {
+  public void Circle(SVGPoint p, float r, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     Circle(p, r);
   }
   //-----
-  public void Circle(uSVGPoint p, float r, float width) {
+  public void Circle(SVGPoint p, float r, float width) {
     this._graphicsStroke.Circle(p, r, width);
   }
   //-----
-  public void Circle(uSVGPoint p, float r,
-                  uSVGColor? strokeColor, float width) {
+  public void Circle(SVGPoint p, float r,
+                  SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
@@ -516,20 +516,20 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: FillCircle
   //--------------------------------------------------------------------------------
-  public void FillCircle(uSVGPoint p, float r) {
+  public void FillCircle(SVGPoint p, float r) {
     this._graphicsFill.Circle(p, r);
   }
   //-----
-  public void FillCircle(uSVGPoint p, float r, uSVGColor? strokeColor) {
+  public void FillCircle(SVGPoint p, float r, SVGColor? strokeColor) {
     this._graphicsFill.Circle(p, r, strokeColor);
   }
   //-----
-  public void FillCircle(uSVGPoint p, float r, uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void FillCircle(SVGPoint p, float r, SVGColor fillColor, SVGColor? strokeColor) {
     this._graphicsFill.Circle(p, r, fillColor, strokeColor);
   }
   //-----
-  public void FillCircle(uSVGPoint p, float r,
-              uSVGColor? strokeColor, float width) {
+  public void FillCircle(SVGPoint p, float r,
+              SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillCircle(p, r, strokeColor);
       return;
@@ -541,8 +541,8 @@ public class SVGGraphics {
     Circle(p, r, strokeColor, width);
   }
   //-----
-  public void FillCircle(uSVGPoint p, float r,
-              uSVGColor fillColor, uSVGColor? strokeColor, float width) {
+  public void FillCircle(SVGPoint p, float r,
+              SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillCircle(p, r, strokeColor);
       return;
@@ -556,23 +556,23 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: Ellipse
   //--------------------------------------------------------------------------------
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle) {
     this._graphicsStroke.Ellipse(p, rx, ry, angle);
   }
   //-----
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle, uSVGColor? strokeColor) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     Ellipse(p, rx, ry, angle);
   }
   //-----
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle, float width) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle, float width) {
     this._graphicsStroke.Ellipse(p, rx, ry, angle, width);
   }
   //-----
-  public void Ellipse(uSVGPoint p, float rx, float ry, float angle,
-                            uSVGColor? strokeColor, float width) {
+  public void Ellipse(SVGPoint p, float rx, float ry, float angle,
+                            SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
@@ -581,21 +581,21 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: FillEllipse
   //--------------------------------------------------------------------------------
-  public void FillEllipse(uSVGPoint p, float rx, float ry, float angle) {
+  public void FillEllipse(SVGPoint p, float rx, float ry, float angle) {
     this._graphicsFill.Ellipse(p, rx, ry, angle);
   }
   //-----
-  public void FillEllipse(uSVGPoint p, float rx, float ry, float angle, uSVGColor? strokeColor) {
+  public void FillEllipse(SVGPoint p, float rx, float ry, float angle, SVGColor? strokeColor) {
     this._graphicsFill.Ellipse(p, rx, ry, angle, strokeColor);
   }
   //-----
-  public void FillEllipse(uSVGPoint p, float rx, float ry, float angle,
-                uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void FillEllipse(SVGPoint p, float rx, float ry, float angle,
+                SVGColor fillColor, SVGColor? strokeColor) {
     this._graphicsFill.Ellipse(p, rx, ry, angle, fillColor, strokeColor);
   }
   //-----
-  public void FillEllipse(uSVGPoint p, float rx, float ry, float angle,
-                          uSVGColor? strokeColor, float width) {
+  public void FillEllipse(SVGPoint p, float rx, float ry, float angle,
+                          SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillEllipse(p, rx, ry, angle, strokeColor);
       return;
@@ -608,8 +608,8 @@ public class SVGGraphics {
 
   }
   //-----
-  public void FillEllipse(uSVGPoint p, float rx, float ry, float angle,
-                uSVGColor fillColor, uSVGColor? strokeColor, float width) {
+  public void FillEllipse(SVGPoint p, float rx, float ry, float angle,
+                SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillEllipse(p, rx, ry, angle, strokeColor);
       return;
@@ -624,22 +624,22 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: Polygon
   //--------------------------------------------------------------------------------
-  public void Polygon(uSVGPoint[] points) {
+  public void Polygon(SVGPoint[] points) {
     this._graphicsStroke.Polygon(points);
   }
   //-----
-  public void Polygon(uSVGPoint[] points, uSVGColor? strokeColor) {
+  public void Polygon(SVGPoint[] points, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     Polygon(points);
   }
   //-----
-  public void Polygon(uSVGPoint[] points, float width) {
+  public void Polygon(SVGPoint[] points, float width) {
     this._graphicsStroke.Polygon(points, width);
   }
   //-----
-  public void Polygon(uSVGPoint[] points, uSVGColor? strokeColor, float width) {
+  public void Polygon(SVGPoint[] points, SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
@@ -648,19 +648,19 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: FillPolygon
   //--------------------------------------------------------------------------------
-  public void FillPolygon(uSVGPoint[] points) {
+  public void FillPolygon(SVGPoint[] points) {
     this._graphicsFill.Polygon(points);
   }
   //-----
-  public void FillPolygon(uSVGPoint[] points, uSVGColor? strokeColor) {
+  public void FillPolygon(SVGPoint[] points, SVGColor? strokeColor) {
     this._graphicsFill.Polygon(points, strokeColor);
   }
   //-----
-  public void FillPolygon(uSVGPoint[] points, uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void FillPolygon(SVGPoint[] points, SVGColor fillColor, SVGColor? strokeColor) {
     this._graphicsFill.Polygon(points, fillColor, strokeColor);
   }
   //-----
-  public void FillPolygon(uSVGPoint[] points, uSVGColor? strokeColor, float width) {
+  public void FillPolygon(SVGPoint[] points, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillPolygon(points, strokeColor);
       return;
@@ -671,8 +671,8 @@ public class SVGGraphics {
     Polygon(points, width);
   }
   //-----
-  public void FillPolygon(uSVGPoint[] points,
-            uSVGColor fillColor, uSVGColor? strokeColor, float width) {
+  public void FillPolygon(SVGPoint[] points,
+            SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillPolygon(points, strokeColor);
       return;
@@ -686,22 +686,22 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: Polyline
   //--------------------------------------------------------------------------------
-  public void Polyline(uSVGPoint[] points) {
+  public void Polyline(SVGPoint[] points) {
     this._graphicsStroke.Polyline(points);
   }
   //-----
-  public void Polyline(uSVGPoint[] points, uSVGColor? strokeColor) {
+  public void Polyline(SVGPoint[] points, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     Polyline(points);
   }
   //-----
-  public void Polyline(uSVGPoint[] points, float width) {
+  public void Polyline(SVGPoint[] points, float width) {
     this._graphicsStroke.Polyline(points, width);
   }
   //-----
-  public void Polyline(uSVGPoint[] points, uSVGColor? strokeColor, float width) {
+  public void Polyline(SVGPoint[] points, SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
@@ -710,19 +710,19 @@ public class SVGGraphics {
   //--------------------------------------------------------------------------------
   //Method: FillPolyline
   //--------------------------------------------------------------------------------
-  public void FillPolyline(uSVGPoint[] points) {
+  public void FillPolyline(SVGPoint[] points) {
     this._graphicsFill.Polyline(points);
   }
   //-----
-  public void FillPolyline(uSVGPoint[] points, uSVGColor? strokeColor) {
+  public void FillPolyline(SVGPoint[] points, SVGColor? strokeColor) {
     this._graphicsFill.Polyline(points, strokeColor);
   }
   //-----
-  public void FillPolyline(uSVGPoint[] points, uSVGColor fillColor, uSVGColor? strokeColor) {
+  public void FillPolyline(SVGPoint[] points, SVGColor fillColor, SVGColor? strokeColor) {
     this._graphicsFill.Polyline(points, fillColor, strokeColor);
   }
   //-----
-  public void FillPolyline(uSVGPoint[] points, uSVGColor? strokeColor, float width) {
+  public void FillPolyline(SVGPoint[] points, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillPolyline(points, strokeColor);
       return;
@@ -733,8 +733,8 @@ public class SVGGraphics {
     Polyline(points, width);
   }
   //-----
-  public void FillPolyline(uSVGPoint[] points,
-            uSVGColor fillColor, uSVGColor? strokeColor, float width) {
+  public void FillPolyline(SVGPoint[] points,
+            SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillPolyline(points, strokeColor);
       return;
@@ -758,14 +758,14 @@ public class SVGGraphics {
   //-----
   //Fill co Stroke trong do luon
   public void FillPath(SVGLinearGradientBrush linearGradientBrush,
-                              uSVGColor? strokePathColor,
+                              SVGColor? strokePathColor,
                               SVGGraphicsPath graphicsPath) {
     this._graphicsFill.FillPath(linearGradientBrush, strokePathColor, graphicsPath);
   }
   //-----
   //Fill khong co Stroke, va ve stroke sau
   public void FillPath(SVGLinearGradientBrush linearGradientBrush,
-                              uSVGColor? strokePathColor,
+                              SVGColor? strokePathColor,
                               float width,
                               SVGGraphicsPath graphicsPath) {
 
@@ -789,14 +789,14 @@ public class SVGGraphics {
   //-----
   //Fill co Stroke trong do luon
   public void FillPath(SVGRadialGradientBrush radialGradientBrush,
-                              uSVGColor? strokePathColor,
+                              SVGColor? strokePathColor,
                               SVGGraphicsPath graphicsPath) {
     this._graphicsFill.FillPath(radialGradientBrush, strokePathColor, graphicsPath);
   }
   //-----
   //Fill khong co Stroke, va ve stroke sau
   public void FillPath(SVGRadialGradientBrush radialGradientBrush,
-                              uSVGColor? strokePathColor,
+                              SVGColor? strokePathColor,
                               float width,
                               SVGGraphicsPath graphicsPath) {
     this._graphicsFill.FillPath(radialGradientBrush, strokePathColor, graphicsPath);
@@ -816,18 +816,18 @@ public class SVGGraphics {
     this._graphicsFill.FillPath(graphicsPath);
   }
   //Fill khong to Stroke
-  public void FillPath(uSVGColor fillColor, SVGGraphicsPath graphicsPath) {
+  public void FillPath(SVGColor fillColor, SVGGraphicsPath graphicsPath) {
     this._graphicsFill.FillPath(fillColor, graphicsPath);
   }
   //-----
   //Fill co Stroke trong do luon
-  public void FillPath(uSVGColor fillColor, uSVGColor? strokePathColor,
+  public void FillPath(SVGColor fillColor, SVGColor? strokePathColor,
                               SVGGraphicsPath graphicsPath) {
     this._graphicsFill.FillPath(fillColor, strokePathColor, graphicsPath);
   }
   //-----
   //Fill khong co Stroke, va ve stroke sau
-  public void FillPath(uSVGColor fillColor, uSVGColor? strokePathColor,
+  public void FillPath(SVGColor fillColor, SVGColor? strokePathColor,
                               float width,
                               SVGGraphicsPath graphicsPath) {
     this._graphicsFill.FillPath(fillColor, strokePathColor, graphicsPath);
@@ -838,7 +838,7 @@ public class SVGGraphics {
     SetColor(strokePathColor.Value.color);
   }
   //-----
-  public void FillPath( SVGGraphicsPath graphicsPath, uSVGPoint[] points) {
+  public void FillPath( SVGGraphicsPath graphicsPath, SVGPoint[] points) {
     this._graphicsFill.FillPath(graphicsPath, points);
   }
   //================================================================================
@@ -856,7 +856,7 @@ public class SVGGraphics {
   }
   //-----
   //Fill khong co Stroke, va ve stroke sau
-  public void DrawPath(SVGGraphicsPath graphicsPath, float width, uSVGColor? strokePathColor) {
+  public void DrawPath(SVGGraphicsPath graphicsPath, float width, SVGColor? strokePathColor) {
     if(strokePathColor == null)return;
     SetColor(strokePathColor.Value.color);
     this._graphicsStroke.DrawPath(graphicsPath, width);

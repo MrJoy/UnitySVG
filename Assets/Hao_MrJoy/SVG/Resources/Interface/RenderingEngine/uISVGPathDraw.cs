@@ -3,69 +3,69 @@ public interface uISVGPathDraw {
   //-----
   //MoveTo
   //-----
-  void MoveTo(uSVGPoint p);
+  void MoveTo(SVGPoint p);
 
   //-----
   //CircleTo
   //-----
-  void CircleTo(uSVGPoint p, float r);
+  void CircleTo(SVGPoint p, float r);
 
   //-----
   //EllipseTo
   //-----
-  void EllipseTo(uSVGPoint p, float r1, float r2, float angle);
+  void EllipseTo(SVGPoint p, float r1, float r2, float angle);
 
   //-----
   //ArcTo
   //-----
   void ArcTo(float r1, float r2, float angle,
-        bool largeArcFlag, bool sweepFlag, uSVGPoint p);
+        bool largeArcFlag, bool sweepFlag, SVGPoint p);
 
   //-----
   //CubicCurveTo
   //-----
-  void CubicCurveTo(uSVGPoint p1, uSVGPoint p2, uSVGPoint p);
+  void CubicCurveTo(SVGPoint p1, SVGPoint p2, SVGPoint p);
 
   //-----
   //QuadraticCurveTo
   //-----
-  void QuadraticCurveTo(uSVGPoint p1, uSVGPoint p);
+  void QuadraticCurveTo(SVGPoint p1, SVGPoint p);
 
   //-----
   //LineTo
   //-----
-  void LineTo(uSVGPoint p);
+  void LineTo(SVGPoint p);
 
   //-----
   //Rect
   //-----
-  void Rect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4);
+  void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4);
 
   //-----
   //RoundedRect
   //-----
-  void RoundedRect(uSVGPoint p1, uSVGPoint p2, uSVGPoint p3, uSVGPoint p4,
-        uSVGPoint p5, uSVGPoint p6, uSVGPoint p7, uSVGPoint p8,
+  void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4,
+        SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8,
         float r1, float r2, float angle);
 
 
   //-----
   //Circle
   //-----
-  void Circle(uSVGPoint p, float r);
+  void Circle(SVGPoint p, float r);
 
   //-----
   //Ellipse
   //-----
-  void Ellipse(uSVGPoint p, float rx, float ry, float angle);
+  void Ellipse(SVGPoint p, float rx, float ry, float angle);
 
   //-----
   //Polyline
   //-----
-  void Polyline(uSVGPoint[] points);
+  void Polyline(SVGPoint[] points);
 
   //-----
   //Polygon
   //-----
-  void Polygon(uSVGPoint[] points);
+  void Polygon(SVGPoint[] points);
 }
