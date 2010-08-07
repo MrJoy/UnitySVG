@@ -17,7 +17,7 @@ public class SVGGradientElement {
   private SVGSpreadMethod _spreadMethod;
   /***************************************************************************/
   private string _id;
-  private uXMLImp _xmlImp;
+  private SVGParser _xmlImp;
   private List<SVGStopElement> _stopList;
   protected AttributeList _attrList;
   /***************************************************************************/
@@ -34,7 +34,7 @@ public class SVGGradientElement {
     get { return _stopList; }
   }
   /***************************************************************************/
-  public SVGGradientElement(uXMLImp xmlImp, AttributeList attrList) {
+  public SVGGradientElement(SVGParser xmlImp, AttributeList attrList) {
     _attrList = attrList;
     _xmlImp = xmlImp;
     _stopList = new List<SVGStopElement>();

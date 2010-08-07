@@ -5,13 +5,13 @@ public class SVGGElement : SVGTransformable, ISVGDrawable {
   //-------------------------------
   private AttributeList _attrList;
   private List<object> _elementList = null;
-  private uXMLImp _xmlImp;
+  private SVGParser _xmlImp;
   //-------------------------------
   private SVGGraphics _render;
   //-------------------------------
   private SVGPaintable _paintable;
   /***********************************************************************************/
-  public SVGGElement(uXMLImp xmlImp,
+  public SVGGElement(SVGParser xmlImp,
                       SVGTransformList inheritTransformList,
                       SVGPaintable inheritPaintable,
                       SVGGraphics render) : base(inheritTransformList) {

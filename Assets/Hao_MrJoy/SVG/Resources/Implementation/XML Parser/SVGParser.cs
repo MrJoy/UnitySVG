@@ -15,13 +15,13 @@ public struct Node {
   }
 }
 
-public class uXMLImp : SmallXmlParser.IContentHandler {
+public class SVGParser : SmallXmlParser.IContentHandler {
   private SmallXmlParser _parser = new SmallXmlParser();
 
   /***********************************************************************************/
-  public uXMLImp() { }
+  public SVGParser() { }
 
-  public uXMLImp(string text) {
+  public SVGParser(string text) {
     _parser.Parse(new StringReader(text), this);
   }
 

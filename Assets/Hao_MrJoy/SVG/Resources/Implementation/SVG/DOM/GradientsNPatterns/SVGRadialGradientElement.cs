@@ -23,7 +23,7 @@ public class SVGRadialGradientElement : SVGGradientElement {
     get { return _fy; }
   }
   /***************************************************************************/
-  public SVGRadialGradientElement(uXMLImp xmlImp, AttributeList attrList) : base(xmlImp, attrList) {
+  public SVGRadialGradientElement(SVGParser xmlImp, AttributeList attrList) : base(xmlImp, attrList) {
     string temp;
     temp = attrList.GetValue("cx");
     _cx = new SVGLength((temp == "") ? "50%" : temp);

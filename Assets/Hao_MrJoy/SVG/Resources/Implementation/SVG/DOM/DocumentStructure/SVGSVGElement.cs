@@ -9,14 +9,14 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
   //-------------------------------
   private AttributeList _attrList;
   private List<object> _elementList;
-  private uXMLImp _xmlImp;
+  private SVGParser _xmlImp;
   //-------------------------------
   private SVGPaintable _paintable;
   //-------------------------------
   private SVGGraphics _render;
 
   /***********************************************************************************/
-  public SVGSVGElement(  uXMLImp xmlImp,
+  public SVGSVGElement(  SVGParser xmlImp,
               SVGTransformList inheritTransformList,
               SVGPaintable inheritPaintable,
               SVGGraphics r) : base(inheritTransformList) {

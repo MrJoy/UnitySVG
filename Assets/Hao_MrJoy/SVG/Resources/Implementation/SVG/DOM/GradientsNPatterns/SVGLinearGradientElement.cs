@@ -22,7 +22,7 @@ public class SVGLinearGradientElement : SVGGradientElement {
     get { return _y2; }
   }
   /***************************************************************************/
-  public SVGLinearGradientElement(uXMLImp xmlImp, AttributeList attrList) : base(xmlImp, attrList) {
+  public SVGLinearGradientElement(SVGParser xmlImp, AttributeList attrList) : base(xmlImp, attrList) {
     string temp;
     temp = _attrList.GetValue("x1");
     _x1 = new SVGLength((temp == "") ? "0%" : temp);
