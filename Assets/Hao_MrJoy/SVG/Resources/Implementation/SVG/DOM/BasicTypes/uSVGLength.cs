@@ -14,11 +14,11 @@ public enum uSVGLengthType : ushort {
 /**************************************************************************************************/
 public struct uSVGLength  {
   private uSVGLengthType m_unitType;
-  private float m_valueInSpecifiedUnits;
+  private float m_valueInSpecifiedUnits, m_value;
 
   /***********************************************************************************/
   public float value {
-    get { return uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType); }
+    get { return m_value; }
   }
   public uSVGLengthType unitType {
     get{ return m_unitType; }
@@ -27,10 +27,12 @@ public struct uSVGLength  {
   public uSVGLength(ushort unitType, float valueInSpecifiedUnits) {
     m_unitType = (uSVGLengthType)unitType;
     m_valueInSpecifiedUnits = valueInSpecifiedUnits;
+    m_value = uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);
   }
   public uSVGLength(float valueInSpecifiedUnits) {
     m_unitType = (uSVGLengthType)0;
     m_valueInSpecifiedUnits = valueInSpecifiedUnits;
+    m_value = uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);
   }
   public uSVGLength(string valueText) {
     float t_value = 0.0f;
@@ -38,6 +40,7 @@ public struct uSVGLength  {
     uSVGLengthConvertor.f_ExtractType(valueText, ref t_value, ref t_type);
     m_unitType = t_type;      
     m_valueInSpecifiedUnits = t_value;
+    m_value = uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);
   }
   /***********************************************************************************/
   public void NewValueSpecifiedUnits(ushort unitType, float valueInSpecifiedUnits) {
