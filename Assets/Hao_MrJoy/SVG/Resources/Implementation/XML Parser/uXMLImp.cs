@@ -3,7 +3,7 @@ using System.IO;
 public class uXMLImp : SmallXmlParser.IContentHandler {
   public enum XMLTagState {OPEN, CLOSE, BOTH}
 
-  private SmallXmlParser _parser   = new SmallXmlParser();
+  private SmallXmlParser _parser = new SmallXmlParser();
   private TextReader _textReader;
 
   private string _currentName = "";
@@ -12,8 +12,7 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   private AttributeList _currentList;
 
   /***********************************************************************************/
-  public uXMLImp() {
-  }
+  public uXMLImp() { }
 
   public uXMLImp(string text) {
     _textReader = new StringReader(text);
@@ -46,7 +45,7 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   //    XMLTagState.BOTH   : current XMLTag is Open and Closed in the same XMLTag.
   //---------------------------------------------------------
   public XMLTagState GetCurrentTagState() {
-    return this._currentTagState;
+    return _currentTagState;
   }
 
   //---------------------------------------------------------
@@ -133,40 +132,35 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   }
 
   /***********************************************************************************/
-  public void OnStartParsing(SmallXmlParser parser) {
-  }
+  public void OnStartParsing(SmallXmlParser parser) { }
 
-  public void OnEndParsing(SmallXmlParser parser) {
-  }
+  public void OnEndParsing(SmallXmlParser parser) { }
 
   public void OnStartEndElement(string name, AttributeList attrs, string lineText) {
-    this._parser.Pause();
-    this._currentName = name;
-    this._currentLineText = lineText;
+    _parser.Pause();
+    _currentName = name;
+    _currentLineText = lineText;
     CloneAttrsList(attrs);
-    this._currentTagState = XMLTagState.BOTH;
+    _currentTagState = XMLTagState.BOTH;
   }
   public void OnStartElement(string name, AttributeList attrs, string lineText) {
-    this._parser.Pause();
-    this._currentName = name;
-    this._currentLineText = lineText;
+    _parser.Pause();
+    _currentName = name;
+    _currentLineText = lineText;
     CloneAttrsList(attrs);
-    this._currentTagState = XMLTagState.OPEN;
+    _currentTagState = XMLTagState.OPEN;
   }
 
   public void OnEndElement(string name, string lineText) {
-    this._parser.Pause();
-    this._currentName = name;
-    this._currentLineText = lineText;
-    this._currentTagState = XMLTagState.CLOSE;
+    _parser.Pause();
+    _currentName = name;
+    _currentLineText = lineText;
+    _currentTagState = XMLTagState.CLOSE;
   }
 
-  public void OnChars(string s) {
-  }
+  public void OnChars(string s) { }
 
-  public void OnIgnorableWhitespace(string s) {
-  }
+  public void OnIgnorableWhitespace(string s) { }
 
-  public void OnProcessingInstruction(string name, string text) {
-  }
+  public void OnProcessingInstruction(string name, string text) { }
 }
