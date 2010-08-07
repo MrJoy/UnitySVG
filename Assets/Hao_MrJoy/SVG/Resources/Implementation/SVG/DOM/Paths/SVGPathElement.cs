@@ -317,7 +317,7 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
   private SVGGraphicsPath _graphicsPath;
   private void CreateGraphicsPath() {
     this._graphicsPath = new SVGGraphicsPath();
-    for(int i = 0; i < this._segList.numberOfItems; i++) {
+    for(int i = 0; i < this._segList.Count; i++) {
       ISVGDrawableSeg temp = this._segList.GetItem(i)as ISVGDrawableSeg;
       if(temp != null) {
         temp.Render(this._graphicsPath);
@@ -336,7 +336,7 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
   //Thuc thi Interface Drawable
   public void BeforeRender(SVGTransformList transformList) {
     this.inheritTransformList = transformList;
-    for(int i = 0; i < this._segList.numberOfItems; i++) {
+    for(int i = 0; i < this._segList.Count; i++) {
       ISVGDrawable temp = this._segList.GetItem(i)as ISVGDrawable;
       if(temp != null) {
         temp.BeforeRender(this.summaryTransformList);

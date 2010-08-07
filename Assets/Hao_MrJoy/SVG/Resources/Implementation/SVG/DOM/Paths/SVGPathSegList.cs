@@ -2,11 +2,7 @@ using System.Collections.Generic;
 
 public class SVGPathSegList {
   private List<object> _segList = new List<object>();
-  /***********************************************************************************/
-  public int numberOfItems {
-    get{return this._segList.Count;}
-  }
-
+  public int Count { get { return _segList.Count; } }
   /***********************************************************************************/
   public SVGPathSegList() {
   }
@@ -21,7 +17,7 @@ public class SVGPathSegList {
   }
   //-----------
   public SVGPathSeg GetItem(int index) {
-    if(index < 0 || index > numberOfItems) {
+    if(index < 0 || index > _segList.Count) {
       return null;
     }
     return(SVGPathSeg)this._segList[index];
