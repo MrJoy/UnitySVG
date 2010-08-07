@@ -253,7 +253,7 @@ public class uSVGGraphicsPath {
   //Method: GetBound
   //--------------------------------------------------------------------------------
   public uSVGRect GetBound() {
-Profiler.BeginSample("uSVGGraphicsPath/GetBound()");
+Profiler.BeginSample("uSVGGraphicsPath.GetBound()");
     float cx, cy, r, rx, ry, x, y, width, height;
 
     for (int i = 0; i < listObject.Count; i++ ) {
