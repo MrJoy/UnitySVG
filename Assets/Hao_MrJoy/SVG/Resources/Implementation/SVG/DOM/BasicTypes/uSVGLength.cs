@@ -18,10 +18,10 @@ public struct uSVGLength  {
 
 		/***********************************************************************************/
 		public float value {
-			get{return uSVGLengthConvertor.f_ConvertToPX(this.m_valueInSpecifiedUnits, this.m_unitType);}
+			get{return uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType);}
 		}
 		public uSVGLengthType unitType {
-			get{ return this.m_unitType;}
+			get{ return m_unitType;}
 		}
 		/***********************************************************************************/
 		public uSVGLength(ushort unitType, float valueInSpecifiedUnits) {
@@ -41,8 +41,8 @@ public struct uSVGLength  {
 		}
 		/***********************************************************************************/
 		public void NewValueSpecifiedUnits(ushort unitType, float valueInSpecifiedUnits) {
-			this.m_unitType = (uSVGLengthType)unitType;
-			this.m_valueInSpecifiedUnits = valueInSpecifiedUnits;
+			m_unitType = (uSVGLengthType)unitType;
+			m_valueInSpecifiedUnits = valueInSpecifiedUnits;
 		}
 		public void NewValueSpecifiedUnits(float valueInSpecifiedUnits) {
 			NewValueSpecifiedUnits(0, valueInSpecifiedUnits);
@@ -57,7 +57,7 @@ public struct uSVGLength  {
 		/***********************************************************************************/
 		private float f_GetValue(uSVGLengthType unitType) {
 
-			float temp = uSVGLengthConvertor.f_ConvertToPX(this.value, this.m_unitType);
+			float temp = uSVGLengthConvertor.f_ConvertToPX(value, m_unitType);
 			switch (unitType) {
 				case uSVGLengthType.SVG_LENGTHTYPE_IN :
 					return temp / 90.0f;
