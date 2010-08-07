@@ -1,3 +1,4 @@
+using UnityEngine;
 using System.Collections.Generic;
 
 public class uSVGGElement : uSVGTransformable, uISVGDrawable {
@@ -18,10 +19,6 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
     _xmlImp = xmlImp;
     _attrList = _xmlImp.GetCurrentAttributesList();
     _paintable = new uSVGPaintable(inheritPaintable, _attrList);
-    Initial();
-  }
-  /***********************************************************************************/
-  private void Initial() {
     _elementList = new List<object>();
     currentTransformList = new uSVGTransformList(_attrList.GetValue("TRANSFORM"));
     GetElementList();
@@ -114,31 +111,28 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
   }
   /***********************************************************************************/
   public void BeforeRender(uSVGTransformList transformList) {
-    this.inheritTransformList = transformList;
+    inheritTransformList = transformList;
     for(int i = 0; i < _elementList.Count; i++) {
       uISVGDrawable temp = _elementList[i] as uISVGDrawable;
-      if(temp != null) {
-        temp.BeforeRender(this.summaryTransformList);
-      }
+      if(temp != null) temp.BeforeRender(summaryTransformList);
     }
   }
   public void Render() {
-    UnityEngine.Color _color = UnityEngine.Color.black;
-    bool use__color = false;
-    if((this._paintable.IsFill() == true)&&(this._paintable.IsLinearGradiantFill() == false)) {
-      _color = this._paintable.fillColor.Value.color;
-      use__color = true;
-    } else if(this._paintable.strokeColor != null) {
-      _color = this._paintable.strokeColor.Value.color;
-      use__color = true;
+    Color _color = Color.black;
+    bool use_color = false;
+    if(_paintable.IsFill() && !_paintable.IsLinearGradiantFill()) {
+      _color = _paintable.fillColor.Value.color;
+      use_color = true;
+    } else if(_paintable.strokeColor != null) {
+      _color = _paintable.strokeColor.Value.color;
+      use_color = true;
     }
-
 
     for(int i = 0; i < _elementList.Count; i++) {
       uISVGDrawable temp = _elementList[i] as uISVGDrawable;
       if(temp != null) {
-        if(use__color)
-          this._render.SetColor(_color);
+        if(use_color)
+          _render.SetColor(_color);
         temp.Render();
       }
     }
