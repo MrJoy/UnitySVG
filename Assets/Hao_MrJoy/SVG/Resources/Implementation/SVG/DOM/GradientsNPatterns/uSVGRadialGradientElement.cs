@@ -1,43 +1,43 @@
 using System.Collections.Generic;
 
-public class uSVGRadialGradientElement : uSVGGradientElement {
-  private uSVGLength _cx;
-  private uSVGLength _cy;
-  private uSVGLength _r;
-  private uSVGLength _fx;
-  private uSVGLength _fy;
+public class uSVGRadialGradientElement : SVGGradientElement {
+  private SVGLength _cx;
+  private SVGLength _cy;
+  private SVGLength _r;
+  private SVGLength _fx;
+  private SVGLength _fy;
   /***************************************************************************/
-  public uSVGLength cx {
+  public SVGLength cx {
     get { return _cx; }
   }
-  public uSVGLength cy {
+  public SVGLength cy {
     get { return _cy; }
   }
-  public uSVGLength r {
+  public SVGLength r {
     get { return _r; }
   }
-  public uSVGLength fx {
+  public SVGLength fx {
     get { return _fx; }
   }
-  public uSVGLength fy {
+  public SVGLength fy {
     get { return _fy; }
   }
   /***************************************************************************/
   public uSVGRadialGradientElement(uXMLImp xmlImp, AttributeList attrList) : base(xmlImp, attrList) {
     string temp;
     temp = attrList.GetValue("cx");
-    _cx = new uSVGLength((temp == "") ? "50%" : temp);
+    _cx = new SVGLength((temp == "") ? "50%" : temp);
 
     temp = attrList.GetValue("cy");
-    _cy = new uSVGLength((temp == "") ? "50%" : temp);
+    _cy = new SVGLength((temp == "") ? "50%" : temp);
 
     temp = attrList.GetValue("r");
-    _r = new uSVGLength((temp == "") ? "50%" : temp);
+    _r = new SVGLength((temp == "") ? "50%" : temp);
 
     temp = attrList.GetValue("fx");
-    _fx = new uSVGLength((temp == "") ? "50%" : temp);
+    _fx = new SVGLength((temp == "") ? "50%" : temp);
 
     temp = attrList.GetValue("fy");
-    _fy = new uSVGLength((temp == "") ? "50%" : temp);
+    _fy = new SVGLength((temp == "") ? "50%" : temp);
   }
 }

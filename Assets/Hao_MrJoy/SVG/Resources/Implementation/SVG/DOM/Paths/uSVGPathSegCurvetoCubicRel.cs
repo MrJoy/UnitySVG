@@ -73,7 +73,7 @@ public class uSVGPathSegCurvetoCubicRel : uSVGPathSegCurvetoCubic, uISVGDrawable
   //--------------------------------------------------------------------------------
   //Method: Render
   //--------------------------------------------------------------------------------
-  public void Render(uSVGGraphicsPath _graphicsPath) {
+  public void Render(SVGGraphicsPath _graphicsPath) {
     uSVGPoint p, p1, p2;
     p1 = controlPoint1;
     p2 = controlPoint2;

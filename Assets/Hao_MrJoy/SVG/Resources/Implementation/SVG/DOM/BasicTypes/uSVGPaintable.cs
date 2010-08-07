@@ -19,7 +19,7 @@ public class uSVGPaintable{
   /***********************************************************************************/
   private uSVGColor? _fillColor;
   private uSVGColor? _strokeColor;
-  private uSVGLength _strokeWidth;
+  private SVGLength _strokeWidth;
   private bool isStrokeWidth = false;
   private uSVGStrokeLineCapTypes _strokeLineCap = uSVGStrokeLineCapTypes.UNKNOWN;
   private uSVGStrokeLineJoinTypes _strokeLineJoin = uSVGStrokeLineJoinTypes.UNKNOWN;
@@ -63,7 +63,7 @@ public class uSVGPaintable{
   public uSVGPaintable() {
     this._fillColor = new uSVGColor();
     this._strokeColor = new uSVGColor();
-    this._strokeWidth = new uSVGLength("1");
+    this._strokeWidth = new SVGLength("1");
     this._linearGradList = new List<uSVGLinearGradientElement>();
     this._radialGradList = new List<uSVGRadialGradientElement>();
   }
@@ -112,7 +112,7 @@ public class uSVGPaintable{
     _strokeColor = new uSVGColor(attrList.GetValue("stroke"));
 
     if(attrList.GetValue("stroke-width") != "") isStrokeWidth = true;
-    _strokeWidth = new uSVGLength(attrList.GetValue("stroke-width"));
+    _strokeWidth = new SVGLength(attrList.GetValue("stroke-width"));
 
 
     SetStrokeLineCap(attrList.GetValue("stroke-linecap"));
@@ -139,7 +139,7 @@ public class uSVGPaintable{
     }
     if(_dictionary.ContainsKey("stroke-width")) {
       this.isStrokeWidth = true;
-      _strokeWidth = new uSVGLength(_dictionary["stroke-width"]);
+      _strokeWidth = new SVGLength(_dictionary["stroke-width"]);
     }
 
     if(_dictionary.ContainsKey("stroke-linecap")) {
@@ -251,19 +251,19 @@ public class uSVGPaintable{
     this._radialGradList.Add(radialGradElement);
   }
   //----------------------
-  public uSVGLinearGradientBrush GetLinearGradientBrush(uSVGGraphicsPath graphicsPath) {
+  public SVGLinearGradientBrush GetLinearGradientBrush(SVGGraphicsPath graphicsPath) {
     for(int i=0; i < this._linearGradList.Count; i++) {
       if(this._linearGradList[i].id == this._gradientID) {
-        return new uSVGLinearGradientBrush(this._linearGradList[i], graphicsPath);
+        return new SVGLinearGradientBrush(this._linearGradList[i], graphicsPath);
       }
     }
     return null;
   }
   //----------------------
-  public uSVGRadialGradientBrush GetRadialGradientBrush(uSVGGraphicsPath graphicsPath) {
+  public SVGRadialGradientBrush GetRadialGradientBrush(SVGGraphicsPath graphicsPath) {
     for(int i=0; i < this._radialGradList.Count; i++) {
       if(this._radialGradList[i].id == this._gradientID) {
-        return new uSVGRadialGradientBrush(this._radialGradList[i], graphicsPath);
+        return new SVGRadialGradientBrush(this._radialGradList[i], graphicsPath);
       }
     }
     return null;

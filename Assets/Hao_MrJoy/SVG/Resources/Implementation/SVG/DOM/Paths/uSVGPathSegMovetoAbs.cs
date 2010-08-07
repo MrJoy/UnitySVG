@@ -24,7 +24,7 @@ public class uSVGPathSegMovetoAbs : uSVGPathSeg, uISVGDrawableSeg {
   //--------------------------------------------------------------------------------
   //Method: Render
   //--------------------------------------------------------------------------------
-  public void Render(uSVGGraphicsPath _graphicsPath) {
+  public void Render(SVGGraphicsPath _graphicsPath) {
     uSVGPoint p;
     p = new uSVGPoint(this._x, this._y);
     _graphicsPath.AddMoveTo(p);

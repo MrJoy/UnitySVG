@@ -7,14 +7,14 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
   private List<object> _elementList = null;
   private uXMLImp _xmlImp;
   //-------------------------------
-  private uSVGGraphics _render;
+  private SVGGraphics _render;
   //-------------------------------
   private uSVGPaintable _paintable;
   /***********************************************************************************/
   public uSVGGElement(uXMLImp xmlImp,
                       uSVGTransformList inheritTransformList,
                       uSVGPaintable inheritPaintable,
-                      uSVGGraphics render) : base(inheritTransformList) {
+                      SVGGraphics render) : base(inheritTransformList) {
     _render = render;
     _xmlImp = xmlImp;
     _attrList = _xmlImp.Node.Attributes;
@@ -33,37 +33,37 @@ public class uSVGGElement : uSVGTransformable, uISVGDrawable {
       }
       switch(_xmlImp.Node.Name) {
         case "rect":
-          _elementList.Add(new uSVGRectElement(_xmlImp.Node.Attributes,
+          _elementList.Add(new SVGRectElement(_xmlImp.Node.Attributes,
                                                summaryTransformList,
                                                _paintable,
                                                _render));
           break;
         case "line":
-          _elementList.Add(new uSVGLineElement(_xmlImp.Node.Attributes,
+          _elementList.Add(new SVGLineElement(_xmlImp.Node.Attributes,
                                                summaryTransformList,
                                                _paintable,
                                                _render));
           break;
         case "circle":
-          _elementList.Add(new uSVGCircleElement(_xmlImp.Node.Attributes,
+          _elementList.Add(new SVGCircleElement(_xmlImp.Node.Attributes,
                                                  summaryTransformList,
                                                  _paintable,
                                                  _render));
           break;
         case "ellipse":
-          _elementList.Add(new uSVGEllipseElement(_xmlImp.Node.Attributes,
+          _elementList.Add(new SVGEllipseElement(_xmlImp.Node.Attributes,
                                                   summaryTransformList,
                                                   _paintable,
                                                   _render));
           break;
         case "polyline":
-          _elementList.Add(new uSVGPolylineElement(_xmlImp.Node.Attributes,
+          _elementList.Add(new SVGPolylineElement(_xmlImp.Node.Attributes,
                                                    summaryTransformList,
                                                    _paintable,
                                                    _render));
           break;
         case "polygon":
-          _elementList.Add(new uSVGPolygonElement(_xmlImp.Node.Attributes,
+          _elementList.Add(new SVGPolygonElement(_xmlImp.Node.Attributes,
                                                   summaryTransformList,
                                                   _paintable,
                                                   _render));

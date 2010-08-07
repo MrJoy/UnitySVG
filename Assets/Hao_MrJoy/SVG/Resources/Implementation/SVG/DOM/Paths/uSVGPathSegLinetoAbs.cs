@@ -23,7 +23,7 @@ public class uSVGPathSegLinetoAbs : uSVGPathSeg, uISVGDrawableSeg {
   //--------------------------------------------------------------------------------
   //Method: Render
   //--------------------------------------------------------------------------------
-  public void Render(uSVGGraphicsPath _graphicsPath) {
+  public void Render(SVGGraphicsPath _graphicsPath) {
     uSVGPoint p;
     p = currentPoint;
     _graphicsPath.AddLineTo(p);

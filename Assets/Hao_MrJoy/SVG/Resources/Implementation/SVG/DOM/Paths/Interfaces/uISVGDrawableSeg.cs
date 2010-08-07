@@ -1,3 +1,3 @@
 public interface uISVGDrawableSeg {
-  void Render(uSVGGraphicsPath graphicsPath);
+  void Render(SVGGraphicsPath graphicsPath);
 }

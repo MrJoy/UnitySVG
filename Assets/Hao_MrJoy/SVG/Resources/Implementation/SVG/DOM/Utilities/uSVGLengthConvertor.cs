@@ -1,6 +1,6 @@
 public class uSVGLengthConvertor  {
   /***********************************************************************************/
-  public static bool ExtractType(string text, ref float value, ref uSVGLengthType lengthType) {
+  public static bool ExtractType(string text, ref float value, ref SVGLengthType lengthType) {
     string _value = "";
     int i;
     for(i = 0; i < text.Length; i++) {
@@ -18,27 +18,27 @@ public class uSVGLengthConvertor  {
 
     value = float.Parse(_value);
     switch(unit.ToUpper()) {
-      case "EM": lengthType = uSVGLengthType.SVG_LENGTHTYPE_EMS; break;
-      case "EX": lengthType = uSVGLengthType.SVG_LENGTHTYPE_EXS; break;
-      case "PX": lengthType = uSVGLengthType.SVG_LENGTHTYPE_PX; break;
-      case "CM": lengthType = uSVGLengthType.SVG_LENGTHTYPE_CM; break;
-      case "MM": lengthType = uSVGLengthType.SVG_LENGTHTYPE_MM; break;
-      case "IN": lengthType = uSVGLengthType.SVG_LENGTHTYPE_IN; break;
-      case "PT": lengthType = uSVGLengthType.SVG_LENGTHTYPE_PT; break;
-      case "PC": lengthType = uSVGLengthType.SVG_LENGTHTYPE_PC; break;
-      case "%": lengthType = uSVGLengthType.SVG_LENGTHTYPE_PERCENTAGE; break;
-      default : lengthType = uSVGLengthType.SVG_LENGTHTYPE_UNKNOWN; break;
+      case "EM": lengthType = SVGLengthType.EMs; break;
+      case "EX": lengthType = SVGLengthType.EXs; break;
+      case "PX": lengthType = SVGLengthType.PX; break;
+      case "CM": lengthType = SVGLengthType.CM; break;
+      case "MM": lengthType = SVGLengthType.MM; break;
+      case "IN": lengthType = SVGLengthType.IN; break;
+      case "PT": lengthType = SVGLengthType.PT; break;
+      case "PC": lengthType = SVGLengthType.PC; break;
+      case "%": lengthType = SVGLengthType.Percentage; break;
+      default : lengthType = SVGLengthType.Unknown; break;
     }
     return true;
   }
   /***********************************************************************************/
-  public static float ConvertToPX(float value, uSVGLengthType lengthType) {
+  public static float ConvertToPX(float value, SVGLengthType lengthType) {
     switch(lengthType) {
-      case uSVGLengthType.SVG_LENGTHTYPE_IN: return value * 90.0f;
-      case uSVGLengthType.SVG_LENGTHTYPE_CM: return value * 35.43307f;
-      case uSVGLengthType.SVG_LENGTHTYPE_MM: return value * 3.543307f;
-      case uSVGLengthType.SVG_LENGTHTYPE_PT: return value * 1.25f;
-      case uSVGLengthType.SVG_LENGTHTYPE_PC: return value * 15.0f;
+      case SVGLengthType.IN: return value * 90.0f;
+      case SVGLengthType.CM: return value * 35.43307f;
+      case SVGLengthType.MM: return value * 3.543307f;
+      case SVGLengthType.PT: return value * 1.25f;
+      case SVGLengthType.PC: return value * 15.0f;
       default: return value;
     }
   }

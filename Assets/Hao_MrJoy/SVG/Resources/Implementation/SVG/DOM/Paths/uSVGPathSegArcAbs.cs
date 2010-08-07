@@ -35,7 +35,7 @@ public class uSVGPathSegArcAbs : uSVGPathSeg, uISVGDrawableSeg  {
   //--------------------------------------------------------------------------------
   //Method: Render
   //--------------------------------------------------------------------------------
-  public void Render(uSVGGraphicsPath _graphicsPath) {
+  public void Render(SVGGraphicsPath _graphicsPath) {
     uSVGPoint p;
     p = currentPoint;
     _graphicsPath.AddArcTo(this._r1, this._r2, this._angle,

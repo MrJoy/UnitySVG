@@ -54,7 +54,7 @@ public class uSVGPathSegCurvetoQuadraticRel : uSVGPathSegCurvetoQuadratic, uISVG
   //--------------------------------------------------------------------------------
   //Method: Render
   //--------------------------------------------------------------------------------
-  public void Render(uSVGGraphicsPath _graphicsPath) {
+  public void Render(SVGGraphicsPath _graphicsPath) {
     uSVGPoint p, p1;
     p = currentPoint;
     p1 = controlPoint1;

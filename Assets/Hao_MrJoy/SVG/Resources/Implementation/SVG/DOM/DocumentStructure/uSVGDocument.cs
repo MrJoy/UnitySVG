@@ -1,7 +1,7 @@
 
 public class uSVGDocument {
   private uSVGSVGElement _rootElement = null;
-  private uSVGGraphics _render;
+  private SVGGraphics _render;
   /***********************************************************************************/
   public uSVGSVGElement rootElement {
     get {
@@ -18,7 +18,7 @@ public class uSVGDocument {
   //private Dictionary<string, uSVGElement> _nodeByTagName = new Dictionary<string, uSVGElement>();
   /***********************************************************************************/
   private uXMLImp parser;
-  public uSVGDocument(string originalDocument, uSVGGraphics r) {
+  public uSVGDocument(string originalDocument, SVGGraphics r) {
     parser = new uXMLImp(originalDocument);
     _render = r;
   }
