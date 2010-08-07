@@ -365,8 +365,7 @@ Profiler.EndSample();
   //--------------------------------------------------------------------------------
   //Method: f_RenderPolygonElement
   //--------------------------------------------------------------------------------
-  private void f_RenderPolygonElement(uSVGPolygonElement polygonElement,
-                                      uISVGPathDraw pathDraw) {
+  private void f_RenderPolygonElement(uSVGPolygonElement polygonElement, uISVGPathDraw pathDraw) {
     int length = polygonElement.listPoints.Count;
     uSVGPoint[] points = new uSVGPoint[length];
 
@@ -377,8 +376,7 @@ Profiler.EndSample();
   //--------------------------------------------------------------------------------
   //Method: f_RenderPolylineElement
   //--------------------------------------------------------------------------------
-  private void f_RenderPolylineElement(uSVGPolylineElement polylineElement,
-                                       uISVGPathDraw pathDraw) {
+  private void f_RenderPolylineElement(uSVGPolylineElement polylineElement, uISVGPathDraw pathDraw) {
     int length = polylineElement.listPoints.Count;
     uSVGPoint[] points = new uSVGPoint[length];
 
@@ -389,8 +387,7 @@ Profiler.EndSample();
   //--------------------------------------------------------------------------------
   //Method: f_RenderRectElement
   //--------------------------------------------------------------------------------
-  private void f_RenderRectElement(uSVGRectElement rectElement,
-                                   uISVGPathDraw pathDraw) {
+  private void f_RenderRectElement(uSVGRectElement rectElement, uISVGPathDraw pathDraw) {
     uSVGPoint p1, p2, p3, p4;
     float tx = rectElement.x.value;
     float ty = rectElement.y.value;
