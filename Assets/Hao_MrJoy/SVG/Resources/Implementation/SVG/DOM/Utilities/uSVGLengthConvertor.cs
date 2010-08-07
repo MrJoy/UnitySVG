@@ -2,22 +2,19 @@ public class uSVGLengthConvertor  {
   /***********************************************************************************/
   public static bool ExtractType(string text, ref float value, ref uSVGLengthType lengthType) {
     string _value = "";
-    string unit = "";
     int i;
-    text = text.Replace(" ", "");
     for(i = 0; i < text.Length; i++) {
-      if((('0' <= text[i])&&(text[i] <= '9'))||
-       (text[i] == '+')||(text[i] == '-')||(text[i] == '.')) {
+      if((('0' <= text[i]) && (text[i] <= '9')) || (text[i] == '+') || (text[i] == '-') || (text[i] == '.')) {
         _value = _value + text[i];
+      } else if(text[i] == ' ') {
+        // Skip.
       } else {
         break;
       }
     }
-    unit = unit + text.Substring(i);
+    string unit = text.Substring(i);
 
-    if(_value == "") {
-      return false;
-    }
+    if(_value == "") return false;
 
     value = float.Parse(_value);
     switch(unit.ToUpper()) {
@@ -37,18 +34,12 @@ public class uSVGLengthConvertor  {
   /***********************************************************************************/
   public static float ConvertToPX(float value, uSVGLengthType lengthType) {
     switch(lengthType) {
-    case uSVGLengthType.SVG_LENGTHTYPE_IN :
-      return value * 90.0f;
-    case uSVGLengthType.SVG_LENGTHTYPE_CM :
-      return value * 35.43307f;
-    case uSVGLengthType.SVG_LENGTHTYPE_MM :
-      return value * 3.543307f;
-    case uSVGLengthType.SVG_LENGTHTYPE_PT :
-      return value * 1.25f;
-    case uSVGLengthType.SVG_LENGTHTYPE_PC :
-      return value * 15.0f;
-    default:
-      return value;
+      case uSVGLengthType.SVG_LENGTHTYPE_IN: return value * 90.0f;
+      case uSVGLengthType.SVG_LENGTHTYPE_CM: return value * 35.43307f;
+      case uSVGLengthType.SVG_LENGTHTYPE_MM: return value * 3.543307f;
+      case uSVGLengthType.SVG_LENGTHTYPE_PT: return value * 1.25f;
+      case uSVGLengthType.SVG_LENGTHTYPE_PC: return value * 15.0f;
+      default: return value;
     }
   }
 }
