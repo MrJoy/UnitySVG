@@ -34,9 +34,8 @@ public class uSVGTransformable {
 			float m_angle = 0.0f;
 			for(int i = 0; i < m_summaryTransformList.Count; i++ ) {
 				uSVGTransform m_temp = m_summaryTransformList[i];
-				if(m_temp.type == uSVGTransformType.SVG_TRANSFORM_ROTATE)  {
-					m_angle += m_temp.angle;
-				}
+        if(m_temp.type == uSVGTransformType.SVG_TRANSFORM_ROTATE) 
+          m_angle += m_temp.angle;
 			}
 			return m_angle;
 		}
