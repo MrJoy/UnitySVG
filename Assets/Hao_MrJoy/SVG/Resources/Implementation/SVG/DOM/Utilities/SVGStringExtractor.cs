@@ -36,9 +36,15 @@ public static class SVGStringExtractor {
   //--------------------------------------------------
   //Extract for Syntax:  700 200 -30
   private static char[] splitSpaceComma = new char[] {' ', ',', '\n', '\t', '\r'};
-  public static string[] ExtractTransformValue(string inputText) {
-    string[] values = inputText.Split(splitSpaceComma, StringSplitOptions.RemoveEmptyEntries);
+  public static float[] ExtractTransformValueAsPX(string inputText) {
+    string[] tmp = ExtractTransformValue(inputText);
+    float[] values = new float[tmp.Length];
+    for(int i = 0; i < values.Length; i++)
+      values[i] = SVGLength.GetPXLength(tmp[i]);
     return values;
+  }
+  public static string[] ExtractTransformValue(string inputText) {
+    return inputText.Split(splitSpaceComma, StringSplitOptions.RemoveEmptyEntries);
   }
   //--------------------------------------------------
   //Extract for Systax : M100 100 C200 100,...
