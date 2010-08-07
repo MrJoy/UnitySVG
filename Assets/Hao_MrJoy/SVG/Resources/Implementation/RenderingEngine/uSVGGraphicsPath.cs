@@ -428,8 +428,8 @@ Profiler.EndSample();
       t_rx = (t_rx == 0.0f) ? t_ry : t_rx;
       t_ry = (t_ry == 0.0f) ? t_rx : t_ry;
 
-      t_rx = (t_rx > (tw / 2f -2f)) ? (tw / 2f - 2f) : t_rx;
-      t_ry = (t_ry > (th / 2f - 2f)) ? (th / 2f - 2f) : t_ry;
+      t_rx = (t_rx > (tw * 0.5f - 2f)) ? (tw * 0.5f - 2f) : t_rx;
+      t_ry = (t_ry > (th * 0.5f - 2f)) ? (th * 0.5f - 2f) : t_ry;
 
       uSVGPoint t_p1, t_p2, t_p3, t_p4, t_p5, t_p6, t_p7, t_p8;
       float angle = transformAngle;
