@@ -1,27 +1,7 @@
 using System;
 using System.Globalization;
 
-public class SVGNumber {
-
-  private float _value;
-  //*************************************************************************************
-  public float value {
-    get {
-      return _value;
-    }
-    set  {
-      this._value = value;
-    }
-  }
-  //*********************************************************************************
-  public SVGNumber(float val) {
-    _value = val;
-  }
-
-  public SVGNumber(string str) {
-    _value = SVGNumber.ParseToFloat(str);
-  }
-  //************************************************************************************
+public static class SVGNumber {
   public static float ParseToFloat(string str) {
     float val;
     int index = str.IndexOfAny(new Char[]{'E','e'});

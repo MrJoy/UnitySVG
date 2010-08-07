@@ -1,5 +1,5 @@
 // TODO: Look at using UnityEngine.Rect?
-public class SVGRect {
+public struct SVGRect {
   private float _x;
   private float _y;
   private float _width;
