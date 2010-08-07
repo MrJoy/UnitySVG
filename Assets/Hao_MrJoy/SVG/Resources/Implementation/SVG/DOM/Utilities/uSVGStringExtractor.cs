@@ -77,9 +77,7 @@ Profiler.EndSample();
   //--------------------------------------------------
   //Extract for Syntax:  fill: #ffffff; stroke:#000000; stroke-width:0.172
   private static char[] splitColonSemicolon = new char[]{':',';'};
-  public static void ExtractStyleValue(string inputText,
-          ref Dictionary<string, string> dic) {
-
+  public static void ExtractStyleValue(string inputText, ref Dictionary<string, string> dic) {
     inputText = inputText.Trim();
     inputText = uSVGStringExtractor.RemoveMultiSpace(inputText);
     inputText = inputText.Replace(" ","");
@@ -87,7 +85,7 @@ Profiler.EndSample();
     string[] valuesStr = inputText.Split(splitColonSemicolon, System.StringSplitOptions.RemoveEmptyEntries);
 
     int len = valuesStr.GetLength(0);
-    for(int i = 0; i < len -1; i++) {
+    for(int i = 0; i < len - 1; i++) {
       dic.Add(valuesStr[i], valuesStr[i+1]);
       i++;
     }
