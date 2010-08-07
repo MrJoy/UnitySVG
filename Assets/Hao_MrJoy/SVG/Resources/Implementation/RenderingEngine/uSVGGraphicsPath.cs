@@ -543,10 +543,7 @@ Profiler.EndSample();
       }
     }
 
-    if(isClose) {
-      uSVGPoint tp = new uSVGPoint(beginPoint.x, beginPoint.y);
-      tp = tp.MatrixTransform(matrixTransform);
-      pathDraw.LineTo(tp);
-    }
+    if(isClose)
+      pathDraw.LineTo(beginPoint.MatrixTransform(matrixTransform));
   }
 }
