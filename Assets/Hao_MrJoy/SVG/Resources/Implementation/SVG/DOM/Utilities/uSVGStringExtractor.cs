@@ -1,3 +1,5 @@
+using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class uSVGStringExtractor {
@@ -16,40 +18,32 @@ public class uSVGStringExtractor {
 	}
 	//--------------------------------------------------
 	//Extract for Syntax:   translate(700 200) rotate(-30)
-	private static char[] splitPipe = new char[]{'|'};
+	private static char[] splitPipe = new char[] {'|', ' ', ')', '\n', '\t', '\r'};
 	public static Dictionary<string, string> f_ExtractTransformList(string inputText) {
+Profiler.BeginSample("uSVGStringExtractor.f_ExtractTransformList(string)");
 		Dictionary <string, string> m_return = new Dictionary<string, string>();
-		int i = 0;
-		string m_key = "";
-		string m_value = "";
-		
-		inputText = inputText.Trim();		
-		
-		inputText = uSVGStringExtractor.f_RemoveMultiSpace(inputText); //Lam sach bot khoang trang;
-		inputText = inputText.Replace(") ",")|");
-		
-		string[] valuesStr = inputText.Split(splitPipe, System.StringSplitOptions.RemoveEmptyEntries);
 
-		int len = valuesStr.GetLength(0);
+		string[] valuesStr = inputText.Split(splitPipe, StringSplitOptions.RemoveEmptyEntries);
 
-		for (i = 0; i < len; i++) {
+		int len = valuesStr.Length;
+
+		for (int i = 0; i < len; i++) {
 			int vt1 = valuesStr[i].IndexOf('(');
-			int vt2 = valuesStr[i].IndexOf(')');
-			m_key = valuesStr[i].Substring(0, vt1);
-			m_value = valuesStr[i].Substring(vt1+1, vt2-vt1-1);
+			string m_key = valuesStr[i].Substring(0, vt1);
+			string m_value = valuesStr[i].Substring(vt1+1);
 			m_return.Add(m_key, m_value);
 		}
+Profiler.EndSample();
 		return m_return;
 	}
 	//--------------------------------------------------
 	//Extract for Syntax:  700 200 -30
-	private static char[] splitSpaceComma = new char[]{' ',','};
+	private static char[] splitSpaceComma = new char[] {' ', ',', '\n', '\t', '\r'};
 	public static string[] f_ExtractTransformValue(string inputText) {
-		inputText = inputText.Trim();		
-		inputText = uSVGStringExtractor.f_RemoveMultiSpace(inputText);
-
+Profiler.BeginSample("uSVGStringExtractor.f_ExtractTransformValue(string)");
 		string[] values = inputText.Split(splitSpaceComma, System.StringSplitOptions.RemoveEmptyEntries);
-		return values;		
+Profiler.EndSample();
+		return values;
 	}
 	//--------------------------------------------------
 	//Extract for Systax : M100 100 C200 100,...
