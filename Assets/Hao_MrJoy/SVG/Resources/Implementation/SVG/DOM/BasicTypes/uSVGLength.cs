@@ -21,7 +21,7 @@ public struct uSVGLength  {
     get { return uSVGLengthConvertor.f_ConvertToPX(m_valueInSpecifiedUnits, m_unitType); }
   }
   public uSVGLengthType unitType {
-    get{ return m_unitType;}
+    get{ return m_unitType; }
   }
   /***********************************************************************************/
   public uSVGLength(ushort unitType, float valueInSpecifiedUnits) {
