@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 
 public class uXMLImp : SmallXmlParser.IContentHandler {
   public enum XMLTagState {OPEN, CLOSE, BOTH}
@@ -82,29 +83,29 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   //Purpose: ....
   //---------------------------------------------------------
 
+  private StringBuilder sb = new StringBuilder();
   public string ReadFirstElement(string name) {
     int level = 0;
-    string _return = "";
-    if((this._currentName == name)&&(this._currentTagState == XMLTagState.OPEN)) {
+    sb.Length = 0;
+    if((_currentName == name)&&(_currentTagState == XMLTagState.OPEN)) {
       level++;
-      _return += _currentLineText;
+      sb.Append(_currentLineText);
     }
     while(ReadNextTag()) {
-      if(this._currentName == name) {
-        if(this._currentTagState == XMLTagState.OPEN)level++;
-        else if(this._currentTagState == XMLTagState.CLOSE) {
+      if(_currentName == name) {
+        if(_currentTagState == XMLTagState.OPEN) level++;
+        else if(_currentTagState == XMLTagState.CLOSE) {
           level--;
           if(level == 0) {
-            _return += _currentLineText;
+            sb.Append(_currentLineText);
             break;
           }
         }
       }
 
-      if(level > 0)
-        _return += _currentLineText;
+      if(level > 0) sb.Append(_currentLineText);
     }
-    return _return;
+    return sb.ToString();
   }
   //---------------------------------------------------------
   //Methods: GetUntilCloseTag
@@ -112,23 +113,22 @@ public class uXMLImp : SmallXmlParser.IContentHandler {
   //---------------------------------------------------------
   public string GetUntilCloseTag(string name) {
     int level = 1;
-    string _return = "";
+    sb.Length = 0;
     while(ReadNextTag()) {
-      if(this._currentName == name) {
-        if(this._currentTagState == XMLTagState.OPEN)level++;
-        else if(this._currentTagState == XMLTagState.CLOSE) {
+      if(_currentName == name) {
+        if(_currentTagState == XMLTagState.OPEN) level++;
+        else if(_currentTagState == XMLTagState.CLOSE) {
           level--;
           if(level == 0) {
-            _return += _currentLineText;
+            sb.Append(_currentLineText);
             break;
           }
         }
       }
 
-      if(level > 0)
-        _return += _currentLineText;
+      if(level > 0) sb.Append(_currentLineText);
     }
-    return _return;
+    return sb.ToString();
   }
 
   /***********************************************************************************/
