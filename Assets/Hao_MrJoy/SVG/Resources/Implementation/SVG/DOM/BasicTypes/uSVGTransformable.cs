@@ -17,15 +17,6 @@ public class uSVGTransformable {
         m_summaryTransformList.AppendItems(m_currentTransformList);
 		}
 	}
-	public uSVGTransformList currentTransformList {
-		get { return m_currentTransformList; }
-		set { 
-			m_currentTransformList = value;
-			m_summaryTransformList = new uSVGTransformList(m_inheritTransformList.Count + m_currentTransformList.Count);
-			m_summaryTransformList.AppendItems(m_inheritTransformList);
-			m_summaryTransformList.AppendItems(m_currentTransformList);
-		}
-	}
 	public uSVGTransformList summaryTransformList {
 		get { return m_summaryTransformList; }
 	}
@@ -34,6 +25,20 @@ public class uSVGTransformable {
 			float m_angle = 0.0f;
 			for(int i = 0; i < m_summaryTransformList.Count; i++ ) {
 				uSVGTransform m_temp = m_summaryTransformList[i];
+  public uSVGTransformList currentTransformList {
+    get { return m_currentTransformList; }
+    set { 
+      m_currentTransformList = value;
+      int c = 0;
+      if(m_inheritTransformList != null) c += m_inheritTransformList.Count;
+      if(m_currentTransformList != null) c += m_currentTransformList.Count;
+      m_summaryTransformList = new uSVGTransformList(c);
+      if(m_inheritTransformList != null)
+        m_summaryTransformList.AppendItems(m_inheritTransformList);
+      if(m_currentTransformList != null)
+        m_summaryTransformList.AppendItems(m_currentTransformList);
+    }
+  }
         if(m_temp.type == uSVGTransformType.SVG_TRANSFORM_ROTATE) 
           m_angle += m_temp.angle;
 			}
