@@ -20,29 +20,24 @@ public class uSVGStringExtractor {
   //Extract for Syntax:   translate(700 200)rotate(-30)
   private static char[] splitPipe = new char[] {'|', ' ', ')', '\n', '\t', '\r'};
   public static List<uSVGTransform> ExtractTransformList(string inputText) {
-Profiler.BeginSample("uSVGStringExtractor.ExtractTransformList(string)");
     List<uSVGTransform> _return = new List<uSVGTransform>();
 
     string[] valuesStr = inputText.Split(splitPipe, StringSplitOptions.RemoveEmptyEntries);
 
     int len = valuesStr.Length;
-
     for(int i = 0; i < len; i++) {
       int vt1 = valuesStr[i].IndexOf('(');
       string _key = valuesStr[i].Substring(0, vt1);
       string _value = valuesStr[i].Substring(vt1+1);
       _return.Add(new uSVGTransform(_key, _value));
     }
-Profiler.EndSample();
     return _return;
   }
   //--------------------------------------------------
   //Extract for Syntax:  700 200 -30
   private static char[] splitSpaceComma = new char[] {' ', ',', '\n', '\t', '\r'};
   public static string[] ExtractTransformValue(string inputText) {
-Profiler.BeginSample("uSVGStringExtractor.ExtractTransformValue(string)");
     string[] values = inputText.Split(splitSpaceComma, StringSplitOptions.RemoveEmptyEntries);
-Profiler.EndSample();
     return values;
   }
   //--------------------------------------------------
@@ -51,7 +46,6 @@ Profiler.EndSample();
   // WARNING:  This method is NOT thread-safe due to use of static _break member!
   public static void ExtractPathSegList(string inputText,
                       ref List<char> charList, ref List<string> valueList) {
-Profiler.BeginSample("uSVGStringExtractor.ExtractPathSegList(string, ref List<char>, ref List<string>)");
     _break.Clear();
     for(int i = 0; i<inputText.Length; i++) {
 //      if(char.IsLetter(inputText[i])) {
@@ -71,7 +65,6 @@ Profiler.BeginSample("uSVGStringExtractor.ExtractPathSegList(string, ref List<ch
       charList.Add(inputText[_breakSpot1]);
       valueList.Add(_string);
     }
-Profiler.EndSample();
   }
 
   //--------------------------------------------------
