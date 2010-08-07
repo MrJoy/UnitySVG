@@ -47,32 +47,31 @@ Profiler.EndSample();
 	}
 	//--------------------------------------------------
 	//Extract for Systax : M100 100 C200 100,...
+	private static List<int> m_break = new List<int>();
+	// WARNING:  This method is NOT thread-safe due to use of static m_break member!
 	public static void f_ExtractPathSegList(string inputText,
-											ref List<string> charList, ref List<string> valueList) {
-		int i = 0;	
-		inputText = inputText.Trim();		
-		
-		inputText = uSVGStringExtractor.f_RemoveMultiSpace(inputText);
-		
-		List<int> m_break = new List<int>();
-		for(i = 0; i<inputText.Length; i++) {
-			if (((inputText[i] >='a') && (inputText[i] <='z')) ||
-				((inputText[i] >='A') && (inputText[i] <='Z'))) {
+											ref List<char> charList, ref List<string> valueList) {
+Profiler.BeginSample("uSVGStringExtractor.f_ExtractPathSegList(string, ref List<char>, ref List<string>)");
+		m_break.Clear();
+		for(int i = 0; i<inputText.Length; i++) {
+//		  if(char.IsLetter(inputText[i])) {
+			if (((inputText[i] >= 'a') && (inputText[i] <= 'z')) ||
+				((inputText[i] >= 'A') && (inputText[i] <= 'Z'))) {
 				m_break.Add(i);
 			}
 		}
 		m_break.Add(inputText.Length);
+		charList.Capacity = m_break.Count - 1;
+		valueList.Capacity = m_break.Count - 1;
 
-		for(i = 0; i < m_break.Count - 1; i++) {
+		for(int i = 0; i < m_break.Count - 1; i++) {
 			int m_breakSpot1 = m_break[i];
 			int m_breakSpot2 = m_break[i+1];
-			string m_string1 = "";
-			string m_string2 = "";
-			m_string1 = inputText.Substring(m_breakSpot1, 1);
-			m_string2 = inputText.Substring(m_breakSpot1+1, m_breakSpot2 - m_breakSpot1 -1);
-			charList.Add(m_string1);
-			valueList.Add(m_string2);
+			string m_string = inputText.Substring(m_breakSpot1+1, m_breakSpot2 - m_breakSpot1 -1);
+			charList.Add(inputText[m_breakSpot1]);
+			valueList.Add(m_string);
 		}
+Profiler.EndSample();
 	}
 	
 	//--------------------------------------------------

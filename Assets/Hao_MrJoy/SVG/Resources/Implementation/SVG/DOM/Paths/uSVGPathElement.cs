@@ -25,51 +25,50 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 		//-----------
 		string m_d = this.m_attrList.GetValue("D");
 
-		string m_char, m_value;
-    List<string> m_charList = new List<string>();
+    List<char> m_charList = new List<char>();
     List<string> m_valueList = new List<string>();
 
 		uSVGStringExtractor.f_ExtractPathSegList(m_d, ref m_charList, ref m_valueList);
 		for(int i = 0; i < m_charList.Count; i++) {
-			m_char = m_charList[i];
-			m_value = m_valueList[i];
+			char m_char = m_charList[i];
+			string m_value = m_valueList[i];
 			string[] m_valuesOfChar = uSVGStringExtractor.f_ExtractTransformValue(m_value);
 			switch (m_char) {
-				case "Z" :
-				case "z" : {
+				case 'Z' :
+				case 'z' : {
 					uSVGPathSegClosePath temp = CreateSVGPathSegClosePath();
 					m_segList.AppendItem(temp);
 				break;
 				}
-				case "M" : {
+				case 'M' : {
 					uSVGPathSegMovetoAbs temp = CreateSVGPathSegMovetoAbs(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]));
 					m_segList.AppendItem(temp);
 				break;
 				}
-				case "m" : {
+				case 'm' : {
 					uSVGPathSegMovetoRel temp = CreateSVGPathSegMovetoRel(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]));
 					m_segList.AppendItem(temp);
 				break;
 				}
-				case "L" : {
+				case 'L' : {
 					uSVGPathSegLinetoAbs temp = CreateSVGPathSegLinetoAbs(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]));
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "l" : {
+				case 'l' : {
 					uSVGPathSegLinetoRel temp = CreateSVGPathSegLinetoRel(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]));
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "C" : {
+				case 'C' : {
 					uSVGPathSegCurvetoCubicAbs temp = CreateSVGPathSegCurvetoCubicAbs(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]),
@@ -80,7 +79,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "c" : {
+				case 'c' : {
 					uSVGPathSegCurvetoCubicRel temp = CreateSVGPathSegCurvetoCubicRel(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]),
@@ -91,7 +90,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "S" : {
+				case 'S' : {
 					uSVGPathSegCurvetoCubicSmoothAbs temp =
 												CreateSVGPathSegCurvetoCubicSmoothAbs(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
@@ -101,7 +100,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "s" : {
+				case 's' : {
 					uSVGPathSegCurvetoCubicSmoothRel temp =
 												CreateSVGPathSegCurvetoCubicSmoothRel(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
@@ -111,7 +110,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "Q" : {
+				case 'Q' : {
 					uSVGPathSegCurvetoQuadraticAbs temp = CreateSVGPathSegCurvetoQuadraticAbs(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]),
@@ -120,7 +119,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "q" : {
+				case 'q' : {
 					uSVGPathSegCurvetoQuadraticRel temp = CreateSVGPathSegCurvetoQuadraticRel(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]),
@@ -129,7 +128,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "T" : {
+				case 'T' : {
 					uSVGPathSegCurvetoQuadraticSmoothAbs temp =
 													CreateSVGPathSegCurvetoQuadraticSmoothAbs(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
@@ -137,7 +136,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "t" : {
+				case 't' : {
 					uSVGPathSegCurvetoQuadraticSmoothRel temp =
 												CreateSVGPathSegCurvetoQuadraticSmoothRel(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
@@ -145,7 +144,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "A" : {
+				case 'A' : {
 					uSVGPathSegArcAbs temp = CreateSVGPathSegArcAbs(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]),
@@ -157,7 +156,7 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "a" : {
+				case 'a' : {
 					uSVGPathSegArcRel temp = CreateSVGPathSegArcRel(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]),
 													uSVGLength.GetPXLength(m_valuesOfChar[1]),
@@ -169,25 +168,25 @@ public class uSVGPathElement : uSVGTransformable, uISVGDrawable {
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "H" : {
+				case 'H' : {
 					uSVGPathSegLinetoHorizontalAbs temp = CreateSVGPathSegLinetoHorizontalAbs(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]));
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "h" : {
+				case 'h' : {
 					uSVGPathSegLinetoHorizontalRel temp = CreateSVGPathSegLinetoHorizontalRel(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]));
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "V" : {
+				case 'V' : {
 					uSVGPathSegLinetoVerticalAbs temp = CreateSVGPathSegLinetoVerticalAbs(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]));
 					m_segList.AppendItem(temp);
 					break;
 				}
-				case "v" : {
+				case 'v' : {
 					uSVGPathSegLinetoVerticalRel temp = CreateSVGPathSegLinetoVerticalRel(
 													uSVGLength.GetPXLength(m_valuesOfChar[0]));
 					m_segList.AppendItem(temp);
