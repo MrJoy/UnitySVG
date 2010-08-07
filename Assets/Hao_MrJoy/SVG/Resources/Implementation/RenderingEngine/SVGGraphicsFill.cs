@@ -47,7 +47,6 @@ public class SVGGraphicsFill : ISVGPathDraw {
   }
 
   private void SetPixelForFlag(int x, int y) {
-
     int tx = x + this._translateX;
     int ty = y + this._translateY;
     if(isInZone(tx, ty)) {

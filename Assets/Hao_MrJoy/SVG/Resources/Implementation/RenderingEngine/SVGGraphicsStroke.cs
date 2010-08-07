@@ -21,7 +21,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   //--------------------------------------------------------------------------------
   private void SetPixel(int x, int y) {
     this._graphics.SetPixel(x, y);
-    
   }
   //--------------------------------------------------------------------------------
   //Method: StrokeLineCapLeft
