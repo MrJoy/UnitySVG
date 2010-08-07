@@ -95,11 +95,12 @@ public class SVGGraphicsFill : ISVGPathDraw {
   }
 
   //Fill se to lan tu vi tri(x,y)theo gia tri this._flagStep
+  private static LiteStack<SVGPoint> _stack = new LiteStack<SVGPoint>();
   private void Fill(int x, int y) {
     if(!isInZone(x, y))
       return;
-    LiteStack<SVGPoint> _stack = new LiteStack<SVGPoint>();
-    
+    _stack.Clear();
+
     SVGPoint temp = new SVGPoint(x, y);
     this._flag[(int)temp.x, (int)temp.y] = FILL_FLAG;
     _stack.Push(temp);
