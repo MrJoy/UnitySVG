@@ -35,6 +35,10 @@ public class uSVGTransformList {
 	}
 
 	/*********************************************************************************************/
+	public void Clear() {
+	  m_listTransform.Clear();
+	  _totalMatrix = null;
+	}
 	public void AppendItem(uSVGTransform newItem) {
 		m_listTransform.Add(newItem);
 	  _totalMatrix = null;

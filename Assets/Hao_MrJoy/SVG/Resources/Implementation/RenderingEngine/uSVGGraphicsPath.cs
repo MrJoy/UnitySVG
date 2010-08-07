@@ -90,7 +90,7 @@ public class uSVGGraphicsPath {
     boundUL           = new uSVGPoint(+10000f, +10000f);
     boundBR           = new uSVGPoint(-10000f, -10000f);
     _fillRule         = uSVGFillRuleTypes.SVG_NONE_ZERO;
-    transformList     = new uSVGTransformList();
+    transformList.Clear();
     listObject.Clear();
     listType.Clear();
   }
@@ -348,17 +348,6 @@ Profiler.BeginSample("uSVGGraphicsPath.GetBound()");
                                 boundBR.y - boundUL.y + 2);
 Profiler.EndSample();
     return tmp;
-  }
-  //--------------------------------------------------------------------------------
-  //Method: GetBoundTransformed
-  //--------------------------------------------------------------------------------
-  public uSVGRect GetBoundTransformed() {
-    uSVGRect orig = GetBound();
-
-    uSVGPoint p1 = new uSVGPoint(orig.x, orig.y).MatrixTransform(matrixTransform);
-    uSVGPoint p2 = new uSVGPoint(orig.x + orig.width, orig.y + orig.height).MatrixTransform(matrixTransform);
-
-    return new uSVGRect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y);
   }
   //================================================================================
   //                                      RENDER
