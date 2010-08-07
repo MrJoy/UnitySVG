@@ -344,8 +344,8 @@ public class SVGBasicDraw {
     return _distance;
   }
 
-  private delegate SVGPoint EvaluateDelegate(float t, SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4);
-  private SVGPoint EvaluateForCubic(float t, SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
+  //private delegate SVGPoint EvaluateDelegate(float t, SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4);
+  private static SVGPoint EvaluateForCubic(float t, SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
     SVGPoint _return = new SVGPoint(0, 0);
     float b0, b1, b2, b3, b4;
     b0 = (1.0f - t);
@@ -358,7 +358,7 @@ public class SVGBasicDraw {
     return _return;
   }
 
-  private SVGPoint EvaluateForQuadratic(float t, SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
+  private static SVGPoint EvaluateForQuadratic(float t, SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
     SVGPoint _return = new SVGPoint(0, 0);
     float b0, b1, b2, b3;
     b0 = (1.0f - t);
@@ -370,7 +370,7 @@ public class SVGBasicDraw {
     return _return;
   }
 
-  private void CubicCurve(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4, int numberOfLimit, EvaluateDelegate evalFunction) {
+  private void CubicCurve(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4, int numberOfLimit, bool cubic) {
 
     MoveTo(p1); //MoveTo the first Point;
 
@@ -382,9 +382,9 @@ public class SVGBasicDraw {
     _flatness = 1.0f;
 
     SVGPointExt _pStart, _pEnd, _pMid;
-    _pStart = new SVGPointExt(evalFunction(t1, p1, p2, p3, p4), t1);
+    _pStart = new SVGPointExt(cubic ? EvaluateForCubic(t1, p1, p2, p3, p4) : EvaluateForQuadratic(t1, p1, p2, p3, p4), t1);
 
-    _pEnd = new SVGPointExt(evalFunction(t2, p1, p2, p3, p4), t2);
+    _pEnd = new SVGPointExt(cubic ? EvaluateForCubic(t2, p1, p2, p3, p4) : EvaluateForQuadratic(t2, p1, p2, p3, p4), t2);
 
     // The point on Line Segment[_pStart, _pEnd] correlate with _t
 
@@ -400,7 +400,7 @@ public class SVGBasicDraw {
       float _tm = (t1 + t2)/2; //tm is a middle of t1 .. t2. [t1 .. tm .. t2]
 
       //The point on the Curve correlate with tm
-      _pMid = new SVGPointExt(evalFunction(_tm, p1, p2, p3, p4), _tm);
+      _pMid = new SVGPointExt(cubic ? EvaluateForCubic(_tm, p1, p2, p3, p4) : EvaluateForQuadratic(_tm, p1, p2, p3, p4), _tm);
 
       //Calculate Distance from Middle Point to the Flatnet
       float dist = Distance(  _pStart.point,
@@ -416,7 +416,7 @@ public class SVGBasicDraw {
         for(i = 0; i < _limit; i++) {
           mm = (t1 + _tm)/ 2;
 
-          SVGPointExt _q = new SVGPointExt(evalFunction(mm, p1, p2, p3, p4), mm);
+          SVGPointExt _q = new SVGPointExt(cubic ? EvaluateForCubic(mm, p1, p2, p3, p4) : EvaluateForQuadratic(mm, p1, p2, p3, p4), mm);
           _limitList[i] = _q;
           dist = Distance(_pStart.point,
                   _pMid.point,
@@ -463,9 +463,8 @@ public class SVGBasicDraw {
   //Methods: CubicCurve
   //--------------------------------------------------------------------------------
   public void CubicCurve(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4) {
-    EvaluateDelegate evalFunction = new EvaluateDelegate(EvaluateForCubic);
     int _temp = NumberOfLimitForCubic(p1, p2, p3, p4);
-    CubicCurve(p1, p2, p3, p4, _temp, evalFunction);
+    CubicCurve(p1, p2, p3, p4, _temp, true);
   }
   //--------------------------------------------------------------------------------
   //Methods: CubicCurveTo
@@ -480,8 +479,7 @@ public class SVGBasicDraw {
   //--------------------------------------------------------------------------------
   public void QuadraticCurve(SVGPoint p1, SVGPoint p2, SVGPoint p3) {
     SVGPoint p4 = new SVGPoint(p2.x, p2.y);
-    EvaluateDelegate evalFunction = new EvaluateDelegate(EvaluateForQuadratic);
-    CubicCurve(p1, p2, p3, p4, 0, evalFunction);
+    CubicCurve(p1, p2, p3, p4, 0, false);
     this._currentPoint.SetValue(p3);
   }
   //--------------------------------------------------------------------------------
