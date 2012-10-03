@@ -6,7 +6,7 @@ public class SVGDocument {
   public SVGSVGElement rootElement {
     get {
       if(_rootElement == null) {
-        while(!parser.IsEOF && parser.Node.Name != "svg")
+        while(!parser.IsEOF && parser.Node.Name != SVGNodeName.SVG)
           parser.Next();
         _rootElement = new SVGSVGElement(parser, new SVGTransformList(), new SVGPaintable(), _render);
       }

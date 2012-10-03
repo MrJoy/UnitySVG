@@ -65,7 +65,7 @@ public class SVGGradientElement {
         exitFlag = true;
         continue;
       }
-      if(_xmlImp.Node.Name == "stop")
+      if(_xmlImp.Node.Name == SVGNodeName.Stop)
         _stopList.Add(new SVGStopElement(_xmlImp.Node.Attributes));
     }
   }
