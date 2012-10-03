@@ -152,16 +152,16 @@ public class SVGPaintable{
   /***********************************************************************************/
   private void SetStrokeLineCap(string lineCapType) {
     switch(lineCapType) {
-      case "butt" :   _strokeLineCap = SVGStrokeLineCapMethod.Butt;  break;
-      case "round" :  _strokeLineCap = SVGStrokeLineCapMethod.Round;  break;
-      case "square" : _strokeLineCap = SVGStrokeLineCapMethod.Square;break;
+      case "butt"  : _strokeLineCap = SVGStrokeLineCapMethod.Butt; break;
+      case "round" : _strokeLineCap = SVGStrokeLineCapMethod.Round; break;
+      case "square": _strokeLineCap = SVGStrokeLineCapMethod.Square; break;
     }
   }
   private void SetStrokeLineJoin(string lineCapType) {
     switch(lineCapType) {
-      case "miter" :   _strokeLineJoin = SVGStrokeLineJoinMethod.Miter;  break;
-      case "round" :  _strokeLineJoin = SVGStrokeLineJoinMethod.Round;  break;
-      case "bevel" :   _strokeLineJoin = SVGStrokeLineJoinMethod.Bevel;  break;
+      case "miter":  _strokeLineJoin = SVGStrokeLineJoinMethod.Miter; break;
+      case "round":  _strokeLineJoin = SVGStrokeLineJoinMethod.Round; break;
+      case "bevel":  _strokeLineJoin = SVGStrokeLineJoinMethod.Bevel; break;
     }
   }
   /***********************************************************************************/
