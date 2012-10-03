@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{C825E391-339B-34F5-AA31-4CB7ADB4FDF1}") = "UnitySVG", "Assembly-CSharp.csproj", "{BC613454-DFE0-776F-0E71-475893EB0160}"
+Project("{C825E391-339B-34F5-AA31-4CB7ADB4FDF1}") = "UnitySVG", "Assembly-CSharp-vs.csproj", "{BC613454-DFE0-776F-0E71-475893EB0160}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,7 +17,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-				GlobalSection(MonoDevelopProperties) = preSolution
+					GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
