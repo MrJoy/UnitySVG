@@ -63,7 +63,7 @@ public class SVGPaintable{
   public SVGPaintable() {
     this._fillColor = new SVGColor();
     this._strokeColor = new SVGColor();
-    this._strokeWidth = new SVGLength("1");
+    this._strokeWidth = new SVGLength(1);
     this._linearGradList = new List<SVGLinearGradientElement>();
     this._radialGradList = new List<SVGRadialGradientElement>();
   }
