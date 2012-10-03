@@ -32,19 +32,19 @@ public class SVGParser : SmallXmlParser.IContentHandler {
   public Node Node {
     get { return Stream[idx]; }
   }
-  
+
   public bool Next() {
     idx++;
     return !IsEOF;
   }
-  
+
   public bool IsEOF {
     get {
       return idx >= Stream.Count;
     }
   }
 
-  public void OnStartParsing(SmallXmlParser parser) { 
+  public void OnStartParsing(SmallXmlParser parser) {
     idx = 0;
   }
 

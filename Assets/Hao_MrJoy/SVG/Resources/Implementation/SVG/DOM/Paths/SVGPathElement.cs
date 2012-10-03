@@ -17,13 +17,13 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
   private void Initial() {
     currentTransformList = new SVGTransformList(_attrList.GetValue("transform"));
     _segList = new SVGPathSegList();
-    
+
     //-----------
     string _d = _attrList.GetValue("d");
-    
+
     List<char> _charList = new List<char>();
     List<string> _valueList = new List<string>();
-    
+
     SVGStringExtractor.ExtractPathSegList(_d, ref _charList, ref _valueList);
     for(int i = 0; i < _charList.Count; i++) {
       char _char = _charList[i];
@@ -102,7 +102,7 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
     } else {
       return new SVGPathSegClosePath(_firstPoint.x, _firstPoint.y);
     }
-    
+
     return new SVGPathSegClosePath(-1f, -1f);
   }
   //================================================================================
@@ -120,7 +120,7 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
   private void Draw() {
     if(_paintable.strokeColor == null)
       return;
-    
+
     _render.DrawPath(_graphicsPath, _paintable.strokeWidth, _paintable.strokeColor);
   }
   //================================================================================
@@ -144,23 +144,23 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
       _render.FillPath(_paintable.fillColor.Value, _graphicsPath);
       Draw();
       break;
-    
+
     case SVGPaintMethod.LinearGradientFill:
       SVGLinearGradientBrush _linearGradBrush = _paintable.GetLinearGradientBrush(_graphicsPath);
-      
+
       if(_linearGradBrush != null)
         _render.FillPath(_linearGradBrush, _graphicsPath);
       Draw();
       break;
-    
+
     case SVGPaintMethod.RadialGradientFill:
       SVGRadialGradientBrush _radialGradBrush = _paintable.GetRadialGradientBrush(_graphicsPath);
-      
+
       if(_radialGradBrush != null)
         _render.FillPath(_radialGradBrush, _graphicsPath);
       Draw();
       break;
-    
+
     case SVGPaintMethod.PathDraw:
       Draw();
       break;

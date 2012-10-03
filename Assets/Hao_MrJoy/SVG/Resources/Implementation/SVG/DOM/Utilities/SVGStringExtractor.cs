@@ -57,7 +57,7 @@ public static class SVGStringExtractor {
     _break.Add(inputText.Length);
     charList.Capacity = _break.Count - 1;
     valueList.Capacity = _break.Count - 1;
-    
+
     for(int i = 0; i < _break.Count - 1; i++) {
       int _breakSpot1 = _break[i];
       int _breakSpot2 = _break[i + 1];
@@ -72,7 +72,7 @@ public static class SVGStringExtractor {
   private static char[] splitColonSemicolon = new char[] { ':', ';', ' ', '\n', '\t', '\r' };
   public static void ExtractStyleValue(string inputText, ref Dictionary<string, string> dic) {
     string[] valuesStr = inputText.Split(splitColonSemicolon, StringSplitOptions.RemoveEmptyEntries);
-    
+
     int len = valuesStr.Length - 1;
     for(int i = 0; i < len; i += 2)
       dic.Add(valuesStr[i], valuesStr[i + 1]);
