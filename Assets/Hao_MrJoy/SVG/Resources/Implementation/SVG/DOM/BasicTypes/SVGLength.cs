@@ -24,13 +24,13 @@ public struct SVGLength  {
     get{ return _unitType; }
   }
   /***********************************************************************************/
-  public SVGLength(ushort unitType, float valueInSpecifiedUnits) {
-    _unitType = (SVGLengthType)unitType;
+  public SVGLength(SVGLengthType unitType, float valueInSpecifiedUnits) {
+    _unitType = unitType;
     _valueInSpecifiedUnits = valueInSpecifiedUnits;
     _value = SVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
   public SVGLength(float valueInSpecifiedUnits) {
-    _unitType = (SVGLengthType)0;
+    _unitType = SVGLengthType.Number;
     _valueInSpecifiedUnits = valueInSpecifiedUnits;
     _value = SVGLengthConvertor.ConvertToPX(_valueInSpecifiedUnits, _unitType);
   }
