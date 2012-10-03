@@ -16,7 +16,7 @@ public static class SVGLengthConvertor  {
 
     if(_value == "") return false;
 
-    value = float.Parse(_value);
+    value = float.Parse(_value, System.Globalization.CultureInfo.InvariantCulture);
     switch(unit.ToUpper()) {
       case "EM": lengthType = SVGLengthType.EMs; break;
       case "EX": lengthType = SVGLengthType.EXs; break;

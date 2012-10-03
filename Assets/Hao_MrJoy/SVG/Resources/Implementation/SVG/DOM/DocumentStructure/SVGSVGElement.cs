@@ -81,10 +81,10 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
     if(attr != "") {
       string[] _temp = SVGStringExtractor.ExtractTransformValue(attr);
       if(_temp.Length == 4) {
-        float x = SVGNumber.ParseToFloat(_temp[0]);
-        float y = SVGNumber.ParseToFloat(_temp[1]);
-        float w = SVGNumber.ParseToFloat(_temp[2]);
-        float h = SVGNumber.ParseToFloat(_temp[3]);
+        float x = float.Parse(_temp[0], System.Globalization.CultureInfo.InvariantCulture);
+        float y = float.Parse(_temp[1], System.Globalization.CultureInfo.InvariantCulture);
+        float w = float.Parse(_temp[2], System.Globalization.CultureInfo.InvariantCulture);
+        float h = float.Parse(_temp[3], System.Globalization.CultureInfo.InvariantCulture);
         this._viewport = new Rect(x, y, w, h);
       }
     }
