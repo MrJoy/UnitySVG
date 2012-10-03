@@ -61,7 +61,7 @@ public class SVGGradientElement {
   protected void GetElementList() {
     bool exitFlag = false;
     while(!exitFlag && _xmlImp.Next()) {
-      if(_xmlImp.Node.Kind == NodeKind.BlockClose) {
+      if(_xmlImp.Node is BlockCloseNode) {
         exitFlag = true;
         continue;
       }
