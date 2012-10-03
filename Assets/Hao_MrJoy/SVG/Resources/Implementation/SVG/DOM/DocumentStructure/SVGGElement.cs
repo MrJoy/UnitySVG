@@ -76,15 +76,15 @@ public class SVGGElement : SVGTransformable, ISVGDrawable {
           break;
         case "svg":
           _elementList.Add(new SVGSVGElement(_xmlImp,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                             summaryTransformList,
+                                             _paintable,
+                                             _render));
           break;
         case "g":
           _elementList.Add(new SVGGElement(_xmlImp,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                           summaryTransformList,
+                                           _paintable,
+                                           _render));
           break;
         //--------
         case "linearGradient":

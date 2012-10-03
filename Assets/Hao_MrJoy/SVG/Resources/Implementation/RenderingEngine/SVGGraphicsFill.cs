@@ -159,7 +159,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
   private void PreEndSubBuffer() {
     this._translateX = 0;
     this._translateY = 0;
-    
+
     if(_boundTopLeft.x < 0f)
       _boundTopLeft.x = 0f;
     if(_boundTopLeft.y < 0f)
@@ -168,22 +168,22 @@ public class SVGGraphicsFill : ISVGPathDraw {
       _boundBottomRight.x = this._width - 1f;
     if(_boundBottomRight.y >= this._height)
       _boundBottomRight.y = this._height - 1f;
-    
+
     this._subW = (int)Math.Abs((int)_boundTopLeft.x - (int)_boundBottomRight.x) + 1 + (2 * 1);
     this._subH = (int)Math.Abs((int)_boundTopLeft.y - (int)_boundBottomRight.y) + 1 + (2 * 1);
-    
+
     this._inZoneL = (int)_boundTopLeft.x - 1;
     this._inZoneT = (int)_boundTopLeft.y - 1;
-    
+
     this._inZoneL = (_inZoneL < 0) ? 0 : _inZoneL;
     this._inZoneT = (_inZoneT < 0) ? 0 : _inZoneT;
-    
+
     this._inZoneL = (_inZoneL >= this._width) ? (this._width - 1) : _inZoneL;
     this._inZoneT = (_inZoneT >= this._height) ? (this._height - 1) : _inZoneT;
-    
+
     this._subW = (this._subW + this._inZoneL >= this._width) ? (this._width - this._inZoneL - 1) : _subW;
     this._subH = (this._subH + this._inZoneT >= this._height) ? (this._height - this._inZoneT - 1) : _subH;
-    
+
     //Fill
     Fill(this._inZoneL, this._inZoneT);
     if((this._inZoneL == 0) && (this._inZoneT == 0)) {
@@ -354,20 +354,20 @@ public class SVGGraphicsFill : ISVGPathDraw {
     this._basicDraw.MoveTo(p1);
     this._basicDraw.LineTo(p2);
     this._basicDraw.ArcTo(r1, r2, angle, false, true, p3);
-    
+
     this._basicDraw.MoveTo(p3);
     this._basicDraw.LineTo(p4);
     this._basicDraw.ArcTo(r1, r2, angle, false, true, p5);
-    
+
     this._basicDraw.MoveTo(p5);
     this._basicDraw.LineTo(p6);
     this._basicDraw.ArcTo(r1, r2, angle, false, true, p7);
-    
+
     this._basicDraw.MoveTo(p7);
     this._basicDraw.LineTo(p8);
     this._basicDraw.ArcTo(r1, r2, angle, false, true, p1);
-    
-    
+
+
   }
   //-----
   public void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4, SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8, float r1, float r2,
@@ -399,7 +399,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
     points[0] = p;
     BeginSubBuffer();
     ExpandBounds(points, (int)r + 2, (int)r + 2);
-    
+
     this._basicDraw.Circle(p, r);
   }
   //-----
@@ -452,7 +452,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
     if((points != null) && (points.GetLength(0) > 0)) {
       BeginSubBuffer();
       ExpandBounds(points);
-      
+
       this._basicDraw.MoveTo(points[0]);
       int _length = points.GetLength(0);
       for(int i = 1; i < _length; i++)
@@ -564,7 +564,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
     SVGPoint[] points = new SVGPoint[1];
     points[0] = p;
     ExpandBounds(points, (int)r + 1, (int)r + 1);
-    
+
     //---------------
     this._basicDraw.Circle(p, r);
   }
@@ -575,7 +575,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
     SVGPoint[] points = new SVGPoint[1];
     points[0] = p;
     ExpandBounds(points, ((rx > ry) ? (int)rx + 2 : (int)ry + 2), ((rx > ry) ? (int)rx + 2 : (int)ry + 2));
-    
+
     //---------------
     this._basicDraw.Ellipse(p, (int)rx, (int)ry, angle);
   }

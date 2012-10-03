@@ -56,12 +56,12 @@ public class SVGBasicDraw {
       Swap(ref x0, ref y0);
       Swap(ref x1, ref y1);
     }
-    
+
     if(x0 > x1) {
       Swap(ref x0, ref x1);
       Swap(ref y0, ref y1);
     }
-    
+
     int deltax = x1 - x0;
     int deltay = Math.Abs(y1 - y0);
     int error = -(deltax + 1) / 2;
@@ -72,7 +72,7 @@ public class SVGBasicDraw {
     } else {
       ystep = -1;
     }
-    
+
     for(int x = x0; x <= x1; x++) {
       if(steep) {
         SetPixel(y, x);
@@ -115,7 +115,7 @@ public class SVGBasicDraw {
     LineTo(x0, y1);
     MoveTo(x0, y1);
     LineTo(x0, y0);
-    
+
   }
 
   public void Rect(SVGPoint p1, SVGPoint p2) {
@@ -136,7 +136,7 @@ public class SVGBasicDraw {
     if(_delta > 50)
       _delta = 50;
     float _angle = (2 * Mathf.PI) / (float)_delta;
-    
+
     float tx, ty, temp;
     tx = x0;
     ty = radius + y0;
@@ -169,26 +169,26 @@ public class SVGBasicDraw {
     float beta = (float)angle / 180.0f * Mathf.PI;
     float sinbeta = (float)Math.Sin(beta);
     float cosbeta = (float)Math.Cos(beta);
-    
+
     steps = 360 / steps;
-    
+
     int i = 0;
     float alpha = (float)i / 180.0f * Mathf.PI;
     float sinalpha = (float)Math.Sin(alpha);
     float cosalpha = (float)Math.Cos(alpha);
-    
+
     float _x = cx + (rx * cosalpha * cosbeta - ry * sinalpha * sinbeta);
     float _y = cy + (rx * cosalpha * sinbeta + ry * sinalpha * cosbeta);
-    
+
     float _fPointx = _x;
     float _fPointy = _y;
     MoveTo(_x, _y);
-    
+
     for(i = 1; i < 360; i += steps) {
       alpha = (float)i / 180.0f * Mathf.PI;
       sinalpha = (float)Math.Sin(alpha);
       cosalpha = (float)Math.Cos(alpha);
-      
+
       _x = cx + (rx * cosalpha * cosbeta - ry * sinalpha * sinbeta);
       _y = cy + (rx * cosalpha * sinbeta + ry * sinalpha * cosbeta);
       LineTo(_x, _y);
@@ -215,13 +215,13 @@ public class SVGBasicDraw {
     temp2 = (p1.y - p2.y) / 2.0f;
     tx = (_CosRadian * temp1) + (_SinRadian * temp2);
     ty = (-_SinRadian * temp1) + (_CosRadian * temp2);
-    
+
     trx2 = rx * rx;
     try2 = ry * ry;
     tx2 = tx * tx;
     ty2 = ty * ty;
-    
-    
+
+
     double radiiCheck = tx2 / trx2 + ty2 / try2;
     if(radiiCheck > 1) {
       rx = (float)(float)Math.Sqrt((float)radiiCheck) * rx;
@@ -229,36 +229,36 @@ public class SVGBasicDraw {
       trx2 = rx * rx;
       try2 = ry * ry;
     }
-    
+
     double tm1;
     tm1 = (trx2 * try2 - trx2 * ty2 - try2 * tx2) / (trx2 * ty2 + try2 * tx2);
     tm1 = (tm1 < 0) ? 0 : tm1;
-    
+
     float tm2;
     tm2 = (largeArcFlag == sweepFlag) ? -(float)Math.Sqrt((float)tm1) : (float)Math.Sqrt((float)tm1);
-    
-    
+
+
     float tcx, tcy;
     tcx = tm2 * ((rx * ty) / ry);
     tcy = tm2 * (-(ry * tx) / rx);
-    
+
     float cx, cy;
     cx = _CosRadian * tcx - _SinRadian * tcy + ((p1.x + p2.x) / 2.0f);
     cy = _SinRadian * tcx + _CosRadian * tcy + ((p1.y + p2.y) / 2.0f);
-    
+
     float ux = (tx - tcx) / rx;
     float uy = (ty - tcy) / ry;
     float vx = (-tx - tcx) / rx;
     float vy = (-ty - tcy) / ry;
     float _angle, _delta;
-    
+
     float p, n, t;
     n = (float)Math.Sqrt((ux * ux) + (uy * uy));
     p = ux;
     _angle = (uy < 0) ? -(float)Math.Acos(p / n) : (float)Math.Acos(p / n);
     _angle = _angle * 180.0f / Mathf.PI;
     _angle %= 360f;
-    
+
     n = (float)Math.Sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy));
     p = ux * vx + uy * vy;
     t = p / n;
@@ -269,16 +269,16 @@ public class SVGBasicDraw {
         t = -1f;
     }
     _delta = (ux * vy - uy * vx < 0) ? -(float)Math.Acos(t) : (float)Math.Acos(t);
-    
+
     _delta = _delta * 180.0f / Mathf.PI;
-    
+
     if(!sweepFlag && _delta > 0) {
       _delta -= 360f;
     } else if(sweepFlag && _delta < 0)
       _delta += 360f;
-    
+
     _delta %= 360f;
-    
+
     int number = 100;
     float deltaT = _delta / number;
     
@@ -390,7 +390,7 @@ public class SVGBasicDraw {
       if(dist < _flatness) {
         int i = 0;
         float mm = 0.0f;
-        
+
         for(i = 0; i < _limit; i++) {
           mm = (t1 + _tm) / 2;
           
@@ -403,27 +403,27 @@ public class SVGBasicDraw {
             _tm = mm;
           }
         }
-        
+
         if(i == _limit) {
           flag = true;
         } else {
           //Continue calculate the first point has Distance > Flatness
           _stack.Push(_pMid);
-          
+
           for(int j = 0; j <= i; j++)
             _stack.Push(_limitList[j]);
           t2 = mm;
         }
       }
-      
+
       if(flag) {
         LineTo(_pStart.point);
         LineTo(_pMid.point);
         _pStart = _stack.Pop();
-        
+
         if(_stack.Count == 0)
           break;
-        
+
         _pMid = _stack.Peek();
         t1 = t2;
         t2 = _pMid.t;

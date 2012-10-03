@@ -60,39 +60,39 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
       switch(_xmlImp.Node.Name) {
         case "rect":
           _elementList.Add(new SVGRectElement(_xmlImp.Node.Attributes,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                               summaryTransformList,
+                                               _paintable,
+                                               _render));
           break;
         case "line":
           _elementList.Add(new SVGLineElement(_xmlImp.Node.Attributes,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                               summaryTransformList,
+                                               _paintable,
+                                               _render));
           break;
         case "circle":
           _elementList.Add(new SVGCircleElement(_xmlImp.Node.Attributes,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                                 summaryTransformList,
+                                                 _paintable,
+                                                 _render));
           break;
         case "ellipse":
           _elementList.Add(new SVGEllipseElement(_xmlImp.Node.Attributes,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                                  summaryTransformList,
+                                                  _paintable,
+                                                  _render));
           break;
         case "polyline":
           _elementList.Add(new SVGPolylineElement(_xmlImp.Node.Attributes,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                                   summaryTransformList,
+                                                   _paintable,
+                                                   _render));
           break;
         case "polygon":
           _elementList.Add(new SVGPolygonElement(_xmlImp.Node.Attributes,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                                  summaryTransformList,
+                                                  _paintable,
+                                                  _render));
           break;
         case "path":
           _elementList.Add(new SVGPathElement(_xmlImp.Node.Attributes,
@@ -102,15 +102,15 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
           break;
         case "svg":
           _elementList.Add(new SVGSVGElement(_xmlImp,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                             summaryTransformList,
+                                             _paintable,
+                                             _render));
           break;
         case "g":
           _elementList.Add(new SVGGElement(_xmlImp,
-                           summaryTransformList,
-                           _paintable,
-                           _render));
+                                           summaryTransformList,
+                                           _paintable,
+                                           _render));
           break;
         //--------
         case "linearGradient":
