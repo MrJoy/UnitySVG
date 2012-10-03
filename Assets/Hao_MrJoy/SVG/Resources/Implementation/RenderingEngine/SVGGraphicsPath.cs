@@ -228,7 +228,7 @@ public class SVGGraphicsPath {
     listObject.Add(p);
   }
 
-  public SVGRect GetBound() {
+  public Rect GetBound() {
     float cx, cy, r, rx, ry, x, y, width, height;
     
     for(int i = 0; i < listObject.Count; i++)
@@ -316,8 +316,8 @@ public class SVGGraphicsPath {
         ExpandBounds((SVGPoint)listObject[i]);
         break;
       }
-    
-    SVGRect tmp = new SVGRect(boundUL.x - 1, boundUL.y - 1, boundBR.x - boundUL.x + 2, boundBR.y - boundUL.y + 2);
+
+    Rect tmp = new Rect(boundUL.x - 1, boundUL.y - 1, boundBR.x - boundUL.x + 2, boundBR.y - boundUL.y + 2);
     return tmp;
   }
 

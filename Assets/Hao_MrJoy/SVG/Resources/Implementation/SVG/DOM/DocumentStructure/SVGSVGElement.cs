@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class SVGSVGElement : SVGTransformable, ISVGDrawable {
   private SVGLength _width;
   private SVGLength _height;
 
-  private SVGRect _viewport;
+  private Rect _viewport;
 
   //-------------------------------
   private AttributeList _attrList;
@@ -163,7 +164,7 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
         float y = SVGNumber.ParseToFloat(_temp[1]);
         float w = SVGNumber.ParseToFloat(_temp[2]);
         float h = SVGNumber.ParseToFloat(_temp[3]);
-        this._viewport = new SVGRect(x, y, w, h);
+        this._viewport = new Rect(x, y, w, h);
       }
     }
   }
@@ -183,7 +184,7 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
       float attrHeight = this._height.value;
 
       if(_attrList.GetValue("viewBox") != "") {
-        SVGRect r = this._viewport;
+        Rect r = this._viewport;
         x += -r.x;
         y += -r.y;
         w = r.width;

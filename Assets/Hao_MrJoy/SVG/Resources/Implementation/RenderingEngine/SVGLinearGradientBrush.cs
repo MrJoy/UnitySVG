@@ -145,7 +145,7 @@ public class SVGLinearGradientBrush {
   }
   //-----
   private void SetGradientVector(SVGGraphicsPath graphicsPath) {
-    SVGRect bound = graphicsPath.GetBound();
+    Rect bound = graphicsPath.GetBound();
     if(_linearGradElement.x1.unitType == SVGLengthType.Percentage) {
       _x1 = bound.x + (bound.width * _x1 / 100f);
     }

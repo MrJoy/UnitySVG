@@ -195,8 +195,8 @@ public class SVGRadialGradientBrush {
   }
   //-----
   private void SetGradientVector(SVGGraphicsPath graphicsPath) {
-    SVGRect bound = graphicsPath.GetBound();
-    
+    Rect bound = graphicsPath.GetBound();
+
     if(_radialGradElement.cx.unitType == SVGLengthType.Percentage) {
       _cx = bound.x + (bound.width * _cx / 100f);
     }
