@@ -23,7 +23,5 @@ public interface ISVGPathDraw {
 
   void Ellipse(Vector2 p, float rx, float ry, float angle);
 
-  void Polyline(Vector2[] points);
-
   void Polygon(Vector2[] points);
 }

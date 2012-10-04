@@ -748,43 +748,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
       }
     }
   }
-  //--------------------------------------------------------------------------------
-  //Methods: Polyline
-  //--------------------------------------------------------------------------------
-  public void Polyline(Vector2[] points) {
-
-    if((this.isUseWidth) && ((int)this._width > 1)) {
-      Polyline(points, this._width);
-      return;
-    }
-
-    int _length = points.GetLength(0);
-    if(_length > 1) {
-      this._basicDraw.MoveTo(points[0]);
-      for(int i = 1; i < _length; i++)
-        this._basicDraw.LineTo(points[i]);
-    }
-  }
-  //-----
-  public void Polyline(Vector2[] points, float width) {
-    if((int)width == 1) {
-      Polygon(points);
-      return;
-    }
-    int _length = points.GetLength(0);
-    if(_length > 1) {
-      if(_length >= 2) {
-        Line(points[0], points[1], width);
-        StrokeLineCapLeft(points[0], points[1], width);
-        StrokeLineCapRight(points[_length - 2], points[_length - 1], width);
-
-        for(int i = 1; i < _length - 1; i++) {
-          StrokeLineJoin(points[i - 1], points[i], points[i + 1], width);
-          Line(points[i], points[i + 1], width);
-        }
-      }
-    }
-  }
   //================================================================================
   //--------------------------------------------------------------------------------
   //Methods: DrawPath

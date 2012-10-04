@@ -683,68 +683,6 @@ public class SVGGraphics {
     SetColor(strokeColor.Value.color);
     Polygon(points, width);
   }
-  //--------------------------------------------------------------------------------
-  //Method: Polyline
-  //--------------------------------------------------------------------------------
-  public void Polyline(Vector2[] points) {
-    this._graphicsStroke.Polyline(points);
-  }
-  //-----
-  public void Polyline(Vector2[] points, SVGColor? strokeColor) {
-    if(strokeColor != null) {
-      SetColor(strokeColor.Value.color);
-    }
-    Polyline(points);
-  }
-  //-----
-  public void Polyline(Vector2[] points, float width) {
-    this._graphicsStroke.Polyline(points, width);
-  }
-  //-----
-  public void Polyline(Vector2[] points, SVGColor? strokeColor, float width) {
-    if(strokeColor != null) {
-      SetColor(strokeColor.Value.color);
-    }
-    Polyline(points, width);
-  }
-  //--------------------------------------------------------------------------------
-  //Method: FillPolyline
-  //--------------------------------------------------------------------------------
-  public void FillPolyline(Vector2[] points) {
-    this._graphicsFill.Polyline(points);
-  }
-  //-----
-  public void FillPolyline(Vector2[] points, SVGColor? strokeColor) {
-    this._graphicsFill.Polyline(points, strokeColor);
-  }
-  //-----
-  public void FillPolyline(Vector2[] points, SVGColor fillColor, SVGColor? strokeColor) {
-    this._graphicsFill.Polyline(points, fillColor, strokeColor);
-  }
-  //-----
-  public void FillPolyline(Vector2[] points, SVGColor? strokeColor, float width) {
-    if((int)width == 1) {
-      FillPolyline(points, strokeColor);
-      return;
-    }
-    FillPolyline(points);
-    if(strokeColor == null)return;
-    SetColor(strokeColor.Value.color);
-    Polyline(points, width);
-  }
-  //-----
-  public void FillPolyline(Vector2[] points,
-            SVGColor fillColor, SVGColor? strokeColor, float width) {
-    if((int)width == 1) {
-      FillPolyline(points, strokeColor);
-      return;
-    }
-    SetColor(fillColor.color);
-    FillPolyline(points);
-    if(strokeColor == null)return;
-    SetColor(strokeColor.Value.color);
-    Polyline(points, width);
-  }
 
   //================================================================================
   //--------------------------------------------------------------------------------

@@ -476,20 +476,6 @@ public class SVGGraphicsFill : ISVGPathDraw {
     PrePolygon(points);
     EndSubBuffer(strokeColor);
   }
-  //--------------------------------------------------------------------------------
-  //Method: Polyline.
-  //--------------------------------------------------------------------------------
-  public void Polyline(Vector2[] points) {
-    Polygon(points);
-  }
-  //-----
-  public void Polyline(Vector2[] points, SVGColor? strokeColor) {
-    Polygon(points, strokeColor);
-  }
-  //-----
-  public void Polyline(Vector2[] points, SVGColor fillColor, SVGColor? strokeColor) {
-    Polygon(points, fillColor, strokeColor);
-  }
 
   //--------------------------------------------------------------------------------
   //Method: Fill Path
