@@ -349,8 +349,9 @@ public class SVGBasicDraw {
   }
 
   private static LiteStack<Vector2Ext> _stack = new LiteStack<Vector2Ext>();
+  private static List<Vector2Ext> _limitList = new List<Vector2Ext>();
   private void CubicCurve(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, int numberOfLimit, bool cubic) {
-
+//Profiler.BeginSample("SVGBasicDraw.CubicCurve(...)");
     MoveTo(p1);
     //MoveTo the first Point;
     //How many times the curve change form innegative -> negative or vice versa
@@ -373,7 +374,9 @@ public class SVGBasicDraw {
     _stack.Push(_pEnd);
     //Push End Point into Stack
     //Array of Change Point
-    Vector2Ext[] _limitList = new Vector2Ext[_limit + 1];
+    _limitList.Clear();
+    if(_limitList.Capacity < _limit + 1)
+      _limitList.Capacity = _limit + 1;
 
     int _count = 0;
     while(true) {
@@ -396,7 +399,10 @@ public class SVGBasicDraw {
           mm = (t1 + _tm) / 2;
 
           Vector2Ext _q = new Vector2Ext(cubic ? EvaluateForCubic(mm, p1, p2, p3, p4) : EvaluateForQuadratic(mm, p1, p2, p3, p4), mm);
-          _limitList[i] = _q;
+          if(_limitList.Count - 1 < i)
+            _limitList.Add(_q);
+          else
+            _limitList[i] = _q;
           dist = Distance(_pStart.point, _pMid.point, _q.point);
           if(dist >= _flatness) {
             break;
@@ -435,6 +441,7 @@ public class SVGBasicDraw {
       }
     }
     LineTo(_pStart.point);
+//Profiler.EndSample();
   }
 
   public void CubicCurve(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
