@@ -37,8 +37,9 @@ public class SVGGraphics {
   //Method: SetSize
   //--------------------------------------------------------------------------------
   public void SetSize(float width, float height) {
-    this._device.SetDevice(width, height);
-    this._device.GetBufferSize(ref _width, ref _height);
+    _width = (int)width;
+    _height = (int)height;
+    this._device.SetDevice(_width, _height);
     this._graphicsFill.SetSize((int)width, (int)height);
     Clean();
   }
