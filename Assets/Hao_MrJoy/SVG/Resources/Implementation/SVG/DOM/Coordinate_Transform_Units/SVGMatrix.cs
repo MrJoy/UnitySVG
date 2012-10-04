@@ -47,8 +47,8 @@ public class SVGMatrix {
                            e,              f);
     }
     public SVGMatrix Rotate(float angle) {
-      double ca = (float)Math.Cos((float)(angle * Mathf.Rad2Deg));
-      double sa = (float)Math.Sin((float)(angle * Mathf.Rad2Deg));
+      double ca = (float)Math.Cos((float)(angle * Mathf.Deg2Rad));
+      double sa = (float)Math.Sin((float)(angle * Mathf.Deg2Rad));
 
       return new SVGMatrix((float)(a*ca + c*sa), (float)(b*ca + d*sa),
                            (float)(c*ca - a*sa), (float)(d*ca - b*sa),
@@ -60,13 +60,13 @@ public class SVGMatrix {
                            a*x + c*y + e, b*x + d*y + f);
     }
     public SVGMatrix SkewX(float angle) {
-      double ta = Math.Tan((float)(angle*Mathf.Rad2Deg));
+      double ta = Math.Tan((float)(angle*Mathf.Deg2Rad));
       return new SVGMatrix(a,                 b,
                            (float)(c + a*ta), (float)(d + b*ta),
                            e,                 f);
     }
     public SVGMatrix SkewY(float angle) {
-      double ta = Math.Tan((float)(angle*Mathf.Rad2Deg));
+      double ta = Math.Tan((float)(angle*Mathf.Deg2Rad));
       return new SVGMatrix((float)(a + c*ta), (float)(b + d*ta),
                            c,                 d,
                            e,                 f);
