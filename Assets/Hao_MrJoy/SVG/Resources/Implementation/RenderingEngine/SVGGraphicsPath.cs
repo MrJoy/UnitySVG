@@ -8,21 +8,6 @@ public enum SVGFillRule : ushort {
   EvenOdd = 1
 }
 
-public enum SVGPathElementType : ushort {
-  Polygon = 0,
-  Polyline = 1,
-  Rect = 2,
-  Circle = 3,
-  Ellipse = 4,
-  CircleTo = 5,
-  EllipseTo = 6,
-  MoveTo = 7,
-  ArcTo = 8,
-  CubicCurveTo = 9,
-  QuadraticCurveTo = 10,
-  LineTo = 11
-}
-
 public class SVGGraphicsPath {
   private Vector2 beginPoint;
 
@@ -35,7 +20,7 @@ public class SVGGraphicsPath {
   private SVGTransformList _transformList;
   private SVGMatrix _matrixTransform;
 
-  private ArrayList listObject, listType;
+  private ArrayList listObject;
 
   public SVGFillRule fillRule {
     get { return _fillRule; }
@@ -75,7 +60,6 @@ public class SVGGraphicsPath {
     boundBR = new Vector2(-10000f, -10000f);
     transformList = new SVGTransformList();
     listObject = new ArrayList();
-    listType = new ArrayList();
   }
 
   public void Reset() {
@@ -86,7 +70,6 @@ public class SVGGraphicsPath {
     _fillRule = SVGFillRule.NoneZero;
     transformList.Clear();
     listObject.Clear();
-    listType.Clear();
   }
 
   private void ExpandBounds(float x, float y) {
@@ -136,98 +119,78 @@ public class SVGGraphicsPath {
 
   public void Add(SVGPolygonElement polygonElement) {
     SetFirstPoint(polygonElement.listPoints[0]);
-
-    listType.Add(SVGPathElementType.Polygon);
     listObject.Add(polygonElement);
   }
 
   public void Add(SVGPolylineElement polylineElement) {
     SetFirstPoint(polylineElement.listPoints[0]);
-
-    listType.Add(SVGPathElementType.Polyline);
     listObject.Add(polylineElement);
   }
 
   public void Add(SVGRectElement rectElement) {
     SetFirstPoint(new Vector2(rectElement.x.value, rectElement.y.value));
-
-    listType.Add(SVGPathElementType.Rect);
     listObject.Add(rectElement);
   }
 
   public void Add(SVGCircleElement circleElement) {
     Vector2 p = new Vector2(circleElement.cx.value, circleElement.cy.value);
     SetFirstPoint(p);
-
-    listType.Add(SVGPathElementType.Circle);
     listObject.Add(circleElement);
   }
 
   public void Add(SVGEllipseElement ellipseElement) {
     Vector2 p = new Vector2(ellipseElement.cx.value, ellipseElement.cy.value);
     SetFirstPoint(p);
-
-    listType.Add(SVGPathElementType.Ellipse);
     listObject.Add(ellipseElement);
   }
 
   public void AddCircleTo(Vector2 p, float r) {
     SVGGCircle gCircle = new SVGGCircle(p, r);
-    listType.Add(SVGPathElementType.CircleTo);
     listObject.Add(gCircle);
   }
 
   public void AddEllipseTo(Vector2 p, float r1, float r2, float angle) {
     SVGGEllipse gEllipse = new SVGGEllipse(p, r1, r2, angle);
-    listType.Add(SVGPathElementType.EllipseTo);
     listObject.Add(gEllipse);
   }
 
   public void AddMoveTo(Vector2 p) {
     SetFirstPoint(p);
-
-    listType.Add(SVGPathElementType.MoveTo);
-    listObject.Add(p);
+    listObject.Add(new SVGGMoveTo(p));
   }
 
   public void AddArcTo(float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag, Vector2 p) {
     SVGGArcAbs svgGArcAbs = new SVGGArcAbs(r1, r2, angle, largeArcFlag, sweepFlag, p);
-    listType.Add(SVGPathElementType.ArcTo);
     listObject.Add(svgGArcAbs);
   }
 
   public void AddCubicCurveTo(Vector2 p1, Vector2 p2, Vector2 p) {
     SVGGCubicAbs svgGCubicAbs = new SVGGCubicAbs(p1, p2, p);
-    listType.Add(SVGPathElementType.CubicCurveTo);
     listObject.Add(svgGCubicAbs);
   }
 
   public void AddQuadraticCurveTo(Vector2 p1, Vector2 p) {
     SVGGQuadraticAbs svgGQuadraticAbs = new SVGGQuadraticAbs(p1, p);
-    listType.Add(SVGPathElementType.QuadraticCurveTo);
     listObject.Add(svgGQuadraticAbs);
   }
 
   public void AddLineTo(Vector2 p) {
-    listType.Add(SVGPathElementType.LineTo);
-    listObject.Add(p);
+    listObject.Add(new SVGGLineTo(p));
   }
 
   public Rect GetBound() {
     float cx, cy, r, rx, ry, x, y, width, height;
 
-    for(int i = 0; i < listObject.Count; i++)
-      switch((SVGPathElementType)listType[i]) {
-      case SVGPathElementType.Polygon:
-        SVGPolygonElement polygonElement = (SVGPolygonElement)listObject[i];
+    for(int i = 0; i < listObject.Count; i++) {
+      object seg = listObject[i];
+      if(seg is SVGPolygonElement) {
+        SVGPolygonElement polygonElement = (SVGPolygonElement)seg;
         ExpandBounds(polygonElement.listPoints);
-        break;
-      case SVGPathElementType.Polyline:
-        SVGPolylineElement polylineElement = (SVGPolylineElement)listObject[i];
+      } else if(seg is SVGPolylineElement) {
+        SVGPolylineElement polylineElement = (SVGPolylineElement)seg;
         ExpandBounds(polylineElement.listPoints);
-        break;
-      case SVGPathElementType.Rect:
-        SVGRectElement rectElement = (SVGRectElement)listObject[i];
+      } else if(seg is SVGRectElement) {
+        SVGRectElement rectElement = (SVGRectElement)seg;
 
         x = rectElement.x.value;
         y = rectElement.y.value;
@@ -237,70 +200,54 @@ public class SVGGraphicsPath {
         ExpandBounds(x + width, y);
         ExpandBounds(x + width, y + height);
         ExpandBounds(x, y + height);
-        break;
-      case SVGPathElementType.Circle:
-        SVGCircleElement circleElement = (SVGCircleElement)listObject[i];
+      } else if(seg is SVGCircleElement) {
+        SVGCircleElement circleElement = (SVGCircleElement)seg;
 
         cx = circleElement.cx.value;
         cy = circleElement.cy.value;
         r = circleElement.r.value;
         ExpandBounds(cx, cy, r, r);
-        break;
-      case SVGPathElementType.Ellipse:
-        SVGEllipseElement ellipseElement = (SVGEllipseElement)listObject[i];
+      } else if(seg is SVGEllipseElement) {
+        SVGEllipseElement ellipseElement = (SVGEllipseElement)seg;
 
         cx = ellipseElement.cx.value;
         cy = ellipseElement.cy.value;
         rx = ellipseElement.rx.value;
         ry = ellipseElement.ry.value;
         ExpandBounds(cx, cy, rx, ry);
-        break;
-      //-----
-      case SVGPathElementType.CircleTo:
-        SVGGCircle circle = (SVGGCircle)listObject[i];
+      } else if(seg is SVGGCircle) {
+        SVGGCircle circle = (SVGGCircle)seg;
 
         r = circle.r;
         ExpandBounds(circle.point, r, r);
-        break;
-      //-----
-      case SVGPathElementType.EllipseTo:
-        SVGGEllipse ellipse = (SVGGEllipse)listObject[i];
+      } else if(seg is SVGGEllipse) {
+        SVGGEllipse ellipse = (SVGGEllipse)seg;
 
         ExpandBounds(ellipse.point, ellipse.r1, ellipse.r2);
-        break;
-      //-----
-      case SVGPathElementType.MoveTo:
-        Vector2 pointMoveTo = (Vector2)listObject[i];
+      } else if(seg is SVGGMoveTo) {
+        Vector2 pointMoveTo = ((SVGGMoveTo)seg).point;
 
         ExpandBounds(pointMoveTo);
-        break;
-      //-----
-      case SVGPathElementType.ArcTo:
-        SVGGArcAbs gArcAbs = (SVGGArcAbs)listObject[i];
+      } else if(seg is SVGGArcAbs) {
+        SVGGArcAbs gArcAbs = (SVGGArcAbs)seg;
 
         r = (int)gArcAbs.r1 + (int)gArcAbs.r2;
         ExpandBounds(gArcAbs.point, r, r);
-        break;
-      //-----
-      case SVGPathElementType.CubicCurveTo:
-        SVGGCubicAbs gCubicAbs = (SVGGCubicAbs)listObject[i];
+      } else if(seg is SVGGCubicAbs) {
+        SVGGCubicAbs gCubicAbs = (SVGGCubicAbs)seg;
 
         ExpandBounds(gCubicAbs.p1);
         ExpandBounds(gCubicAbs.p2);
         ExpandBounds(gCubicAbs.p);
-        break;
-      //-----
-      case SVGPathElementType.QuadraticCurveTo:
-        SVGGQuadraticAbs gQuadraticAbs = (SVGGQuadraticAbs)listObject[i];
+      } else if(seg is SVGGQuadraticAbs) {
+        SVGGQuadraticAbs gQuadraticAbs = (SVGGQuadraticAbs)seg;
 
         ExpandBounds(gQuadraticAbs.p1);
         ExpandBounds(gQuadraticAbs.p);
-        break;
-      //-----
-      case SVGPathElementType.LineTo:
-        ExpandBounds((Vector2)listObject[i]);
-        break;
+      } else if(seg is SVGGLineTo) {
+        ExpandBounds(((SVGGLineTo)seg).point);
       }
+    }
 
     Rect tmp = new Rect(boundUL.x - 1, boundUL.y - 1, boundBR.x - boundUL.x + 2, boundBR.y - boundUL.y + 2);
     return tmp;
@@ -407,54 +354,40 @@ public class SVGGraphicsPath {
   }
 
   public void RenderPath(ISVGPathDraw pathDraw, bool isClose) {
-    for(int i = 0; i < listObject.Count; i++)
-      switch((SVGPathElementType)listType[i]) {
-      case SVGPathElementType.Polygon:
-        RenderPolygonElement((SVGPolygonElement)listObject[i], pathDraw);
+    for(int i = 0; i < listObject.Count; i++) {
+      object seg = listObject[i];
+      if(seg is SVGPolygonElement) {
+        RenderPolygonElement((SVGPolygonElement)seg, pathDraw);
         isClose = false;
-        break;
-      case SVGPathElementType.Polyline:
-        RenderPolylineElement((SVGPolylineElement)listObject[i], pathDraw);
-        break;
-      case SVGPathElementType.Rect:
-        RenderRectElement((SVGRectElement)listObject[i], pathDraw);
+      } else if(seg is SVGPolylineElement) {
+        RenderPolylineElement((SVGPolylineElement)seg, pathDraw);
+      } else if(seg is SVGRectElement) {
+        RenderRectElement((SVGRectElement)seg, pathDraw);
         isClose = false;
-        break;
-      case SVGPathElementType.Circle:
-        RenderCircleElement((SVGCircleElement)listObject[i], pathDraw);
+      } else if(seg is SVGCircleElement) {
+        RenderCircleElement((SVGCircleElement)seg, pathDraw);
         isClose = false;
-        break;
-      case SVGPathElementType.Ellipse:
-        RenderEllipseElement((SVGEllipseElement)listObject[i], pathDraw);
+      } else if(seg is SVGEllipseElement) {
+        RenderEllipseElement((SVGEllipseElement)seg, pathDraw);
         isClose = false;
-        break;
-      //-----
-      case SVGPathElementType.CircleTo:
-        RenderCircleTo((SVGGCircle)listObject[i], pathDraw);
+      } else if(seg is SVGGCircle) {
+        RenderCircleTo((SVGGCircle)seg, pathDraw);
         isClose = false;
-        break;
-      //-----
-      case SVGPathElementType.EllipseTo:
-        RenderEllipseTo((SVGGEllipse)listObject[i], pathDraw);
+      } else if(seg is SVGGEllipse) {
+        RenderEllipseTo((SVGGEllipse)seg, pathDraw);
         isClose = false;
-        break;
-      //-----
-      case SVGPathElementType.MoveTo:
-        RenderMoveTo((Vector2)listObject[i], pathDraw);
-        break;
-      case SVGPathElementType.ArcTo:
-        RenderArcTo((SVGGArcAbs)listObject[i], pathDraw);
-        break;
-      case SVGPathElementType.CubicCurveTo:
-        RenderCubicCurveTo((SVGGCubicAbs)listObject[i], pathDraw);
-        break;
-      case SVGPathElementType.QuadraticCurveTo:
-        RenderQuadraticCurveTo((SVGGQuadraticAbs)listObject[i], pathDraw);
-        break;
-      case SVGPathElementType.LineTo:
-        RenderLineTo((Vector2)listObject[i], pathDraw);
-        break;
+      } else if(seg is SVGGMoveTo) {
+        RenderMoveTo(((SVGGMoveTo)seg).point, pathDraw);
+      } else if(seg is SVGGArcAbs) {
+        RenderArcTo((SVGGArcAbs)seg, pathDraw);
+      } else if(seg is SVGGCubicAbs) {
+        RenderCubicCurveTo((SVGGCubicAbs)seg, pathDraw);
+      } else if(seg is SVGGQuadraticAbs) {
+        RenderQuadraticCurveTo((SVGGQuadraticAbs)seg, pathDraw);
+      } else if(seg is SVGGLineTo) {
+        RenderLineTo(((SVGGLineTo)seg).point, pathDraw);
       }
+    }
 
     if(isClose)
       pathDraw.LineTo(matrixTransform.Transform(beginPoint));
