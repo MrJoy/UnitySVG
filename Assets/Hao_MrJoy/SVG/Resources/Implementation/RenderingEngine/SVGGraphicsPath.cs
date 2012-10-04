@@ -178,8 +178,6 @@ public class SVGGraphicsPath {
   }
 
   public Rect GetBound() {
-    float cx, cy, r, rx, ry, x, y, width, height;
-
     for(int i = 0; i < listObject.Count; i++) {
       ISVGPathSegment seg = (ISVGPathSegment)listObject[i];
       seg.ExpandBounds(this);
