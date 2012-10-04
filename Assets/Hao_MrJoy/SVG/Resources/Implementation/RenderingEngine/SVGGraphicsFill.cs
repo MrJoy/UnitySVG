@@ -65,19 +65,19 @@ public class SVGGraphicsFill : ISVGPathDraw {
   private Vector2 _boundTopLeft, _boundBottomRight;
 
   private void ExpandBounds(Vector2 point) {
-      if(point.x < _boundTopLeft.x) _boundTopLeft.x = point.x;
-      if(point.y < _boundTopLeft.y) _boundTopLeft.y = point.y;
+    if(point.x < _boundTopLeft.x) _boundTopLeft.x = point.x;
+    if(point.y < _boundTopLeft.y) _boundTopLeft.y = point.y;
 
-      if(point.x > _boundBottomRight.x) _boundBottomRight.x = point.x;
-      if(point.y > _boundBottomRight.y) _boundBottomRight.y = point.y;
+    if(point.x > _boundBottomRight.x) _boundBottomRight.x = point.x;
+    if(point.y > _boundBottomRight.y) _boundBottomRight.y = point.y;
   }
 
   private void ExpandBounds(Vector2 point, float dx, float dy) {
-      if(point.x - dy < _boundTopLeft.x) _boundTopLeft.x = point.x - dx;
-      if(point.y - dx < _boundTopLeft.y) _boundTopLeft.y = point.y - dy;
+    if(point.x - dy < _boundTopLeft.x) _boundTopLeft.x = point.x - dx;
+    if(point.y - dx < _boundTopLeft.y) _boundTopLeft.y = point.y - dy;
 
-      if(point.x + dx > _boundBottomRight.x) _boundBottomRight.x = point.x + dx;
-      if(point.y + dy > _boundBottomRight.y) _boundBottomRight.y = point.y + dy;
+    if(point.x + dx > _boundBottomRight.x) _boundBottomRight.x = point.x + dx;
+    if(point.y + dy > _boundBottomRight.y) _boundBottomRight.y = point.y + dy;
   }
 
   //Tinh Bound cho Fill
