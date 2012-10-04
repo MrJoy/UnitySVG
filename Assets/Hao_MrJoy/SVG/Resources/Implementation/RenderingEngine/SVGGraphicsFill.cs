@@ -191,15 +191,18 @@ public class SVGGraphicsFill : ISVGPathDraw {
     }
   }
 
+  private void FillInZone() {
+    for(int i = this._inZoneL; i < this._subW + this._inZoneL; i++)
+      for(int j = this._inZoneT; j < this._subH + this._inZoneT; j++)
+        if(this._flag[i, j] != -1)
+          this._graphics.SetPixel(i, j);
+  }
   //Fill Solid color, No fill Stroke
   public void EndSubBuffer() {
     PreEndSubBuffer();
 
     Fill(this._inZoneL, this._inZoneT);
-    for(int i = this._inZoneL; i < this._subW + this._inZoneL; i++)
-      for(int j = this._inZoneT; j < this._subH + this._inZoneT; j++)
-        if(this._flag[i, j] != -1)
-          this._graphics.SetPixel(i, j);
+    FillInZone();
   }
 
   //Fill Solid color, No fill Stroke
@@ -208,27 +211,26 @@ public class SVGGraphicsFill : ISVGPathDraw {
 
     for(int i = 0; i < points.GetLength(0); i++)
       Fill(points[i].x, points[i].y);
-    for(int i = this._inZoneL; i < this._subW + this._inZoneL; i++)
-      for(int j = this._inZoneT; j < this._subH + this._inZoneT; j++)
-        if(this._flag[i, j] != -1)
-          this._graphics.SetPixel(i, j);
+    FillInZone();
+  }
+
+  //Fill Solid color, No fill Stroke
+  public void EndSubBuffer(Vector2 point) {
+    PreEndSubBuffer();
+
+    Fill(point.x, point.y);
+    FillInZone();
   }
 
   //Fill Solid color, with fill Stroke
   public void EndSubBuffer(SVGColor? strokePathColor) {
     PreEndSubBuffer();
 
-    for(int i = this._inZoneL; i < this._subW + this._inZoneL; i++)
-      for(int j = this._inZoneT; j < this._subH + this._inZoneT; j++)
-        if(this._flag[i, j] == 0)
-          this._graphics.SetPixel(i, j);
+    FillInZone();
 
     this._graphics.SetColor(strokePathColor.Value.color);
 
-    for(int i = this._inZoneL; i < this._subW + this._inZoneL; i++)
-      for(int j = this._inZoneT; j < this._subH + this._inZoneT; j++)
-        if(this._flag[i, j] > 0)
-          this._graphics.SetPixel(i, j);
+    FillInZone();
   }
 
   //Fill Linear Gradient, no fill Stroke
@@ -261,10 +263,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
 
     this._graphics.SetColor(strokePathColor.Value.color);
 
-    for(int i = this._inZoneL; i < this._subW + this._inZoneL; i++)
-      for(int j = this._inZoneT; j < this._subH + this._inZoneT; j++)
-        if(this._flag[i, j] > 0)
-          this._graphics.SetPixel(i, j);
+    FillInZone();
   }
 
   //Fill Radial Gradient, no fill Stroke
@@ -298,10 +297,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
 
     this._graphics.SetColor(strokePathColor.Value.color);
 
-    for(int i = this._inZoneL; i < this._subW + this._inZoneL; i++)
-      for(int j = this._inZoneT; j < this._subH + this._inZoneT; j++)
-        if(this._flag[i, j] > 0)
-          this._graphics.SetPixel(i, j);
+    FillInZone();
   }
 
   private void PreRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
@@ -395,10 +391,8 @@ public class SVGGraphicsFill : ISVGPathDraw {
   //Method: CircleFill
   //--------------------------------------------------------------------------------
   private void PreCircle(Vector2 p, float r) {
-    Vector2[] points = new Vector2[1];
-    points[0] = p;
     BeginSubBuffer();
-    ExpandBounds(points, (int)r + 2, (int)r + 2);
+    ExpandBounds(p, (int)r + 2, (int)r + 2);
 
     this._basicDraw.Circle(p, r);
   }
@@ -422,10 +416,8 @@ public class SVGGraphicsFill : ISVGPathDraw {
   //Method: Ellipse
   //--------------------------------------------------------------------------------
   private void PreEllipse(Vector2 p, float rx, float ry, float angle) {
-    Vector2[] points = new Vector2[1];
-    points[0] = p;
-    BeginSubBuffer();
-    ExpandBounds(points, ((rx > ry) ? (int)rx : (int)ry), ((rx > ry) ? (int)rx : (int)ry));
+    int d = (rx > ry) ? (int)rx : (int)ry;
+    ExpandBounds(p, d, d);
 
     this._basicDraw.Ellipse(p, (int)rx, (int)ry, angle);
   }
@@ -492,6 +484,12 @@ public class SVGGraphicsFill : ISVGPathDraw {
     EndSubBuffer(points);
   }
   //-----
+  public void FillPath(SVGGraphicsPath graphicsPath, Vector2 point) {
+    BeginSubBuffer();
+    graphicsPath.RenderPath(this, true);
+    EndSubBuffer(point);
+  }
+  //-----
   //Path Solid Fill
   public void FillPath(SVGColor fillColor, SVGGraphicsPath graphicsPath) {
     SetColor(fillColor.color);
@@ -547,9 +545,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
   //Method: CircleTo
   //--------------------------------------------------------------------------------
   public void CircleTo(Vector2 p, float r) {
-    Vector2[] points = new Vector2[1];
-    points[0] = p;
-    ExpandBounds(points, (int)r + 1, (int)r + 1);
+    ExpandBounds(p, (int)r + 1, (int)r + 1);
 
     //---------------
     this._basicDraw.Circle(p, r);
@@ -558,9 +554,8 @@ public class SVGGraphicsFill : ISVGPathDraw {
   //Method: EllipseTo
   //--------------------------------------------------------------------------------
   public void EllipseTo(Vector2 p, float rx, float ry, float angle) {
-    Vector2[] points = new Vector2[1];
-    points[0] = p;
-    ExpandBounds(points, ((rx > ry) ? (int)rx + 2 : (int)ry + 2), ((rx > ry) ? (int)rx + 2 : (int)ry + 2));
+    int d = (rx > ry) ? (int)rx + 2 : (int)ry + 2;
+    ExpandBounds(p, d, d);
 
     //---------------
     this._basicDraw.Ellipse(p, (int)rx, (int)ry, angle);
@@ -569,9 +564,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
   //Method: LineTo4Path
   //--------------------------------------------------------------------------------
   public void LineTo(Vector2 p) {
-    Vector2[] points = new Vector2[1];
-    points[0] = p;
-    ExpandBounds(points);
+    ExpandBounds(p);
     //---------------
     this._basicDraw.LineTo(p);
   }
@@ -579,9 +572,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
   //Method: MoveTo
   //--------------------------------------------------------------------------------
   public void MoveTo(Vector2 p) {
-    Vector2[] points = new Vector2[1];
-    points[0] = p;
-    ExpandBounds(points);
+    ExpandBounds(p);
     //---------------
     this._basicDraw.MoveTo(p);
   }
@@ -590,9 +581,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
   //Method: Arc4Path
   /-------------------------------------------------------------------------------*/
   public void ArcTo(float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag, Vector2 p) {
-    Vector2[] points = new Vector2[1];
-    points[0] = p;
-    ExpandBounds(points, (r1 > r2) ? 2 * (int)r1 + 2 : 2 * (int)r2 + 2, (r1 > r2) ? 2 * (int)r1 + 2 : 2 * (int)r2 + 2);
+    ExpandBounds(p, (r1 > r2) ? 2 * (int)r1 + 2 : 2 * (int)r2 + 2, (r1 > r2) ? 2 * (int)r1 + 2 : 2 * (int)r2 + 2);
     //---------------
     this._basicDraw.ArcTo(r1, r2, angle, largeArcFlag, sweepFlag, p);
   }
@@ -600,11 +589,14 @@ public class SVGGraphicsFill : ISVGPathDraw {
   //Method: CubicCurveTo4Path
   /-------------------------------------------------------------------------------*/
   public void CubicCurveTo(Vector2 p1, Vector2 p2, Vector2 p) {
-    Vector2[] points = new Vector2[3];
+    /*Vector2[] points = new Vector2[3];
     points[0] = p1;
     points[1] = p2;
     points[2] = p;
-    ExpandBounds(points);
+    ExpandBounds(points);*/
+    ExpandBounds(p1);
+    ExpandBounds(p2);
+    ExpandBounds(p);
     //---------------
     this._basicDraw.CubicCurveTo(p1, p2, p);
   }
@@ -613,10 +605,12 @@ public class SVGGraphicsFill : ISVGPathDraw {
   //Method: QuadraticCurveTo4Path
   /-------------------------------------------------------------------------------*/
   public void QuadraticCurveTo(Vector2 p1, Vector2 p) {
-    Vector2[] points = new Vector2[2];
+    /*Vector2[] points = new Vector2[2];
     points[0] = p1;
     points[1] = p;
-    ExpandBounds(points);
+    ExpandBounds(points);*/
+    ExpandBounds(p1);
+    ExpandBounds(p);
     //---------------
     this._basicDraw.QuadraticCurveTo(p1, p);
   }

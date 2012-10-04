@@ -779,6 +779,11 @@ public class SVGGraphics {
   public void FillPath( SVGGraphicsPath graphicsPath, Vector2[] points) {
     this._graphicsFill.FillPath(graphicsPath, points);
   }
+  //-----
+  public void FillPath( SVGGraphicsPath graphicsPath, Vector2 point) {
+    this._graphicsFill.FillPath(graphicsPath, point);
+  }
+
   //================================================================================
   //--------------------------------------------------------------------------------
   //Draw Path
