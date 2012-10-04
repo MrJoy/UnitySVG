@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SVGDevice {
+public class SVGDeviceSmall : ISVGDevice {
   private Texture2D _texture;
 
   private int _width;
@@ -8,9 +8,6 @@ public class SVGDevice {
 
   private Color _color = Color.white;
   /***********************************************************************************/
-  public void SetDevice(float width, float height) {
-    this.SetDevice((int)width, (int)height);
-  }
   public void SetDevice(int width, int height) {
     if(this._texture == null) {
       this._texture = new Texture2D(width, height, TextureFormat.RGB24, false);

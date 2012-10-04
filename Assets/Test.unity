@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 5526ef80d6d7342859fad7964808fdca, type: 1}
+  useFastButBloatedRenderer: 0
 --- !u!23 &21
 Renderer:
   m_ObjectHideFlags: 0

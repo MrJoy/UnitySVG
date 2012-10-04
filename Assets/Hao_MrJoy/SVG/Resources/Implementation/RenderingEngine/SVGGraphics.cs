@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SVGGraphics {
   //================================================================================
-  private SVGDevice _device;
+  private ISVGDevice _device;
 
   private SVGGraphicsFill _graphicsFill;
   private SVGGraphicsStroke _graphicsStroke;
@@ -27,7 +27,7 @@ public class SVGGraphics {
     this._graphicsStroke = new SVGGraphicsStroke(this);
   }
   //-----
-  public SVGGraphics(SVGDevice device) {
+  public SVGGraphics(ISVGDevice device) {
     this._device = device;
     this._graphicsFill = new SVGGraphicsFill(this);
     this._graphicsStroke = new SVGGraphicsStroke(this);

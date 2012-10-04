@@ -2,14 +2,14 @@ using UnityEngine;
 public class Implement {
   private TextAsset _SVGFile;
   private Texture2D _texture = null;
-  private  SVGDevice _device;
-  private  SVGGraphics _graphics;
+  private ISVGDevice _device;
+  private SVGGraphics _graphics;
   private SVGDocument _svgDocument;
 
   /***********************************************************************************/
-  public Implement(TextAsset svgFile) {
+  public Implement(TextAsset svgFile, ISVGDevice device) {
     this._SVGFile = svgFile;
-    _device = new SVGDevice();
+    _device = device;
     _graphics = new SVGGraphics(_device);
   }
   /***********************************************************************************/

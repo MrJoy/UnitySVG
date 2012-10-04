@@ -55,8 +55,10 @@
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGPolygon.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGQuadraticAbs.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGRect.cs" />
+     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\RenderingDevices\ISVGDevice.cs" />
+     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\RenderingDevices\SVGDeviceFast.cs" />
+     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\RenderingDevices\SVGDeviceSmall.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGBasicDraw.cs" />
-     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGDevice.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGGraphics.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGGraphicsFill.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGGraphicsPath.cs" />

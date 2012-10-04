@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 public class Invoke : MonoBehaviour {
   public TextAsset SVGFile = null;
+  public bool useFastButBloatedRenderer = false;
   private Implement m_implement;
   // Use this for initialization
   void Start () {
@@ -12,7 +13,12 @@ public class Invoke : MonoBehaviour {
 
       w.Reset();
       w.Start();
-      m_implement = new Implement(this.SVGFile);
+      ISVGDevice device;
+      if(useFastButBloatedRenderer)
+        device = new SVGDeviceFast();
+      else
+        device = new SVGDeviceSmall();
+      m_implement = new Implement(this.SVGFile, device);
       w.Stop();
       long c = w.ElapsedMilliseconds;
 
