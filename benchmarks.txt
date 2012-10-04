@@ -91,3 +91,13 @@ Allocation  4.0MiB  11.9MiB 5.9MiB          11.3MiB 12.9MiB 3.9MiB    7.9MiB
 Time1       124ms   611ms   1217ms          3711ms  2402ms  337ms     791ms
 Time2       123ms   607ms   1233ms          3710ms  2397ms  335ms     791ms
 Time3       126ms   603ms   1225ms          3689ms  2398ms  338ms     793ms
+
+
+After fixing lion.svg asset (I.E. just a fix to the artwork, no change to the
+code):
+
+File        none    arc1    lineargradient1 tiger   lion    test1     rect1
+Allocation  4.0MiB  11.9MiB 5.9MiB          11.3MiB 5.9MiB  3.9MiB    7.9MiB
+Time1       124ms   611ms   1217ms          3711ms  2102ms  337ms     791ms
+Time2       123ms   607ms   1233ms          3710ms  2109ms  335ms     791ms
+Time3       126ms   603ms   1225ms          3689ms  2109ms  338ms     793ms
