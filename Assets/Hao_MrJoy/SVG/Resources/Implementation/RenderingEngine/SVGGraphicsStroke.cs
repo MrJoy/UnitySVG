@@ -201,7 +201,7 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   //--------------------------------------------------------------------------------
   public void EllipseTo(Vector2 p, float r1, float r2, float angle) {
     if((this.isUseWidth) && ((int)this._width > 1)) {
-      EllipseTo(p, r1, r2, this._width);
+      EllipseTo(p, r1, r2, angle, this._width);
       return;
     }
     Ellipse(p, r1, r2, angle);
