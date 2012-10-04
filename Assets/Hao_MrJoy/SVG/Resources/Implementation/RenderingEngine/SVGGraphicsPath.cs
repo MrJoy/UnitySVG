@@ -15,17 +15,12 @@ public class SVGGraphicsPath {
 
   private bool needSetFirstPoint;
 
-  private SVGFillRule _fillRule = SVGFillRule.NoneZero;
-
   private SVGTransformList _transformList;
   private SVGMatrix _matrixTransform;
 
   private ArrayList listObject;
 
-  public SVGFillRule fillRule {
-    get { return _fillRule; }
-    set { _fillRule = value; }
-  }
+  public SVGFillRule fillRule = SVGFillRule.NoneZero;
 
   public SVGMatrix matrixTransform {
     get {
@@ -67,7 +62,7 @@ public class SVGGraphicsPath {
     needSetFirstPoint = true;
     boundUL = new Vector2(+10000f, +10000f);
     boundBR = new Vector2(-10000f, -10000f);
-    _fillRule = SVGFillRule.NoneZero;
+    fillRule = SVGFillRule.NoneZero;
     transformList.Clear();
     listObject.Clear();
   }
