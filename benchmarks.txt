@@ -82,3 +82,12 @@ Allocation  4.0MiB  11.9MiB 5.9MiB          11.9MiB 12.9MiB 3.9MiB    7.9MiB
 Time1       126ms   610ms   1263ms          3712ms  2419ms  338ms     793ms
 Time2       125ms   605ms   1268ms          3706ms  2397ms  337ms     800ms
 Time3       123ms   611ms   1258ms          3717ms  2410ms  338ms     793ms
+
+
+Removing deeper instrumentations:
+
+File        none    arc1    lineargradient1 tiger   lion    test1     rect1
+Allocation  4.0MiB  11.9MiB 5.9MiB          11.3MiB 12.9MiB 3.9MiB    7.9MiB
+Time1       124ms   611ms   1217ms          3711ms  2402ms  337ms     791ms
+Time2       123ms   607ms   1233ms          3710ms  2397ms  335ms     791ms
+Time3       126ms   603ms   1225ms          3689ms  2398ms  338ms     793ms
