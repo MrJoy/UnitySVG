@@ -97,7 +97,15 @@ After fixing lion.svg asset (I.E. just a fix to the artwork, no change to the
 code):
 
 File        none    arc1    lineargradient1 tiger   lion    test1     rect1
-Allocation  4.0MiB  11.9MiB 5.9MiB          11.3MiB 5.9MiB  3.9MiB    7.9MiB
+Allocation  4.0MiB  11.9MiB 5.9MiB          11.3MiB 12.9MiB 3.9MiB    7.9MiB
 Time1       124ms   611ms   1217ms          3711ms  2102ms  337ms     791ms
 Time2       123ms   607ms   1233ms          3710ms  2109ms  335ms     791ms
 Time3       126ms   603ms   1225ms          3689ms  2109ms  338ms     793ms
+
+After moving to our own canvas system:
+
+File        none    arc1    lineargradient1 tiger   lion    test1     rect1
+Allocation  8.0MiB  15.7MiB 9.7MiB          15.3MiB 9.9MiB  7.7MiB    11.7MiB
+Time1       86ms    590ms   1052ms          3572ms  1999ms  291ms     749ms
+Time2       84ms    568ms   1068ms          3557ms  2016ms  297ms     751ms
+Time3       85ms    565ms   1071ms          3562ms  2026ms  295ms     747ms
