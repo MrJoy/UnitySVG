@@ -150,7 +150,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 19}
   m_LocalRotation: {x: .70710659, y: 0, z: 0, w: -.707106948}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &243507135
 Transform:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 2268932f9d8c84ae28ffd0a78885f00e, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &346929311
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &346929312
 Transform:
   m_ObjectHideFlags: 0
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 9c11505acd3334dd49c26981ad8853a9, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &392277589
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &392277590
 Transform:
   m_ObjectHideFlags: 0
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: c2545c8d9994746c092fb7a7023206e2, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &496905653
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &496905654
 Transform:
   m_ObjectHideFlags: 0
@@ -552,7 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 4b1d125e9c8d84780a99629ca0a7d768, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &587760788
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &587760789
 Transform:
   m_ObjectHideFlags: 0
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: a040285ffb356451198844403cc242b3, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &593286091
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,7 +651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &593286092
 Transform:
   m_ObjectHideFlags: 0
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: c7b0d77386e2b426dbc764553e601799, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &881726710
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &881726711
 Transform:
   m_ObjectHideFlags: 0
@@ -792,7 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 4769247eb286a4faabbd21567ef7d5d2, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &1260368763
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,7 +811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1260368764
 Transform:
   m_ObjectHideFlags: 0
@@ -872,7 +872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 9ed41d2b626b344d2bd96a4f792485b5, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &1346698413
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1346698414
 Transform:
   m_ObjectHideFlags: 0
@@ -952,7 +952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: f7a83dad7eccd4f39812661fee7bf285, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &1405422295
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,7 +979,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1405422295}
   m_LocalRotation: {x: .70710659, y: 0, z: 0, w: -.707106948}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1051,7 +1051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1500756938
 Transform:
   m_ObjectHideFlags: 0
@@ -1112,7 +1112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: e3f6aaf8394bc4ed7b78185625feac37, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &1720699317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,7 +1131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1720699318
 Transform:
   m_ObjectHideFlags: 0
@@ -1192,7 +1192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 1805eee13a2014d5ea9a586e0d0560ee, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &1727401827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1727401828
 Transform:
   m_ObjectHideFlags: 0
@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: e4c0cc2d4572f45a1b29a021feb7e1b9, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &1780094373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,7 +1291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1780094374
 Transform:
   m_ObjectHideFlags: 0
@@ -1352,7 +1352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: bdd68603fbf20464fa6d8ecffbb07690, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &1888689892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,7 +1371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1888689893
 Transform:
   m_ObjectHideFlags: 0
@@ -1432,7 +1432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 421a8db9b6ed841c394c51edd695620e, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &1911835905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,7 +1451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1911835906
 Transform:
   m_ObjectHideFlags: 0
@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 1a881d02cd6d34d0f8814e6a92b19c2f, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &2024987706
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,7 +1531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2024987707
 Transform:
   m_ObjectHideFlags: 0
@@ -1592,7 +1592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: 97cc7aa9aaa064cb38b78afc029b5aac, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &2049339317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2049339318
 Transform:
   m_ObjectHideFlags: 0
@@ -1672,4 +1672,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f681b4a6dd117063d000a35b613f5639, type: 1}
   m_Name: 
   SVGFile: {fileID: 4900000, guid: bd68f1af0cd774dc4bde7d2e161fea35, type: 1}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
