@@ -173,29 +173,29 @@ public class SVGGraphicsPath {
   }
 
   public Rect GetBound() {
-Profiler.BeginSample("SVGGraphicsPath.GetBound");
+//Profiler.BeginSample("SVGGraphicsPath.GetBound");
     for(int i = 0; i < listObject.Count; i++) {
       ISVGPathSegment seg = (ISVGPathSegment)listObject[i];
       seg.ExpandBounds(this);
     }
 
     Rect tmp = new Rect(boundUL.x - 1, boundUL.y - 1, boundBR.x - boundUL.x + 2, boundBR.y - boundUL.y + 2);
-Profiler.EndSample();
+//Profiler.EndSample();
     return tmp;
   }
 
   public void RenderPath(ISVGPathDraw pathDraw, bool isClose) {
-Profiler.BeginSample("SVGGraphicsPath.RenderPath(ISVGPathDraw, bool)");
+//Profiler.BeginSample("SVGGraphicsPath.RenderPath(ISVGPathDraw, bool)");
     isClose = !isClose;
     for(int i = 0; i < listObject.Count; i++) {
       ISVGPathSegment seg = (ISVGPathSegment)listObject[i];
-Profiler.BeginSample("SVGGraphicsPath.RenderPath(ISVGPathDraw, bool) => " + seg.GetType().ToString());
+//Profiler.BeginSample("SVGGraphicsPath.RenderPath(ISVGPathDraw, bool) => " + seg.GetType().ToString());
       isClose = seg.Render(this, pathDraw) || isClose;
-Profiler.EndSample();
+//Profiler.EndSample();
     }
 
     if(!isClose)
       pathDraw.LineTo(matrixTransform.Transform(beginPoint));
-Profiler.EndSample();
+//Profiler.EndSample();
   }
 }
