@@ -4,7 +4,6 @@ using System;
 // TODO: Rename Matrix2x3
 public class SVGMatrix {
     protected float _a, _b, _c, _d, _e, _f;
-    const double radPerDegree = 2.0 * 3.1415926535 / 360.0;
     public SVGMatrix() : this(1, 0, 0, 1, 0, 0) {}
     public SVGMatrix(float a, float b, float c, float d, float e, float f) {
       this._a = a;
@@ -72,8 +71,8 @@ public class SVGMatrix {
                            e,              f);
     }
     public SVGMatrix Rotate(float angle) {
-      double ca = (float)Math.Cos((float)(angle * radPerDegree));
-      double sa = (float)Math.Sin((float)(angle * radPerDegree));
+      double ca = (float)Math.Cos((float)(angle * Mathf.Rad2Deg));
+      double sa = (float)Math.Sin((float)(angle * Mathf.Rad2Deg));
 
       return new SVGMatrix((float)(a*ca + c*sa), (float)(b*ca + d*sa),
                            (float)(c*ca - a*sa), (float)(d*ca - b*sa),
@@ -85,13 +84,13 @@ public class SVGMatrix {
                            a*x + c*y + e, b*x + d*y + f);
     }
     public SVGMatrix SkewX(float angle) {
-      double ta = Math.Tan((float)(angle*radPerDegree));
+      double ta = Math.Tan((float)(angle*Mathf.Rad2Deg));
       return new SVGMatrix(a,                 b,
                            (float)(c + a*ta), (float)(d + b*ta),
                            e,                 f);
     }
     public SVGMatrix SkewY(float angle) {
-      double ta = Math.Tan((float)(angle*radPerDegree));
+      double ta = Math.Tan((float)(angle*Mathf.Rad2Deg));
       return new SVGMatrix((float)(a + c*ta), (float)(b + d*ta),
                            c,                 d,
                            e,                 f);
