@@ -7,8 +7,10 @@ public class SVGTransformable {
     get { return _inheritTransformList; }
     set {
       int c = 0;
-      if(_inheritTransformList != null)c += _inheritTransformList.Count;
-      if(_currentTransformList != null)c += _currentTransformList.Count;
+      if(_inheritTransformList != null)
+        c += _inheritTransformList.Count;
+      if(_currentTransformList != null)
+        c += _currentTransformList.Count;
       _inheritTransformList = value;
       _summaryTransformList = new SVGTransformList(c);
       if(_inheritTransformList != null)
@@ -22,8 +24,10 @@ public class SVGTransformable {
     set {
       _currentTransformList = value;
       int c = 0;
-      if(_inheritTransformList != null)c += _inheritTransformList.Count;
-      if(_currentTransformList != null)c += _currentTransformList.Count;
+      if(_inheritTransformList != null)
+        c += _inheritTransformList.Count;
+      if(_currentTransformList != null)
+        c += _currentTransformList.Count;
       _summaryTransformList = new SVGTransformList(c);
       if(_inheritTransformList != null)
         _summaryTransformList.AppendItems(_inheritTransformList);
