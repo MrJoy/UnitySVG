@@ -178,16 +178,19 @@ public class SVGGraphicsPath {
   }
 
   public Rect GetBound() {
+Profiler.BeginSample("SVGGraphicsPath.GetBound");
     for(int i = 0; i < listObject.Count; i++) {
       ISVGPathSegment seg = (ISVGPathSegment)listObject[i];
       seg.ExpandBounds(this);
     }
 
     Rect tmp = new Rect(boundUL.x - 1, boundUL.y - 1, boundBR.x - boundUL.x + 2, boundBR.y - boundUL.y + 2);
+Profiler.EndSample();
     return tmp;
   }
 
   public void RenderPath(ISVGPathDraw pathDraw, bool isClose) {
+Profiler.BeginSample("SVGGraphicsPath.RenderPath(ISVGPathDraw, bool)");
     isClose = !isClose;
     for(int i = 0; i < listObject.Count; i++) {
       ISVGPathSegment seg = (ISVGPathSegment)listObject[i];
@@ -196,5 +199,6 @@ public class SVGGraphicsPath {
 
     if(!isClose)
       pathDraw.LineTo(matrixTransform.Transform(beginPoint));
+Profiler.EndSample();
   }
 }
