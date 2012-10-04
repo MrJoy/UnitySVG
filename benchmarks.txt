@@ -49,3 +49,27 @@ Allocation  8.9KiB  18.1KiB 40.2KiB         4.4MiB  0.7MiB  19.3KiB   24.3KiB
 Time1       193ms   1101ms  1958ms          4560ms  3485ms  486ms     1372ms
 Time2       196ms   1098ms  1943ms          4565ms  3494ms  480ms     1370ms
 Time3       196ms   1111ms  1925ms          4572ms  3515ms  478ms     1362ms
+
+
+(Following numbers gathered on a mid-2012 Retina MacBook Pro w/ 2.7Ghz Core i7,
+and 16GB of 1600Mhz DDR3 RAM running OSX 10.8.2, under Unity 3.5.5.  NFI why
+the massive increase in memory usage but I presume it has to do with changes to
+Texture2D...)
+
+
+Same code as above:
+
+File        none    arc1    lineargradient1 tiger   lion    test1     rect1
+Allocation  4.0MiB  11.9MiB 5.9MiB          11.7MiB 11.7MiB 3.9MiB    7.9MiB
+Time1       124ms   939ms   1587ms          4516ms  2707ms  348ms     1141ms
+Time2       124ms   912ms   1567ms          4441ms  2702ms  346ms     1143ms
+Time3       123ms   913ms   1561ms          4423ms  2696ms  347ms     1175ms
+
+
+After 2012-10-03 optimizations:
+
+File        none    arc1    lineargradient1 tiger   lion    test1     rect1
+Allocation  4.0MiB  11.9MiB 5.9MiB          11.5MiB 12.9MiB 3.9MiB    7.9MiB
+Time1       127ms   838ms   1330ms          4157ms  2607ms  338ms     1070ms
+Time2       125ms   833ms   1330ms          4174ms  2609ms  339ms     1053ms
+Time3       125ms   838ms   1329ms          4180ms  2594ms  337ms     1052ms
