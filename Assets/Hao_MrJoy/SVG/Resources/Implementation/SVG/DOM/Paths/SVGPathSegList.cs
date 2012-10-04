@@ -1,7 +1,11 @@
 using System.Collections.Generic;
 
 public class SVGPathSegList {
-  private List<object> _segList = new List<object>();
+  private List<object> _segList;
+  public SVGPathSegList(int size) {
+    _segList = new List<object>(size);
+  }
+
   public int Count {
     get { return _segList.Count; }
   }

@@ -16,7 +16,6 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
   /***********************************************************************************/
   private void Initial() {
     currentTransformList = new SVGTransformList(_attrList.GetValue("transform"));
-    _segList = new SVGPathSegList();
 
     //-----------
     string _d = _attrList.GetValue("d");
@@ -25,6 +24,7 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
     List<string> _valueList = new List<string>();
 
     SVGStringExtractor.ExtractPathSegList(_d, ref _charList, ref _valueList);
+    _segList = new SVGPathSegList(_charList.Count);
     for(int i = 0; i < _charList.Count; i++) {
       char _char = _charList[i];
       string _value = _valueList[i];
