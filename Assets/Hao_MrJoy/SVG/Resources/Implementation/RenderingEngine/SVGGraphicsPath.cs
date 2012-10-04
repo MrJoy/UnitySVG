@@ -189,7 +189,9 @@ Profiler.BeginSample("SVGGraphicsPath.RenderPath(ISVGPathDraw, bool)");
     isClose = !isClose;
     for(int i = 0; i < listObject.Count; i++) {
       ISVGPathSegment seg = (ISVGPathSegment)listObject[i];
+Profiler.BeginSample("SVGGraphicsPath.RenderPath(ISVGPathDraw, bool) => " + seg.GetType().ToString());
       isClose = seg.Render(this, pathDraw) || isClose;
+Profiler.EndSample();
     }
 
     if(!isClose)

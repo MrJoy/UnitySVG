@@ -348,6 +348,7 @@ public class SVGBasicDraw {
     return _return;
   }
 
+  private static LiteStack<Vector2Ext> _stack = new LiteStack<Vector2Ext>();
   private void CubicCurve(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, int numberOfLimit, bool cubic) {
 
     MoveTo(p1);
@@ -368,7 +369,7 @@ public class SVGBasicDraw {
 
     // The point on Line Segment[_pStart, _pEnd] correlate with _t
 
-    LiteStack<Vector2Ext> _stack = new LiteStack<Vector2Ext>();
+    _stack.Clear();
     _stack.Push(_pEnd);
     //Push End Point into Stack
     //Array of Change Point

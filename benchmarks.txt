@@ -73,3 +73,12 @@ Allocation  4.0MiB  11.9MiB 5.9MiB          11.5MiB 12.9MiB 3.9MiB    7.9MiB
 Time1       127ms   838ms   1330ms          4157ms  2607ms  338ms     1070ms
 Time2       125ms   833ms   1330ms          4174ms  2609ms  339ms     1053ms
 Time3       125ms   838ms   1329ms          4180ms  2594ms  337ms     1052ms
+
+
+After LiteStack optimizations:
+
+File        none    arc1    lineargradient1 tiger   lion    test1     rect1
+Allocation  4.0MiB  11.9MiB 5.9MiB          11.9MiB 12.9MiB 3.9MiB    7.9MiB
+Time1       126ms   610ms   1263ms          3712ms  2419ms  338ms     793ms
+Time2       125ms   605ms   1268ms          3706ms  2397ms  337ms     800ms
+Time3       123ms   611ms   1258ms          3717ms  2410ms  338ms     793ms
