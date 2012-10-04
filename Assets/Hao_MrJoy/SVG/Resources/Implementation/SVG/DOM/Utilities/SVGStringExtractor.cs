@@ -80,7 +80,7 @@ public static class SVGStringExtractor {
   //--------------------------------------------------
   //Extract for Syntax:   translate(700 200)rotate(-30)
   public static string ExtractUrl4Gradient(string inputText) {
-Profiler.BeginSample("uSVGStringExtractor.ExtractUrl4Gradient(string)");
+Profiler.BeginSample("SVGStringExtractor.ExtractUrl4Gradient(string)");
     // TODO: Optimize this routine...
     string _return = "";
     inputText = inputText.Trim();

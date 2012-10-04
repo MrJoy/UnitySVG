@@ -15,7 +15,7 @@ public class Implement {
   /***********************************************************************************/
   /*-----------------------------------------------------------
   Methods: CreateEmptySVGDocument
-  Use: tao 1 uSVGDocument trong, day la buoc khoi dau cua viec bat
+  Use: tao 1 SVGDocument trong, day la buoc khoi dau cua viec bat
   dau phan tich va do du lieu vao trong 1 SVGDocument
   -------------------------------------------------------------*/
   private void CreateEmptySVGDocument() {
@@ -24,7 +24,7 @@ public class Implement {
 
   /*-----------------------------------------------------------
   Methods: StarProcess1
-  Use: ta bat dau doc du lieu de do vao uSVGDocument
+  Use: ta bat dau doc du lieu de do vao SVGDocument
   -------------------------------------------------------------*/
   public void StartProcess() {
 Profiler.BeginSample("SVG.Implement.StartProcess[CreateEmptySVGDocument]");

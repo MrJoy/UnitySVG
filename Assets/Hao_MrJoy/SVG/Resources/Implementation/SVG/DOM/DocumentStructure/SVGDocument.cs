@@ -15,7 +15,7 @@ public class SVGDocument {
   }
   /***********************************************************************************/
   //_nodeByTagName la 1 dictionary de luu tru cac Element ton tai ben trong 1 SVG Document
-  //private Dictionary<string, uSVGElement> _nodeByTagName = new Dictionary<string, uSVGElement>();
+  //private Dictionary<string, SVGElement> _nodeByTagName = new Dictionary<string, SVGElement>();
   /***********************************************************************************/
   private SVGParser parser;
   public SVGDocument(string originalDocument, SVGGraphics r) {

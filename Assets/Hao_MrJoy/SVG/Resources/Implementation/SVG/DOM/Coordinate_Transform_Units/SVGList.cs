@@ -12,7 +12,7 @@ public class SVGList {
   protected ArrayList items;
 
   /// <summary>
-  /// uSVGList constructor
+  /// SVGList constructor
   /// </summary>
   public SVGList() {
     itemOwnerMap = new Hashtable();
