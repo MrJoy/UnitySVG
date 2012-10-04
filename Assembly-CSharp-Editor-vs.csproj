@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{6D054D44-9FEA-FDD9-EA1B-35B8981E0B0D}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_3_5_5;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_OSX;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Editor\UnityREPL\Evaluator.cs" />
+     <Compile Include="Assets\Editor\UnityREPL\LogEntry.cs" />
+     <Compile Include="Assets\Editor\UnityREPL\PrettyPrint.cs" />
+     <Compile Include="Assets\Editor\UnityREPL\ReflectionProxy.cs" />
+     <Compile Include="Assets\Editor\UnityREPL\Shell.cs" />
+     <Compile Include="Assets\Editor\UnityREPL\UnityREPLHelper.cs" />
+     <Compile Include="Assets\UnityGUIExtensions\Editor\Common.cs" />
+     <Compile Include="Assets\UnityGUIExtensions\Editor\EditorAutoSelect.cs" />
+     <Compile Include="Assets\UnityGUIExtensions\Editor\EditorGUIHelper.cs" />
+     <Compile Include="Assets\UnityGUIExtensions\Editor\HorizontalPanes.cs" />
+     <Compile Include="Assets\UnityGUIExtensions\Editor\Toolbar.cs" />
+     <Compile Include="Assets\UnityGUIExtensions\Editor\VerticalPanes.cs" />
+     <None Include="Assets\SVGFiles\butterfly.txt" />
+     <None Include="Assets\SVGFiles\tiger.txt" />
+     <None Include="Assets\SVGFiles\path2.txt" />
+     <None Include="Assets\SVGFiles\test1.txt" />
+     <None Include="Assets\SVGFiles\polyline1.txt" />
+     <None Include="Assets\SVGFiles\radgrad1.txt" />
+     <None Include="Assets\SVGFiles\lion.txt" />
+     <None Include="Assets\Hao_MrJoy\Use\Shader.shader" />
+     <None Include="Assets\SVGFiles\lineargradient1.txt" />
+     <None Include="Assets\SVGFiles\test2.txt" />
+     <None Include="Assets\SVGFiles\polyline2.txt" />
+     <None Include="Assets\SVGFiles\arc1.txt" />
+     <None Include="Assets\SVGFiles\lines1.txt" />
+     <None Include="Assets\SVGFiles\arc3.txt" />
+     <None Include="Assets\SVGFiles\rect2.txt" />
+     <None Include="Assets\SVGFiles\arc2.txt" />
+     <None Include="Assets\SVGFiles\circle1.txt" />
+     <None Include="Assets\SVGFiles\none.txt" />
+     <None Include="Assets\SVGFiles\path1.txt" />
+     <None Include="Assets\SVGFiles\path3.txt" />
+     <None Include="Assets\SVGFiles\rect1.txt" />
+ <Reference Include="Assets\Editor\UnityREPL\Plugins\Mono.CSharp">
+ <HintPath>Assets\Editor\UnityREPL\Plugins\Mono.CSharp.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-vs.csproj">
+      <Project>{BC613454-DFE0-776F-0E71-475893EB0160}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

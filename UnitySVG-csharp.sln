@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{C825E391-339B-34F5-AA31-4CB7ADB4FDF1}") = "UnitySVG", "Assembly-CSharp-vs.csproj", "{BC613454-DFE0-776F-0E71-475893EB0160}"
 EndProject
+Project("{C825E391-339B-34F5-AA31-4CB7ADB4FDF1}") = "UnitySVG", "Assembly-CSharp-Editor-vs.csproj", "{6D054D44-9FEA-FDD9-EA1B-35B8981E0B0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{BC613454-DFE0-776F-0E71-475893EB0160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC613454-DFE0-776F-0E71-475893EB0160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC613454-DFE0-776F-0E71-475893EB0160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D054D44-9FEA-FDD9-EA1B-35B8981E0B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D054D44-9FEA-FDD9-EA1B-35B8981E0B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D054D44-9FEA-FDD9-EA1B-35B8981E0B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D054D44-9FEA-FDD9-EA1B-35B8981E0B0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-						GlobalSection(MonoDevelopProperties) = preSolution
+											GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

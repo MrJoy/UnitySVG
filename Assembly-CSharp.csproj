@@ -70,7 +70,6 @@
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicTypes\SVGTransformable.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGList.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGMatrix.cs" />
-     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGPoint.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGTransform.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGTransformList.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\DocumentStructure\SVGDocument.cs" />
@@ -111,13 +110,14 @@
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\SVGColorExtractor.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\SVGException.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\SVGLengthConvertor.cs" />
-     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\SVGNumber.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Utilities\SVGStringExtractor.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\XML Parser\AttributeList.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\XML Parser\SVGParser.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\XML Parser\SmallXmlParser.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Interface\RenderingEngine\ISVGPathDraw.cs" />
      <Compile Include="Assets\Hao_MrJoy\Use\Invoke.cs" />
+     <Compile Include="Assets\UnityGUIExtensions\AutoSelect.cs" />
+     <Compile Include="Assets\UnityGUIExtensions\GUIHelper.cs" />
      <None Include="Assets\SVGFiles\butterfly.txt" />
      <None Include="Assets\SVGFiles\tiger.txt" />
      <None Include="Assets\SVGFiles\path2.txt" />

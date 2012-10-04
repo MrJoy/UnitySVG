@@ -1,0 +1,6 @@
+[submodule "Assets/Editor/UnityREPL"]
+	path = Assets/Editor/UnityREPL
+	url = git://github.com/MrJoy/UnityREPL.git
+[submodule "Assets/UnityGUIExtensions"]
+	path = Assets/UnityGUIExtensions
+	url = git://github.com/MrJoy/UnityGUIExtensions.git
