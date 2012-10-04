@@ -3,39 +3,15 @@ using System;
 
 // TODO: Rename Matrix2x3
 public class SVGMatrix {
-    protected float _a, _b, _c, _d, _e, _f;
+    public float a, b, c, d, e, f;
     public SVGMatrix() : this(1, 0, 0, 1, 0, 0) {}
     public SVGMatrix(float a, float b, float c, float d, float e, float f) {
-      this._a = a;
-      this._b = b;
-      this._c = c;
-      this._d = d;
-      this._e = e;
-      this._f = f;
-    }
-    public float a {
-      get { return this._a; }
-      set { this._a = value; }
-    }
-    public float b {
-      get { return this._b; }
-      set { this._b = value; }
-    }
-    public float c {
-      get { return this._c; }
-      set { this._c = value; }
-    }
-    public float d {
-      get { return this._d; }
-      set { this._d = value; }
-    }
-    public float e {
-      get { return this._e; }
-      set { this._e = value; }
-    }
-    public float f {
-      get { return this._f; }
-      set { this._f = value; }
+      this.a = a;
+      this.b = b;
+      this.c = c;
+      this.d = d;
+      this.e = e;
+      this.f = f;
     }
 
     //---------------------------------------
