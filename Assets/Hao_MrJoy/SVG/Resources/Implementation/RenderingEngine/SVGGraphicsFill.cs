@@ -3,14 +3,14 @@ using System;
 using System.Collections;
 
 public class SVGGraphicsFill : ISVGPathDraw {
-  private const int FILL_FLAG = -1;
+  private const sbyte FILL_FLAG = -1;
   private float[,] _neighbor = new float[4, 2] { { -1.0f, 0.0f }, { 0.0f, -1.0f }, { 1.0f, 0.0f }, { 0.0f, 1.0f } };
 
   private SVGGraphics _graphics;
   private SVGBasicDraw _basicDraw;
 
-  private int _flagStep;
-  private int[,] _flag;
+  private sbyte _flagStep;
+  private sbyte[,] _flag;
 
   //Chieu rong va chieu dai cua picture;
   private int _width, _height;
@@ -39,7 +39,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
     this._height = (int)height;
     this._subW = this._width;
     this._subH = this._height;
-    this._flag = new int[(int)width + 1, (int)height + 1];
+    this._flag = new sbyte[(int)width + 1, (int)height + 1];
   }
 
   public void SetColor(Color color) {
@@ -129,12 +129,12 @@ public class SVGGraphicsFill : ISVGPathDraw {
   }
 
   public void Fill(float x, float y, int flagStep) {
-    this._flagStep = flagStep;
+    this._flagStep = (sbyte)flagStep;
     Fill((int)x, (int)y);
   }
 
   public void Fill(Vector2 point, int flagStep) {
-    this._flagStep = flagStep;
+    this._flagStep = (sbyte)flagStep;
     Fill((int)point.x, (int)point.y);
   }
 
