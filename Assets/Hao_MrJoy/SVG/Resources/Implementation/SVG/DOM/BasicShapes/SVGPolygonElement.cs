@@ -9,7 +9,7 @@ public class SVGPolygonElement : SVGTransformable, ISVGDrawable {
   private SVGPaintable _paintable;
   //================================================================================
   public List<Vector2> listPoints {
-    get{ return this._listPoints;}
+    get { return this._listPoints; }
   }
   //================================================================================
   public SVGPolygonElement(  AttributeList attrList,

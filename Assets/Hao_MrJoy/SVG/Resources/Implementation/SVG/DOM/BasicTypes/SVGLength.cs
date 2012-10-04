@@ -12,7 +12,7 @@ public enum SVGLengthType : ushort {
   PC = 10,
 }
 /**************************************************************************************************/
-public struct SVGLength  {
+public struct SVGLength {
   private SVGLengthType _unitType;
   private float _valueInSpecifiedUnits, _value;
 
@@ -21,7 +21,7 @@ public struct SVGLength  {
     get { return _value; }
   }
   public SVGLengthType unitType {
-    get{ return _unitType; }
+    get { return _unitType; }
   }
   /***********************************************************************************/
   public SVGLength(SVGLengthType unitType, float valueInSpecifiedUnits) {

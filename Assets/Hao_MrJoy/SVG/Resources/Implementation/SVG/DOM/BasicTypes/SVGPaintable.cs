@@ -14,7 +14,7 @@ public enum SVGPaintMethod {
   NoDraw
 }
 
-public class SVGPaintable{
+public class SVGPaintable {
 
   /***********************************************************************************/
   private SVGColor? _fillColor;
@@ -31,33 +31,33 @@ public class SVGPaintable{
 
   /***********************************************************************************/
   public SVGColor? fillColor {
-    get{return this._fillColor;}
+    get { return this._fillColor; }
   }
   public SVGColor? strokeColor {
-    get{
+    get {
       if(IsStroke())return this._strokeColor;
       else return null;
     }
   }
   public float strokeWidth {
-    get{return this._strokeWidth.value;}
+    get { return this._strokeWidth.value; }
   }
   public SVGStrokeLineCapMethod strokeLineCap {
-    get{ return this._strokeLineCap;}
+    get { return this._strokeLineCap; }
   }
   public SVGStrokeLineJoinMethod strokeLineJoin {
-    get{ return this._strokeLineJoin;}
+    get { return this._strokeLineJoin; }
   }
 
   public List<SVGLinearGradientElement> linearGradList {
-    get{ return this._linearGradList;}
+    get { return this._linearGradList; }
   }
   public List<SVGRadialGradientElement> radialGradList {
-    get{ return this._radialGradList;}
+    get { return this._radialGradList; }
   }
 
   public string gradientID {
-    get{ return this._gradientID;}
+    get { return this._gradientID; }
   }
   /***********************************************************************************/
   public SVGPaintable() {

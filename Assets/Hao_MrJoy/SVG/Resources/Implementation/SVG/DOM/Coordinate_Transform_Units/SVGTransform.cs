@@ -20,10 +20,10 @@ public class SVGTransform {
 
   //***********************************************************************************
   public SVGMatrix matrix {
-    get{return this._matrix;}
+    get { return this._matrix; }
   }
   public float angle {
-    get{
+    get {
       switch(this._type) {
         case SVGTransformMode.Rotate:
         case SVGTransformMode.SkewX:
@@ -48,7 +48,7 @@ public class SVGTransform {
     this._matrix = matrix;
   }
 
-  //Chuyen doi 1 day gia tri "a b c d e f" => arr[] = string{a, b, c, d, e, f};
+  //Chuyen doi 1 day gia tri "a b c d e f" => arr[] = string { a, b, c, d, e, f };
   public SVGTransform(string strKey, string strValue) {
     string[] valuesStr = SVGStringExtractor.ExtractTransformValue(strValue);
     int len = valuesStr.Length;

@@ -15,11 +15,11 @@ public class SVGGraphics {
   private SVGStrokeLineJoinMethod  _strokeLineJoin  = SVGStrokeLineJoinMethod.Unknown;
   //================================================================================
   public SVGStrokeLineCapMethod strokeLineCap {
-    get{ return this._strokeLineCap;}
+    get { return this._strokeLineCap; }
   }
   //-----
   public SVGStrokeLineJoinMethod strokeLineJoin {
-    get{ return this._strokeLineJoin;}
+    get { return this._strokeLineJoin; }
   }
   //================================================================================
   public SVGGraphics() {

@@ -16,28 +16,28 @@ public class SVGMatrix {
       this._f = f;
     }
     public float a {
-      get {return this._a;}
-      set {this._a = value;}
+      get { return this._a; }
+      set { this._a = value; }
     }
     public float b {
-      get {return this._b;}
-      set {this._b = value;}
+      get { return this._b; }
+      set { this._b = value; }
     }
     public float c {
-      get {return this._c;}
-      set {this._c = value;}
+      get { return this._c; }
+      set { this._c = value; }
     }
     public float d {
-      get {return this._d;}
-      set {this._d = value;}
+      get { return this._d; }
+      set { this._d = value; }
     }
     public float e {
-      get {return this._e;}
-      set {this._e = value;}
+      get { return this._e; }
+      set { this._e = value; }
     }
     public float f {
-      get {return this._f;}
-      set {this._f = value;}
+      get { return this._f; }
+      set { this._f = value; }
     }
 
     //---------------------------------------

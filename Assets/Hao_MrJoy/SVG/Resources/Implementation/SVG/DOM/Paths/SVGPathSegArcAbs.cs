@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SVGPathSegArcAbs : SVGPathSeg, ISVGDrawableSeg  {
+public class SVGPathSegArcAbs : SVGPathSeg, ISVGDrawableSeg {
   private float _x      = 0f;
   private float _y      = 0f;
   private float _r1      = 0f;
@@ -10,11 +10,11 @@ public class SVGPathSegArcAbs : SVGPathSeg, ISVGDrawableSeg  {
   private bool _sweepFlag  = false;
   //================================================================================
   public float x {
-    get{ return this._x;}
+    get { return this._x; }
   }
   //-----
   public float y {
-    get{ return this._y;}
+    get { return this._y; }
   }
   //================================================================================
   public SVGPathSegArcAbs(float r1, float r2, float angle,
@@ -29,8 +29,8 @@ public class SVGPathSegArcAbs : SVGPathSeg, ISVGDrawableSeg  {
     this._y = y;
   }
   //================================================================================
-  public override Vector2 currentPoint{
-    get{
+  public override Vector2 currentPoint {
+    get {
       return new Vector2(this._x, this._y);
     }
   }

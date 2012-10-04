@@ -9,7 +9,7 @@ public class SVGPolylineElement : SVGTransformable, ISVGDrawable {
   private SVGPaintable _paintable;
   //================================================================================
   public List<Vector2> listPoints {
-    get{ return this._listPoints;}
+    get { return this._listPoints; }
   }
   //================================================================================
   public SVGPolylineElement(  AttributeList attrList,

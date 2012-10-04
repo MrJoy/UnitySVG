@@ -27,7 +27,7 @@ public class SVGBasicDraw {
     get { return this._currentPoint; }
   }
   public SetPixelDelegate SetPixelMethod {
-    set{ SetPixel = value;}
+    set { SetPixel = value; }
   }
 
   public SVGBasicDraw() {

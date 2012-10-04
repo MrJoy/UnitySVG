@@ -14,8 +14,8 @@ public class SVGPathSegClosePath : SVGPathSeg, ISVGDrawableSeg {
     }
   }
   //================================================================================
-  public override Vector2 currentPoint{
-    get{
+  public override Vector2 currentPoint {
+    get {
       return new Vector2(this._x, this._y);
     }
   }

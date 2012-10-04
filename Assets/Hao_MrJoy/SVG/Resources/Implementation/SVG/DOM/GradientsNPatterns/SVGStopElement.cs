@@ -14,7 +14,7 @@ public class SVGStopElement {
     string temp = attrList.GetValue("offset").Trim();
     if(temp != "") {
       if(temp.EndsWith("%")) {
-        _offset = float.Parse(temp.TrimEnd(new char[1]{'%'}), System.Globalization.CultureInfo.InvariantCulture);
+        _offset = float.Parse(temp.TrimEnd(new char[1] { '%' }), System.Globalization.CultureInfo.InvariantCulture);
       } else {
         _offset = float.Parse(temp, System.Globalization.CultureInfo.InvariantCulture)* 100;
       }

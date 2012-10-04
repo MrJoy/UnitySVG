@@ -1,4 +1,4 @@
-public static class SVGLengthConvertor  {
+public static class SVGLengthConvertor {
   /***********************************************************************************/
   public static bool ExtractType(string text, ref float value, ref SVGLengthType lengthType) {
     string _value = "";

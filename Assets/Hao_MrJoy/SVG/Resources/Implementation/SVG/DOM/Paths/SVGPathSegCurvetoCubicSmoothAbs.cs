@@ -1,25 +1,25 @@
 using UnityEngine;
 
-public class SVGPathSegCurvetoCubicSmoothAbs : SVGPathSegCurvetoCubic, ISVGDrawableSeg  {
+public class SVGPathSegCurvetoCubicSmoothAbs : SVGPathSegCurvetoCubic, ISVGDrawableSeg {
   private float _x  = 0f;
   private float _y  = 0f;
   private float _x2  = 0f;
   private float _y2  = 0f;
   //================================================================================
   public float x {
-    get{ return this._x;}
+    get { return this._x; }
   }
   //-----
   public float y {
-    get{ return this._y;}
+    get { return this._y; }
   }
   //-----
   public float x2 {
-    get{ return this._x2;}
+    get { return this._x2; }
   }
   //-----
   public float y2 {
-    get{ return this._y2;}
+    get { return this._y2; }
   }
   //================================================================================
   public SVGPathSegCurvetoCubicSmoothAbs(float x2, float y2, float x, float y) : base() {
@@ -29,15 +29,15 @@ public class SVGPathSegCurvetoCubicSmoothAbs : SVGPathSegCurvetoCubic, ISVGDrawa
     this._y2 = y2;
   }
   //================================================================================
-  public override Vector2 currentPoint{
-    get{
+  public override Vector2 currentPoint {
+    get {
       Vector2 _return = new Vector2(this._x, this._y);
       return _return;
     }
   }
   //-----
-  public override Vector2 controlPoint1{
-    get{
+  public override Vector2 controlPoint1 {
+    get {
       Vector2 _return = new Vector2(0f,0f);
       SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null) {
@@ -50,8 +50,8 @@ public class SVGPathSegCurvetoCubicSmoothAbs : SVGPathSegCurvetoCubic, ISVGDrawa
     }
   }
   //-----
-  public override Vector2 controlPoint2{
-    get{
+  public override Vector2 controlPoint2 {
+    get {
       return new Vector2(this._x2, this._y2);
     }
   }

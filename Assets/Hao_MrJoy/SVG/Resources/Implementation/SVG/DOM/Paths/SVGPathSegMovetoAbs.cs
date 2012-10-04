@@ -5,11 +5,11 @@ public class SVGPathSegMovetoAbs : SVGPathSeg, ISVGDrawableSeg {
   private float _y = 0f;
   //================================================================================
   public float x {
-    get{ return this._x;}
+    get { return this._x; }
   }
   //-----
   public float y {
-    get{ return this._y;}
+    get { return this._y; }
   }
   //================================================================================
   public SVGPathSegMovetoAbs(float x, float y) : base() {
@@ -17,8 +17,8 @@ public class SVGPathSegMovetoAbs : SVGPathSeg, ISVGDrawableSeg {
     this._y = y;
   }
   //================================================================================
-  public override Vector2 currentPoint{
-    get{
+  public override Vector2 currentPoint {
+    get {
       Vector2 _return = new Vector2(this._x, this._y);
       return _return;
     }

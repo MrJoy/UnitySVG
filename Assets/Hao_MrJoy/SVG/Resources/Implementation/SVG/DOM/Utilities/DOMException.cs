@@ -50,6 +50,6 @@ public class DOMException : Exception
     private DOMExceptionType code;
     public DOMExceptionType Code
     {
-      get{return code;}
+      get { return code; }
     }
 }
