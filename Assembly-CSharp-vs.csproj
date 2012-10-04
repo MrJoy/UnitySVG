@@ -49,7 +49,12 @@
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGCircle.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGCubicAbs.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGEllipse.cs" />
+     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGLineTo.cs" />
+     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGMoveTo.cs" />
+     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGPolyLine.cs" />
+     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGPolygon.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGQuadraticAbs.cs" />
+     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\BasicType\SVGGRect.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGBasicDraw.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGDevice.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\RenderingEngine\SVGGraphics.cs" />
@@ -80,6 +85,7 @@
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\GradientsNPatterns\SVGStopElement.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\Interfaces\ISVGDrawable.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\Interfaces\ISVGDrawableSeg.cs" />
+     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\Interfaces\ISVGPathSegment.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathElement.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSeg.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Paths\SVGPathSegArcAbs.cs" />
