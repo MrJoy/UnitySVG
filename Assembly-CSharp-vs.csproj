@@ -68,7 +68,6 @@
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicTypes\SVGLength.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicTypes\SVGPaintable.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\BasicTypes\SVGTransformable.cs" />
-     <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGList.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGMatrix.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGTransform.cs" />
      <Compile Include="Assets\Hao_MrJoy\SVG\Resources\Implementation\SVG\DOM\Coordinate_Transform_Units\SVGTransformList.cs" />
