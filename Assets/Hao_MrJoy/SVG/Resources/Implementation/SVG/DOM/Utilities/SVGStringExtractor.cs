@@ -3,18 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class SVGStringExtractor {
-  private static string RemoveMultiSpace(string inputText) {
-    string temp = "";
-    inputText = inputText.Replace('\n', ' ');
-    inputText = inputText.Replace('\t', ' ');
-    inputText = inputText.Replace('\r', ' ');
-    temp = inputText;
-    do {
-      inputText = temp;
-      temp = inputText.Replace("  ", " ");
-    } while(temp != inputText);
-    return temp;
-  }
   //--------------------------------------------------
   //Extract for Syntax:   translate(700 200)rotate(-30)
   private static char[] splitPipe = new char[] { ')' };
@@ -78,24 +66,23 @@ public static class SVGStringExtractor {
       dic.Add(valuesStr[i], valuesStr[i + 1]);
   }
   //--------------------------------------------------
-  //Extract for Syntax:   translate(700 200)rotate(-30)
+  //Extract for Syntax:   url(#identifier)
   public static string ExtractUrl4Gradient(string inputText) {
-Profiler.BeginSample("SVGStringExtractor.ExtractUrl4Gradient(string)");
-    // TODO: Optimize this routine...
     string _return = "";
-    inputText = inputText.Trim();
-    inputText = SVGStringExtractor.RemoveMultiSpace(inputText);
-    inputText = inputText.Replace(" ", "");
-    int vt1 = inputText.IndexOf("url(#");
-    int vt2;
-    if(inputText.IndexOf(")") >= 0) {
-      vt2 = inputText.IndexOf(")");
-    } else {
+
+    inputText = inputText
+      .Replace('\n', ' ')
+      .Replace('\t', ' ')
+      .Replace('\r', ' ')
+      .Replace(" ", "");
+
+    int vt1 = inputText.IndexOf("url(#"),
+        vt2 = inputText.IndexOf(")");
+    if(vt2 < 0)
       vt2 = inputText.Length;
-    }
 
     _return = inputText.Substring(vt1 + 5, vt2 - vt1 - 5);
-Profiler.EndSample();
+
     return _return;
   }
 }
