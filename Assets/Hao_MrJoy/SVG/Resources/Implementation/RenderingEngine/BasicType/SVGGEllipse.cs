@@ -1,29 +1,23 @@
 using UnityEngine;
 
-public class SVGGEllipse {
-  private Vector2 _p;
-  private float _r1, _r2, _angle;
-
-  public Vector2 point {
-    get { return this._p; }
-  }
-
-  public float r1 {
-    get { return this._r1; }
-  }
-
-  public float r2 {
-    get { return this._r2; }
-  }
-
-  public float angle {
-    get { return this._angle; }
-  }
+public struct SVGGEllipse : ISVGPathSegment {
+  private Vector2 p;
+  private float r1, r2;
+  private float angle;
 
   public SVGGEllipse(Vector2 p, float r1, float r2, float angle) {
-    _p = p;
-    _r1 = r1;
-    _r2 = r2;
-    _angle = angle;
+    this.p = p;
+    this.r1 = r1;
+    this.r2 = r2;
+    this.angle = angle;
+  }
+
+  public void ExpandBounds(SVGGraphicsPath path) {
+    path.ExpandBounds(p, r1, r2);
+  }
+
+  public bool Render(SVGGraphicsPath path, ISVGPathDraw pathDraw) {
+    pathDraw.EllipseTo(path.matrixTransform.Transform(p), r1, r2, path.transformAngle + angle);
+    return true;
   }
 }

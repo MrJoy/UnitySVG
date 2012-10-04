@@ -1,23 +1,22 @@
 using UnityEngine;
 
-public class SVGGCubicAbs {
-  private Vector2 _p1, _p2, _p;
+public struct SVGGCubicAbs : ISVGPathSegment {
+  private Vector2 p1, p2, point;
 
-  public Vector2 p1 {
-    get { return _p1; }
+  public SVGGCubicAbs(Vector2 q1, Vector2 q2, Vector2 p) {
+    this.p1 = q1;
+    this.p2 = q2;
+    this.point = p;
   }
 
-  public Vector2 p2 {
-    get { return _p2; }
+  public void ExpandBounds(SVGGraphicsPath path) {
+    path.ExpandBounds(p1);
+    path.ExpandBounds(p2);
+    path.ExpandBounds(point);
   }
 
-  public Vector2 p {
-    get { return _p; }
-  }
-
-  public SVGGCubicAbs(Vector2 q1, Vector2 q2, Vector2 q) {
-    _p1 = q1;
-    _p2 = q2;
-    _p = q;
+  public bool Render(SVGGraphicsPath path, ISVGPathDraw pathDraw) {
+    pathDraw.CubicCurveTo(path.matrixTransform.Transform(p1), path.matrixTransform.Transform(p2), path.matrixTransform.Transform(point));
+    return false;
   }
 }

@@ -1,13 +1,18 @@
 using UnityEngine;
 
-public struct SVGGMoveTo {
-  private Vector2 _p;
-
-  public Vector2 point {
-    get { return _p; }
-  }
+public struct SVGGMoveTo : ISVGPathSegment {
+  private Vector2 point;
 
   public SVGGMoveTo(Vector2 p) {
-    _p = p;
+    point = p;
+  }
+
+  public void ExpandBounds(SVGGraphicsPath path) {
+    path.ExpandBounds(point);
+  }
+
+  public bool Render(SVGGraphicsPath path, ISVGPathDraw pathDraw) {
+    pathDraw.MoveTo(path.matrixTransform.Transform(point));
+    return false;
   }
 }
