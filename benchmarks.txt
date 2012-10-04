@@ -109,3 +109,12 @@ Allocation  8.0MiB  15.7MiB 9.7MiB          15.3MiB 9.9MiB  7.7MiB    11.7MiB
 Time1       86ms    590ms   1052ms          3572ms  1999ms  291ms     749ms
 Time2       84ms    568ms   1068ms          3557ms  2016ms  297ms     751ms
 Time3       85ms    565ms   1071ms          3562ms  2026ms  295ms     747ms
+
+
+Reverting our own canvas system, but avoiding re-allocation of textures:
+
+File        none    arc1    lineargradient1 tiger   lion    test1     rect1
+Allocation  4.0MiB  11.9MiB 5.9MiB          11.3MiB 5.9MiB  3.9MiB    7.9MiB
+Time1       122ms   612ms   1221ms          3708ms  2087ms  338ms     792ms
+Time2       126ms   611ms   1220ms          3701ms  2089ms  340ms     789ms
+Time3       124ms   610ms   1220ms          3705ms  2092ms  340ms     791ms
