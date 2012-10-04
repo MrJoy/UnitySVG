@@ -163,19 +163,19 @@ public class SVGBasicDraw {
 
   private void Ellipse(int cx, int cy, int rx, int ry, float angle) {
     float chuvi = 2f * Mathf.PI * (float)Math.Sqrt(rx * rx + ry * ry);
-    int steps = (int)(chuvi / 3f);
+    int steps = (int)(chuvi / 3);
     if(steps > 50)
       steps = 50;
-    float beta = (float)angle / 180.0f * Mathf.PI;
-    float sinbeta = (float)Math.Sin(beta);
-    float cosbeta = (float)Math.Cos(beta);
+    float beta = angle * Mathf.Deg2Rad;
+    float sinbeta = Mathf.Sin(beta);
+    float cosbeta = Mathf.Cos(beta);
 
     steps = 360 / steps;
 
     int i = 0;
-    float alpha = (float)i / 180.0f * Mathf.PI;
-    float sinalpha = (float)Math.Sin(alpha);
-    float cosalpha = (float)Math.Cos(alpha);
+    float alpha = i * Mathf.Deg2Rad;
+    float sinalpha = Mathf.Sin(alpha);
+    float cosalpha = Mathf.Cos(alpha);
 
     float _x = cx + (rx * cosalpha * cosbeta - ry * sinalpha * sinbeta);
     float _y = cy + (rx * cosalpha * sinbeta + ry * sinalpha * cosbeta);
@@ -185,9 +185,9 @@ public class SVGBasicDraw {
     MoveTo(_x, _y);
 
     for(i = 1; i < 360; i += steps) {
-      alpha = (float)i / 180.0f * Mathf.PI;
-      sinalpha = (float)Math.Sin(alpha);
-      cosalpha = (float)Math.Cos(alpha);
+      alpha = i * Mathf.Deg2Rad;
+      sinalpha = Mathf.Sin(alpha);
+      cosalpha = Mathf.Cos(alpha);
 
       _x = cx + (rx * cosalpha * cosbeta - ry * sinalpha * sinbeta);
       _y = cy + (rx * cosalpha * sinbeta + ry * sinalpha * cosbeta);
