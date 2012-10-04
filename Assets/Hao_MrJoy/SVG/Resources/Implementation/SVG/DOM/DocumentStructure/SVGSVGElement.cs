@@ -67,11 +67,15 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
   }
 
   public void Render() {
+//Profiler.BeginSample("SVGSVGElement.Render() => SetSize");
     this._render.SetSize(this._width.value, this._height.value);
+//Profiler.EndSample();
     for(int i = 0; i < _elementList.Count; i++) {
       ISVGDrawable temp = _elementList[i] as ISVGDrawable;
       if(temp != null) {
+//Profiler.BeginSample("SVGSVGElement.Render() => " + temp.GetType().ToString());
         temp.Render();
+//Profiler.EndSample();
       }
     }
   }
