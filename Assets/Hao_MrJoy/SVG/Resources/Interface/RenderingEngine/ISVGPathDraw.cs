@@ -1,27 +1,29 @@
+using UnityEngine;
+
 public interface ISVGPathDraw {
-  void MoveTo(SVGPoint p);
+  void MoveTo(Vector2 p);
 
-  void CircleTo(SVGPoint p, float r);
+  void CircleTo(Vector2 p, float r);
 
-  void EllipseTo(SVGPoint p, float r1, float r2, float angle);
+  void EllipseTo(Vector2 p, float r1, float r2, float angle);
 
-  void ArcTo(float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag, SVGPoint p);
+  void ArcTo(float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag, Vector2 p);
 
-  void CubicCurveTo(SVGPoint p1, SVGPoint p2, SVGPoint p);
+  void CubicCurveTo(Vector2 p1, Vector2 p2, Vector2 p);
 
-  void QuadraticCurveTo(SVGPoint p1, SVGPoint p);
+  void QuadraticCurveTo(Vector2 p1, Vector2 p);
 
-  void LineTo(SVGPoint p);
+  void LineTo(Vector2 p);
 
-  void Rect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4);
+  void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4);
 
-  void RoundedRect(SVGPoint p1, SVGPoint p2, SVGPoint p3, SVGPoint p4, SVGPoint p5, SVGPoint p6, SVGPoint p7, SVGPoint p8, float r1, float r2, float angle);
+  void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8, float r1, float r2, float angle);
 
-  void Circle(SVGPoint p, float r);
+  void Circle(Vector2 p, float r);
 
-  void Ellipse(SVGPoint p, float rx, float ry, float angle);
+  void Ellipse(Vector2 p, float rx, float ry, float angle);
 
-  void Polyline(SVGPoint[] points);
+  void Polyline(Vector2[] points);
 
-  void Polygon(SVGPoint[] points);
+  void Polygon(Vector2[] points);
 }

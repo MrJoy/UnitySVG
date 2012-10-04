@@ -1,8 +1,10 @@
+using UnityEngine;
+
 public class SVGGCircle {
-  private SVGPoint _p;
+  private Vector2 _p;
   private float _r;
 
-  public SVGPoint point {
+  public Vector2 point {
     get { return _p; }
   }
 
@@ -10,7 +12,7 @@ public class SVGGCircle {
     get { return _r; }
   }
 
-  public SVGGCircle(SVGPoint p, float r) {
+  public SVGGCircle(Vector2 p, float r) {
     _p = p;
     _r = r;
   }

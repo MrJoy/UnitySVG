@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SVGPathSegLinetoVerticalRel : SVGPathSeg, ISVGDrawableSeg  {
   private float _y = 0f;
   //================================================================================
@@ -9,9 +11,9 @@ public class SVGPathSegLinetoVerticalRel : SVGPathSeg, ISVGDrawableSeg  {
     this._y = y;
   }
   //================================================================================
-  public override SVGPoint currentPoint{
+  public override Vector2 currentPoint{
     get{
-      SVGPoint _return = new SVGPoint(0f,0f);
+      Vector2 _return = new Vector2(0f,0f);
       SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null) {
         _return.x = _prevSeg.currentPoint.x;
@@ -24,7 +26,7 @@ public class SVGPathSegLinetoVerticalRel : SVGPathSeg, ISVGDrawableSeg  {
   //Method: Render
   //--------------------------------------------------------------------------------
   public void Render(SVGGraphicsPath _graphicsPath) {
-    SVGPoint p;
+    Vector2 p;
     p = currentPoint;
     _graphicsPath.AddLineTo(p);
   }

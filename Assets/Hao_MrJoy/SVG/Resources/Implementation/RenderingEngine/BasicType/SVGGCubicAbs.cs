@@ -1,19 +1,21 @@
-public class SVGGCubicAbs {
-  private SVGPoint _p1, _p2, _p;
+using UnityEngine;
 
-  public SVGPoint p1 {
+public class SVGGCubicAbs {
+  private Vector2 _p1, _p2, _p;
+
+  public Vector2 p1 {
     get { return _p1; }
   }
 
-  public SVGPoint p2 {
+  public Vector2 p2 {
     get { return _p2; }
   }
 
-  public SVGPoint p {
+  public Vector2 p {
     get { return _p; }
   }
 
-  public SVGGCubicAbs(SVGPoint q1, SVGPoint q2, SVGPoint q) {
+  public SVGGCubicAbs(Vector2 q1, Vector2 q2, Vector2 q) {
     _p1 = q1;
     _p2 = q2;
     _p = q;

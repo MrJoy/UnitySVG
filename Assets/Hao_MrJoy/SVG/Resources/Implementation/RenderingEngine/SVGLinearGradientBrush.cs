@@ -163,13 +163,11 @@ public class SVGLinearGradientBrush {
     }
 
     if(_linearGradElement.gradientUnits == SVGGradientUnit.ObjectBoundingBox) {
-      SVGPoint _point = new SVGPoint(_x1, _y1);
-      _point = _point.MatrixTransform(graphicsPath.matrixTransform);
+      Vector2 _point = graphicsPath.matrixTransform.Transform(new Vector2(_x1, _y1));
       _x1 = _point.x;
       _y1 = _point.y;
 
-      _point = new SVGPoint(_x2, _y2);
-      _point = _point.MatrixTransform(graphicsPath.matrixTransform);
+      _point = graphicsPath.matrixTransform.Transform(new Vector2(_x2, _y2));
       _x2 = _point.x;
       _y2 = _point.y;
     }

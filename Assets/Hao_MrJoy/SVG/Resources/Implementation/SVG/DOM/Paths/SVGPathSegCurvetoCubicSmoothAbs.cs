@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SVGPathSegCurvetoCubicSmoothAbs : SVGPathSegCurvetoCubic, ISVGDrawableSeg  {
   private float _x  = 0f;
   private float _y  = 0f;
@@ -27,37 +29,37 @@ public class SVGPathSegCurvetoCubicSmoothAbs : SVGPathSegCurvetoCubic, ISVGDrawa
     this._y2 = y2;
   }
   //================================================================================
-  public override SVGPoint currentPoint{
+  public override Vector2 currentPoint{
     get{
-      SVGPoint _return = new SVGPoint(this._x, this._y);
+      Vector2 _return = new Vector2(this._x, this._y);
       return _return;
     }
   }
   //-----
-  public override SVGPoint controlPoint1{
+  public override Vector2 controlPoint1{
     get{
-      SVGPoint _return = new SVGPoint(0f,0f);
+      Vector2 _return = new Vector2(0f,0f);
       SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null) {
-        SVGPoint t_currP = previousPoint;
-        SVGPoint t_prevCP2 = ((SVGPathSegCurvetoCubic)_prevSeg).controlPoint2;
-        SVGPoint t_P = t_currP - t_prevCP2;
+        Vector2 t_currP = previousPoint;
+        Vector2 t_prevCP2 = ((SVGPathSegCurvetoCubic)_prevSeg).controlPoint2;
+        Vector2 t_P = t_currP - t_prevCP2;
         _return = t_currP + t_P;
       }
       return _return;
     }
   }
   //-----
-  public override SVGPoint controlPoint2{
+  public override Vector2 controlPoint2{
     get{
-      return new SVGPoint(this._x2, this._y2);
+      return new Vector2(this._x2, this._y2);
     }
   }
   //--------------------------------------------------------------------------------
   //Method: Render
   //--------------------------------------------------------------------------------
   public void Render(SVGGraphicsPath _graphicsPath) {
-    SVGPoint p, p1, p2;
+    Vector2 p, p1, p2;
     p1 = controlPoint1;
     p2 = controlPoint2;
     p = currentPoint;

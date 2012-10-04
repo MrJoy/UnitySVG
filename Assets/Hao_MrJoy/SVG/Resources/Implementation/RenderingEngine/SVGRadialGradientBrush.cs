@@ -117,8 +117,8 @@ public class SVGRadialGradientBrush {
   }
   //----
   //Tim giao diem giua duong thang(x,y)->(fx, fy)voi duong tron
-  private SVGPoint CrossPoint(float x, float y) {
-    SVGPoint _point = new SVGPoint(0f, 0f);
+  private Vector2 CrossPoint(float x, float y) {
+    Vector2 _point = new Vector2(0f, 0f);
 
     float dx = _fx - x;
     float dy = _fy - y;
@@ -145,8 +145,8 @@ public class SVGRadialGradientBrush {
       float x2 = (float)((-tb - delta) / (2 * ta));
       float y2 = (float)(a * x2 + b);
 
-      SVGPoint vt1 = new SVGPoint(x1 - _fx, y1 - _fy);
-      SVGPoint vt2 = new SVGPoint(x - _fx, y - _fy);
+      Vector2 vt1 = new Vector2(x1 - _fx, y1 - _fy);
+      Vector2 vt2 = new Vector2(x - _fx, y - _fy);
 
       if(((vt1.x * vt2.x) >= 0) && ((vt1.y * vt2.y) >= 0)) {
         _point.x = x1;
@@ -161,7 +161,7 @@ public class SVGRadialGradientBrush {
   //-----
   //Tinh % tai vi tri x,y
   private float Percent(float x, float y) {
-    SVGPoint _cP = CrossPoint(x, y);
+    Vector2 _cP = CrossPoint(x, y);
 
     //float d1 = (float)Math.Sqrt((_cP.x - x)*(_cP.x - x)+(_cP.y - y)*(_cP.y - y));
     float d2 = (float)Math.Sqrt((_fx - x) * (_fx - x) + (_fy - y) * (_fy - y));
@@ -206,10 +206,10 @@ public class SVGRadialGradientBrush {
     }
 
     if(_radialGradElement.r.unitType == SVGLengthType.Percentage) {
-      SVGPoint _p1 = new SVGPoint(bound.x, bound.y);
-      SVGPoint _p2 = new SVGPoint(bound.x + bound.width, bound.y + bound.height);
-      _p1 = _p1.MatrixTransform(graphicsPath.matrixTransform);
-      _p2 = _p2.MatrixTransform(graphicsPath.matrixTransform);
+      Vector2 _p1 = new Vector2(bound.x, bound.y);
+      Vector2 _p2 = new Vector2(bound.x + bound.width, bound.y + bound.height);
+      _p1 = graphicsPath.matrixTransform.Transform(_p1);
+      _p2 = graphicsPath.matrixTransform.Transform(_p2);
 
       float dd = (float)Math.Sqrt((_p2.x - _p1.x) * (_p2.x - _p1.x) + (_p2.y - _p1.y) * (_p2.y - _p1.y));
       _r = (dd * _r / 100f);
@@ -224,7 +224,7 @@ public class SVGRadialGradientBrush {
 
 
     if((float)Math.Sqrt((_cx - _fx) * (_cx - _fx) + (_cy - _fy) * (_cy - _fy)) > _r) {
-      SVGPoint _cP = CrossPoint(_cx, _cy);
+      Vector2 _cP = CrossPoint(_cx, _cy);
       _fx = _cP.x;
       _fy = _cP.y;
     }
@@ -232,13 +232,13 @@ public class SVGRadialGradientBrush {
 
 
     if(_radialGradElement.gradientUnits == SVGGradientUnit.ObjectBoundingBox) {
-      SVGPoint _point = new SVGPoint(_cx, _cy);
-      _point = _point.MatrixTransform(graphicsPath.matrixTransform);
+      Vector2 _point = new Vector2(_cx, _cy);
+      _point = graphicsPath.matrixTransform.Transform(_point);
       _cx = _point.x;
       _cy = _point.y;
 
-      _point = new SVGPoint(_fx, _fy);
-      _point = _point.MatrixTransform(graphicsPath.matrixTransform);
+      _point = new Vector2(_fx, _fy);
+      _point = graphicsPath.matrixTransform.Transform(_point);
       _fx = _point.x;
       _fy = _point.y;
     }

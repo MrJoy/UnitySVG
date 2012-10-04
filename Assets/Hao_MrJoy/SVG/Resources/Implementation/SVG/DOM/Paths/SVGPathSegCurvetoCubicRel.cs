@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SVGPathSegCurvetoCubicRel : SVGPathSegCurvetoCubic, ISVGDrawableSeg  {
   private float _x  = 0f;
   private float _y  = 0f;
@@ -34,9 +36,9 @@ public class SVGPathSegCurvetoCubicRel : SVGPathSegCurvetoCubic, ISVGDrawableSeg
     this._y2 = y2;
   }
   //================================================================================
-  public override SVGPoint currentPoint{
+  public override Vector2 currentPoint{
     get{
-      SVGPoint _return = new SVGPoint(0f,0f);
+      Vector2 _return = new Vector2(0f,0f);
       SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null) {
         _return.x = _prevSeg.currentPoint.x + this._x;
@@ -46,9 +48,9 @@ public class SVGPathSegCurvetoCubicRel : SVGPathSegCurvetoCubic, ISVGDrawableSeg
     }
   }
   //-----
-  public override SVGPoint controlPoint1{
+  public override Vector2 controlPoint1{
     get{
-      SVGPoint _return = new SVGPoint(0f,0f);
+      Vector2 _return = new Vector2(0f,0f);
       SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null) {
         _return.x = _prevSeg.currentPoint.x + this._x1;
@@ -58,9 +60,9 @@ public class SVGPathSegCurvetoCubicRel : SVGPathSegCurvetoCubic, ISVGDrawableSeg
     }
   }
   //-----
-  public override SVGPoint controlPoint2{
+  public override Vector2 controlPoint2{
     get{
-      SVGPoint _return = new SVGPoint(0f,0f);
+      Vector2 _return = new Vector2(0f,0f);
       SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null) {
         _return.x = _prevSeg.currentPoint.x + this._x2;
@@ -73,7 +75,7 @@ public class SVGPathSegCurvetoCubicRel : SVGPathSegCurvetoCubic, ISVGDrawableSeg
   //Method: Render
   //--------------------------------------------------------------------------------
   public void Render(SVGGraphicsPath _graphicsPath) {
-    SVGPoint p, p1, p2;
+    Vector2 p, p1, p2;
     p1 = controlPoint1;
     p2 = controlPoint2;
     p = currentPoint;

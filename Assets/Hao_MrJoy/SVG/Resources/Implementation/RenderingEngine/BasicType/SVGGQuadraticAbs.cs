@@ -1,15 +1,17 @@
-public class SVGGQuadraticAbs {
-  private SVGPoint _p1, _p;
+using UnityEngine;
 
-  public SVGPoint p1 {
+public class SVGGQuadraticAbs {
+  private Vector2 _p1, _p;
+
+  public Vector2 p1 {
     get { return this._p1; }
   }
 
-  public SVGPoint p {
+  public Vector2 p {
     get { return this._p; }
   }
 
-  public SVGGQuadraticAbs(SVGPoint q1, SVGPoint q) {
+  public SVGGQuadraticAbs(Vector2 q1, Vector2 q) {
     this._p1 = q1;
     this._p = q;
   }

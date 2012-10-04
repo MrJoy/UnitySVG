@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SVGPathSegCurvetoQuadraticRel : SVGPathSegCurvetoQuadratic, ISVGDrawableSeg  {
   private float _x  = 0f;
   private float _y  = 0f;
@@ -27,9 +29,9 @@ public class SVGPathSegCurvetoQuadraticRel : SVGPathSegCurvetoQuadratic, ISVGDra
     this._y1 = y1;
   }
   /***********************************************************************************/
-  public override SVGPoint currentPoint{
+  public override Vector2 currentPoint{
     get{
-      SVGPoint _return = new SVGPoint(0f,0f);
+      Vector2 _return = new Vector2(0f,0f);
       SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null) {
         _return.x = _prevSeg.currentPoint.x + this._x;
@@ -39,9 +41,9 @@ public class SVGPathSegCurvetoQuadraticRel : SVGPathSegCurvetoQuadratic, ISVGDra
     }
   }
   //-----
-  public override SVGPoint controlPoint1{
+  public override Vector2 controlPoint1{
     get{
-      SVGPoint _return = new SVGPoint(0f,0f);
+      Vector2 _return = new Vector2(0f,0f);
       SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null) {
         _return.x = _prevSeg.currentPoint.x + this._x1;
@@ -54,7 +56,7 @@ public class SVGPathSegCurvetoQuadraticRel : SVGPathSegCurvetoQuadratic, ISVGDra
   //Method: Render
   //--------------------------------------------------------------------------------
   public void Render(SVGGraphicsPath _graphicsPath) {
-    SVGPoint p, p1;
+    Vector2 p, p1;
     p = currentPoint;
     p1 = controlPoint1;
     _graphicsPath.AddQuadraticCurveTo(p1, p);

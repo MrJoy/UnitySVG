@@ -1,5 +1,6 @@
+using UnityEngine;
 public class SVGGArcAbs  {
-  private SVGPoint _p;
+  public Vector2 _p;
   private float _r1;
   private float _r2;
   private float _angle;
@@ -26,12 +27,12 @@ public class SVGGArcAbs  {
     get{return this._sweepFlag;}
   }
   //-----
-  public SVGPoint point {
+  public Vector2 point {
     get{return this._p;}
   }
   //================================================================================
   public SVGGArcAbs(float r1, float r2, float angle,
-              bool largeArcFlag, bool sweepFlag, SVGPoint p) {
+              bool largeArcFlag, bool sweepFlag, Vector2 p) {
     this._r1 = r1;
     this._r2 = r2;
     this._angle = angle;

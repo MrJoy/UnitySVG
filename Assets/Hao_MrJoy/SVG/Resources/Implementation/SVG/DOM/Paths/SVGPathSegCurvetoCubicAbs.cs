@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SVGPathSegCurvetoCubicAbs : SVGPathSegCurvetoCubic, ISVGDrawableSeg  {
   private float _x  = 0f;
   private float _y  = 0f;
@@ -39,28 +41,28 @@ public class SVGPathSegCurvetoCubicAbs : SVGPathSegCurvetoCubic, ISVGDrawableSeg
     this._y2 = y2;
   }
   //================================================================================
-  public override SVGPoint currentPoint{
+  public override Vector2 currentPoint{
     get{
-      return new SVGPoint(this._x, this._y);
+      return new Vector2(this._x, this._y);
     }
   }
   //-----
-  public override SVGPoint controlPoint1{
+  public override Vector2 controlPoint1{
     get{
-      return new SVGPoint(this._x1, this._y1);
+      return new Vector2(this._x1, this._y1);
     }
   }
   //-----
-  public override SVGPoint controlPoint2{
+  public override Vector2 controlPoint2{
     get{
-      return new SVGPoint(this._x2, this._y2);
+      return new Vector2(this._x2, this._y2);
     }
   }
   //--------------------------------------------------------------------------------
   //Method: Render
   //--------------------------------------------------------------------------------
   public void Render(SVGGraphicsPath _graphicsPath) {
-    SVGPoint p, p1, p2;
+    Vector2 p, p1, p2;
     p1 = controlPoint1;
     p2 = controlPoint2;
     p = currentPoint;

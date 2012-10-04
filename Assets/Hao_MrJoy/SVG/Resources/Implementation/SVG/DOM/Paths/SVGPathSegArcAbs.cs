@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SVGPathSegArcAbs : SVGPathSeg, ISVGDrawableSeg  {
   private float _x      = 0f;
   private float _y      = 0f;
@@ -27,16 +29,16 @@ public class SVGPathSegArcAbs : SVGPathSeg, ISVGDrawableSeg  {
     this._y = y;
   }
   //================================================================================
-  public override SVGPoint currentPoint{
+  public override Vector2 currentPoint{
     get{
-      return new SVGPoint(this._x, this._y);
+      return new Vector2(this._x, this._y);
     }
   }
   //--------------------------------------------------------------------------------
   //Method: Render
   //--------------------------------------------------------------------------------
   public void Render(SVGGraphicsPath _graphicsPath) {
-    SVGPoint p;
+    Vector2 p;
     p = currentPoint;
     _graphicsPath.AddArcTo(this._r1, this._r2, this._angle,
             this._largeArcFlag, this._sweepFlag, p);

@@ -95,4 +95,8 @@ public class SVGMatrix {
                   c,          d,
                   e,          f);
     }
+
+  public Vector2 Transform(Vector2 point) {
+    return new Vector2(a*point.x + c*point.y + e, b*point.x + d*point.y +f);
+  }
 }

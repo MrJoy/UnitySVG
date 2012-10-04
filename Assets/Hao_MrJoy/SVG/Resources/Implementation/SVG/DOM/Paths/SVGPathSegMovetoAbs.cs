@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SVGPathSegMovetoAbs : SVGPathSeg, ISVGDrawableSeg {
   private float _x = 0f;
   private float _y = 0f;
@@ -15,9 +17,9 @@ public class SVGPathSegMovetoAbs : SVGPathSeg, ISVGDrawableSeg {
     this._y = y;
   }
   //================================================================================
-  public override SVGPoint currentPoint{
+  public override Vector2 currentPoint{
     get{
-      SVGPoint _return = new SVGPoint(this._x, this._y);
+      Vector2 _return = new Vector2(this._x, this._y);
       return _return;
     }
   }
@@ -25,8 +27,8 @@ public class SVGPathSegMovetoAbs : SVGPathSeg, ISVGDrawableSeg {
   //Method: Render
   //--------------------------------------------------------------------------------
   public void Render(SVGGraphicsPath _graphicsPath) {
-    SVGPoint p;
-    p = new SVGPoint(this._x, this._y);
+    Vector2 p;
+    p = new Vector2(this._x, this._y);
     _graphicsPath.AddMoveTo(p);
   }
 }

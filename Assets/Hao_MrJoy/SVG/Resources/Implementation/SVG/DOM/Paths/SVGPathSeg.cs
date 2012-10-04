@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public enum SVGPathSegTypes : ushort {
   Unknown = 0,
   Close = 1,
@@ -31,10 +33,10 @@ public abstract class SVGPathSeg {
     get { return _segList.GetPreviousSegment(this); }
   }
   /***********************************************************************************/
-  public abstract SVGPoint currentPoint { get; }
-  public SVGPoint previousPoint {
+  public abstract Vector2 currentPoint { get; }
+  public Vector2 previousPoint {
     get {
-      SVGPoint _return = new SVGPoint(0f, 0f);
+      Vector2 _return = new Vector2(0f, 0f);
       SVGPathSeg _prevSeg = previousSeg;
       if(_prevSeg != null)
         _return = _prevSeg.currentPoint;

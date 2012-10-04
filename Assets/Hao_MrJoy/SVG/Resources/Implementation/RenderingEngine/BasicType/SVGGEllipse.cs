@@ -1,8 +1,10 @@
+using UnityEngine;
+
 public class SVGGEllipse {
-  private SVGPoint _p;
+  private Vector2 _p;
   private float _r1, _r2, _angle;
 
-  public SVGPoint point {
+  public Vector2 point {
     get { return this._p; }
   }
 
@@ -18,7 +20,7 @@ public class SVGGEllipse {
     get { return this._angle; }
   }
 
-  public SVGGEllipse(SVGPoint p, float r1, float r2, float angle) {
+  public SVGGEllipse(Vector2 p, float r1, float r2, float angle) {
     _p = p;
     _r1 = r1;
     _r2 = r2;

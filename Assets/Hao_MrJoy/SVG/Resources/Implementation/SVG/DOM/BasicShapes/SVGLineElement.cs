@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SVGLineElement : SVGTransformable, ISVGDrawable {
   private SVGLength _x1;
   private SVGLength _y1;
@@ -50,7 +52,7 @@ public class SVGLineElement : SVGTransformable, ISVGDrawable {
     this.inheritTransformList = transformList;
   }
   public void Render() {
-    SVGPoint p1, p2;
+    Vector2 p1, p2;
     SVGMatrix _matrix = this.transformMatrix;
     if(this._paintable.strokeColor == null)return;
 
@@ -61,11 +63,11 @@ public class SVGLineElement : SVGTransformable, ISVGDrawable {
     float ty1 = this._y1.value;
     float tx2 = this._x2.value;
     float ty2 = this._y2.value;
-    p1 = new SVGPoint(tx1, ty1);
-    p2 = new SVGPoint(tx2, ty2);
+    p1 = new Vector2(tx1, ty1);
+    p2 = new Vector2(tx2, ty2);
 
-    p1 = p1.MatrixTransform(_matrix);
-    p2 = p2.MatrixTransform(_matrix);
+    p1 = _matrix.Transform(p1);
+    p2 = _matrix.Transform(p2);
 
     this._render.Line(p1, p2, this._paintable.strokeColor, _width);
   }

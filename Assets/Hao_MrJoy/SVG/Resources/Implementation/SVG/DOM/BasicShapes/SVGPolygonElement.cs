@@ -1,13 +1,14 @@
+using UnityEngine;
 using System.Collections.Generic;
 
 public class SVGPolygonElement : SVGTransformable, ISVGDrawable {
-  private List<SVGPoint> _listPoints;
+  private List<Vector2> _listPoints;
   //================================================================================
   private SVGGraphics _render;
   private AttributeList _attrList;
   private SVGPaintable _paintable;
   //================================================================================
-  public List<SVGPoint> listPoints {
+  public List<Vector2> listPoints {
     get{ return this._listPoints;}
   }
   //================================================================================
@@ -21,8 +22,8 @@ public class SVGPolygonElement : SVGTransformable, ISVGDrawable {
     this._listPoints = ExtractPoints(this._attrList.GetValue("points"));
   }
   //================================================================================
-  private List<SVGPoint> ExtractPoints(string inputText) {
-    List<SVGPoint> _return = new List<SVGPoint>();
+  private List<Vector2> ExtractPoints(string inputText) {
+    List<Vector2> _return = new List<Vector2>();
     string[] _lstStr = SVGStringExtractor.ExtractTransformValue(inputText);
 
     int len = _lstStr.Length;
@@ -33,7 +34,7 @@ public class SVGPolygonElement : SVGTransformable, ISVGDrawable {
       value2 = _lstStr[i+1];
       SVGLength _length1 = new SVGLength(value1);
       SVGLength _length2 = new SVGLength(value2);
-      SVGPoint _point = new SVGPoint(_length1.value, _length2.value);
+      Vector2 _point = new Vector2(_length1.value, _length2.value);
       _return.Add(_point);
       i++;
     }
