@@ -29,6 +29,8 @@ h1. PERFORMANCE
 
 Pretty awful right now.  See "benchmarks.txt":http://github.com/MrJoy/UnitySVG/blob/master/benchmarks.txt for specifics.
 
+I strongly suggest installing and using "SVGO":https://github.com/svg/svgo to optimize SVG files before use.
+
 
 h1. HISTORY
 
