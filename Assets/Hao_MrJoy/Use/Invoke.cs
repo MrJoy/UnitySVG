@@ -30,15 +30,15 @@ public class Invoke : MonoBehaviour {
 
       w.Reset();
       w.Start();
-      renderer.material.mainTexture = m_implement.GetTexture();
+      GetComponent<Renderer>().material.mainTexture = m_implement.GetTexture();
       w.Stop();
       long r = w.ElapsedMilliseconds;
       UnityEngine.Debug.Log("Construction: " + Format(c) + ", Processing: " + Format(p) + ", Rendering: " + Format(r));
 
-      Vector2 ts = renderer.material.mainTextureScale;
+      Vector2 ts = GetComponent<Renderer>().material.mainTextureScale;
       ts.x *= -1;
-      renderer.material.mainTextureScale = ts;
-      renderer.material.mainTexture.filterMode = FilterMode.Trilinear;
+      GetComponent<Renderer>().material.mainTextureScale = ts;
+      GetComponent<Renderer>().material.mainTexture.filterMode = FilterMode.Trilinear;
     }
   }
 
