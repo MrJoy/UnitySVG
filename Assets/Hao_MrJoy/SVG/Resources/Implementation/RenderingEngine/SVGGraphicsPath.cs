@@ -16,13 +16,13 @@ public class SVGGraphicsPath {
   private bool needSetFirstPoint;
 
   private SVGTransformList _transformList;
-  private SVGMatrix _matrixTransform;
+  private Matrix2x3 _matrixTransform;
 
   private ArrayList listObject;
 
   public SVGFillRule fillRule = SVGFillRule.NoneZero;
 
-  public SVGMatrix matrixTransform {
+  public Matrix2x3 matrixTransform {
     get {
       if(_matrixTransform == null) {
         _matrixTransform = transformList.Consolidate().matrix;

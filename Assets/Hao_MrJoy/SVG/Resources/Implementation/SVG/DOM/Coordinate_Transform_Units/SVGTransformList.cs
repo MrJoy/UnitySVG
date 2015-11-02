@@ -1,60 +1,75 @@
 using System.Collections.Generic;
 
-public class SVGTransformList {
-  private List<SVGTransform> _listTransform;
-  /*********************************************************************************************/
-  public int Count {
-    get { return _listTransform.Count; }
-  }
-  private SVGMatrix _totalMatrix = null;
-  public SVGMatrix totalMatrix {
-    get {
-      if(_totalMatrix == null) {
-        if(_listTransform.Count == 0) {
-          _totalMatrix = new SVGMatrix(1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
-        } else {
-          SVGMatrix matrix = _listTransform[0].matrix;
-          for(int i = 1; i < _listTransform.Count; i++)
-            matrix = matrix.Multiply(_listTransform[i].matrix);
-          _totalMatrix = matrix;
-        }
-      }
-      return _totalMatrix;
-    }
-  }
-  /*********************************************************************************************/
-  public SVGTransformList() {
-    _listTransform = new List<SVGTransform>();
-  }
-  public SVGTransformList(int capacity) {
-    _listTransform = new List<SVGTransform>(capacity);
-  }
-  public SVGTransformList(string listString) {
-    _listTransform = SVGStringExtractor.ExtractTransformList(listString);
-  }
+public class SVGTransformList
+{
+	private readonly List<SVGTransform> _listTransform;
 
-  /*********************************************************************************************/
-  public void Clear() {
-    _listTransform.Clear();
-    _totalMatrix = null;
-  }
-  public void AppendItem(SVGTransform newItem) {
-    _listTransform.Add(newItem);
-    _totalMatrix = null;
-  }
-  public void AppendItems(SVGTransformList newListItem) {
-    _listTransform.AddRange(newListItem._listTransform);
-    _totalMatrix = null;
-  }
-  public SVGTransform this[int index] {
-    get {
-      if((index < 0)||(index >= _listTransform.Count))
-        throw new DOMException(DOMExceptionType.IndexSizeErr);
-      return _listTransform[index];
-    }
-  }
+	public int Count
+	{
+		get { return _listTransform.Count; }
+	}
 
-  public SVGTransform Consolidate() {
-    return new SVGTransform(totalMatrix);
-  }
+	private Matrix2x3 _totalMatrix;
+
+	public Matrix2x3 totalMatrix
+	{
+		get
+		{
+			if (_totalMatrix == null)
+			{
+				_totalMatrix = new Matrix2x3();
+				for (int i = 0; i < _listTransform.Count; ++i)
+					_totalMatrix.Multiply(_listTransform[i].matrix);
+			}
+			return _totalMatrix;
+		}
+	}
+
+	public SVGTransformList()
+	{
+		_listTransform = new List<SVGTransform>();
+	}
+
+	public SVGTransformList(int capacity)
+	{
+		_listTransform = new List<SVGTransform>(capacity);
+	}
+
+	public SVGTransformList(string listString)
+	{
+		_listTransform = SVGStringExtractor.ExtractTransformList(listString);
+	}
+
+	public void Clear()
+	{
+		_listTransform.Clear();
+		_totalMatrix = null;
+	}
+
+	public void AppendItem(SVGTransform newItem)
+	{
+		_listTransform.Add(newItem);
+		_totalMatrix = null;
+	}
+
+	public void AppendItems(SVGTransformList newListItem)
+	{
+		_listTransform.AddRange(newListItem._listTransform);
+		_totalMatrix = null;
+	}
+
+	public SVGTransform this[int index]
+	{
+		get
+		{
+			if ((index < 0) || (index >= _listTransform.Count))
+				throw new DOMException(DOMExceptionType.IndexSizeErr);
+			return _listTransform[index];
+		}
+	}
+
+	public SVGTransform Consolidate()
+	{
+		return new SVGTransform(totalMatrix);
+	}
 }

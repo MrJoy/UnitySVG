@@ -49,7 +49,7 @@ public class SVGTransformable {
       return _angle;
     }
   }
-  public SVGMatrix transformMatrix {
+  public Matrix2x3 transformMatrix {
     get { return summaryTransformList.Consolidate().matrix; }
   }
   /*********************************************************************************************/

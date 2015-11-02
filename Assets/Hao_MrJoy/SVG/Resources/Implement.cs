@@ -31,7 +31,7 @@ Profiler.BeginSample("SVG.Implement.StartProcess[CreateEmptySVGDocument]");
     CreateEmptySVGDocument();
 Profiler.EndSample();
 Profiler.BeginSample("SVG.Implement.StartProcess[GetRootElement]");
-    SVGSVGElement _rootSVGElement = this._svgDocument.rootElement;
+    SVGSVGElement _rootSVGElement = this._svgDocument.RootElement;
 Profiler.EndSample();
 Profiler.BeginSample("SVG.Implement.StartProcess[ClearCanvas]");
     this._graphics.SetColor(Color.white);
