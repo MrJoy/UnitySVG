@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnitySVG;
@@ -22,6 +23,8 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable
 		_segList = new SVGPathSegList(0); // optimization: count number of segments before starting
 		for (int i = 0; i < dstr.Length;)
 		{
+			while (i < dstr.Length-1 && dstr[i] == ' ') // skip whitespace before type character
+				++i;
 			char _char = dstr[i];
 			switch (_char)
 			{
@@ -32,9 +35,17 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable
 					break;
 				case 'M':
 				{
-					float a = ReadFloat(dstr, ref i);
-					float b = ReadFloat(dstr, ref i);
-					_segList.AppendItem(new SVGPathSegMovetoAbs(a, b));
+					try
+					{
+						float a = ReadFloat(dstr, ref i);
+						float b = ReadFloat(dstr, ref i);
+						_segList.AppendItem(new SVGPathSegMovetoAbs(a, b));
+					}
+					catch (Exception)
+					{
+						Debug.Log("exception when parsing " + dstr);
+						throw;
+					}
 				}
 					break;
 				case 'm':
@@ -135,11 +146,11 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable
 					float a = ReadFloat(dstr, ref i);
 					float b = ReadFloat(dstr, ref i);
 					float c = ReadFloat(dstr, ref i);
-					float d = ReadFloat(dstr, ref i);
-					float e = ReadFloat(dstr, ref i);
+					bool d = ReadFloat(dstr, ref i) > 0;
+					bool e = ReadFloat(dstr, ref i) > 0;
 					float f = ReadFloat(dstr, ref i);
 					float g = ReadFloat(dstr, ref i);
-					//_segList.AppendItem(new SVGPathSegArcAbs(a, b, c, d, e, f, g));
+					_segList.AppendItem(new SVGPathSegArcAbs(a, b, c, d, e, f, g));
 				}
 					break;
 				case 'a':
@@ -147,11 +158,11 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable
 					float a = ReadFloat(dstr, ref i);
 					float b = ReadFloat(dstr, ref i);
 					float c = ReadFloat(dstr, ref i);
-					float d = ReadFloat(dstr, ref i);
-					float e = ReadFloat(dstr, ref i);
+					bool d = ReadFloat(dstr, ref i) > 0;
+					bool e = ReadFloat(dstr, ref i) > 0;
 					float f = ReadFloat(dstr, ref i);
 					float g = ReadFloat(dstr, ref i);
-					//_segList.AppendItem(new SVGPathSegArcRel(a, b, c, d, e, f, g));
+					_segList.AppendItem(new SVGPathSegArcRel(a, b, c, d, e, f, g));
 				}
 					break;
 				case 'H':
@@ -263,11 +274,14 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable
 
 	private static float ReadFloat(string s, ref int i)
 	{
-		int start = ++i;
+		++i;
+		while ((s[i] == ' '))
+			++i;
+		int start = i;
 		int l = 0;
 		for (; i < s.Length; ++i, ++l)
 		{
-			if (((s[i] >= 'a') && (s[i] <= 'z')) || ((s[i] >= 'A') && (s[i] <= 'Z')) || (s[i] == ' '))
+			if (((s[i] >= 'a') && (s[i] <= 'z')) || ((s[i] >= 'A') && (s[i] <= 'Z')) || (s[i] == ' ') || (s[i] == ','))
 			{
 				break;
 			}
