@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -7,8 +8,10 @@ public class Invoke : MonoBehaviour
 	public TextAsset SVGFile = null;
 	public bool useFastButBloatedRenderer = false;
 
-	private  void Start () 
+	private  IEnumerator Start ()
 	{
+
+		yield return new WaitForSeconds(1.0f);
 		if (SVGFile != null) {
 			Stopwatch w = new Stopwatch();
 
