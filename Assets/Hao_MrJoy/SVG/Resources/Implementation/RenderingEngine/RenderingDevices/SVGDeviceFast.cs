@@ -7,6 +7,9 @@ public class SVGDeviceFast : ISVGDevice
 	private int _width;
 	private int _height;
 
+	public int Width { get { return _width; } }
+	public int Height { get { return _height; } }
+
 	private Color _color = Color.white;
 	private Color32[] pixels;
 
@@ -48,11 +51,5 @@ public class SVGDeviceFast : ISVGDevice
 		_texture.SetPixels32(pixels);
 		_texture.Apply();
 		return _texture;
-	}
-
-	public void GetBufferSize(ref int width, ref int height)
-	{
-		width = _width;
-		height = _height;
 	}
 }

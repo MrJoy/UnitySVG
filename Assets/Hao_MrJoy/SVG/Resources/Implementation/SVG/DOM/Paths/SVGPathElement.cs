@@ -20,7 +20,37 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable
 		currentTransformList = new SVGTransformList(attrList.GetValue("transform"));
 
 		string dstr = attrList.GetValue("d");
-		_segList = new SVGPathSegList(0); // optimization: count number of segments before starting
+		int nbSegments = 0;
+		for (int i = 0; i < dstr.Length; ++i)
+		{
+			switch (dstr[i])
+			{
+				case 'Z':
+				case 'z':
+				case 'M':
+				case 'm':
+				case 'L':
+				case 'l':
+				case 'C':
+				case 'c':
+				case 'S':
+				case 's':
+				case 'Q':
+				case 'q':
+				case 'T':
+				case 't':
+				case 'A':
+				case 'a':
+				case 'H':
+				case 'h':
+				case 'V':
+				case 'v':
+					++nbSegments;
+					break;
+			}
+		}
+
+		_segList = new SVGPathSegList(nbSegments); // optimization: count number of segments before starting
 		for (int i = 0; i < dstr.Length;)
 		{
 			while (i < dstr.Length-1 && dstr[i] == ' ') // skip whitespace before type character
@@ -281,7 +311,7 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable
 		int l = 0;
 		for (; i < s.Length; ++i, ++l)
 		{
-			if (((s[i] >= 'a') && (s[i] <= 'z')) || ((s[i] >= 'A') && (s[i] <= 'Z')) || (s[i] == ' ') || (s[i] == ','))
+			if (((s[i] >= 'a') && (s[i] <= 'z')) || ((s[i] >= 'A') && (s[i] <= 'Z')) || (s[i] == ' ') || (s[i] == ',') || (s[i] == '\n') || (s[i] == '\t') || (s[i] == '\r'))
 			{
 				break;
 			}

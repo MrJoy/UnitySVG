@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 5526ef80d6d7342859fad7964808fdca, type: 3}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!23 &21
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 8a395d64ef14b443a87fd383c19bb58c, type: 3}
-  useFastButBloatedRenderer: 0
+  useFastButBloatedRenderer: 1
 --- !u!1 &1500756937
 GameObject:
   m_ObjectHideFlags: 0

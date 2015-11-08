@@ -29,14 +29,14 @@ public static class SVGStringExtractor
 	//Extract for Syntax:  700 200 -30
 	private static char[] splitSpaceComma = new char[] {' ', ',', '\n', '\t', '\r'};
 
-	public static float[] ExtractTransformValueAsPX(string inputText)
-	{
-		string[] tmp = ExtractTransformValue(inputText);
-		float[] values = new float[tmp.Length];
-		for (int i = 0; i < values.Length; i++)
-			values[i] = SVGLength.GetPXLength(tmp[i]);
-		return values;
-	}
+	//public static float[] ExtractTransformValueAsPX(string inputText)
+	//{
+	//	string[] tmp = ExtractTransformValue(inputText);
+	//	float[] values = new float[tmp.Length];
+	//	for (int i = 0; i < values.Length; i++)
+	//		values[i] = SVGLength.GetPXLength(tmp[i]);
+	//	return values;
+	//}
 
 	public static string[] ExtractTransformValue(string inputText)
 	{
@@ -45,9 +45,9 @@ public static class SVGStringExtractor
 
 	//--------------------------------------------------
 	//Extract for Systax : M100 100 C200 100,...
-	private static readonly List<int> _break = new List<int>();
+	//private static readonly List<int> _break = new List<int>();
 	// WARNING:  This method is NOT thread-safe due to use of static _break member!
-	public static void ExtractPathSegList(string inputText, ref List<char> charList, ref List<string> valueList)
+	/*public static void ExtractPathSegList(string inputText, ref List<char> charList, ref List<string> valueList)
 	{
 		Profiler.BeginSample("SVGStringExtractor.ExtractPathSegList()");
 		_break.Clear();
@@ -66,7 +66,7 @@ public static class SVGStringExtractor
 			valueList.Add(inputText.Substring(_breakSpot1 + 1, _breakSpot2 - _breakSpot1 - 1));
 		}
 		Profiler.EndSample();
-	}
+	}*/
 
 	//--------------------------------------------------
 	//Extract for Syntax:  fill: #ffffff; stroke:#000000; stroke-width:0.172

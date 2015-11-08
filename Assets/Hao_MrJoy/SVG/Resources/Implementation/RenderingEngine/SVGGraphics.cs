@@ -99,9 +99,9 @@ public class SVGGraphics
 	//--------------------------------------------------------------------------------
 	public void Clean()
 	{
-		int width = 0, height = 0;
+		int width = _device.Width;
+		int height = _device.Height;
 		SetColor(Color.white);
-		_device.GetBufferSize(ref width, ref height);
 		for (int i = 0; i < width; i++)
 		{
 			for (int j = 0; j < height; j++)

@@ -29,8 +29,10 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable
 
 		ViewBoxTransform();
 
-		currentTransformList = new SVGTransformList();
-		currentTransformList.AppendItem(new SVGTransform(_cachedViewBoxTransform));
+		SVGTransform temp = new SVGTransform(_cachedViewBoxTransform);
+		SVGTransformList t_currentTransformList = new SVGTransformList();
+		t_currentTransformList.AppendItem(temp);
+		currentTransformList = t_currentTransformList; // use setter only once, since it also updates other lists
 
 		xmlImp.GetElementList(_elementList, paintable, _render, summaryTransformList);
 	}

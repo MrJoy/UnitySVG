@@ -48,17 +48,17 @@ public class SVGGraphicsStroke : ISVGPathDraw
 			return;
 		}
 
-		Vector2 _p1 = new Vector2(0f, 0f);
-		Vector2 _p2 = new Vector2(0f, 0f);
-		Vector2 _p3 = new Vector2(0f, 0f);
-		Vector2 _p4 = new Vector2(0f, 0f);
+		Vector2 _p1 = Vector2.zero;
+		Vector2 _p2 = Vector2.zero;
+		Vector2 _p3 = Vector2.zero;
+		Vector2 _p4 = Vector2.zero;
 
 		_graphics.GetThickLine(p1, p2, width, ref _p1, ref _p2, ref _p3, ref _p4);
 
-		Vector2 t_p1 = new Vector2(0f, 0f);
-		Vector2 t_p2 = new Vector2(0f, 0f);
-		Vector2 t_p3 = new Vector2(0f, 0f);
-		Vector2 t_p4 = new Vector2(0f, 0f);
+		Vector2 t_p1 = Vector2.zero;
+		Vector2 t_p2 = Vector2.zero;
+		Vector2 t_p3 = Vector2.zero;
+		Vector2 t_p4 = Vector2.zero;
 
 		_graphics.GetThickLine(_p2, _p1, width, ref t_p1, ref t_p2, ref t_p3, ref t_p4);
 
@@ -89,17 +89,17 @@ public class SVGGraphicsStroke : ISVGPathDraw
 			return;
 		}
 
-		Vector2 _p1 = new Vector2(0f, 0f);
-		Vector2 _p2 = new Vector2(0f, 0f);
-		Vector2 _p3 = new Vector2(0f, 0f);
-		Vector2 _p4 = new Vector2(0f, 0f);
+		Vector2 _p1 = Vector2.zero;
+		Vector2 _p2 = Vector2.zero;
+		Vector2 _p3 = Vector2.zero;
+		Vector2 _p4 = Vector2.zero;
 
 		_graphics.GetThickLine(p1, p2, width, ref _p1, ref _p2, ref _p3, ref _p4);
 
-		Vector2 t_p1 = new Vector2(0f, 0f);
-		Vector2 t_p2 = new Vector2(0f, 0f);
-		Vector2 t_p3 = new Vector2(0f, 0f);
-		Vector2 t_p4 = new Vector2(0f, 0f);
+		Vector2 t_p1 = Vector2.zero;
+		Vector2 t_p2 = Vector2.zero;
+		Vector2 t_p3 = Vector2.zero;
+		Vector2 t_p4 = Vector2.zero;
 
 		_graphics.GetThickLine(_p4, _p3, width, ref t_p1, ref t_p2, ref t_p3, ref t_p4);
 
@@ -132,18 +132,18 @@ public class SVGGraphicsStroke : ISVGPathDraw
 		if ((_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Miter) ||
 		    (_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Unknown))
 		{
-			Vector2 _p1 = new Vector2(0f, 0f);
-			Vector2 _p2 = new Vector2(0f, 0f);
-			Vector2 _p3 = new Vector2(0f, 0f);
-			Vector2 _p4 = new Vector2(0f, 0f);
+			Vector2 _p1 = Vector2.zero;
+			Vector2 _p2 = Vector2.zero;
+			Vector2 _p3 = Vector2.zero;
+			Vector2 _p4 = Vector2.zero;
 
 			_graphics.GetThickLine(p1, p2, width, ref _p1, ref _p2, ref _p3, ref _p4);
 
 
-			Vector2 _p5 = new Vector2(0f, 0f);
-			Vector2 _p6 = new Vector2(0f, 0f);
-			Vector2 _p7 = new Vector2(0f, 0f);
-			Vector2 _p8 = new Vector2(0f, 0f);
+			Vector2 _p5 = Vector2.zero;
+			Vector2 _p6 = Vector2.zero;
+			Vector2 _p7 = Vector2.zero;
+			Vector2 _p8 = Vector2.zero;
 
 			_graphics.GetThickLine(p2, p3, width, ref _p5, ref _p6, ref _p7, ref _p8);
 
@@ -167,18 +167,18 @@ public class SVGGraphicsStroke : ISVGPathDraw
 		}
 		if (_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Bevel)
 		{
-			Vector2 _p1 = new Vector2(0f, 0f);
-			Vector2 _p2 = new Vector2(0f, 0f);
-			Vector2 _p3 = new Vector2(0f, 0f);
-			Vector2 _p4 = new Vector2(0f, 0f);
+			Vector2 _p1 = Vector2.zero;
+			Vector2 _p2 = Vector2.zero;
+			Vector2 _p3 = Vector2.zero;
+			Vector2 _p4 = Vector2.zero;
 
 			_graphics.GetThickLine(p1, p2, width, ref _p1, ref _p2, ref _p3, ref _p4);
 
 
-			Vector2 _p5 = new Vector2(0f, 0f);
-			Vector2 _p6 = new Vector2(0f, 0f);
-			Vector2 _p7 = new Vector2(0f, 0f);
-			Vector2 _p8 = new Vector2(0f, 0f);
+			Vector2 _p5 = Vector2.zero;
+			Vector2 _p6 = Vector2.zero;
+			Vector2 _p7 = Vector2.zero;
+			Vector2 _p8 = Vector2.zero;
 
 			_graphics.GetThickLine(p2, p3, width, ref _p5, ref _p6, ref _p7, ref _p8);
 
@@ -256,28 +256,25 @@ public class SVGGraphicsStroke : ISVGPathDraw
 	//-----
 	public void ArcTo(float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag, Vector2 p, float width)
 	{
-		float tx, ty, rx, ry;
-		rx = r1;
-		ry = r2;
-		Vector2 p1 = new Vector2(0f, 0f);
-		Vector2 p2 = new Vector2(0f, 0f);
-		p1 = _basicDraw.currentPoint;
-		p2 = p;
+		Profiler.BeginSample("SVGGraphicsStroke.ArcTo");
+		float rx = r1;
+		float ry = r2;
+		Vector2 p1 = _basicDraw.currentPoint;
+		Vector2 p2 = p;
 
-		double trx2, try2, tx2, ty2;
 		float temp1, temp2;
 		float _radian = (angle*Mathf.PI/180.0f);
 		float _CosRadian = (float) Math.Cos(_radian);
 		float _SinRadian = (float) Math.Sin(_radian);
 		temp1 = (p1.x - p2.x)/2.0f;
 		temp2 = (p1.y - p2.y)/2.0f;
-		tx = (_CosRadian*temp1) + (_SinRadian*temp2);
-		ty = (-_SinRadian*temp1) + (_CosRadian*temp2);
+		float tx = (_CosRadian*temp1) + (_SinRadian*temp2);
+		float ty = (-_SinRadian*temp1) + (_CosRadian*temp2);
 
-		trx2 = rx*rx;
-		try2 = ry*ry;
-		tx2 = tx*tx;
-		ty2 = ty*ty;
+		double trx2 = rx*rx;
+		double try2 = ry*ry;
+		double tx2 = tx*tx;
+		double ty2 = ty*ty;
 
 
 		double radiiCheck = tx2/trx2 + ty2/try2;
@@ -289,37 +286,32 @@ public class SVGGraphicsStroke : ISVGPathDraw
 			try2 = ry*ry;
 		}
 
-		double tm1;
-		tm1 = (trx2*try2 - trx2*ty2 - try2*tx2)/(trx2*ty2 + try2*tx2);
+		double tm1 = (trx2*try2 - trx2*ty2 - try2*tx2)/(trx2*ty2 + try2*tx2);
 		tm1 = (tm1 < 0) ? 0 : tm1;
 
-		float tm2;
-		tm2 = (largeArcFlag == sweepFlag) ? -(float) Math.Sqrt((float) tm1) : (float) Math.Sqrt((float) tm1);
+		float tm2 = (largeArcFlag == sweepFlag) ? -(float) Math.Sqrt((float) tm1) : (float) Math.Sqrt((float) tm1);
 
-		float tcx, tcy;
-		tcx = tm2*((rx*ty)/ry);
-		tcy = tm2*(-(ry*tx)/rx);
+		float tcx = tm2*((rx*ty)/ry);
+		float tcy = tm2*(-(ry*tx)/rx);
 
-		float cx, cy;
-		cx = _CosRadian*tcx - _SinRadian*tcy + ((p1.x + p2.x)/2.0f);
-		cy = _SinRadian*tcx + _CosRadian*tcy + ((p1.y + p2.y)/2.0f);
+		float cx = _CosRadian*tcx - _SinRadian*tcy + ((p1.x + p2.x)/2.0f);
+		float cy = _SinRadian*tcx + _CosRadian*tcy + ((p1.y + p2.y)/2.0f);
 
 		float ux = (tx - tcx)/rx;
 		float uy = (ty - tcy)/ry;
 		float vx = (-tx - tcx)/rx;
 		float vy = (-ty - tcy)/ry;
-		float _angle, _delta;
 
 		float tp, n;
 		n = (float) Math.Sqrt((ux*ux) + (uy*uy));
 		tp = ux;
-		_angle = (uy < 0) ? -(float) Math.Acos(tp/n) : (float) Math.Acos(tp/n);
+		float _angle = (uy < 0) ? -(float) Math.Acos(tp/n) : (float) Math.Acos(tp/n);
 		_angle = _angle*180.0f/Mathf.PI;
 		_angle %= 360f;
 
 		n = (float) Math.Sqrt((ux*ux + uy*uy)*(vx*vx + vy*vy));
 		tp = ux*vx + uy*vy;
-		_delta = (ux*vy - uy*vx < 0) ? -(float) Math.Acos(tp/n) : (float) Math.Acos(tp/n);
+		float _delta = (ux*vy - uy*vx < 0) ? -(float) Math.Acos(tp/n) : (float) Math.Acos(tp/n);
 		_delta = _delta*180.0f/Mathf.PI;
 
 		if (!sweepFlag && _delta > 0)
@@ -334,8 +326,8 @@ public class SVGGraphicsStroke : ISVGPathDraw
 		int number = 50;
 		float deltaT = _delta/number;
 		//---Get Control Point
-		Vector2 _controlPoint1 = new Vector2(0f, 0f);
-		Vector2 _controlPoint2 = new Vector2(0f, 0f);
+		Vector2 _controlPoint1 = Vector2.zero;
+		Vector2 _controlPoint2 = Vector2.zero;
 
 		for (int i = 0; i <= number; i++)
 		{
@@ -360,31 +352,29 @@ public class SVGGraphicsStroke : ISVGPathDraw
 			}
 		}
 		//-----
-		Vector2 _p1 = new Vector2(0f, 0f);
-		Vector2 _p2 = new Vector2(0f, 0f);
-		Vector2 _p3 = new Vector2(0f, 0f);
-		Vector2 _p4 = new Vector2(0f, 0f);
+		Vector2 _p1 = Vector2.zero;
+		Vector2 _p2 = Vector2.zero;
+		Vector2 _p3 = Vector2.zero;
+		Vector2 _p4 = Vector2.zero;
 
 		_graphics.GetThickLine(p1, _controlPoint1, width, ref _p1, ref _p2, ref _p3, ref _p4);
 
-		Vector2 _p5 = new Vector2(0f, 0f);
-		Vector2 _p6 = new Vector2(0f, 0f);
-		Vector2 _p7 = new Vector2(0f, 0f);
-		Vector2 _p8 = new Vector2(0f, 0f);
+		Vector2 _p5 = Vector2.zero;
+		Vector2 _p6 = Vector2.zero;
+		Vector2 _p7 = Vector2.zero;
+		Vector2 _p8 = Vector2.zero;
 
 		_graphics.GetThickLine(_controlPoint2, p2, width, ref _p5, ref _p6, ref _p7, ref _p8);
 
-		float _half, _ihalf1, _ihalf2;
-		_half = width/2f;
-		_ihalf1 = _half;
-		_ihalf2 = width - _ihalf1 + 0.5f;
+		float _half = width/2f;
+		float _ihalf1 = _half;
+		float _ihalf2 = width - _ihalf1 + 0.5f;
 		//-----
 
-		float t_len1, t_len2;
-		t_len1 = (_p1.x - cx)*(_p1.x - cx) + (_p1.y - cy)*(_p1.y - cy);
-		t_len2 = (_p2.x - cx)*(_p2.x - cx) + (_p2.y - cy)*(_p2.y - cy);
+		float t_len1 = (_p1.x - cx)*(_p1.x - cx) + (_p1.y - cy)*(_p1.y - cy);
+		float t_len2 = (_p2.x - cx)*(_p2.x - cx) + (_p2.y - cy)*(_p2.y - cy);
 
-		Vector2 tempPoint = new Vector2(0f, 0f);
+		Vector2 tempPoint;
 		if (t_len1 > t_len2)
 		{
 			tempPoint = _p1;
@@ -402,15 +392,19 @@ public class SVGGraphicsStroke : ISVGPathDraw
 			_p8 = tempPoint;
 		}
 
+		Profiler.BeginSample("SVGGraphicsStroke.ArcTo[CreateGraphicsPath]");
 		SVGGraphicsPath _graphicsPath = new SVGGraphicsPath();
 		_graphicsPath.AddMoveTo(_p2);
 		_graphicsPath.AddArcTo(r1 + _ihalf1, r2 + _ihalf1, angle, largeArcFlag, sweepFlag, _p8);
 		_graphicsPath.AddLineTo(_p7);
 		_graphicsPath.AddArcTo(r1 - _ihalf2, r2 - _ihalf2, angle, largeArcFlag, !sweepFlag, _p1);
 		_graphicsPath.AddLineTo(_p2);
+		Profiler.EndSample();
+		Profiler.BeginSample("SVGGraphicsStroke.ArcTo[FillPath]");
 		_graphics.FillPath(_graphicsPath);
-
+		Profiler.EndSample();
 		MoveTo(p);
+		Profiler.EndSample();
 	}
 
 	//--------------------------------------------------------------------------------
@@ -429,13 +423,13 @@ public class SVGGraphicsStroke : ISVGPathDraw
 	//-----
 	public void CubicCurveTo(Vector2 p1, Vector2 p2, Vector2 p, float width)
 	{
-		Vector2 _point = new Vector2(0f, 0f);
+		Vector2 _point = Vector2.zero;
 		_point = _basicDraw.currentPoint;
 
-		Vector2 _p1 = new Vector2(0f, 0f);
-		Vector2 _p2 = new Vector2(0f, 0f);
-		Vector2 _p3 = new Vector2(0f, 0f);
-		Vector2 _p4 = new Vector2(0f, 0f);
+		Vector2 _p1 = Vector2.zero;
+		Vector2 _p2 = Vector2.zero;
+		Vector2 _p3 = Vector2.zero;
+		Vector2 _p4 = Vector2.zero;
 
 		bool temp;
 		temp = _graphics.GetThickLine(_point, p1, width, ref _p1, ref _p2, ref _p3, ref _p4);
@@ -445,17 +439,17 @@ public class SVGGraphicsStroke : ISVGPathDraw
 			return;
 		}
 
-		Vector2 _p5 = new Vector2(0f, 0f);
-		Vector2 _p6 = new Vector2(0f, 0f);
-		Vector2 _p7 = new Vector2(0f, 0f);
-		Vector2 _p8 = new Vector2(0f, 0f);
+		Vector2 _p5 = Vector2.zero;
+		Vector2 _p6 = Vector2.zero;
+		Vector2 _p7 = Vector2.zero;
+		Vector2 _p8 = Vector2.zero;
 
 		_graphics.GetThickLine(p1, p2, width, ref _p5, ref _p6, ref _p7, ref _p8);
 
-		Vector2 _p9 = new Vector2(0f, 0f);
-		Vector2 _p10 = new Vector2(0f, 0f);
-		Vector2 _p11 = new Vector2(0f, 0f);
-		Vector2 _p12 = new Vector2(0f, 0f);
+		Vector2 _p9 = Vector2.zero;
+		Vector2 _p10 = Vector2.zero;
+		Vector2 _p11 = Vector2.zero;
+		Vector2 _p12 = Vector2.zero;
 
 		_graphics.GetThickLine(p2, p, width, ref _p9, ref _p10, ref _p11, ref _p12);
 
@@ -496,20 +490,20 @@ public class SVGGraphicsStroke : ISVGPathDraw
 	//-----
 	public void QuadraticCurveTo(Vector2 p1, Vector2 p, float width)
 	{
-		Vector2 _point = new Vector2(0f, 0f);
+		Vector2 _point = Vector2.zero;
 		_point = _basicDraw.currentPoint;
 
-		Vector2 _p1 = new Vector2(0f, 0f);
-		Vector2 _p2 = new Vector2(0f, 0f);
-		Vector2 _p3 = new Vector2(0f, 0f);
-		Vector2 _p4 = new Vector2(0f, 0f);
+		Vector2 _p1 = Vector2.zero;
+		Vector2 _p2 = Vector2.zero;
+		Vector2 _p3 = Vector2.zero;
+		Vector2 _p4 = Vector2.zero;
 
 		_graphics.GetThickLine(_point, p1, width, ref _p1, ref _p2, ref _p3, ref _p4);
 
-		Vector2 _p5 = new Vector2(0f, 0f);
-		Vector2 _p6 = new Vector2(0f, 0f);
-		Vector2 _p7 = new Vector2(0f, 0f);
-		Vector2 _p8 = new Vector2(0f, 0f);
+		Vector2 _p5 = Vector2.zero;
+		Vector2 _p6 = Vector2.zero;
+		Vector2 _p7 = Vector2.zero;
+		Vector2 _p8 = Vector2.zero;
 
 		_graphics.GetThickLine(p1, p, width, ref _p5, ref _p6, ref _p7, ref _p8);
 
@@ -544,7 +538,7 @@ public class SVGGraphicsStroke : ISVGPathDraw
 	//-----
 	public void LineTo(Vector2 p, float width)
 	{
-		Vector2 _point = new Vector2(0f, 0f);
+		Vector2 _point = Vector2.zero;
 		_point = _basicDraw.currentPoint;
 		Line(_point, p, width);
 		MoveTo(p);
@@ -576,10 +570,10 @@ public class SVGGraphicsStroke : ISVGPathDraw
 				return;
 			StrokeLineCapLeft(p1, p2, width);
 			StrokeLineCapRight(p1, p2, width);
-			Vector2 _p1 = new Vector2(0f, 0f);
-			Vector2 _p2 = new Vector2(0f, 0f);
-			Vector2 _p3 = new Vector2(0f, 0f);
-			Vector2 _p4 = new Vector2(0f, 0f);
+			Vector2 _p1 = Vector2.zero;
+			Vector2 _p2 = Vector2.zero;
+			Vector2 _p3 = Vector2.zero;
+			Vector2 _p4 = Vector2.zero;
 
 			_graphics.GetThickLine(p1, p2, width, ref _p1, ref _p2, ref _p3, ref _p4);
 
@@ -666,17 +660,17 @@ public class SVGGraphicsStroke : ISVGPathDraw
 		Line(p3, p4, width);
 		Line(p5, p6, width);
 		Line(p7, p8, width);
-		Vector2 _p1 = new Vector2(0f, 0f);
-		Vector2 _p2 = new Vector2(0f, 0f);
-		Vector2 _p3 = new Vector2(0f, 0f);
-		Vector2 _p4 = new Vector2(0f, 0f);
+		Vector2 _p1 = Vector2.zero;
+		Vector2 _p2 = Vector2.zero;
+		Vector2 _p3 = Vector2.zero;
+		Vector2 _p4 = Vector2.zero;
 
 		_graphics.GetThickLine(p1, p2, width, ref _p1, ref _p2, ref _p3, ref _p4);
 
-		Vector2 _p5 = new Vector2(0f, 0f);
-		Vector2 _p6 = new Vector2(0f, 0f);
-		Vector2 _p7 = new Vector2(0f, 0f);
-		Vector2 _p8 = new Vector2(0f, 0f);
+		Vector2 _p5 = Vector2.zero;
+		Vector2 _p6 = Vector2.zero;
+		Vector2 _p7 = Vector2.zero;
+		Vector2 _p8 = Vector2.zero;
 
 		//-------
 		_graphics.GetThickLine(p3, p4, width, ref _p5, ref _p6, ref _p7, ref _p8);

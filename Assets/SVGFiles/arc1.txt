@@ -2,12 +2,12 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="1000" height="1000" viewBox="0 0 1000 1000"
-     xmlns="http://www.w3.org/2000/svg" version="1.1">
+	 xmlns="http://www.w3.org/2000/svg" version="1.1">
   <title>Example arcs01 - arc commands in path data</title>
   <desc>Picture of a pie chart with two pie wedges and
-        a picture of a line with arc blips</desc>
+		a picture of a line with arc blips</desc>
 	<path d="M600,300 A400,200 0 1,0 800,400"
-        fill="none" stroke="purple" stroke-width="5"  />
-        	<path d="M600,300 A300,200 0 0,1 800,400"
-        fill="none" stroke="red" stroke-width="5"  />
+		fill="none" stroke="purple" stroke-width="5"  />
+			<path d="M600,300 A300,200 0 0,1 800,400"
+		fill="none" stroke="red" stroke-width="5"  />
 </svg>
