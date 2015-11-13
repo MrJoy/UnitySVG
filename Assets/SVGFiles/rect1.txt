@@ -3,7 +3,7 @@
 	"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="1000px" height="1000px" viewBox="0 0 1000 1000"
 	xmlns="http://www.w3.org/2000/svg" version="1.1">
-	<rect x="0" y="0" width="400" height="200" rx="50" fill="green"/>
+	<rect x="5" y="5" width="400" height="200" rx="50" fill="green"/>
 	<rect x="100" y="100" width="400" height="200" rx="50" fill="none" stroke="blue"/>
 	<g transform="translate(200 400) rotate(-30)">
 		<rect x="0" y="0" width="400" height="200" rx="150" ry="80" 

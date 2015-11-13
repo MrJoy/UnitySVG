@@ -9,20 +9,21 @@ public enum SVGNodeName {
 
 public class Node {
   public SVGNodeName Name;
-  public AttributeList Attributes;
-  public Node(SVGNodeName n, AttributeList a) {
+  public Dictionary<string,string> Attributes;
+  public Node(SVGNodeName n, Dictionary<string, string> a)
+  {
     Name = n;
     Attributes = a;
   }
 }
 public class InlineNode : Node {
-  public InlineNode(SVGNodeName n, AttributeList a) : base(n, a) {}
+	public InlineNode(SVGNodeName n, Dictionary<string, string> a) : base(n, a) { }
 }
 public class BlockOpenNode : Node {
-  public BlockOpenNode(SVGNodeName n, AttributeList a) : base(n, a) {}
+	public BlockOpenNode(SVGNodeName n, Dictionary<string, string> a) : base(n, a) { }
 }
 public class BlockCloseNode : Node {
-  public BlockCloseNode(SVGNodeName n, AttributeList a) : base(n, a) {}
+	public BlockCloseNode(SVGNodeName n, Dictionary<string, string> a) : base(n, a) { }
 }
 
 public class SVGParser : SmallXmlParser.IContentHandler {
@@ -58,19 +59,21 @@ public class SVGParser : SmallXmlParser.IContentHandler {
     idx = 0;
   }
 
-  public void OnInlineElement(string name, AttributeList attrs) {
-    Stream.Add(new InlineNode(Lookup(name), new AttributeList(attrs)));
+  public void OnInlineElement(string name, Dictionary<string, string> attrs)
+  {
+	  Stream.Add(new InlineNode(Lookup(name), new Dictionary<string, string>(attrs)));
   }
 
-  public void OnStartElement(string name, AttributeList attrs) {
-    Stream.Add(new BlockOpenNode(Lookup(name), new AttributeList(attrs)));
+  public void OnStartElement(string name, Dictionary<string, string> attrs)
+  {
+	  Stream.Add(new BlockOpenNode(Lookup(name), new Dictionary<string, string>(attrs)));
   }
 
   public void OnEndElement(string name) {
-    Stream.Add(new BlockCloseNode(Lookup(name), new AttributeList()));
+	  Stream.Add(new BlockCloseNode(Lookup(name), new Dictionary<string, string>()));
   }
 
-  public void GetElementList(List<object> elementList, SVGPaintable paintable,
+  public void GetElementList(List<ISVGDrawable> elementList, SVGPaintable paintable,
                              SVGGraphics render, SVGTransformList summaryTransformList) {
     bool exitFlag = false;
     while(!exitFlag && Next()) {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 //Day la Class cu duoc cung cap boi SmallXmlParser
 
-public struct AttributeList {
+/*public struct AttributeList {
   Dictionary<string,string> attrs;
 
   public AttributeList(AttributeList a) {
@@ -47,4 +47,4 @@ public struct AttributeList {
       return sb.ToString();
     }
   }
-}
+}*/

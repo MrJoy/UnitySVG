@@ -1,97 +1,41 @@
-public class SVGCircleElement : SVGTransformable, ISVGDrawable {
-  private SVGLength _cx;
-  private SVGLength _cy;
-  private SVGLength _r;
-  //================================================================================
-  private SVGGraphics _render;
-  private AttributeList _attrList;
-  private SVGPaintable _paintable;
-  //================================================================================
-  public SVGLength cx {
-    get {
-      return this._cx;
-    }
-  }
+using System.Collections.Generic;
+using UnitySVG;
 
-  public SVGLength cy {
-    get {
-      return this._cy;
-    }
-  }
+public class SVGCircleElement : SVGBasicElement
+{
+	private readonly SVGLength _cx;
+	private readonly SVGLength _cy;
+	private readonly SVGLength _r;
 
-  public SVGLength r {
-    get {
-      return this._r;
-    }
-  }
-  //================================================================================
-  public SVGCircleElement(AttributeList attrList,
-              SVGTransformList inheritTransformList,
-              SVGPaintable inheritPaintable,
-              SVGGraphics _render) : base(inheritTransformList) {
-    this._attrList = attrList;
-    this._render = _render;
-    this._paintable = new SVGPaintable(inheritPaintable, this._attrList);
-    this._cx = new SVGLength(attrList.GetValue("cx"));
-    this._cy = new SVGLength(attrList.GetValue("cy"));
-    this._r = new SVGLength(attrList.GetValue("r"));
-  }
-  //================================================================================
-  private SVGGraphicsPath _graphicsPath;
-  private void CreateGraphicsPath() {
-    this._graphicsPath = new SVGGraphicsPath();
+	public SVGLength cx
+	{
+		get { return _cx; }
+	}
 
-    this._graphicsPath.Add(this);
-    this._graphicsPath.transformList = this.summaryTransformList;
-  }
-  //-----
-  private void Draw() {
-    if(this._paintable.strokeColor == null)return;
+	public SVGLength cy
+	{
+		get { return _cy; }
+	}
 
-    this._render.DrawPath(this._graphicsPath, this._paintable.strokeWidth,
-                            this._paintable.strokeColor);
-  }
-  //================================================================================
-  //Thuc thi Interface Drawable
-  public void BeforeRender(SVGTransformList transformList) {
-    this.inheritTransformList = transformList;
-  }
-  //------
-  public void Render() {
-    CreateGraphicsPath();
-    this._render.SetStrokeLineCap(this._paintable.strokeLineCap);
-    this._render.SetStrokeLineJoin(this._paintable.strokeLineJoin);
-    switch(this._paintable.GetPaintType()) {
-      case SVGPaintMethod.SolidGradientFill : {
-        this._render.FillPath(this._paintable.fillColor.Value, this._graphicsPath);
-        Draw();
-        break;
-      }
-      case SVGPaintMethod.LinearGradientFill : {
+	public SVGLength r
+	{
+		get { return _r; }
+	}
 
-        SVGLinearGradientBrush _linearGradBrush =
-                  this._paintable.GetLinearGradientBrush(this._graphicsPath);
+	public SVGCircleElement(Dictionary<string, string> attrList,
+		SVGTransformList inheritTransformList,
+		SVGPaintable inheritPaintable,
+		SVGGraphics render) : base(attrList, inheritTransformList, inheritPaintable, render)
+	{
+		_cx = new SVGLength(attrList.GetValue("cx"));
+		_cy = new SVGLength(attrList.GetValue("cy"));
+		_r = new SVGLength(attrList.GetValue("r"));
+	}
 
-        if(_linearGradBrush != null) {
-          this._render.FillPath(_linearGradBrush, _graphicsPath);
-        }
-        Draw();
-        break;
-      }
-      case SVGPaintMethod.RadialGradientFill : {
-        SVGRadialGradientBrush _radialGradBrush =
-                  this._paintable.GetRadialGradientBrush(this._graphicsPath);
-
-        if(_radialGradBrush != null) {
-          this._render.FillPath(_radialGradBrush, _graphicsPath);
-        }
-        Draw();
-        break;
-      }
-      case SVGPaintMethod.PathDraw : {
-        Draw();
-        break;
-      }
-    }
-  }
+	protected override void CreateGraphicsPath()
+	{
+		_graphicsPath = new SVGGraphicsPath();
+		_graphicsPath.Add(this);
+		_graphicsPath.transformList = summaryTransformList;
+	}
 }

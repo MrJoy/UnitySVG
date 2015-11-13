@@ -1,164 +1,182 @@
 using System;
-using System.Collections.Generic;
+using System.Globalization;
 
-
-public enum SVGTransformMode : ushort {
-  Unknown   = 0,
-  Matrix   = 1,
-  Translate = 2,
-  Scale   = 3,
-  Rotate   = 4,
-  SkewX   = 5,
-  SkewY   = 6
+public enum SVGTransformMode : ushort
+{
+	Unknown = 0,
+	Matrix = 1,
+	Translate = 2,
+	Scale = 3,
+	Rotate = 4,
+	SkewX = 5,
+	SkewY = 6
 }
 
-public class SVGTransform {
+public class SVGTransform
+{
+	private SVGTransformMode _type;
+	private float _angle;
 
-  private SVGTransformMode _type;
-  private SVGMatrix _matrix;
-  private double _angle;
+	public Matrix2x3 matrix { get; private set; }
 
-  //***********************************************************************************
-  public SVGMatrix matrix {
-    get { return this._matrix; }
-  }
-  public float angle {
-    get {
-      switch(this._type) {
-        case SVGTransformMode.Rotate:
-        case SVGTransformMode.SkewX:
-        case SVGTransformMode.SkewY: {
-          return(float)this._angle;
-        }
-        default: return 0.0f;
-      }
-    }
-  }
-  public SVGTransformMode type {
-    get { return this._type; }
-  }
-  //***********************************************************************************
-  public SVGTransform() {
-    this._matrix = new SVGMatrix();
-    this._type = SVGTransformMode.Matrix;
-  }
+	public float angle
+	{
+		get
+		{
+			switch (_type)
+			{
+				case SVGTransformMode.Rotate:
+				case SVGTransformMode.SkewX:
+				case SVGTransformMode.SkewY:
+				{
+					return _angle;
+				}
+				default:
+					return 0.0f;
+			}
+		}
+	}
 
-  public SVGTransform(SVGMatrix matrix) {
-    this._type = SVGTransformMode.Matrix;
-    this._matrix = matrix;
-  }
+	public SVGTransformMode type
+	{
+		get { return _type; }
+	}
 
-  //Chuyen doi 1 day gia tri "a b c d e f" => arr[] = string { a, b, c, d, e, f };
-  public SVGTransform(string strKey, string strValue) {
-    string[] valuesStr = SVGStringExtractor.ExtractTransformValue(strValue);
-    int len = valuesStr.Length;
-    float[] values = new float[len];
+	public SVGTransform()
+	{
+		matrix = new Matrix2x3();
+		_type = SVGTransformMode.Matrix;
+	}
 
-    for(int i = 0; i<len; i++) {
-      values.SetValue(float.Parse(valuesStr[i], System.Globalization.CultureInfo.InvariantCulture), i);
-    }
-    switch(strKey) {
-      case "translate":
-        switch(len) {
-          case 1:
-            SetTranslate(values[0], 0);
-            break;
-          case 2:
-            SetTranslate(values[0], values[1]);
-            break;
-          default:
-            throw new ApplicationException("Wrong number of arguments in translate transform");
-        }
-      break;
-      case "rotate":
-        switch(len) {
-          case 1:
-            SetRotate(values[0]);
-            break;
-          case 3:
-            SetRotate(values[0], values[1], values[2]);
-            break;
-          default:
-            throw new ApplicationException("Wrong number of arguments in rotate transform");
-        }
-      break;
-      case "scale":
-        switch(len) {
-          case 1:
-            SetScale(values[0], values[0]);
-          break;
-          case 2:
-            SetScale(values[0], values[1]);
-          break;
-          default:
-            throw new ApplicationException("Wrong number of arguments in scale transform");
-        }
-      break;
-      case "skewX":
-        if(len != 1)
-          throw new ApplicationException("Wrong number of arguments in skewX transform");
-          SetSkewX(values[0]);
-      break;
-      case "skewY":
-        if(len != 1)
-          throw new ApplicationException("Wrong number of arguments in skewY transform");
-        SetSkewY(values[0]);
-      break;
-      case "matrix":
-        if(len != 6)
-          throw new ApplicationException("Wrong number of arguments in matrix transform");
-        SetMatrix(
-          new SVGMatrix(
-            values[0],
-            values[1],
-            values[2],
-            values[3],
-            values[4],
-            values[5]
-            ));
-      break;
-      default:
-        this._type = SVGTransformMode.Unknown;
-      break;
-    }
-  }
-  //***********************************************************************************
-  public void SetMatrix(SVGMatrix matrix) {
-    this._type = SVGTransformMode.Matrix;
-    this._matrix = matrix;
-  }
+	public SVGTransform(Matrix2x3 matrix)
+	{
+		_type = SVGTransformMode.Matrix;
+		this.matrix = matrix;
+	}
 
-  public void SetTranslate(float tx, float ty) {
-    this._type = SVGTransformMode.Translate;
-    this._matrix = new SVGMatrix().Translate(tx, ty);
-  }
+	public SVGTransform(string strKey, string strValue)
+	{
+		string[] valuesStr = SVGStringExtractor.ExtractTransformValue(strValue);
+		int len = valuesStr.Length;
+		float[] values = new float[len];
 
-  public void SetScale(float sx, float sy) {
-    this._type = SVGTransformMode.Scale;
-    this._matrix = new SVGMatrix().ScaleNonUniform(sx, sy);
-  }
+		for (int i = 0; i < len; i++)
+		{
+			values.SetValue(float.Parse(valuesStr[i], CultureInfo.InvariantCulture), i);
+		}
+		switch (strKey)
+		{
+			case "translate":
+				switch (len)
+				{
+					case 1:
+						SetTranslate(values[0], 0);
+						break;
+					case 2:
+						SetTranslate(values[0], values[1]);
+						break;
+					default:
+						throw new ApplicationException("Wrong number of arguments in translate transform");
+				}
+				break;
+			case "rotate":
+				switch (len)
+				{
+					case 1:
+						SetRotate(values[0]);
+						break;
+					case 3:
+						SetRotate(values[0], values[1], values[2]);
+						break;
+					default:
+						throw new ApplicationException("Wrong number of arguments in rotate transform");
+				}
+				break;
+			case "scale":
+				switch (len)
+				{
+					case 1:
+						SetScale(values[0], values[0]);
+						break;
+					case 2:
+						SetScale(values[0], values[1]);
+						break;
+					default:
+						throw new ApplicationException("Wrong number of arguments in scale transform");
+				}
+				break;
+			case "skewX":
+				if (len != 1)
+					throw new ApplicationException("Wrong number of arguments in skewX transform");
+				SetSkewX(values[0]);
+				break;
+			case "skewY":
+				if (len != 1)
+					throw new ApplicationException("Wrong number of arguments in skewY transform");
+				SetSkewY(values[0]);
+				break;
+			case "matrix":
+				if (len != 6)
+					throw new ApplicationException("Wrong number of arguments in matrix transform");
+				SetMatrix(
+					new Matrix2x3(
+						values[0],
+						values[1],
+						values[2],
+						values[3],
+						values[4],
+						values[5]
+						));
+				break;
+			default:
+				_type = SVGTransformMode.Unknown;
+				break;
+		}
+	}
 
-  public void SetRotate(float angle) {
-    this._type = SVGTransformMode.Rotate;
-    this._angle = angle;
-    this._matrix = new SVGMatrix().Rotate(angle);
-  }
+	public void SetMatrix(Matrix2x3 m)
+	{
+		_type = SVGTransformMode.Matrix;
+		matrix = m;
+	}
 
-  public void SetRotate(float angle, float cx, float cy) {
-    this._type = SVGTransformMode.Rotate;
-    this._angle = angle;
-    this._matrix = new SVGMatrix().Translate(cx, cy).Rotate(angle).Translate(-cx,-cy);
-  }
+	public void SetTranslate(float tx, float ty)
+	{
+		_type = SVGTransformMode.Translate;
+		matrix = new Matrix2x3().Translate(tx, ty);
+	}
 
-  public void SetSkewX(float angle) {
-    this._type = SVGTransformMode.SkewX;
-    this._angle = angle;
-    this._matrix = new SVGMatrix().SkewX(angle);
-  }
+	public void SetScale(float sx, float sy)
+	{
+		_type = SVGTransformMode.Scale;
+		matrix = new Matrix2x3().ScaleNonUniform(sx, sy);
+	}
 
-  public void SetSkewY(float angle) {
-    this._type = SVGTransformMode.SkewY;
-    this._angle = angle;
-    this._matrix = new SVGMatrix().SkewY(angle);
-  }
+	public void SetRotate(float rotateAngle)
+	{
+		_type = SVGTransformMode.Rotate;
+		_angle = rotateAngle;
+		matrix = new Matrix2x3().Rotate(rotateAngle);
+	}
+
+	public void SetRotate(float rotateAngle, float cx, float cy)
+	{
+		_type = SVGTransformMode.Rotate;
+		_angle = rotateAngle;
+		matrix = new Matrix2x3().Translate(cx, cy).Rotate(angle).Translate(-cx, -cy);
+	}
+
+	public void SetSkewX(float skewAngle)
+	{
+		_type = SVGTransformMode.SkewX;
+		_angle = skewAngle;
+		matrix = new Matrix2x3().SkewX(angle);
+	}
+
+	public void SetSkewY(float skewAngle)
+	{
+		_type = SVGTransformMode.SkewY;
+		_angle = skewAngle;
+		matrix = new Matrix2x3().SkewY(angle);
+	}
 }

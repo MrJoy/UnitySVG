@@ -1,48 +1,49 @@
-using UnityEngine;
-using System;
+using System.Collections;
 using System.Diagnostics;
+using UnityEngine;
 
-public class Invoke : MonoBehaviour {
-  public TextAsset SVGFile = null;
-  public bool useFastButBloatedRenderer = false;
-  private Implement m_implement;
-  // Use this for initialization
-  void Start () {
-    if (SVGFile != null) {
-      Stopwatch w = new Stopwatch();
+[RequireComponent(typeof(Renderer))]
+public class Invoke : MonoBehaviour 
+{
+	public TextAsset SVGFile = null;
+	public bool useFastButBloatedRenderer = false;
 
-      w.Reset();
-      w.Start();
-      ISVGDevice device;
-      if(useFastButBloatedRenderer)
-        device = new SVGDeviceFast();
-      else
-        device = new SVGDeviceSmall();
-      m_implement = new Implement(this.SVGFile, device);
-      w.Stop();
-      long c = w.ElapsedMilliseconds;
+	private void Start ()
+	{
 
-      w.Reset();
-      w.Start();
-      m_implement.StartProcess();
-      w.Stop();
-      long p = w.ElapsedMilliseconds;
+		//yield return new WaitForSeconds(0.1f);
+		if (SVGFile != null) {
+			Stopwatch w = new Stopwatch();
 
-      w.Reset();
-      w.Start();
-      renderer.material.mainTexture = m_implement.GetTexture();
-      w.Stop();
-      long r = w.ElapsedMilliseconds;
-      UnityEngine.Debug.Log("Construction: " + Format(c) + ", Processing: " + Format(p) + ", Rendering: " + Format(r));
+			w.Reset();
+			w.Start();
+			ISVGDevice device;
+			if(useFastButBloatedRenderer)
+				device = new SVGDeviceFast();
+			else
+				device = new SVGDeviceSmall();
+			var implement = new Implement(SVGFile, device);
+			w.Stop();
+			long c = w.ElapsedMilliseconds;
 
-      Vector2 ts = renderer.material.mainTextureScale;
-      ts.x *= -1;
-      renderer.material.mainTextureScale = ts;
-      renderer.material.mainTexture.filterMode = FilterMode.Trilinear;
-    }
-  }
+			w.Reset();
+			w.Start();
+			implement.StartProcess();
+			w.Stop();
+			long p = w.ElapsedMilliseconds;
 
-  private string Format(long ts) {
-    return String.Format("{0} ms", ts);
-  }
+			w.Reset();
+			w.Start();
+			var myRenderer = GetComponent<Renderer>();
+			myRenderer.material.mainTexture = implement.GetTexture();
+			w.Stop();
+			long r = w.ElapsedMilliseconds;
+			UnityEngine.Debug.LogFormat("Construction: {0} ms, Processing: {1} ms, Rendering: {2} ms", c, p, r);
+
+			Vector2 ts = myRenderer.material.mainTextureScale;
+			ts.x *= -1;
+			myRenderer.material.mainTextureScale = ts;
+			myRenderer.material.mainTexture.filterMode = FilterMode.Trilinear;
+		}
+	}
 }
