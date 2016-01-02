@@ -25,15 +25,15 @@ public enum SVGPathSegTypes : ushort {
 
 public abstract class SVGPathSeg {
   protected SVGPathSegList _segList;
-  /***********************************************************************************/
+
   internal void SetList(SVGPathSegList segList) {
     this._segList = segList;
   }
-  public SVGPathSeg previousSeg {
-    get { return _segList.GetPreviousSegment(this); }
-  }
-  /***********************************************************************************/
+
+  public SVGPathSeg previousSeg { get { return _segList.GetPreviousSegment(this); } }
+
   public abstract Vector2 currentPoint { get; }
+
   public Vector2 previousPoint {
     get {
       Vector2 _return = new Vector2(0f, 0f);

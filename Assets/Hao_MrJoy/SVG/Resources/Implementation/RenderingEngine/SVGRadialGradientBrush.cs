@@ -17,6 +17,7 @@ public class SVGRadialGradientBrush {
     _radialGradElement = radialGradElement;
     Initialize();
   }
+
   public SVGRadialGradientBrush(SVGRadialGradientElement radialGradElement, SVGGraphicsPath graphicsPath) {
     _radialGradElement = radialGradElement;
     Initialize();
@@ -108,6 +109,7 @@ public class SVGRadialGradientBrush {
   //-----
   private float _deltaR, _deltaG, _deltaB;
   private int _vitriOffset = 0;
+
   private void PreColorProcess(int index) {
     float dp = _stopOffsetList[index + 1] - _stopOffsetList[index];
 

@@ -1,25 +1,14 @@
 using UnityEngine;
 
 public class SVGPathSegArcAbs : SVGPathSeg, ISVGDrawableSeg {
-  private float _x      = 0f;
-  private float _y      = 0f;
-  private float _r1      = 0f;
-  private float _r2      = 0f;
-  private float _angle    = 0f;
-  private bool _largeArcFlag  = false;
-  private bool _sweepFlag  = false;
-  //================================================================================
-  public float x {
-    get { return this._x; }
-  }
-  //-----
-  public float y {
-    get { return this._y; }
-  }
-  //================================================================================
-  public SVGPathSegArcAbs(float r1, float r2, float angle,
-              bool largeArcFlag, bool sweepFlag,
-              float x, float y) : base() {
+  private float _x = 0f, _y = 0f, _r1 = 0f, _r2 = 0f, _angle = 0f;
+  private bool _largeArcFlag = false, _sweepFlag = false;
+
+  public float x { get { return this._x; } }
+
+  public float y { get { return this._y; } }
+
+  public SVGPathSegArcAbs(float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag, float x, float y) : base() {
     this._r1 = r1;
     this._r2 = r2;
     this._angle = angle;
@@ -28,19 +17,10 @@ public class SVGPathSegArcAbs : SVGPathSeg, ISVGDrawableSeg {
     this._x = x;
     this._y = y;
   }
-  //================================================================================
-  public override Vector2 currentPoint {
-    get {
-      return new Vector2(this._x, this._y);
-    }
-  }
-  //--------------------------------------------------------------------------------
-  //Method: Render
-  //--------------------------------------------------------------------------------
+
+  public override Vector2 currentPoint { get { return new Vector2(this._x, this._y); } }
+
   public void Render(SVGGraphicsPath _graphicsPath) {
-    Vector2 p;
-    p = currentPoint;
-    _graphicsPath.AddArcTo(this._r1, this._r2, this._angle,
-            this._largeArcFlag, this._sweepFlag, p);
+    _graphicsPath.AddArcTo(this._r1, this._r2, this._angle, this._largeArcFlag, this._sweepFlag, currentPoint);
   }
 }

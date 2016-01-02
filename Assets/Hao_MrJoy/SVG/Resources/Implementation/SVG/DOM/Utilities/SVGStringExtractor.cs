@@ -2,52 +2,48 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class SVGStringExtractor
-{
-	//--------------------------------------------------
-	//Extract for Syntax:   translate(700 200)rotate(-30)
-	private static char[] splitPipe = new char[] {')'};
+public static class SVGStringExtractor {
+  //--------------------------------------------------
+  //Extract for Syntax:   translate(700 200)rotate(-30)
+  private static char[] splitPipe = new char[] { ')' };
 
-	public static List<SVGTransform> ExtractTransformList(string inputText)
-	{
-		List<SVGTransform> _return = new List<SVGTransform>();
+  public static List<SVGTransform> ExtractTransformList(string inputText) {
+    List<SVGTransform> _return = new List<SVGTransform>();
 
-		string[] valuesStr = inputText.Split(splitPipe, StringSplitOptions.RemoveEmptyEntries);
+    string[] valuesStr = inputText.Split(splitPipe, StringSplitOptions.RemoveEmptyEntries);
 
-		int len = valuesStr.Length;
-		for (int i = 0; i < len; i++)
-		{
-			int vt1 = valuesStr[i].IndexOf('(');
-			string _key = valuesStr[i].Substring(0, vt1).Trim();
-			string _value = valuesStr[i].Substring(vt1 + 1).Trim();
-			_return.Add(new SVGTransform(_key, _value));
-		}
-		return _return;
-	}
+    int len = valuesStr.Length;
+    for(int i = 0; i < len; i++) {
+      int vt1 = valuesStr[i].IndexOf('(');
+      string _key = valuesStr[i].Substring(0, vt1).Trim();
+      string _value = valuesStr[i].Substring(vt1 + 1).Trim();
+      _return.Add(new SVGTransform(_key, _value));
+    }
+    return _return;
+  }
 
-	//--------------------------------------------------
-	//Extract for Syntax:  700 200 -30
-	private static char[] splitSpaceComma = new char[] {' ', ',', '\n', '\t', '\r'};
+  //--------------------------------------------------
+  //Extract for Syntax:  700 200 -30
+  private static char[] splitSpaceComma = new char[] { ' ', ',', '\n', '\t', '\r' };
 
-	//public static float[] ExtractTransformValueAsPX(string inputText)
-	//{
-	//	string[] tmp = ExtractTransformValue(inputText);
-	//	float[] values = new float[tmp.Length];
-	//	for (int i = 0; i < values.Length; i++)
-	//		values[i] = SVGLength.GetPXLength(tmp[i]);
-	//	return values;
-	//}
+  //public static float[] ExtractTransformValueAsPX(string inputText)
+  //{
+  //	string[] tmp = ExtractTransformValue(inputText);
+  //	float[] values = new float[tmp.Length];
+  //	for (int i = 0; i < values.Length; i++)
+  //		values[i] = SVGLength.GetPXLength(tmp[i]);
+  //	return values;
+  //}
 
-	public static string[] ExtractTransformValue(string inputText)
-	{
-		return inputText.Split(splitSpaceComma, StringSplitOptions.RemoveEmptyEntries);
-	}
+  public static string[] ExtractTransformValue(string inputText) {
+    return inputText.Split(splitSpaceComma, StringSplitOptions.RemoveEmptyEntries);
+  }
 
-	//--------------------------------------------------
-	//Extract for Systax : M100 100 C200 100,...
-	//private static readonly List<int> _break = new List<int>();
-	// WARNING:  This method is NOT thread-safe due to use of static _break member!
-	/*public static void ExtractPathSegList(string inputText, ref List<char> charList, ref List<string> valueList)
+  //--------------------------------------------------
+  //Extract for Systax : M100 100 C200 100,...
+  //private static readonly List<int> _break = new List<int>();
+  // WARNING:  This method is NOT thread-safe due to use of static _break member!
+  /*public static void ExtractPathSegList(string inputText, ref List<char> charList, ref List<string> valueList)
 	{
 		Profiler.BeginSample("SVGStringExtractor.ExtractPathSegList()");
 		_break.Clear();
@@ -68,38 +64,36 @@ public static class SVGStringExtractor
 		Profiler.EndSample();
 	}*/
 
-	//--------------------------------------------------
-	//Extract for Syntax:  fill: #ffffff; stroke:#000000; stroke-width:0.172
-	private static char[] splitColonSemicolon = new char[] {':', ';', ' ', '\n', '\t', '\r'};
+  //--------------------------------------------------
+  //Extract for Syntax:  fill: #ffffff; stroke:#000000; stroke-width:0.172
+  private static char[] splitColonSemicolon = new char[] { ':', ';', ' ', '\n', '\t', '\r' };
 
-	public static void ExtractStyleValue(string inputText, ref Dictionary<string, string> dic)
-	{
-		string[] valuesStr = inputText.Split(splitColonSemicolon, StringSplitOptions.RemoveEmptyEntries);
+  public static void ExtractStyleValue(string inputText, ref Dictionary<string, string> dic) {
+    string[] valuesStr = inputText.Split(splitColonSemicolon, StringSplitOptions.RemoveEmptyEntries);
 
-		int len = valuesStr.Length - 1;
-		for (int i = 0; i < len; i += 2)
-			dic.Add(valuesStr[i], valuesStr[i + 1]);
-	}
+    int len = valuesStr.Length - 1;
+    for(int i = 0; i < len; i += 2)
+      dic.Add(valuesStr[i], valuesStr[i + 1]);
+  }
 
-	//--------------------------------------------------
-	//Extract for Syntax:   url(#identifier)
-	public static string ExtractUrl4Gradient(string inputText)
-	{
-		string _return = "";
+  //--------------------------------------------------
+  //Extract for Syntax:   url(#identifier)
+  public static string ExtractUrl4Gradient(string inputText) {
+    string _return = "";
 
-		inputText = inputText
-			.Replace('\n', ' ')
-			.Replace('\t', ' ')
-			.Replace('\r', ' ')
-			.Replace(" ", "");
+    inputText = inputText
+                .Replace('\n', ' ')
+                .Replace('\t', ' ')
+                .Replace('\r', ' ')
+                .Replace(" ", "");
 
-		int vt1 = inputText.IndexOf("url(#"),
-			vt2 = inputText.IndexOf(")");
-		if (vt2 < 0)
-			vt2 = inputText.Length;
+    int vt1 = inputText.IndexOf("url(#"),
+    vt2 = inputText.IndexOf(")");
+    if(vt2 < 0)
+      vt2 = inputText.Length;
 
-		_return = inputText.Substring(vt1 + 5, vt2 - vt1 - 5);
+    _return = inputText.Substring(vt1 + 5, vt2 - vt1 - 5);
 
-		return _return;
-	}
+    return _return;
+  }
 }

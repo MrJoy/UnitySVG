@@ -153,18 +153,23 @@ public struct SVGColorExtractor {
   };
 
   private static Color change(int r, int g, int b) {
-    return new Color((float)r/255.0f, (float)g/255.0f, (float)b/255.0f);
+    return new Color((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f);
   }
+
   public static Color ConstColor(string name) {
-    if(name.Length == 0) return Color.black;
+    if(name.Length == 0)
+      return Color.black;
     return ConstantColors[name.ToLower()];
   }
   //------------
   public static bool IsConstName(string textColor) {
-    if(textColor.Length == 0) return false;
-    if(textColor[0] == '#') return false;
+    if(textColor.Length == 0)
+      return false;
+    if(textColor[0] == '#')
+      return false;
     return ConstantColors.ContainsKey(textColor.ToLower());
   }
+
   public static bool IsHexColor(string colorStr) {
     if(colorStr.Length > 0) {
       if(colorStr[0] == '#') {
@@ -175,17 +180,22 @@ public struct SVGColorExtractor {
     }
     return false;
   }
+
   private static int ParseHexDigit(char c) {
     int cc = (int)c - (int)'0';
-    if(cc >= 0 && cc < 10) return cc;
+    if(cc >= 0 && cc < 10)
+      return cc;
     cc = c - (int)'a';
-    if(cc >= 0 && cc < 6) return 10 + cc;
+    if(cc >= 0 && cc < 6)
+      return 10 + cc;
     cc = c - (int)'A';
-    if(cc >= 0 && cc < 6) return 10 + cc;
+    if(cc >= 0 && cc < 6)
+      return 10 + cc;
     return 0;
   }
+
   public static Color HexColor(string colorStr) {
-    int r=0, g=0, b=0;
+    int r = 0, g = 0, b = 0;
     if(colorStr.Length > 0) {
       if(colorStr[0] == '#') {
         if(colorStr.Length == 4) {

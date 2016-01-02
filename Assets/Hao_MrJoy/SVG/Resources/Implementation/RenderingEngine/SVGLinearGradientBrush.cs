@@ -17,6 +17,7 @@ public class SVGLinearGradientBrush {
     _linearGradElement = linearGradElement;
     Initialize();
   }
+
   public SVGLinearGradientBrush(SVGLinearGradientElement linearGradElement, SVGGraphicsPath graphicsPath) {
     _linearGradElement = linearGradElement;
     Initialize();
@@ -68,6 +69,7 @@ public class SVGLinearGradientBrush {
   //-----
   private float _deltaR, _deltaG, _deltaB;
   private int _vitriOffset = 0;
+
   private void PreColorProcess(int index) {
     float dp = _stopOffsetList[index + 1] - _stopOffsetList[index];
 
@@ -77,6 +79,7 @@ public class SVGLinearGradientBrush {
   }
   //------
   private float _a, _b, _aP, _bP, _cP;
+
   private void PreLocationProcess() {
     if((_x1 - _x2 == 0f) || (_y1 - _y2 == 0f)) {
       return;
@@ -180,7 +183,7 @@ public class SVGLinearGradientBrush {
     Color _color = Color.black;
 
 
-        /*if(_ox != x) {
+    /*if(_ox != x) {
       _ox = x;
       _dem ++ ;
 
@@ -189,13 +192,13 @@ public class SVGLinearGradientBrush {
       }
     }*/
 
-float _percent = Percent(x, y);
+    float _percent = Percent(x, y);
 
-        /*if(_show == true) {
+    /*if(_show == true) {
       UnityEngine.Debug.Log("x " + x + " y " + y + " percent " + _percent);
     }*/
 
-if((_stopOffsetList[_vitriOffset] <= _percent) && (_percent <= _stopOffsetList[_vitriOffset + 1])) {
+    if((_stopOffsetList[_vitriOffset] <= _percent) && (_percent <= _stopOffsetList[_vitriOffset + 1])) {
       _color.r = ((_percent - _stopOffsetList[_vitriOffset]) * _deltaR) + _stopColorList[_vitriOffset].r;
       _color.g = ((_percent - _stopOffsetList[_vitriOffset]) * _deltaG) + _stopColorList[_vitriOffset].g;
       _color.b = ((_percent - _stopOffsetList[_vitriOffset]) * _deltaB) + _stopColorList[_vitriOffset].b;

@@ -1,5 +1,5 @@
-public interface ISVGDrawable
-{
-	void BeforeRender(SVGTransformList transformList);
-	void Render();
+public interface ISVGDrawable {
+  void BeforeRender(SVGTransformList transformList);
+
+  void Render();
 }
