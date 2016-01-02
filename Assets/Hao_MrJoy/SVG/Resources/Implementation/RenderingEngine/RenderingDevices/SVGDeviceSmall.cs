@@ -12,11 +12,15 @@ public class SVGDeviceSmall : ISVGDevice
 
 	private Color _color = Color.white;
 
-	public void SetDevice(int width, int height)
+  public void SetDevice(int width, int height) {
+    SetDevice(width, height, false, false);
+  }
+
+	public void SetDevice(int width, int height, bool mipmaps, bool linear)
 	{
 		if (_texture == null)
 		{
-			_texture = new Texture2D(width, height, TextureFormat.RGB24, false);
+			_texture = new Texture2D(width, height, TextureFormat.RGB24, mipmaps, linear);
 			_texture.hideFlags = HideFlags.HideAndDontSave;
 			_width = width;
 			_height = height;
