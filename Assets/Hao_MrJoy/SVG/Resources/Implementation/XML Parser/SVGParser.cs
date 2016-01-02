@@ -172,6 +172,7 @@ public class SVGParser : SmallXmlParser.IContentHandler {
 
   private static SVGNodeName Lookup(string name) {
     SVGNodeName retVal;
+    // TODO: Experiment with a dictionary lookup here.
     switch(name) {
     case "rect": retVal = SVGNodeName.Rect; break;
     case "line": retVal = SVGNodeName.Line; break;

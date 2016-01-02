@@ -86,6 +86,7 @@ public struct SVGLength {
   }
 
   private static float ConvertToPX(float value, SVGLengthType lengthType) {
+    // TODO: Shouldn't PX-per-<real-world-unit> be a function of the render target size?
     switch(lengthType) {
     case SVGLengthType.IN: return value * 90.0f;
     case SVGLengthType.CM: return value * 35.43307f;

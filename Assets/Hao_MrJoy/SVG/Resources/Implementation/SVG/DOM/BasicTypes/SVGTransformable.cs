@@ -11,6 +11,8 @@ public class SVGTransformable {
     get { return _inheritTransformList; }
     set {
       _inheritTransformList = value;
+      // TODO: Measure if (and how much) redundant work is happening by doing this here.  Consider a dirty state and
+      // TODO: final-reconciliation-before-rendering pass.
       UpdateSummaryTransformList();
     }
   }

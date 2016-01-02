@@ -30,6 +30,7 @@
 // small xml parser that is mostly compatible with
 //
 
+// TODO: Put this in a vendor folder, DLL, etc.
 using System;
 using System.Collections;
 using System.Collections.Generic;
