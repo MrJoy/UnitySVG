@@ -91,7 +91,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
   }
 
   private void Fill(int x, int y) {
-    Debug.LogFormat("Fill called: w:{0}, h:{1}, subW:{2}, subH:{3}, inZoneL:{4}, inZoneT:{5}, x:{6}, y:{7}", _width, _height, _subW, _subH, _inZoneL, _inZoneT, x, y);
+//    Debug.LogFormat("Fill called: w:{0}, h:{1}, subW:{2}, subH:{3}, inZoneL:{4}, inZoneT:{5}, x:{6}, y:{7}", _width, _height, _subW, _subH, _inZoneL, _inZoneT, x, y);
     Profiler.BeginSample("SVGGraphicsFill.Fill");
     if(!isInZone(x, y) || _flag[x, y] != 0)
       return;
@@ -115,7 +115,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
         }
       }
     }
-    Debug.LogFormat("NbIter:{0}", nbIterations);
+//    Debug.LogFormat("NbIter:{0}", nbIterations);
     Profiler.EndSample();
   }
 
