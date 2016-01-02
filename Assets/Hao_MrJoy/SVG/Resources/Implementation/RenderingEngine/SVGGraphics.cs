@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 
 public class SVGGraphics {
-  //================================================================================
   private ISVGDevice _device;
 
   private SVGGraphicsFill _graphicsFill;
@@ -13,33 +12,22 @@ public class SVGGraphics {
 
   private SVGStrokeLineCapMethod _strokeLineCap = SVGStrokeLineCapMethod.Unknown;
   private SVGStrokeLineJoinMethod _strokeLineJoin = SVGStrokeLineJoinMethod.Unknown;
-  //================================================================================
-  public SVGStrokeLineCapMethod strokeLineCap {
-    get { return _strokeLineCap; }
-  }
 
-  //-----
-  public SVGStrokeLineJoinMethod strokeLineJoin {
-    get { return _strokeLineJoin; }
-  }
+  public SVGStrokeLineCapMethod strokeLineCap { get { return _strokeLineCap; } }
 
-  //================================================================================
+  public SVGStrokeLineJoinMethod strokeLineJoin { get { return _strokeLineJoin; } }
+
   public SVGGraphics() {
     _graphicsFill = new SVGGraphicsFill(this);
     _graphicsStroke = new SVGGraphicsStroke(this);
   }
 
-  //-----
   public SVGGraphics(ISVGDevice device) {
     _device = device;
     _graphicsFill = new SVGGraphicsFill(this);
     _graphicsStroke = new SVGGraphicsStroke(this);
   }
 
-  //================================================================================
-  //--------------------------------------------------------------------------------
-  //Method: SetSize
-  //--------------------------------------------------------------------------------
   public void SetSize(float width, float height) {
     _width = (int)width;
     _height = (int)height;
@@ -48,44 +36,26 @@ public class SVGGraphics {
     Clean();
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: SetColor
-  //--------------------------------------------------------------------------------
   public void SetColor(Color color) {
     _device.SetColor(color);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: SetPixel
-  //--------------------------------------------------------------------------------
   public void SetPixel(int x, int y) {
     _device.SetPixel(x, y);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: SetStrokeLineCap
-  //--------------------------------------------------------------------------------
   public void SetStrokeLineCap(SVGStrokeLineCapMethod strokeLineCap) {
     _strokeLineCap = strokeLineCap;
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: SetStrokeLineJoin
-  //--------------------------------------------------------------------------------
   public void SetStrokeLineJoin(SVGStrokeLineJoinMethod strokeLineJoin) {
     _strokeLineJoin = strokeLineJoin;
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: Render
-  //--------------------------------------------------------------------------------
   public Texture2D Render() {
     return _device.Render();
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: Clean
-  //--------------------------------------------------------------------------------
   public void Clean() {
     int width = _device.Width;
     int height = _device.Height;
@@ -97,12 +67,9 @@ public class SVGGraphics {
     }
   }
 
-  //--------------------------------------------------------------------------------
-  //GetThickLine
-  //--------------------------------------------------------------------------------
   //Tinh 4 diem 1, 2, 3, 4 cua 1 line voi width
   public bool GetThickLine(Vector2 p1, Vector2 p2, float width,
-                          ref Vector2 rp1, ref Vector2 rp2, ref Vector2 rp3, ref Vector2 rp4) {
+                           ref Vector2 rp1, ref Vector2 rp2, ref Vector2 rp3, ref Vector2 rp4) {
     float cx1, cy1, cx2, cy2, cx3, cy3, cx4, cy4;
     float dtx, dty, temp, _half;
     int _ihalf1, _ihalf2;
@@ -227,9 +194,6 @@ public class SVGGraphics {
     return true;
   }
 
-  //--------------------------------------------------------------------------------
-  //GetCrossPoint
-  //--------------------------------------------------------------------------------
   //Tinh diem giao nhau giua 2 doan thang
   public Vector2 GetCrossPoint(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
     Vector2 _return = new Vector2(0f, 0f);
@@ -250,7 +214,7 @@ public class SVGGraphics {
       a2 = dy2 / dx2;
       b2 = p3.y - a2 * p3.x;
     }
-    //-----
+
     float tx = 0f, ty = 0f;
 
     //truong hop nam tren duong thang
@@ -315,10 +279,6 @@ public class SVGGraphics {
     return _return;
   }
 
-  //--------------------------------------------------------------------------------
-  //AngleBetween2Vector
-  //--------------------------------------------------------------------------------
-  //Tinh goc giua 2 vector (p1,p2) (p3,p4);
   public float AngleBetween2Vector(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
     Vector2 vt1, vt2;
     vt1 = new Vector2(p2.x - p1.x, p2.y - p1.y);
@@ -332,15 +292,10 @@ public class SVGGraphics {
     return ((float)Math.Acos(cosAngle));
   }
 
-  //================================================================================
-  //--------------------------------------------------------------------------------
-  //Method: Line
-  //--------------------------------------------------------------------------------
   public void Line(Vector2 p1, Vector2 p2) {
     _graphicsStroke.Line(p1, p2);
   }
 
-  //-----
   public void Line(Vector2 p1, Vector2 p2, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
@@ -348,12 +303,10 @@ public class SVGGraphics {
     Line(p1, p2);
   }
 
-  //-----
   public void Line(Vector2 p1, Vector2 p2, float width) {
     _graphicsStroke.Line(p1, p2, width);
   }
 
-  //-----
   public void Line(Vector2 p1, Vector2 p2, SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
@@ -361,14 +314,10 @@ public class SVGGraphics {
     Line(p1, p2, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: Rect
-  //--------------------------------------------------------------------------------
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
     _graphicsStroke.Rect(p1, p2, p3, p4);
   }
 
-  //-----
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
@@ -376,43 +325,36 @@ public class SVGGraphics {
     Rect(p1, p2, p3, p4);
   }
 
-  //-----
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float width) {
     _graphicsStroke.Rect(p1, p2, p3, p4, width);
   }
 
-  //-----
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                  SVGColor? strokeColor, float width) {
+                   SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     Rect(p1, p2, p3, p4, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: Rounded Rect
-  //--------------------------------------------------------------------------------
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                         Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                         float r1, float r2, float angle) {
+                          Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                          float r1, float r2, float angle) {
     _graphicsStroke.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
   }
 
-  //-----
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                         Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                         float r1, float r2, float angle, SVGColor? strokeColor) {
+                          Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                          float r1, float r2, float angle, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
   }
 
-  //-----
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                         Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                         float r1, float r2, float angle, float width) {
+                          Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                          float r1, float r2, float angle, float width) {
     if((int)width == 1) {
       RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
       return;
@@ -420,38 +362,31 @@ public class SVGGraphics {
     _graphicsStroke.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, width);
   }
 
-  //-----
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                         Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                         float r1, float r2, float angle, SVGColor? strokeColor, float width) {
+                          Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                          float r1, float r2, float angle, SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: FillRect
-  //--------------------------------------------------------------------------------
   public void FillRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
     _graphicsFill.Rect(p1, p2, p3, p4);
   }
 
-  //-----
   public void FillRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                      SVGColor? strokeColor) {
+                       SVGColor? strokeColor) {
     _graphicsFill.Rect(p1, p2, p3, p4, strokeColor);
   }
 
-  //-----
   public void FillRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                      SVGColor fillColor, SVGColor? strokeColor) {
+                       SVGColor fillColor, SVGColor? strokeColor) {
     _graphicsFill.Rect(p1, p2, p3, p4, fillColor, strokeColor);
   }
 
-  //-----
   public void FillRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                      SVGColor? strokeColor, float width) {
+                       SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillRect(p1, p2, p3, p4, strokeColor);
       return;
@@ -463,9 +398,8 @@ public class SVGGraphics {
     Rect(p1, p2, p3, p4, strokeColor, width);
   }
 
-  //-----
   public void FillRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                      SVGColor fillColor, SVGColor? strokeColor, float width) {
+                       SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillRect(p1, p2, p3, p4, fillColor, strokeColor);
       return;
@@ -478,37 +412,31 @@ public class SVGGraphics {
     Rect(p1, p2, p3, p4, strokeColor, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: FillRoundedRect
-  //--------------------------------------------------------------------------------
   public void FillRoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                             Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                             float r1, float r2, float angle) {
+                              Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                              float r1, float r2, float angle) {
     _graphicsFill.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
   }
 
-  //-----
   public void FillRoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                             Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                             float r1, float r2, float angle,
-                             SVGColor? strokeColor) {
+                              Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                              float r1, float r2, float angle,
+                              SVGColor? strokeColor) {
     _graphicsFill.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, strokeColor);
   }
 
-  //-----
   public void FillRoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                             Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                             float r1, float r2, float angle,
-                             SVGColor fillColor, SVGColor? strokeColor) {
+                              Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                              float r1, float r2, float angle,
+                              SVGColor fillColor, SVGColor? strokeColor) {
     _graphicsFill.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle,
-                            fillColor, strokeColor);
+                              fillColor, strokeColor);
   }
 
-  //-----
   public void FillRoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                             Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                             float r1, float r2, float angle,
-                             SVGColor? strokeColor, float width) {
+                              Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                              float r1, float r2, float angle,
+                              SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, strokeColor);
       return;
@@ -520,11 +448,10 @@ public class SVGGraphics {
     RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, strokeColor);
   }
 
-  //-----
   public void FillRoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
-                             Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                             float r1, float r2, float angle,
-                             SVGColor fillColor, SVGColor? strokeColor, float width) {
+                              Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                              float r1, float r2, float angle,
+                              SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, strokeColor);
       return;
@@ -537,14 +464,10 @@ public class SVGGraphics {
     RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, strokeColor);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: Circle
-  //--------------------------------------------------------------------------------
   public void Circle(Vector2 p, float r) {
     _graphicsStroke.Circle(p, r);
   }
 
-  //-----
   public void Circle(Vector2 p, float r, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
@@ -552,40 +475,32 @@ public class SVGGraphics {
     Circle(p, r);
   }
 
-  //-----
   public void Circle(Vector2 p, float r, float width) {
     _graphicsStroke.Circle(p, r, width);
   }
 
-  //-----
   public void Circle(Vector2 p, float r,
-                    SVGColor? strokeColor, float width) {
+                     SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     Circle(p, r, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: FillCircle
-  //--------------------------------------------------------------------------------
   public void FillCircle(Vector2 p, float r) {
     _graphicsFill.Circle(p, r);
   }
 
-  //-----
   public void FillCircle(Vector2 p, float r, SVGColor? strokeColor) {
     _graphicsFill.Circle(p, r, strokeColor);
   }
 
-  //-----
   public void FillCircle(Vector2 p, float r, SVGColor fillColor, SVGColor? strokeColor) {
     _graphicsFill.Circle(p, r, fillColor, strokeColor);
   }
 
-  //-----
   public void FillCircle(Vector2 p, float r,
-                        SVGColor? strokeColor, float width) {
+                         SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillCircle(p, r, strokeColor);
       return;
@@ -598,9 +513,8 @@ public class SVGGraphics {
     Circle(p, r, strokeColor, width);
   }
 
-  //-----
   public void FillCircle(Vector2 p, float r,
-                        SVGColor fillColor, SVGColor? strokeColor, float width) {
+                         SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillCircle(p, r, strokeColor);
       return;
@@ -613,14 +527,10 @@ public class SVGGraphics {
     Circle(p, r, strokeColor, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: Ellipse
-  //--------------------------------------------------------------------------------
   public void Ellipse(Vector2 p, float rx, float ry, float angle) {
     _graphicsStroke.Ellipse(p, rx, ry, angle);
   }
 
-  //-----
   public void Ellipse(Vector2 p, float rx, float ry, float angle, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
@@ -628,41 +538,33 @@ public class SVGGraphics {
     Ellipse(p, rx, ry, angle);
   }
 
-  //-----
   public void Ellipse(Vector2 p, float rx, float ry, float angle, float width) {
     _graphicsStroke.Ellipse(p, rx, ry, angle, width);
   }
 
-  //-----
   public void Ellipse(Vector2 p, float rx, float ry, float angle,
-                     SVGColor? strokeColor, float width) {
+                      SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
     }
     Ellipse(p, rx, ry, angle, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: FillEllipse
-  //--------------------------------------------------------------------------------
   public void FillEllipse(Vector2 p, float rx, float ry, float angle) {
     _graphicsFill.Ellipse(p, rx, ry, angle);
   }
 
-  //-----
   public void FillEllipse(Vector2 p, float rx, float ry, float angle, SVGColor? strokeColor) {
     _graphicsFill.Ellipse(p, rx, ry, angle, strokeColor);
   }
 
-  //-----
   public void FillEllipse(Vector2 p, float rx, float ry, float angle,
-                         SVGColor fillColor, SVGColor? strokeColor) {
+                          SVGColor fillColor, SVGColor? strokeColor) {
     _graphicsFill.Ellipse(p, rx, ry, angle, fillColor, strokeColor);
   }
 
-  //-----
   public void FillEllipse(Vector2 p, float rx, float ry, float angle,
-                         SVGColor? strokeColor, float width) {
+                          SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillEllipse(p, rx, ry, angle, strokeColor);
       return;
@@ -675,9 +577,8 @@ public class SVGGraphics {
     Ellipse(p, rx, ry, angle, width);
   }
 
-  //-----
   public void FillEllipse(Vector2 p, float rx, float ry, float angle,
-                         SVGColor fillColor, SVGColor? strokeColor, float width) {
+                          SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillEllipse(p, rx, ry, angle, strokeColor);
       return;
@@ -690,14 +591,10 @@ public class SVGGraphics {
     Ellipse(p, rx, ry, angle, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: Polygon
-  //--------------------------------------------------------------------------------
   public void Polygon(Vector2[] points) {
     _graphicsStroke.Polygon(points);
   }
 
-  //-----
   public void Polygon(Vector2[] points, SVGColor? strokeColor) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
@@ -705,12 +602,10 @@ public class SVGGraphics {
     Polygon(points);
   }
 
-  //-----
   public void Polygon(Vector2[] points, float width) {
     _graphicsStroke.Polygon(points, width);
   }
 
-  //-----
   public void Polygon(Vector2[] points, SVGColor? strokeColor, float width) {
     if(strokeColor != null) {
       SetColor(strokeColor.Value.color);
@@ -718,24 +613,18 @@ public class SVGGraphics {
     Polygon(points, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: FillPolygon
-  //--------------------------------------------------------------------------------
   public void FillPolygon(Vector2[] points) {
     _graphicsFill.Polygon(points);
   }
 
-  //-----
   public void FillPolygon(Vector2[] points, SVGColor? strokeColor) {
     _graphicsFill.Polygon(points, strokeColor);
   }
 
-  //-----
   public void FillPolygon(Vector2[] points, SVGColor fillColor, SVGColor? strokeColor) {
     _graphicsFill.Polygon(points, fillColor, strokeColor);
   }
 
-  //-----
   public void FillPolygon(Vector2[] points, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillPolygon(points, strokeColor);
@@ -748,9 +637,8 @@ public class SVGGraphics {
     Polygon(points, width);
   }
 
-  //-----
   public void FillPolygon(Vector2[] points,
-                         SVGColor fillColor, SVGColor? strokeColor, float width) {
+                          SVGColor fillColor, SVGColor? strokeColor, float width) {
     if((int)width == 1) {
       FillPolygon(points, strokeColor);
       return;
@@ -763,30 +651,24 @@ public class SVGGraphics {
     Polygon(points, width);
   }
 
-  //================================================================================
-  //--------------------------------------------------------------------------------
-  //Path Linear Gradient Fill
-  //--------------------------------------------------------------------------------
   //Fill khong to Stroke
   public void FillPath(SVGLinearGradientBrush linearGradientBrush,
-                      SVGGraphicsPath graphicsPath) {
+                       SVGGraphicsPath graphicsPath) {
     _graphicsFill.FillPath(linearGradientBrush, graphicsPath);
   }
 
-  //-----
   //Fill co Stroke trong do luon
   public void FillPath(SVGLinearGradientBrush linearGradientBrush,
-                      SVGColor? strokePathColor,
-                      SVGGraphicsPath graphicsPath) {
+                       SVGColor? strokePathColor,
+                       SVGGraphicsPath graphicsPath) {
     _graphicsFill.FillPath(linearGradientBrush, strokePathColor, graphicsPath);
   }
 
-  //-----
   //Fill khong co Stroke, va ve stroke sau
   public void FillPath(SVGLinearGradientBrush linearGradientBrush,
-                      SVGColor? strokePathColor,
-                      float width,
-                      SVGGraphicsPath graphicsPath) {
+                       SVGColor? strokePathColor,
+                       float width,
+                       SVGGraphicsPath graphicsPath) {
     _graphicsFill.FillPath(linearGradientBrush, strokePathColor, graphicsPath);
 
     if((int)width == 1)
@@ -799,29 +681,24 @@ public class SVGGraphics {
     SetColor(strokePathColor.Value.color);
   }
 
-  //--------------------------------------------------------------------------------
-  //Path Radial Gradient Fill
-  //--------------------------------------------------------------------------------
   //Fill khong to Stroke
   public void FillPath(SVGRadialGradientBrush radialGradientBrush,
-                      SVGGraphicsPath graphicsPath) {
+                       SVGGraphicsPath graphicsPath) {
     _graphicsFill.FillPath(radialGradientBrush, graphicsPath);
   }
 
-  //-----
   //Fill co Stroke trong do luon
   public void FillPath(SVGRadialGradientBrush radialGradientBrush,
-                      SVGColor? strokePathColor,
-                      SVGGraphicsPath graphicsPath) {
+                       SVGColor? strokePathColor,
+                       SVGGraphicsPath graphicsPath) {
     _graphicsFill.FillPath(radialGradientBrush, strokePathColor, graphicsPath);
   }
 
-  //-----
   //Fill khong co Stroke, va ve stroke sau
   public void FillPath(SVGRadialGradientBrush radialGradientBrush,
-                      SVGColor? strokePathColor,
-                      float width,
-                      SVGGraphicsPath graphicsPath) {
+                       SVGColor? strokePathColor,
+                       float width,
+                       SVGGraphicsPath graphicsPath) {
     _graphicsFill.FillPath(radialGradientBrush, strokePathColor, graphicsPath);
     if((int)width == 1)
       _graphicsFill.FillPath(radialGradientBrush, strokePathColor, graphicsPath);
@@ -834,9 +711,6 @@ public class SVGGraphics {
     //graphicsPath.RenderPath(this, width, false);
   }
 
-  //--------------------------------------------------------------------------------
-  //Path Solid Fill
-  //--------------------------------------------------------------------------------
   //Fill khong to Stroke
   public void FillPath(SVGGraphicsPath graphicsPath) {
     _graphicsFill.FillPath(graphicsPath);
@@ -847,18 +721,16 @@ public class SVGGraphics {
     _graphicsFill.FillPath(fillColor, graphicsPath);
   }
 
-  //-----
   //Fill co Stroke trong do luon
   public void FillPath(SVGColor fillColor, SVGColor? strokePathColor,
-                      SVGGraphicsPath graphicsPath) {
+                       SVGGraphicsPath graphicsPath) {
     _graphicsFill.FillPath(fillColor, strokePathColor, graphicsPath);
   }
 
-  //-----
   //Fill khong co Stroke, va ve stroke sau
   public void FillPath(SVGColor fillColor, SVGColor? strokePathColor,
-                      float width,
-                      SVGGraphicsPath graphicsPath) {
+                       float width,
+                       SVGGraphicsPath graphicsPath) {
     _graphicsFill.FillPath(fillColor, strokePathColor, graphicsPath);
     if((int)width == 1)
       _graphicsFill.FillPath(fillColor, strokePathColor, graphicsPath);
@@ -870,32 +742,23 @@ public class SVGGraphics {
     SetColor(strokePathColor.Value.color);
   }
 
-  //-----
   public void FillPath(SVGGraphicsPath graphicsPath, Vector2[] points) {
     _graphicsFill.FillPath(graphicsPath, points);
   }
 
-  //-----
   public void FillPath(SVGGraphicsPath graphicsPath, Vector2 point) {
     _graphicsFill.FillPath(graphicsPath, point);
   }
 
-  //================================================================================
-  //--------------------------------------------------------------------------------
-  //Draw Path
-  //--------------------------------------------------------------------------------
-  //DrawPath
   public void DrawPath(SVGGraphicsPath graphicsPath) {
     _graphicsStroke.DrawPath(graphicsPath);
   }
 
-  //-----
   //Fill co Stroke trong do luon
   public void DrawPath(SVGGraphicsPath graphicsPath, float width) {
     _graphicsStroke.DrawPath(graphicsPath, width);
   }
 
-  //-----
   //Fill khong co Stroke, va ve stroke sau
   public void DrawPath(SVGGraphicsPath graphicsPath, float width, SVGColor? strokePathColor) {
     if(strokePathColor == null)

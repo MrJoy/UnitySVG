@@ -22,9 +22,8 @@ public class SVGGraphicsPath {
   public Matrix2x3 matrixTransform {
     get {
       Profiler.BeginSample("SVGGraphicsPath.matrixTranform");
-      if(_matrixTransform == null) {
+      if(_matrixTransform == null)
         _matrixTransform = transformList.Consolidate().matrix;
-      }
       Profiler.EndSample();
       return _matrixTransform;
     }
@@ -121,7 +120,7 @@ public class SVGGraphicsPath {
 
   public void Add(SVGRectElement rectElement) {
     SVGGRect rect = new SVGGRect(rectElement.x.value, rectElement.y.value, rectElement.width.value,
-                               rectElement.height.value, rectElement.rx.value, rectElement.ry.value);
+                                 rectElement.height.value, rectElement.rx.value, rectElement.ry.value);
     SetFirstPoint(new Vector2(rect.x, rect.y));
     listObject.Add(rect);
   }

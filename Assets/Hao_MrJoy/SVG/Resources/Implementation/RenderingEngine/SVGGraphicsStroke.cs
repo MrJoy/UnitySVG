@@ -7,34 +7,25 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   private float _width;
   private bool isUseWidth = false;
 
-  //================================================================================
   public SVGGraphicsStroke(SVGGraphics graphics) {
     _graphics = graphics;
 
-    //Basic Draw
     _basicDraw = new SVGBasicDraw();
     _basicDraw.SetPixelMethod = new SetPixelDelegate(SetPixel);
   }
 
-  //================================================================================
-  //--------------------------------------------------------------------------------
-  //SetPixel
-  //--------------------------------------------------------------------------------
   private void SetPixel(int x, int y) {
     _graphics.SetPixel(x, y);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: StrokeLineCapLeft
   //Ve Line Cap, dau cuoi Left
-  //--------------------------------------------------------------------------------
   private static Vector2[] rect_points = new Vector2[4];
 
   private void StrokeLineCapLeft(Vector2 p1, Vector2 p2, float width) {
     if((int)width == 1)
       return;
     if((_graphics.strokeLineCap == SVGStrokeLineCapMethod.Unknown) ||
-      (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
+       (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
       return;
     if(((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)) <= 4f)
       return;
@@ -64,15 +55,12 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _graphics.FillPolygon(rect_points);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: StrokeLineCapRight
   //Ve Line Cap, dau cuoi Right
-  //--------------------------------------------------------------------------------
   private void StrokeLineCapRight(Vector2 p1, Vector2 p2, float width) {
     if((int)width == 1)
       return;
     if((_graphics.strokeLineCap == SVGStrokeLineCapMethod.Unknown) ||
-      (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
+       (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
       return;
 
     if(((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)) <= 4f)
@@ -103,10 +91,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _graphics.FillPolygon(rect_points);
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: StrokeLineJoin
-  //Ve LineJoin
-  //--------------------------------------------------------------------------------
   private static Vector2[] joint_points = new Vector2[8],
     joint_points_small = new Vector2[6];
 
@@ -121,7 +105,7 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     }
 
     if((_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Miter) ||
-      (_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Unknown)) {
+       (_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Unknown)) {
       Vector2 _p1 = Vector2.zero;
       Vector2 _p2 = Vector2.zero;
       Vector2 _p3 = Vector2.zero;
@@ -171,7 +155,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
 
       _graphics.GetThickLine(p2, p3, width, ref _p5, ref _p6, ref _p7, ref _p8);
 
-      //Vector2[] points = new Vector2[6];
       joint_points_small[0] = p2;
       joint_points_small[1] = _p3;
       joint_points_small[2] = _p5;
@@ -184,17 +167,10 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     }
   }
 
-  //================================================================================
-  //--------------------------------------------------------------------------------
-  //Methods: MoveTo
-  //--------------------------------------------------------------------------------
   public void MoveTo(Vector2 p) {
     _basicDraw.MoveTo(p);
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: CircleTo
-  //--------------------------------------------------------------------------------
   public void CircleTo(Vector2 p, float r) {
     if((isUseWidth) && ((int)_width > 1)) {
       CircleTo(p, r, _width);
@@ -203,14 +179,10 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     Circle(p, r);
   }
 
-  //-----
   public void CircleTo(Vector2 p, float r, float width) {
     Circle(p, r, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: EllipseTo
-  //--------------------------------------------------------------------------------
   public void EllipseTo(Vector2 p, float r1, float r2, float angle) {
     if((isUseWidth) && ((int)_width > 1)) {
       EllipseTo(p, r1, r2, angle, _width);
@@ -219,14 +191,10 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     Ellipse(p, r1, r2, angle);
   }
 
-  //-----
   public void EllipseTo(Vector2 p, float r1, float r2, float angle, float width) {
     Ellipse(p, r1, r2, angle, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: ArcTo
-  //--------------------------------------------------------------------------------
   public void ArcTo(float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag, Vector2 p) {
     if((isUseWidth) && ((int)_width > 1))
       ArcTo(r1, r2, angle, largeArcFlag, sweepFlag, p, _width);
@@ -234,20 +202,16 @@ public class SVGGraphicsStroke : ISVGPathDraw {
       _basicDraw.ArcTo(r1, r2, angle, largeArcFlag, sweepFlag, p);
   }
 
-  //-----
   public void ArcTo(float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag, Vector2 p, float width) {
     Profiler.BeginSample("SVGGraphicsStroke.ArcTo");
-    float rx = r1;
-    float ry = r2;
-    Vector2 p1 = _basicDraw.currentPoint;
-    Vector2 p2 = p;
+    float rx = r1, ry = r2;
+    Vector2 p1 = _basicDraw.currentPoint, p2 = p;
 
-    float temp1, temp2;
     float _radian = (angle * Mathf.PI / 180.0f);
     float _CosRadian = (float)Math.Cos(_radian);
     float _SinRadian = (float)Math.Sin(_radian);
-    temp1 = (p1.x - p2.x) / 2.0f;
-    temp2 = (p1.y - p2.y) / 2.0f;
+    float temp1 = (p1.x - p2.x) / 2.0f;
+    float temp2 = (p1.y - p2.y) / 2.0f;
     float tx = (_CosRadian * temp1) + (_SinRadian * temp2);
     float ty = (-_SinRadian * temp1) + (_CosRadian * temp2);
 
@@ -293,9 +257,9 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     float _delta = (ux * vy - uy * vx < 0) ? -(float)Math.Acos(tp / n) : (float)Math.Acos(tp / n);
     _delta = _delta * 180.0f / Mathf.PI;
 
-    if(!sweepFlag && _delta > 0) {
+    if(!sweepFlag && _delta > 0)
       _delta -= 360f;
-    } else if(sweepFlag && _delta < 0)
+    else if(sweepFlag && _delta < 0)
       _delta += 360f;
 
     _delta %= 360f;
@@ -310,9 +274,8 @@ public class SVGGraphicsStroke : ISVGPathDraw {
       float t_angle = (deltaT * i + _angle) * Mathf.PI / 180.0f;
       _controlPoint1.x = _CosRadian * rx * (float)Math.Cos(t_angle) - _SinRadian * ry * (float)Math.Sin(t_angle) + cx;
       _controlPoint1.y = _SinRadian * rx * (float)Math.Cos(t_angle) + _CosRadian * ry * (float)Math.Sin(t_angle) + cy;
-      if((_controlPoint1.x != p1.x) && (_controlPoint1.y != p1.y)) {
+      if((_controlPoint1.x != p1.x) && (_controlPoint1.y != p1.y))
         i = number + 1;
-      }
     }
 
 
@@ -320,9 +283,8 @@ public class SVGGraphicsStroke : ISVGPathDraw {
       float t_angle = (deltaT * i + _angle) * Mathf.PI / 180.0f;
       _controlPoint2.x = _CosRadian * rx * (float)Math.Cos(t_angle) - _SinRadian * ry * (float)Math.Sin(t_angle) + cx;
       _controlPoint2.y = _SinRadian * rx * (float)Math.Cos(t_angle) + _CosRadian * ry * (float)Math.Sin(t_angle) + cy;
-      if((_controlPoint2.x != p2.x) && (_controlPoint2.y != p2.y)) {
+      if((_controlPoint2.x != p2.x) && (_controlPoint2.y != p2.y))
         i = -1;
-      }
     }
     //-----
     Vector2 _p1 = Vector2.zero;
@@ -378,9 +340,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     Profiler.EndSample();
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: CubicCurveTo
-  //--------------------------------------------------------------------------------
   public void CubicCurveTo(Vector2 p1, Vector2 p2, Vector2 p) {
     if((isUseWidth) && ((int)_width > 1)) {
       CubicCurveTo(p1, p2, p, _width);
@@ -389,7 +348,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _basicDraw.CubicCurveTo(p1, p2, p);
   }
 
-  //-----
   public void CubicCurveTo(Vector2 p1, Vector2 p2, Vector2 p, float width) {
     Vector2 _point = Vector2.zero;
     _point = _basicDraw.currentPoint;
@@ -426,7 +384,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _cp3 = _graphics.GetCrossPoint(_p5, _p7, _p9, _p11);
     _cp4 = _graphics.GetCrossPoint(_p6, _p8, _p10, _p12);
 
-
     _basicDraw.MoveTo(_point);
     _basicDraw.CubicCurveTo(p1, p2, p);
 
@@ -441,9 +398,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     MoveTo(p);
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: QuadraticCurveTo
-  //--------------------------------------------------------------------------------
   public void QuadraticCurveTo(Vector2 p1, Vector2 p) {
     if((isUseWidth) && ((int)_width > 1)) {
       QuadraticCurveTo(p1, p, _width);
@@ -452,7 +406,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _basicDraw.QuadraticCurveTo(p1, p);
   }
 
-  //-----
   public void QuadraticCurveTo(Vector2 p1, Vector2 p, float width) {
     Vector2 _point = Vector2.zero;
     _point = _basicDraw.currentPoint;
@@ -486,9 +439,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     MoveTo(p);
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: LineTo
-  //--------------------------------------------------------------------------------
   public void LineTo(Vector2 p) {
     if((isUseWidth) && ((int)_width > 1)) {
       LineTo(p, _width);
@@ -497,7 +447,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _basicDraw.LineTo(p);
   }
 
-  //-----
   public void LineTo(Vector2 p, float width) {
     Vector2 _point = Vector2.zero;
     _point = _basicDraw.currentPoint;
@@ -505,9 +454,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     MoveTo(p);
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: Line
-  //--------------------------------------------------------------------------------
   public void Line(Vector2 p1, Vector2 p2) {
     if((isUseWidth) && ((int)_width > 1)) {
       Line(p1, p2, _width);
@@ -516,7 +462,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _basicDraw.Line(p1, p2);
   }
 
-  //-----
   public void Line(Vector2 p1, Vector2 p2, float width) {
     if((int)width == 1) {
       Line(p1, p2);
@@ -541,9 +486,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     }
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: Rect
-  //--------------------------------------------------------------------------------
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
     if((isUseWidth) && ((int)_width > 1)) {
       Rect(p1, p2, p3, p4, _width);
@@ -552,7 +494,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _basicDraw.Rect(p1, p2, p3, p4);
   }
 
-  //-----
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float width) {
     if((int)width == 1) {
       Rect(p1, p2, p3, p4);
@@ -565,15 +506,12 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     Polygon(rect_points, width);
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: Rounded Rect
-  //--------------------------------------------------------------------------------
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                         float r1, float r2,
-                         float angle) {
+                          float r1, float r2,
+                          float angle) {
     if((isUseWidth) && ((int)_width > 1)) {
       RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2,
-               angle, _width);
+                  angle, _width);
       return;
     }
     _basicDraw.MoveTo(p1);
@@ -593,13 +531,12 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _basicDraw.ArcTo(r1, r2, angle, false, true, p1);
   }
 
-  //-----
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                         float r1, float r2,
-                         float angle, float width) {
+                          float r1, float r2,
+                          float angle, float width) {
     if((int)width == 1) {
       RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2,
-               angle);
+                  angle);
       return;
     }
 
@@ -670,9 +607,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _graphics.FillPath(_graphicsPath);
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: Circle
-  //--------------------------------------------------------------------------------
   public void Circle(Vector2 p, float r) {
     if((isUseWidth) && ((int)_width > 1)) {
       Circle(p, r, _width);
@@ -681,7 +615,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _basicDraw.Circle(p, r);
   }
 
-  //-----
   public void Circle(Vector2 p, float r, float width) {
     if((int)width == 1) {
       Circle(p, r);
@@ -700,9 +633,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     }
   }
 
-  //--------------------------------------------------------------------------------
-  //Methods: Ellipse
-  //--------------------------------------------------------------------------------
   public void Ellipse(Vector2 p, float rx, float ry, float angle) {
     if((isUseWidth) && ((int)_width > 1)) {
       Ellipse(p, rx, ry, angle, _width);
@@ -711,7 +641,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     _basicDraw.Ellipse(p, rx, ry, angle);
   }
 
-  //-----
   public void Ellipse(Vector2 p, float rx, float ry, float angle, float width) {
     if((int)width == 1) {
       Ellipse(p, rx, ry, angle);
@@ -729,9 +658,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     }
   }
 
-  //--------------------------------------------------------------------------------
-  //Method: Polygon
-  //--------------------------------------------------------------------------------
   public void Polygon(Vector2[] points) {
     if((isUseWidth) && ((int)_width > 1)) {
       Polygon(points, _width);
@@ -747,7 +673,6 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     }
   }
 
-  //-----
   public void Polygon(Vector2[] points, float width) {
     if((int)width == 1) {
       Polygon(points);
@@ -773,15 +698,10 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     }
   }
 
-  //================================================================================
-  //--------------------------------------------------------------------------------
-  //Methods: DrawPath
-  //--------------------------------------------------------------------------------
   public void DrawPath(SVGGraphicsPath graphicsPath) {
     graphicsPath.RenderPath(this, false);
   }
 
-  //-----
   //Fill co Stroke trong do luon
   public void DrawPath(SVGGraphicsPath graphicsPath, float width) {
     _width = width;

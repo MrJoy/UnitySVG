@@ -9,7 +9,7 @@ public class SVGGArcAbs : ISVGPathSegment {
   private readonly bool sweepFlag;
 
   public SVGGArcAbs(float r1, float r2, float angle,
-                   bool largeArcFlag, bool sweepFlag, Vector2 p) {
+                    bool largeArcFlag, bool sweepFlag, Vector2 p) {
     this.r1 = r1;
     this.r2 = r2;
     this.angle = angle;

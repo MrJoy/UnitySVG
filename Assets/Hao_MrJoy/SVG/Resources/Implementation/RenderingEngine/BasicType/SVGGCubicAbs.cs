@@ -19,7 +19,7 @@ public class SVGGCubicAbs : ISVGPathSegment {
 
   public bool Render(SVGGraphicsPath path, ISVGPathDraw pathDraw) {
     pathDraw.CubicCurveTo(path.matrixTransform.Transform(p1), path.matrixTransform.Transform(p2),
-                        path.matrixTransform.Transform(point));
+                          path.matrixTransform.Transform(point));
     return false;
   }
 }

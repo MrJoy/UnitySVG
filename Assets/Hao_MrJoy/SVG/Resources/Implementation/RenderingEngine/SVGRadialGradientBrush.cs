@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class SVGRadialGradientBrush {
   private SVGRadialGradientElement _radialGradElement;
-  //-----
-  //Gradient Circle
+
   private float _cx, _cy, _r, _fx, _fy;
-  //-----
+
   private List<Color> _stopColorList;
   private List<float> _stopOffsetList;
-  //-----
+
   private SVGSpreadMethod _spreadMethod;
-  /*********************************************************************************/
+
   public SVGRadialGradientBrush(SVGRadialGradientElement radialGradElement) {
     _radialGradElement = radialGradElement;
     Initialize();
@@ -24,7 +23,7 @@ public class SVGRadialGradientBrush {
 
     SetGradientVector(graphicsPath);
   }
-  /*********************************************************************************/
+
   private void Initialize() {
     _cx = _radialGradElement.cx.value;
     _cy = _radialGradElement.cy.value;
@@ -42,7 +41,7 @@ public class SVGRadialGradientBrush {
     PreColorProcess(_vitriOffset);
 
   }
-  //-----
+
   //Sap xep lai Offset va Stop-color List
   private void GetStopList() {
     List<SVGStopElement> _stopList = _radialGradElement.stopList;
@@ -67,7 +66,7 @@ public class SVGRadialGradientBrush {
       _stopOffsetList.Add(100f);
     }
   }
-  //-----
+
   //Sua lai vi tri cua diem x,y
   private void FixF() {
     if((float)Math.Sqrt((_fx - _cx) * (_fx - _cx)) + ((_fy - _cy) * (_fy - _cy)) > _r) {
@@ -106,7 +105,7 @@ public class SVGRadialGradientBrush {
       }
     }
   }
-  //-----
+
   private float _deltaR, _deltaG, _deltaB;
   private int _vitriOffset = 0;
 
@@ -117,7 +116,7 @@ public class SVGRadialGradientBrush {
     _deltaG = (_stopColorList[index + 1].g - _stopColorList[index].g) / dp;
     _deltaB = (_stopColorList[index + 1].b - _stopColorList[index].b) / dp;
   }
-  //----
+
   //Tim giao diem giua duong thang(x,y)->(fx, fy)voi duong tron
   private Vector2 CrossPoint(float x, float y) {
     Vector2 _point = new Vector2(0f, 0f);
@@ -160,7 +159,7 @@ public class SVGRadialGradientBrush {
     }
     return _point;
   }
-  //-----
+
   //Tinh % tai vi tri x,y
   private float Percent(float x, float y) {
     Vector2 _cP = CrossPoint(x, y);
@@ -195,7 +194,7 @@ public class SVGRadialGradientBrush {
 
     return 100f;
   }
-  //-----
+
   private void SetGradientVector(SVGGraphicsPath graphicsPath) {
     Rect bound = graphicsPath.GetBound();
 
@@ -224,14 +223,11 @@ public class SVGRadialGradientBrush {
       _fy = bound.y + (bound.height * _fy / 100f);
     }
 
-
     if((float)Math.Sqrt((_cx - _fx) * (_cx - _fx) + (_cy - _fy) * (_cy - _fy)) > _r) {
       Vector2 _cP = CrossPoint(_cx, _cy);
       _fx = _cP.x;
       _fy = _cP.y;
     }
-
-
 
     if(_radialGradElement.gradientUnits == SVGGradientUnit.ObjectBoundingBox) {
       Vector2 _point = new Vector2(_cx, _cy);
@@ -245,10 +241,7 @@ public class SVGRadialGradientBrush {
       _fy = _point.y;
     }
   }
-  /*********************************************************************************/
-  //private float _ox = 0;
-  //private int _dem = 0;
-  //private bool _show = false;
+
   public Color GetColor(float x, float y) {
     Color _color = Color.black;
 

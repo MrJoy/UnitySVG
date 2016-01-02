@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class SVGLinearGradientBrush {
   private SVGLinearGradientElement _linearGradElement;
-  //-----
-  //Gradient Vector
   private float _x1, _y1, _x2, _y2;
-  //-----
+
   private List<Color> _stopColorList;
   private List<float> _stopOffsetList;
-  //-----
+
   private SVGSpreadMethod _spreadMethod;
-  /*********************************************************************************/
+
   public SVGLinearGradientBrush(SVGLinearGradientElement linearGradElement) {
     _linearGradElement = linearGradElement;
     Initialize();
@@ -26,8 +24,6 @@ public class SVGLinearGradientBrush {
     PreLocationProcess();
   }
 
-
-  /*********************************************************************************/
   private void Initialize() {
     _x1 = _linearGradElement.x1.value;
     _y1 = _linearGradElement.y1.value;
@@ -42,7 +38,7 @@ public class SVGLinearGradientBrush {
     _vitriOffset = 0;
     PreColorProcess(_vitriOffset);
   }
-  //-----
+
   private void GetStopList() {
     List<SVGStopElement> _stopList = _linearGradElement.stopList;
     int _length = _stopList.Count;
@@ -66,7 +62,7 @@ public class SVGLinearGradientBrush {
       _stopOffsetList.Add(100f);
     }
   }
-  //-----
+
   private float _deltaR, _deltaG, _deltaB;
   private int _vitriOffset = 0;
 
@@ -77,13 +73,12 @@ public class SVGLinearGradientBrush {
     _deltaG = (_stopColorList[index + 1].g - _stopColorList[index].g) / dp;
     _deltaB = (_stopColorList[index + 1].b - _stopColorList[index].b) / dp;
   }
-  //------
+
   private float _a, _b, _aP, _bP, _cP;
 
   private void PreLocationProcess() {
-    if((_x1 - _x2 == 0f) || (_y1 - _y2 == 0f)) {
+    if((_x1 - _x2 == 0f) || (_y1 - _y2 == 0f))
       return;
-    }
     float dx, dy;
     dx = _x2 - _x1;
     dy = _y2 - _y1;
@@ -116,10 +111,7 @@ public class SVGLinearGradientBrush {
     //-1 trai, 0 giua, 1 phai
     int vt = 0;
     if((d1 >= dd) || (d2 >= dd)) {
-      if(d1 < d2)
-        vt = -1;
-      else
-        vt = 1;
+      vt = (d1 < d2) ? -1 : 1;
     }
 
     int _reflectTimes;
@@ -146,24 +138,17 @@ public class SVGLinearGradientBrush {
 
     return 100f;
   }
-  //-----
+
   private void SetGradientVector(SVGGraphicsPath graphicsPath) {
     Rect bound = graphicsPath.GetBound();
-    if(_linearGradElement.x1.unitType == SVGLengthType.Percentage) {
+    if(_linearGradElement.x1.unitType == SVGLengthType.Percentage)
       _x1 = bound.x + (bound.width * _x1 / 100f);
-    }
-
-    if(_linearGradElement.y1.unitType == SVGLengthType.Percentage) {
+    if(_linearGradElement.y1.unitType == SVGLengthType.Percentage)
       _y1 = bound.y + (bound.height * _y1 / 100f);
-    }
-
-    if(_linearGradElement.x2.unitType == SVGLengthType.Percentage) {
+    if(_linearGradElement.x2.unitType == SVGLengthType.Percentage)
       _x2 = bound.x + (bound.width * _x2 / 100f);
-    }
-
-    if(_linearGradElement.y2.unitType == SVGLengthType.Percentage) {
+    if(_linearGradElement.y2.unitType == SVGLengthType.Percentage)
       _y2 = bound.y + (bound.height * _y2 / 100f);
-    }
 
     if(_linearGradElement.gradientUnits == SVGGradientUnit.ObjectBoundingBox) {
       Vector2 _point = graphicsPath.matrixTransform.Transform(new Vector2(_x1, _y1));
@@ -175,7 +160,7 @@ public class SVGLinearGradientBrush {
       _y2 = _point.y;
     }
   }
-  /*********************************************************************************/
+
   /*private float _ox = 0;
   private int _dem = 0;
   private bool _show = false;*/
