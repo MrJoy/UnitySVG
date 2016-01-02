@@ -1,6 +1,9 @@
 using UnityEngine;
 using System;
 
+// TODO: Find a way to break this the hell up.
+
+// TODO: Normalize conventions away from Java-style SetX to properties.
 public class SVGGraphicsFill : ISVGPathDraw {
   private const sbyte FILL_FLAG = -1;
   private readonly int[,] _neighbor = { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };

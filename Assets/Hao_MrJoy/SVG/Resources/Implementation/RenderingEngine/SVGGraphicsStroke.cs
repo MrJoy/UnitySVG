@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+// TODO: Find a way to break this the hell up.
+
+// TODO: Normalize conventions away from Java-style SetX to properties.
 public class SVGGraphicsStroke : ISVGPathDraw {
   private SVGGraphics _graphics;
   private SVGBasicDraw _basicDraw;
@@ -179,6 +182,7 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     Circle(p, r);
   }
 
+  // TODO: Kill this method.
   public void CircleTo(Vector2 p, float r, float width) {
     Circle(p, r, width);
   }
@@ -208,6 +212,7 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     Vector2 p1 = _basicDraw.currentPoint, p2 = p;
 
     float _radian = (angle * Mathf.PI / 180.0f);
+    // TODO: Do we have single-precision methods we can use here?  How's the performance?
     float _CosRadian = (float)Math.Cos(_radian);
     float _SinRadian = (float)Math.Sin(_radian);
     float temp1 = (p1.x - p2.x) / 2.0f;
@@ -544,6 +549,8 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     Line(p3, p4, width);
     Line(p5, p6, width);
     Line(p7, p8, width);
+    // TODO: IIRC, `Vector2.zero` is a p/invoke.  Would it be safe to chain assignments here?  Would it be more
+    // TODO: performant?  What about just calling `new Vector2(0f, 0f)`?
     Vector2 _p1 = Vector2.zero;
     Vector2 _p2 = Vector2.zero;
     Vector2 _p3 = Vector2.zero;

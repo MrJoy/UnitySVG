@@ -1,5 +1,12 @@
 using UnityEngine;
 
+// TODO: Confirm that there's actually value in this.  I suspect it only appears to be smaller due to how Unity's
+// TODO: profiler is accounting for things.  Things that may impact this:
+// TODO: * Whether texture is marked as readable.
+// TODO: * Whether rendering pipeline is GLES or Metal (not sure about analogues on the Direct3D front).
+// TODO:   * Specifically, whether or not semantics require the GL stack to keep a local copy of the texture data in
+// TODO:     host RAM to avoid clobbering the GPU if the GL app writes to that area again.
+// TODO: * Internal representation of texture (24bpp vs. 32bpp).
 public class SVGDeviceSmall : ISVGDevice {
   private Texture2D _texture;
 

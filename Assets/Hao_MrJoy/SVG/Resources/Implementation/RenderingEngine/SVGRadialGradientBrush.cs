@@ -69,6 +69,7 @@ public class SVGRadialGradientBrush {
 
   //Sua lai vi tri cua diem x,y
   private void FixF() {
+    // TODO: Measure performance of comparing squared values instead of taking square root.
     if((float)Math.Sqrt((_fx - _cx) * (_fx - _cx)) + ((_fy - _cy) * (_fy - _cy)) > _r) {
 
       float dx = _fx - _cx;

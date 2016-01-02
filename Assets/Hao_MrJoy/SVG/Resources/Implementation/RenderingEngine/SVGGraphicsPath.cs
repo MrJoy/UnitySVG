@@ -6,6 +6,9 @@ public enum SVGFillRule : ushort {
   EvenOdd = 1
 }
 
+// TODO: Find a way to break this the hell up.
+
+// TODO: Normalize conventions away from Java-style SetX to properties.
 public class SVGGraphicsPath {
   private Vector2 beginPoint;
 

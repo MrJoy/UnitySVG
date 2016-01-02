@@ -2,6 +2,9 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
+// TODO: Find a way to break this the hell up.
+
+// TODO: Normalize conventions away from Java-style SetX to properties.
 public class SVGGraphics {
   private ISVGDevice _device;
 
