@@ -7,4 +7,4 @@ BASE_DIR=$(
   /bin/pwd
 )
 
-mono "${BASE_DIR}"/packages/NArrange.PreBuild/tools/narrange-console.exe -c:"${BASE_DIR}/NArrange.xml" "$@"
+mono "${BASE_DIR}"/packages/NArrange.PreBuild/tools/narrange-console.exe -c:"${BASE_DIR}/NArrange.xml" Assets/ "$@"
