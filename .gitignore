@@ -24,7 +24,6 @@ ExportedObj/
 *.user
 *.unityproj
 *.booproj
-Assets/StyleCop.Cache*
 # ============ #
 # OS generated #
 # ============ #
