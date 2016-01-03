@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+BASE_DIR=$(
+  cd "$(dirname "$(readlink "$0" || echo "$0")")/.."
+  /bin/pwd
+)
+
+mono "${BASE_DIR}"/.paket/packet.exe "$@"
