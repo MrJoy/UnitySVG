@@ -36,14 +36,14 @@ I strongly suggest installing and using [SVGO](https://github.com/svg/svgo) to o
 
 ## History
 
-The initial version of the code is a modified version of [SavageSVG](http://eric.extremeboredom.net/2006/09/08/262)
+The initial version of the code is a modified version of [SavageSVG](https://github.com/codebutler/savagesvg)
 
 This fork offer major improvements in memory usage (as much as 500:1 in some extreme cases), though I have yet to appreciably improve either parsing or rendering times on hardware that isn't heavily memory-bound.
 
 
 ## License
 
-I'm having trouble tracking down a copy of the original code, but I specifically sought out a solution that was usable in binary-only distributions and had been conversing with SavageSVG's author at the time this code was originally put together; it is almost certain that it is usable commercially, but I will sort out the specifics ASAP.
+See [LICENSE](LICENSE) for more information.
 
 
 ## TODO
