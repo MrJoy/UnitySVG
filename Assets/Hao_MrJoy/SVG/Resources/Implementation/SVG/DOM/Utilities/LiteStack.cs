@@ -40,5 +40,5 @@ public class LiteStack<T> {
 }
 
 // TODO: Migrate to type-safe stacks everywhere.
-public class LiteStack : LiteStack<object> {
-}
+//public class LiteStack : LiteStack<object> {
+//}

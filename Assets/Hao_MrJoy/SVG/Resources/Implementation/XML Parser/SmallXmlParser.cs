@@ -51,7 +51,7 @@ public class SmallXmlParser {
 
   private IContentHandler handler;
   private TextReader reader;
-  private readonly LiteStack elementNames = new LiteStack();
+  private readonly LiteStack<string> elementNames = new LiteStack<string>();
   private readonly StringBuilder buffer = new StringBuilder(200);
   private char[] nameBuffer = new char[30];
 
