@@ -12,22 +12,22 @@
             <!-- List of handled source file extensions -->
             <SourceExtensions>
                 <Extension Name="cs">
-                    <Filter Condition="!($(File.Name) : '.Designer.')"/>
+                    <Filter Condition="!($(File.Path) =~ 'Assets/(UnityGUIExtensions|Editor/UnityREPL)')"/>
                 </Extension>
                 <!-- If your project uses other extensions for C# files add them here-->
             </SourceExtensions>
         </SourceHandler>
     </Handlers>
     <!--For encoding, Codepage can be any of the following:
-        "Detect"  - Detect file encodings (NArrange default) 
+        "Detect"  - Detect file encodings (NArrange default)
         "Default" - Use the system default ANSI encoding (e.g. CodePage 1252 Western-European)
         CodePage  - e.g. "65001" for UTF-8
      -->
-    <Encoding CodePage="Detect"/>
+    <Encoding CodePage="65001"/>
     <Formatting>
-        <Tabs Style="Spaces" SpacesPerTab="4"/>
+        <Tabs Style="Spaces" SpacesPerTab="2"/>
         <ClosingComments Enabled="false" Format="End $(ElementType) $(Name)"/>
-        <Regions EndRegionNameEnabled="true" Style="Default"
+        <Regions EndRegionNameEnabled="true" Style="NoDirective"
                  CommentDirectiveBeginPattern="^\s?\$\(\s?Begin\s?\)\s?(?&lt;Name&gt;.*)$"
                  CommentDirectiveEndPattern="^\s?\$\(\s?End\s?\)\s?(?&lt;Name&gt;.*)?$"
                  CommentDirectiveBeginFormat=" $(Begin) {0}"
@@ -45,10 +45,7 @@
             </Elements>
         </Region>
         <Element Id="DefaultUsing" Type="Using">
-            <Group By="Type" SeparatorType="NewLine" Direction="Ascending">
-              <!-- Note: System reference group is always placed first -->
-              <Group By="Name" AttributeCapture="^(.*?)(\.|$)" SeparatorType="NewLine" Direction="Ascending"/>
-            </Group>
+            <Group By="None" SeparatorType="NewLine" Direction="Ascending"/>
             <!-- Sort by name within groups -->
             <Sort By="Name"/>
         </Element>
