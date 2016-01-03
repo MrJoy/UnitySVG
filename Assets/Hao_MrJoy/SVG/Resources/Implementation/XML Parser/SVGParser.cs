@@ -94,78 +94,25 @@ public class SVGParser : SmallXmlParser.IContentHandler {
         exitFlag = true;
         continue;
       }
+
       switch(Node.Name) {
-      case SVGNodeName.Rect:
-        elementList.Add(new SVGRectElement(Node.Attributes,
-                                           summaryTransformList,
-                                           paintable,
-                                           render));
-        break;
-      case SVGNodeName.Line:
-        elementList.Add(new SVGLineElement(Node.Attributes,
-                                           summaryTransformList,
-                                           paintable,
-                                           render));
-        break;
-      case SVGNodeName.Circle:
-        elementList.Add(new SVGCircleElement(Node.Attributes,
-                                             summaryTransformList,
-                                             paintable,
-                                             render));
-        break;
-      case SVGNodeName.Ellipse:
-        elementList.Add(new SVGEllipseElement(Node.Attributes,
-                                              summaryTransformList,
-                                              paintable,
-                                              render));
-        break;
-      case SVGNodeName.PolyLine:
-        elementList.Add(new SVGPolylineElement(Node.Attributes,
-                                               summaryTransformList,
-                                               paintable,
-                                               render));
-        break;
-      case SVGNodeName.Polygon:
-        elementList.Add(new SVGPolygonElement(Node.Attributes,
-                                              summaryTransformList,
-                                              paintable,
-                                              render));
-        break;
-      case SVGNodeName.Path:
-        elementList.Add(new SVGPathElement(Node.Attributes,
-                                           summaryTransformList,
-                                           paintable,
-                                           render));
-        break;
-      case SVGNodeName.SVG:
-        elementList.Add(new SVGSVGElement(this,
-                                          summaryTransformList,
-                                          paintable,
-                                          render));
-        break;
-      case SVGNodeName.G:
-        elementList.Add(new SVGGElement(this,
-                                        summaryTransformList,
-                                        paintable,
-                                        render));
-        break;
-      //--------
-      case SVGNodeName.LinearGradient:
-        paintable.AppendLinearGradient(new SVGLinearGradientElement(this, Node.Attributes));
-        break;
-      //--------
-      case SVGNodeName.RadialGradient:
-        paintable.AppendRadialGradient(new SVGRadialGradientElement(this, Node.Attributes));
-        break;
-      case SVGNodeName.Defs:
-        GetElementList(elementList, paintable, render, summaryTransformList);
-        break;
-      case SVGNodeName.Title:
-        GetElementList(elementList, paintable, render, summaryTransformList);
-        break;
-      case SVGNodeName.Desc:
-        GetElementList(elementList, paintable, render, summaryTransformList);
-        break;
+      case SVGNodeName.Rect:     elementList.Add(new SVGRectElement(Node.Attributes, summaryTransformList, paintable, render)); break;
+      case SVGNodeName.Line:     elementList.Add(new SVGLineElement(Node.Attributes, summaryTransformList, paintable, render)); break;
+      case SVGNodeName.Circle:   elementList.Add(new SVGCircleElement(Node.Attributes, summaryTransformList, paintable, render)); break;
+      case SVGNodeName.Ellipse:  elementList.Add(new SVGEllipseElement(Node.Attributes, summaryTransformList, paintable, render)); break;
+      case SVGNodeName.PolyLine: elementList.Add(new SVGPolylineElement(Node.Attributes, summaryTransformList, paintable, render)); break;
+      case SVGNodeName.Polygon:  elementList.Add(new SVGPolygonElement(Node.Attributes, summaryTransformList, paintable, render)); break;
+      case SVGNodeName.Path:     elementList.Add(new SVGPathElement(Node.Attributes, summaryTransformList, paintable, render)); break;
+
+      case SVGNodeName.SVG:      elementList.Add(new SVGSVGElement(this, summaryTransformList, paintable, render)); break;
+      case SVGNodeName.G:        elementList.Add(new SVGGElement(this, summaryTransformList, paintable, render)); break;
+
+      case SVGNodeName.LinearGradient: paintable.AppendLinearGradient(new SVGLinearGradientElement(this, Node.Attributes)); break;
+      case SVGNodeName.RadialGradient: paintable.AppendRadialGradient(new SVGRadialGradientElement(this, Node.Attributes)); break;
+
+      case SVGNodeName.Defs:  GetElementList(elementList, paintable, render, summaryTransformList); break;
+      case SVGNodeName.Title: GetElementList(elementList, paintable, render, summaryTransformList); break;
+      case SVGNodeName.Desc:  GetElementList(elementList, paintable, render, summaryTransformList); break;
       }
     }
   }

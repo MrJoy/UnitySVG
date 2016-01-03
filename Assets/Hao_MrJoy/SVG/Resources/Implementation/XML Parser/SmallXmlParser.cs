@@ -396,8 +396,8 @@ public class SmallXmlParser {
   private void ReadAttribute(Dictionary<string, string> a) {
     SkipWhitespaces(true);
     if(Peek() == '/' || Peek() == '>')
-			// came here just to spend trailing whitespaces
-			return;
+      // came here just to spend trailing whitespaces
+      return;
 
     string name = ReadName();
     string value;
@@ -462,11 +462,7 @@ internal sealed class SmallXmlParserException : SystemException {
     this.column = column;
   }
 
-  public int Line {
-    get { return line; }
-  }
+  public int Line { get { return line; } }
 
-  public int Column {
-    get { return column; }
-  }
+  public int Column { get { return column; } }
 }
