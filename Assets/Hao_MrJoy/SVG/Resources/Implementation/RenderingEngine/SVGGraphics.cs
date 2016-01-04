@@ -402,7 +402,7 @@ public class SVGGraphics {
                               float r1, float r2, float angle,
                               SVGColor fillColor, SVGColor? strokeColor) {
     graphicsFill.RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle,
-                              fillColor, strokeColor);
+                             fillColor, strokeColor);
   }
 
   public void FillRoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
