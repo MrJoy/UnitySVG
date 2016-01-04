@@ -19,7 +19,6 @@ public enum DOMExceptionType {
   InvalidAccessErr
 }
 
-
 [Serializable]
 public class DOMException : Exception {
   protected DOMException(string msg, Exception innerException) : base(msg, innerException) {
