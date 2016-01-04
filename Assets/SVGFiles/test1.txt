@@ -1,9 +1,9 @@
 <?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="1000" height="1000" viewBox="0 0 1000 1000" version="1.1"
      xmlns="http://www.w3.org/2000/svg">
-  <desc>Example radgrad01 - fill a rectangle by referencing a 
+  <desc>Example radgrad01 - fill a rectangle by referencing a
            radial gradient paint server</desc>
   <g>
     <defs>
@@ -12,14 +12,14 @@
         <stop offset="50%" stop-color="yellow" />
         <stop offset="100%" stop-color="green" />
       </radialGradient>
-      
+
       <radialGradient id="MyGradient2" cx="400" cy="600" r="100" fx="350" fy="600" spreadMethod="repeat">
         <stop offset="0%" stop-color="red" />
         <stop offset="50%" stop-color="yellow" />
         <stop offset="100%" stop-color="green" />
       </radialGradient>
     </defs>
-    <rect fill="url(#MyGradient1)" stroke="black" stroke-width="6"  
+    <rect fill="url(#MyGradient1)" stroke="black" stroke-width="6"
           x="100" y="100" width="600" height="200"/>
   </g>
 </svg>

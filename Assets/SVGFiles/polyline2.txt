@@ -1,16 +1,16 @@
 <?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="1024" height="1024" viewBox="0 0 1200 1200"
      xmlns="http://www.w3.org/2000/svg" version="1.1">
 	<title>Example arcs01 - arc commands in path data</title>
 	<polyline stroke="blue"
 			points="50,375 150,375 150,325 250,325 250,375 350,375 350,250 450,250 450,375 550,375 550,175 650,175 650,375 750,375 750,100 850,100 850,375 950,375 950,25 1050,25 1050,375 1150,375" />
-	
+
 	<g transform="translate(0 400) rotate(30)" stroke-linejoin = "bevel">
 		<polygon fill="red" stroke="blue"
 			points="350,75 379,161 469,161 397,215 423,301 350,250 277,301 303,215 231,161 321,161" />
-	
+
 		<polygon fill="lime" stroke="blue"
 			points="850,75 958,137.5 958,262.5 850,325 742,262.6 742,137.5" />
 	</g>
