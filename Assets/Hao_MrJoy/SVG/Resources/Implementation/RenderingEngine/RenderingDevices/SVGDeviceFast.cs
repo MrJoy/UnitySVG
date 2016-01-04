@@ -11,13 +11,13 @@ public class SVGDeviceFast : ISVGDevice {
   public int Height { get { return _height; } }
 
   private Color _color = Color.white;
-  private Color32[] pixels;
+  private Color[] pixels;
 
   public void SetDevice(int width, int height) {
     _width = width;
     _height = height;
     if(pixels == null || _width != width || _height != height)
-      pixels = new Color32[_width * _height];
+      pixels = new Color[_width * _height];
   }
 
   public void SetPixel(int x, int y) {
@@ -38,7 +38,7 @@ public class SVGDeviceFast : ISVGDevice {
       _texture = new Texture2D(_width, _height, TextureFormat.RGB24, false);
       _texture.hideFlags = HideFlags.HideAndDontSave;
     }
-    _texture.SetPixels32(pixels);
+    _texture.SetPixels(pixels);
     _texture.Apply();
     return _texture;
   }
