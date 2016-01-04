@@ -343,23 +343,12 @@ public class SmallXmlParser {
       string name = ReadName();
       Expect(';');
       switch(name) {
-      case "amp":
-        buffer.Append('&');
-        break;
-      case "quot":
-        buffer.Append('"');
-        break;
-      case "apos":
-        buffer.Append('\'');
-        break;
-      case "lt":
-        buffer.Append('<');
-        break;
-      case "gt":
-        buffer.Append('>');
-        break;
-      default:
-        throw Error("General non-predefined entity reference is not supported in this parser.");
+      case "amp":   buffer.Append('&'); break;
+      case "quot":  buffer.Append('"'); break;
+      case "apos":  buffer.Append('\''); break;
+      case "lt":    buffer.Append('<'); break;
+      case "gt":    buffer.Append('>'); break;
+      default:      throw Error("General non-predefined entity reference is not supported in this parser.");
       }
     }
   }
@@ -370,14 +359,10 @@ public class SmallXmlParser {
       // hex
       Read();
       for(int i = Peek(); i >= 0; i = Peek()) {
-        if('0' <= i && i <= '9')
-          n = n << 4 + i - '0';
-        else if('A' <= i && i <= 'F')
-          n = n << 4 + i - 'A' + 10;
-        else if('a' <= i && i <= 'f')
-          n = n << 4 + i - 'a' + 10;
-        else
-          break;
+        if('0' <= i && i <= '9')      n = n << 4 + i - '0';
+        else if('A' <= i && i <= 'F') n = n << 4 + i - 'A' + 10;
+        else if('a' <= i && i <= 'f') n = n << 4 + i - 'a' + 10;
+        else break;
         Read();
       }
     } else {
@@ -404,14 +389,9 @@ public class SmallXmlParser {
     Expect('=');
     SkipWhitespaces();
     switch(Read()) {
-    case '\'':
-      value = ReadUntil('\'', true);
-      break;
-    case '"':
-      value = ReadUntil('"', true);
-      break;
-    default:
-      throw Error("Invalid attribute value markup.");
+    case '\'':  value = ReadUntil('\'', true); break;
+    case '"':   value = ReadUntil('"', true); break;
+    default:    throw Error("Invalid attribute value markup.");
     }
     a.Add(name, value);
   }
@@ -441,12 +421,9 @@ public class SmallXmlParser {
     Expect('-');
     Expect('-');
     while(true) {
-      if(Read() != '-')
-        continue;
-      if(Read() != '-')
-        continue;
-      if(Read() != '>')
-        throw Error("'--' is not allowed inside comment markup.");
+      if(Read() != '-') continue;
+      if(Read() != '-') continue;
+      if(Read() != '>') throw Error("'--' is not allowed inside comment markup.");
       break;
     }
   }
