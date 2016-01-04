@@ -3,9 +3,17 @@ using System.Diagnostics;
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
+[DisallowMultipleComponent()]
 public class Invoke : MonoBehaviour {
   public TextAsset SVGFile = null;
-  public bool useFastButBloatedRenderer = false;
+  [Tooltip("Use a faster rendering approach that takes notably more memory.")]
+  public bool fastRenderer = false;
+
+  [Space(15)]
+  public TextureWrapMode wrapMode = TextureWrapMode.Clamp;
+  public FilterMode filterMode = FilterMode.Trilinear;
+  [Range(0, 9)]
+  public int anisoLevel = 9;
 
   private void Start() {
     //yield return new WaitForSeconds(0.1f);
@@ -15,7 +23,7 @@ public class Invoke : MonoBehaviour {
       w.Reset();
       w.Start();
       ISVGDevice device;
-      if(useFastButBloatedRenderer)
+      if(fastRenderer)
         device = new SVGDeviceFast();
       else
         device = new SVGDeviceSmall();
@@ -32,11 +40,14 @@ public class Invoke : MonoBehaviour {
       w.Reset();
       w.Start();
       var myRenderer = GetComponent<Renderer>();
-      myRenderer.material.mainTexture = implement.GetTexture();
+      var result = implement.GetTexture();
+      result.wrapMode   = wrapMode;
+      result.filterMode = filterMode;
+      result.anisoLevel = anisoLevel;
+      myRenderer.material.mainTexture = result;
       w.Stop();
       long r = w.ElapsedMilliseconds;
       UnityEngine.Debug.LogFormat("Construction: {0} ms, Processing: {1} ms, Rendering: {2} ms", c, p, r);
-      myRenderer.material.mainTexture.filterMode = FilterMode.Trilinear;
     }
   }
 }
