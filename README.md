@@ -74,11 +74,14 @@ More ambitious ideas include:
 
 #### OS X
 
-You need the Mono MDK.  The best way to ensure you get this, plus have paths set up properly is to use [HomeBrew](http://brew.sh) and [CaskRoom](http://caskroom.io).
-
-Make sure you don't have the HomeBrew Mono package installed first, as the two will conflict.
+You need Mono.  The best way to ensure you get this, plus have paths set up properly is to use [HomeBrew](http://brew.sh).
 
 ```bash
-brew uninstall mono
-brew cask install mono-mdk
+brew install astyle mono
+```
+
+Make sure you add this to your `.profile` (or whatever file is appropriate to your shell), and restart your terminal:
+
+```bash
+export MONO_GAC_PREFIX="/usr/local"
 ```

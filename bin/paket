@@ -7,4 +7,4 @@ BASE_DIR=$(
   /bin/pwd
 )
 
-mono "${BASE_DIR}"/.paket/packet.exe "$@"
+mono "${BASE_DIR}"/.paket/paket.exe "$@"
