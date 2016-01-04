@@ -22,7 +22,7 @@ public class SVGDeviceFast : ISVGDevice {
 
   public void SetPixel(int x, int y) {
     if((x >= 0) && (x < _width) && (y >= 0) && (y < _height))
-      pixels[y * _height + x] = _color;
+      pixels[y * _height + (_width - x)] = _color;
   }
 
   public Color GetPixel(int x, int y) {

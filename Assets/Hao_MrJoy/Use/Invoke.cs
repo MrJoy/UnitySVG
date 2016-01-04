@@ -36,10 +36,6 @@ public class Invoke : MonoBehaviour {
       w.Stop();
       long r = w.ElapsedMilliseconds;
       UnityEngine.Debug.LogFormat("Construction: {0} ms, Processing: {1} ms, Rendering: {2} ms", c, p, r);
-
-      Vector2 ts = myRenderer.material.mainTextureScale;
-      ts.x *= -1; // TODO: Fix the coordinate system we render with to avoid the need for this.
-      myRenderer.material.mainTextureScale = ts;
       myRenderer.material.mainTexture.filterMode = FilterMode.Trilinear;
     }
   }
