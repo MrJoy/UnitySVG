@@ -67,8 +67,8 @@ public class SmallXmlParser {
     string[] arr = new string[elementNames.Count];
     // COMPACT FRAMEWORK NOTE: CopyTo is not visible through the Stack class
     (elementNames as ICollection).CopyTo(arr, 0);
-    return Error(String.Format(
-      "Unexpected end of stream. Element stack content is {0}", String.Join(",", arr)));
+    return Error(String.Format("Unexpected end of stream. Element stack content is {0}",
+                               String.Join(",", arr)));
   }
 
   private bool IsNameChar(char c, bool start) {

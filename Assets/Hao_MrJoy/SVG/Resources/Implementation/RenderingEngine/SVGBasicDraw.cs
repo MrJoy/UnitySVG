@@ -9,13 +9,9 @@ public class SVGBasicDraw {
     private readonly float _delta;
     private readonly Vector2 _point;
 
-    public float t {
-      get { return _delta; }
-    }
+    public float t { get { return _delta; } }
 
-    public Vector2 point {
-      get { return _point; }
-    }
+    public Vector2 point { get { return _point; } }
 
     public Vector2Ext(Vector2 point, float t) {
       _point = point;
@@ -26,21 +22,16 @@ public class SVGBasicDraw {
   private Vector2 _currentPoint;
   public SetPixelDelegate SetPixel;
 
-  public Vector2 currentPoint {
-    get { return _currentPoint; }
-  }
+  public Vector2 currentPoint { get { return _currentPoint; } }
 
-  public SetPixelDelegate SetPixelMethod {
-    set { SetPixel = value; }
-  }
+  public SetPixelDelegate SetPixelMethod { set { SetPixel = value; } }
 
   public SVGBasicDraw() {
     _currentPoint = new Vector2(0f, 0f);
   }
 
   private static void Swap<T>(ref T x1, ref T x2) {
-    T temp;
-    temp = x1;
+    T temp = x1;
     x1 = x2;
     x2 = temp;
   }
@@ -66,15 +57,11 @@ public class SVGBasicDraw {
       Swap(ref y0, ref y1);
     }
 
-    int deltax = x1 - x0;
-    int deltay = Math.Abs(y1 - y0);
-    int error = -(deltax + 1) / 2;
-    int ystep;
-    int y = y0;
-    if(y0 < y1)
-      ystep = 1;
-    else
-      ystep = -1;
+    int deltax = x1 - x0,
+        deltay = Math.Abs(y1 - y0),
+        error = -(deltax + 1) / 2,
+        y = y0,
+        ystep = (y0 < y1) ? 1 : -1;
 
     for(int x = x0; x <= x1; x++) {
       if(steep)
