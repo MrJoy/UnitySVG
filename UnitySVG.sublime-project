@@ -1,0 +1,28 @@
+{
+  "folders":
+  [
+    {
+      "path": ".",
+      "folder_exclude_patterns": [
+        ".git",
+        ".paket",
+        "obj",
+        "packages",
+        "Temp",
+        "Library",
+        "ProjectSettings"
+      ],
+      "file_exclude_patterns": [
+        ".git",
+        "*.sublime-workspace",
+        "*.userprefs",
+        "*.sln",
+        "*.pidb",
+        "*.csproj",
+        "*.unityproj",
+        "*.booproj",
+        "*.meta"
+      ]
+    }
+  ]
+}
