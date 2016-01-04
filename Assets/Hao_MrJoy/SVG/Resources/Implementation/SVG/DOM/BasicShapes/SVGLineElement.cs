@@ -36,7 +36,7 @@ public class SVGLineElement : SVGTransformable, ISVGDrawable {
       return;
     Matrix2x3 _matrix = transformMatrix;
     float _width = _paintable.strokeWidth;
-    _render.SetStrokeLineCap(_paintable.strokeLineCap);
+    _render.StrokeLineCap = _paintable.strokeLineCap;
 
     Vector2 p1 = _matrix.Transform(new Vector2(_x1.value, _y1.value));
     Vector2 p2 = _matrix.Transform(new Vector2(_x2.value, _y2.value));

@@ -347,8 +347,8 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
 
   public void Render() {
     CreateGraphicsPath();
-    _render.SetStrokeLineCap(_paintable.strokeLineCap);
-    _render.SetStrokeLineJoin(_paintable.strokeLineJoin);
+    _render.StrokeLineCap = _paintable.strokeLineCap;
+    _render.StrokeLineJoin = _paintable.strokeLineJoin;
     switch(_paintable.GetPaintType()) {
     case SVGPaintMethod.SolidGradientFill:
       _render.FillPath(_paintable.fillColor.Value, _graphicsPath);

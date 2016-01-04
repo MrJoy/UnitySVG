@@ -43,7 +43,7 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
   }
 
   public void Render() {
-    _render.SetSize(_width.value, _height.value);
+    _render.Size = new Vector2(_width.value, _height.value);
     for(int i = 0; i < _elementList.Count; ++i) {
       ISVGDrawable temp = _elementList[i];
       if(temp != null)

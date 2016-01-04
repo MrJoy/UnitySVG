@@ -27,12 +27,12 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   private void StrokeLineCapLeft(Vector2 p1, Vector2 p2, float width) {
     if((int)width == 1)
       return;
-    if((_graphics.strokeLineCap == SVGStrokeLineCapMethod.Unknown) ||
-        (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
+    if((_graphics.StrokeLineCap == SVGStrokeLineCapMethod.Unknown) ||
+        (_graphics.StrokeLineCap == SVGStrokeLineCapMethod.Butt))
       return;
     if(((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)) <= 4f)
       return;
-    if(_graphics.strokeLineCap == SVGStrokeLineCapMethod.Round) {
+    if(_graphics.StrokeLineCap == SVGStrokeLineCapMethod.Round) {
       _graphics.FillCircle(p1, width / 2f);
       return;
     }
@@ -62,13 +62,13 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   private void StrokeLineCapRight(Vector2 p1, Vector2 p2, float width) {
     if((int)width == 1)
       return;
-    if((_graphics.strokeLineCap == SVGStrokeLineCapMethod.Unknown) ||
-        (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
+    if((_graphics.StrokeLineCap == SVGStrokeLineCapMethod.Unknown) ||
+        (_graphics.StrokeLineCap == SVGStrokeLineCapMethod.Butt))
       return;
 
     if(((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)) <= 4f)
       return;
-    if(_graphics.strokeLineCap == SVGStrokeLineCapMethod.Round) {
+    if(_graphics.StrokeLineCap == SVGStrokeLineCapMethod.Round) {
       _graphics.FillCircle(p2, width / 2f);
       return;
     }
@@ -102,13 +102,13 @@ public class SVGGraphicsStroke : ISVGPathDraw {
       return;
     if(((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)) <= 4f)
       return;
-    if(_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Round) {
+    if(_graphics.StrokeLineJoin == SVGStrokeLineJoinMethod.Round) {
       _graphics.FillCircle(p2, width / 2f);
       return;
     }
 
-    if((_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Miter) ||
-        (_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Unknown)) {
+    if((_graphics.StrokeLineJoin == SVGStrokeLineJoinMethod.Miter) ||
+        (_graphics.StrokeLineJoin == SVGStrokeLineJoinMethod.Unknown)) {
       Vector2 _p1 = Vector2.zero;
       Vector2 _p2 = Vector2.zero;
       Vector2 _p3 = Vector2.zero;
@@ -142,7 +142,7 @@ public class SVGGraphicsStroke : ISVGPathDraw {
       _graphics.FillPolygon(joint_points);
       return;
     }
-    if(_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Bevel) {
+    if(_graphics.StrokeLineJoin == SVGStrokeLineJoinMethod.Bevel) {
       Vector2 _p1 = Vector2.zero;
       Vector2 _p2 = Vector2.zero;
       Vector2 _p3 = Vector2.zero;
