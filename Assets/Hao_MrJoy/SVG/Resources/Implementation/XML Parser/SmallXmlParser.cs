@@ -433,7 +433,8 @@ internal sealed class SmallXmlParserException : SystemException {
   private readonly int line;
   private readonly int column;
 
-  public SmallXmlParserException(string msg, int line, int column) : base(String.Format("{0}. At ({1},{2})", msg, line, column)) {
+  public SmallXmlParserException(string msg, int line, int column)
+  : base(String.Format("{0}. At ({1},{2})", msg, line, column)) {
     this.line = line;
     this.column = column;
   }

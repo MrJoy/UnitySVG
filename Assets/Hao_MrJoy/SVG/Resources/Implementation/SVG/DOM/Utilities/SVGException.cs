@@ -14,7 +14,8 @@ public class SVGException : DOMException {
   public SVGException(SVGExceptionType errorCode, string message) : this(errorCode, message, null) {
   }
 
-  public SVGException(SVGExceptionType errorCode, string message, Exception innerException) : base(message, innerException) {
+  public SVGException(SVGExceptionType errorCode, string message, Exception innerException)
+  : base(message, innerException) {
     code = errorCode;
   }
 
