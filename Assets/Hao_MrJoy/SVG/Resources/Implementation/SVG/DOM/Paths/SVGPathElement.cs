@@ -56,159 +56,141 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
         _segList.AppendItem(CreateSVGPathSegClosePath());
         ++i;
         break;
-      case 'M':
-        {
-          try {
-            float a = ReadFloat(dstr, ref i);
-            float b = ReadFloat(dstr, ref i);
-            _segList.AppendItem(new SVGPathSegMovetoAbs(a, b));
-          } catch(Exception) {
-            Debug.Log("exception when parsing " + dstr);
-            throw;
-          }
-        }
-        break;
-      case 'm':
-        {
+      case 'M': {
+        try {
           float a = ReadFloat(dstr, ref i);
           float b = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegMovetoRel(a, b));
+          _segList.AppendItem(new SVGPathSegMovetoAbs(a, b));
+        } catch(Exception) {
+          Debug.Log("exception when parsing " + dstr);
+          throw;
         }
         break;
-      case 'L':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegLinetoAbs(a, b));
-        }
+      }
+      case 'm': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegMovetoRel(a, b));
         break;
-      case 'l':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegLinetoRel(a, b));
-        }
+      }
+      case 'L': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegLinetoAbs(a, b));
         break;
-      case 'C':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          float c = ReadFloat(dstr, ref i);
-          float d = ReadFloat(dstr, ref i);
-          float e = ReadFloat(dstr, ref i);
-          float f = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegCurvetoCubicAbs(a, b, c, d, e, f));
-        }
+      }
+      case 'l': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegLinetoRel(a, b));
         break;
-      case 'c':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          float c = ReadFloat(dstr, ref i);
-          float d = ReadFloat(dstr, ref i);
-          float e = ReadFloat(dstr, ref i);
-          float f = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegCurvetoCubicRel(a, b, c, d, e, f));
-        }
+      }
+      case 'C': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        float c = ReadFloat(dstr, ref i);
+        float d = ReadFloat(dstr, ref i);
+        float e = ReadFloat(dstr, ref i);
+        float f = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegCurvetoCubicAbs(a, b, c, d, e, f));
         break;
-      case 'S':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          float c = ReadFloat(dstr, ref i);
-          float d = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegCurvetoCubicSmoothAbs(a, b, c, d));
-        }
+      }
+      case 'c': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        float c = ReadFloat(dstr, ref i);
+        float d = ReadFloat(dstr, ref i);
+        float e = ReadFloat(dstr, ref i);
+        float f = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegCurvetoCubicRel(a, b, c, d, e, f));
         break;
-      case 's':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          float c = ReadFloat(dstr, ref i);
-          float d = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegCurvetoCubicSmoothRel(a, b, c, d));
-        }
+      }
+      case 'S': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        float c = ReadFloat(dstr, ref i);
+        float d = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegCurvetoCubicSmoothAbs(a, b, c, d));
         break;
-      case 'Q':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          float c = ReadFloat(dstr, ref i);
-          float d = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegCurvetoQuadraticAbs(a, b, c, d));
-        }
+      }
+      case 's': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        float c = ReadFloat(dstr, ref i);
+        float d = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegCurvetoCubicSmoothRel(a, b, c, d));
         break;
-      case 'q':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          float c = ReadFloat(dstr, ref i);
-          float d = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegCurvetoQuadraticRel(a, b, c, d));
-        }
+      }
+      case 'Q': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        float c = ReadFloat(dstr, ref i);
+        float d = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegCurvetoQuadraticAbs(a, b, c, d));
         break;
-      case 'T':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegCurvetoQuadraticSmoothAbs(a, b));
-        }
+      }
+      case 'q': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        float c = ReadFloat(dstr, ref i);
+        float d = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegCurvetoQuadraticRel(a, b, c, d));
         break;
-      case 't':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegCurvetoQuadraticSmoothRel(a, b));
-        }
+      }
+      case 'T': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegCurvetoQuadraticSmoothAbs(a, b));
         break;
-      case 'A':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          float c = ReadFloat(dstr, ref i);
-          bool d = ReadFloat(dstr, ref i) > 0;
-          bool e = ReadFloat(dstr, ref i) > 0;
-          float f = ReadFloat(dstr, ref i);
-          float g = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegArcAbs(a, b, c, d, e, f, g));
-        }
+      }
+      case 't': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegCurvetoQuadraticSmoothRel(a, b));
         break;
-      case 'a':
-        {
-          float a = ReadFloat(dstr, ref i);
-          float b = ReadFloat(dstr, ref i);
-          float c = ReadFloat(dstr, ref i);
-          bool d = ReadFloat(dstr, ref i) > 0;
-          bool e = ReadFloat(dstr, ref i) > 0;
-          float f = ReadFloat(dstr, ref i);
-          float g = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegArcRel(a, b, c, d, e, f, g));
-        }
+      }
+      case 'A': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        float c = ReadFloat(dstr, ref i);
+        bool d = ReadFloat(dstr, ref i) > 0;
+        bool e = ReadFloat(dstr, ref i) > 0;
+        float f = ReadFloat(dstr, ref i);
+        float g = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegArcAbs(a, b, c, d, e, f, g));
         break;
-      case 'H':
-        {
-          float a = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegLinetoHorizontalAbs(a));
-        }
+      }
+      case 'a': {
+        float a = ReadFloat(dstr, ref i);
+        float b = ReadFloat(dstr, ref i);
+        float c = ReadFloat(dstr, ref i);
+        bool d = ReadFloat(dstr, ref i) > 0;
+        bool e = ReadFloat(dstr, ref i) > 0;
+        float f = ReadFloat(dstr, ref i);
+        float g = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegArcRel(a, b, c, d, e, f, g));
         break;
-      case 'h':
-        {
-          float a = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegLinetoHorizontalRel(a));
-        }
+      }
+      case 'H': {
+        float a = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegLinetoHorizontalAbs(a));
         break;
-      case 'V':
-        {
-          float a = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegLinetoVerticalAbs(a));
-        }
+      }
+      case 'h': {
+        float a = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegLinetoHorizontalRel(a));
         break;
-      case 'v':
-        {
-          float a = ReadFloat(dstr, ref i);
-          _segList.AppendItem(new SVGPathSegLinetoVerticalRel(a));
-        }
+      }
+      case 'V': {
+        float a = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegLinetoVerticalAbs(a));
         break;
+      }
+      case 'v': {
+        float a = ReadFloat(dstr, ref i);
+        _segList.AppendItem(new SVGPathSegLinetoVerticalRel(a));
+        break;
+      }
       default:
         ++i;
         break;

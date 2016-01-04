@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,36 +38,28 @@ namespace UnitySVG {
       _render.StrokeLineJoin = _paintable.strokeLineJoin;
       switch(_paintable.GetPaintType()) {
       case SVGPaintMethod.SolidGradientFill:
-        {
-          _render.FillPath(_paintable.fillColor.Value, _graphicsPath);
-          Draw();
-          break;
-        }
-      case SVGPaintMethod.LinearGradientFill:
-        {
-          SVGLinearGradientBrush _linearGradBrush =
-            _paintable.GetLinearGradientBrush(_graphicsPath);
+        _render.FillPath(_paintable.fillColor.Value, _graphicsPath);
+        Draw();
+        break;
+      case SVGPaintMethod.LinearGradientFill: {
+        SVGLinearGradientBrush _linearGradBrush = _paintable.GetLinearGradientBrush(_graphicsPath);
 
-          if(_linearGradBrush != null)
-            _render.FillPath(_linearGradBrush, _graphicsPath);
-          Draw();
-          break;
-        }
-      case SVGPaintMethod.RadialGradientFill:
-        {
-          SVGRadialGradientBrush _radialGradBrush =
-            _paintable.GetRadialGradientBrush(_graphicsPath);
+        if(_linearGradBrush != null)
+          _render.FillPath(_linearGradBrush, _graphicsPath);
+        Draw();
+        break;
+      }
+      case SVGPaintMethod.RadialGradientFill: {
+        SVGRadialGradientBrush _radialGradBrush = _paintable.GetRadialGradientBrush(_graphicsPath);
 
-          if(_radialGradBrush != null)
-            _render.FillPath(_radialGradBrush, _graphicsPath);
-          Draw();
-          break;
-        }
+        if(_radialGradBrush != null)
+          _render.FillPath(_radialGradBrush, _graphicsPath);
+        Draw();
+        break;
+      }
       case SVGPaintMethod.PathDraw:
-        {
-          Draw();
-          break;
-        }
+        Draw();
+        break;
       }
     }
   }
