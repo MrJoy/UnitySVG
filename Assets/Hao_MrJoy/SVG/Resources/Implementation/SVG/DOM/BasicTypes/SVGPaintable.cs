@@ -37,7 +37,7 @@ public class SVGPaintable {
 
   public SVGColor? fillColor { get { return _fillColor; } }
 
-  public SVGColor? strokeColor { get { return IsStroke() ? _strokeColor : null; } }
+  public SVGColor? strokeColor { get { return IsStroke() ? _strokeColor : null; } } // *NOPAD*
 
   public float strokeWidth { get { return _strokeWidth.value; } }
 
