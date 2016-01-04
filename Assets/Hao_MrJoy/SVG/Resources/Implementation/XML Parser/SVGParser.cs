@@ -23,7 +23,7 @@ public enum SVGNodeName {
 
 public class Node {
   public SVGNodeName Name;
-  public Dictionary<string,string> Attributes;
+  public Dictionary<string, string> Attributes;
 
   public Node(SVGNodeName n, Dictionary<string, string> a) {
     Name = n;

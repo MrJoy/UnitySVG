@@ -32,13 +32,13 @@ public class DOMException : Exception {
   }
 
   public DOMException(DOMExceptionType code,
-                          string msg,
-                          Exception innerException) : base(msg, innerException) {
+                      string msg,
+                      Exception innerException) : base(msg, innerException) {
     this.code = code;
   }
 
   protected DOMException(SerializationInfo info,
-                              StreamingContext context) : base(info, context) {
+                         StreamingContext context) : base(info, context) {
   }
 
   private DOMExceptionType code;

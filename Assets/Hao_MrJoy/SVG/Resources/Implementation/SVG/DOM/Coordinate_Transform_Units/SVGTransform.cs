@@ -47,9 +47,8 @@ public class SVGTransform {
     int len = valuesStr.Length;
     float[] values = new float[len];
 
-    for(int i = 0; i < len; i++) {
+    for(int i = 0; i < len; i++)
       values.SetValue(float.Parse(valuesStr[i], CultureInfo.InvariantCulture), i);
-    }
     switch(strKey) {
     case "translate":
       switch(len) {

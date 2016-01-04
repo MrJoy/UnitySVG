@@ -71,18 +71,16 @@ public class SVGBasicDraw {
     int error = -(deltax + 1) / 2;
     int ystep;
     int y = y0;
-    if(y0 < y1) {
+    if(y0 < y1)
       ystep = 1;
-    } else {
+    else
       ystep = -1;
-    }
 
     for(int x = x0; x <= x1; x++) {
-      if(steep) {
+      if(steep)
         SetPixel(y, x);
-      } else {
+      else
         SetPixel(x, y);
-      }
       error += deltay;
       if(error >= 0) {
         y += ystep;
@@ -276,9 +274,9 @@ public class SVGBasicDraw {
 
     _delta = _delta * 180.0f / Mathf.PI;
 
-    if(!sweepFlag && _delta > 0) {
+    if(!sweepFlag && _delta > 0)
       _delta -= 360f;
-    } else if(sweepFlag && _delta < 0)
+    else if(sweepFlag && _delta < 0)
       _delta += 360f;
 
     _delta %= 360f;
@@ -407,16 +405,15 @@ public class SVGBasicDraw {
           else
             _limitList[i] = _q;
           dist = Distance(_pStart.point, _pMid.point, _q.point);
-          if(dist >= _flatness) {
+          if(dist >= _flatness)
             break;
-          } else {
+          else
             _tm = mm;
-          }
         }
 
-        if(i == _limit) {
+        if(i == _limit)
           flag = true;
-        } else {
+        else {
           //Continue calculate the first point has Distance > Flatness
           _stack.Push(_pMid);
 

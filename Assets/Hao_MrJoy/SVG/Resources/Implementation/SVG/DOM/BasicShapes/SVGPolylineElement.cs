@@ -7,7 +7,7 @@ public class SVGPolylineElement : SVGBasicElement {
 
   public List<Vector2> listPoints { get { return _listPoints; } }
 
-  public SVGPolylineElement(Dictionary<string,string> attrList,
+  public SVGPolylineElement(Dictionary<string, string> attrList,
                             SVGTransformList inheritTransformList,
                             SVGPaintable inheritPaintable,
                             SVGGraphics render) : base(attrList, inheritTransformList, inheritPaintable, render) {

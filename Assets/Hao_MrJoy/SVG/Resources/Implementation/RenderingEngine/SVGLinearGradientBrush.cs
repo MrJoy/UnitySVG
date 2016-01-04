@@ -110,9 +110,8 @@ public class SVGLinearGradientBrush {
     float dd = (float)Math.Sqrt((_x2 - _x1) * (_x2 - _x1) + (_y2 - _y1) * (_y2 - _y1));
     //-1 trai, 0 giua, 1 phai
     int vt = 0;
-    if((d1 >= dd) || (d2 >= dd)) {
+    if((d1 >= dd) || (d2 >= dd))
       vt = (d1 < d2) ? -1 : 1;
-    }
 
     int _reflectTimes;
     float _remainder;

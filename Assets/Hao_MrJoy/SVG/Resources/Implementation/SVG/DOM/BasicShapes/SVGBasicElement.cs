@@ -48,9 +48,8 @@ namespace UnitySVG {
           SVGLinearGradientBrush _linearGradBrush =
             _paintable.GetLinearGradientBrush(_graphicsPath);
 
-          if(_linearGradBrush != null) {
+          if(_linearGradBrush != null)
             _render.FillPath(_linearGradBrush, _graphicsPath);
-          }
           Draw();
           break;
         }
@@ -59,9 +58,8 @@ namespace UnitySVG {
           SVGRadialGradientBrush _radialGradBrush =
             _paintable.GetRadialGradientBrush(_graphicsPath);
 
-          if(_radialGradBrush != null) {
+          if(_radialGradBrush != null)
             _render.FillPath(_radialGradBrush, _graphicsPath);
-          }
           Draw();
           break;
         }

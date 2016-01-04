@@ -75,9 +75,9 @@ public class SVGRadialGradientBrush {
       float dx = _fx - _cx;
       float dy = _fy - _cy;
 
-      if(dx == 0) {
+      if(dx == 0)
         _fy = (_fy > _cy) ? (_cy + _r) : (_cy - _r);
-      } else {
+      else {
         float a, b;
         a = dy / dx;
         b = _fy - a * _fx;
@@ -170,9 +170,8 @@ public class SVGRadialGradientBrush {
     float dd = (float)Math.Sqrt((_cP.x - _fx) * (_cP.x - _fx) + (_cP.y - _fy) * (_cP.y - _fy));
     //0 giua, 1 ngoai
     int vt = 0;
-    if(d2 > dd) {
+    if(d2 > dd)
       vt = 1;
-    }
 
     int _reflectTimes;
     float _remainder;
@@ -199,13 +198,11 @@ public class SVGRadialGradientBrush {
   private void SetGradientVector(SVGGraphicsPath graphicsPath) {
     Rect bound = graphicsPath.GetBound();
 
-    if(_radialGradElement.cx.unitType == SVGLengthType.Percentage) {
+    if(_radialGradElement.cx.unitType == SVGLengthType.Percentage)
       _cx = bound.x + (bound.width * _cx / 100f);
-    }
 
-    if(_radialGradElement.cy.unitType == SVGLengthType.Percentage) {
+    if(_radialGradElement.cy.unitType == SVGLengthType.Percentage)
       _cy = bound.y + (bound.height * _cy / 100f);
-    }
 
     if(_radialGradElement.r.unitType == SVGLengthType.Percentage) {
       Vector2 _p1 = new Vector2(bound.x, bound.y);
@@ -217,12 +214,10 @@ public class SVGRadialGradientBrush {
       _r = (dd * _r / 100f);
     }
 
-    if(_radialGradElement.fx.unitType == SVGLengthType.Percentage) {
+    if(_radialGradElement.fx.unitType == SVGLengthType.Percentage)
       _fx = bound.x + (bound.width * _fx / 100f);
-    }
-    if(_radialGradElement.fy.unitType == SVGLengthType.Percentage) {
+    if(_radialGradElement.fy.unitType == SVGLengthType.Percentage)
       _fy = bound.y + (bound.height * _fy / 100f);
-    }
 
     if((float)Math.Sqrt((_cx - _fx) * (_cx - _fx) + (_cy - _fy) * (_cy - _fy)) > _r) {
       Vector2 _cP = CrossPoint(_cx, _cy);

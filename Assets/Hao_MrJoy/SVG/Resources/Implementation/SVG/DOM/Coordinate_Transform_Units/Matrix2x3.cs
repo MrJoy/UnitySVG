@@ -24,7 +24,8 @@ public class Matrix2x3 {
   }
 
   public void Multiply(Matrix2x3 secondMatrix) {
-    float sa = secondMatrix.a, sb = secondMatrix.b, sc = secondMatrix.c, sd = secondMatrix.d, se = secondMatrix.e, sf = secondMatrix.f;
+    float sa = secondMatrix.a, sb = secondMatrix.b, sc = secondMatrix.c, sd = secondMatrix.d, se = secondMatrix.e,
+          sf = secondMatrix.f;
     SetValues(a * sa + c * sb, b * sa + d * sb,
               a * sc + c * sd, b * sc + d * sd,
               a * se + c * sf + e, b * se + d * sf + f);
@@ -32,9 +33,8 @@ public class Matrix2x3 {
 
   public Matrix2x3 Inverse() {
     float det = a * d - c * b;
-    if(det == 0) {
+    if(det == 0)
       throw new SVGException(SVGExceptionType.MatrixNotInvertable);
-    }
     SetValues(d / det, -b / det,
               -c / det, a / det,
               (c * f - e * d) / det, (e * b - a * f) / det);

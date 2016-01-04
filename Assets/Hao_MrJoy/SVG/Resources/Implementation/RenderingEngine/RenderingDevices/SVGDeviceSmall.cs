@@ -33,9 +33,8 @@ public class SVGDeviceSmall : ISVGDevice {
   }
 
   public void SetPixel(int x, int y) {
-    if((x >= 0) && (x < _width) && (y >= 0) && (y < _height)) {
+    if((x >= 0) && (x < _width) && (y >= 0) && (y < _height))
       _texture.SetPixel(x, y, _color);
-    }
   }
 
   public Color GetPixel(int x, int y) {

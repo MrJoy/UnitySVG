@@ -28,11 +28,11 @@ public static class SVGStringExtractor {
 
   //public static float[] ExtractTransformValueAsPX(string inputText)
   //{
-  //	string[] tmp = ExtractTransformValue(inputText);
-  //	float[] values = new float[tmp.Length];
-  //	for (int i = 0; i < values.Length; i++)
-  //		values[i] = SVGLength.GetPXLength(tmp[i]);
-  //	return values;
+  //  string[] tmp = ExtractTransformValue(inputText);
+  //  float[] values = new float[tmp.Length];
+  //  for (int i = 0; i < values.Length; i++)
+  //    values[i] = SVGLength.GetPXLength(tmp[i]);
+  //  return values;
   //}
 
   public static string[] ExtractTransformValue(string inputText) {
@@ -44,25 +44,25 @@ public static class SVGStringExtractor {
   //private static readonly List<int> _break = new List<int>();
   // WARNING:  This method is NOT thread-safe due to use of static _break member!
   /*public static void ExtractPathSegList(string inputText, ref List<char> charList, ref List<string> valueList)
-	{
-		Profiler.BeginSample("SVGStringExtractor.ExtractPathSegList()");
-		_break.Clear();
-		for (int i = 0; i < inputText.Length; ++i)
-			if (((inputText[i] >= 'a') && (inputText[i] <= 'z')) || ((inputText[i] >= 'A') && (inputText[i] <= 'Z')))
-				_break.Add(i);
-		_break.Add(inputText.Length);
-		charList.Capacity = _break.Count - 1;
-		valueList.Capacity = _break.Count - 1;
+  {
+    Profiler.BeginSample("SVGStringExtractor.ExtractPathSegList()");
+    _break.Clear();
+    for (int i = 0; i < inputText.Length; ++i)
+      if (((inputText[i] >= 'a') && (inputText[i] <= 'z')) || ((inputText[i] >= 'A') && (inputText[i] <= 'Z')))
+        _break.Add(i);
+    _break.Add(inputText.Length);
+    charList.Capacity = _break.Count - 1;
+    valueList.Capacity = _break.Count - 1;
 
-		for (int i = 0; i < _break.Count - 1; ++i)
-		{
-			int _breakSpot1 = _break[i];
-			int _breakSpot2 = _break[i + 1];
-			charList.Add(inputText[_breakSpot1]);
-			valueList.Add(inputText.Substring(_breakSpot1 + 1, _breakSpot2 - _breakSpot1 - 1));
-		}
-		Profiler.EndSample();
-	}*/
+    for (int i = 0; i < _break.Count - 1; ++i)
+    {
+      int _breakSpot1 = _break[i];
+      int _breakSpot2 = _break[i + 1];
+      charList.Add(inputText[_breakSpot1]);
+      valueList.Add(inputText.Substring(_breakSpot1 + 1, _breakSpot2 - _breakSpot1 - 1));
+    }
+    Profiler.EndSample();
+  }*/
 
   //--------------------------------------------------
   //Extract for Syntax:  fill: #ffffff; stroke:#000000; stroke-width:0.172
@@ -88,7 +88,7 @@ public static class SVGStringExtractor {
                 .Replace(" ", "");
 
     int vt1 = inputText.IndexOf("url(#"),
-    vt2 = inputText.IndexOf(")");
+        vt2 = inputText.IndexOf(")");
     if(vt2 < 0)
       vt2 = inputText.Length;
 

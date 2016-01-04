@@ -16,15 +16,13 @@ public class SVGDeviceFast : ISVGDevice {
   public void SetDevice(int width, int height) {
     _width = width;
     _height = height;
-    if(pixels == null || _width != width || _height != height) {
+    if(pixels == null || _width != width || _height != height)
       pixels = new Color32[_width * _height];
-    }
   }
 
   public void SetPixel(int x, int y) {
-    if((x >= 0) && (x < _width) && (y >= 0) && (y < _height)) {
+    if((x >= 0) && (x < _width) && (y >= 0) && (y < _height))
       pixels[y * _height + x] = _color;
-    }
   }
 
   public Color GetPixel(int x, int y) {

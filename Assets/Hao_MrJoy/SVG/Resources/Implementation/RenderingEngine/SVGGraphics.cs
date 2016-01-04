@@ -64,9 +64,8 @@ public class SVGGraphics {
     int height = _device.Height;
     SetColor(Color.white);
     for(int i = 0; i < width; i++) {
-      for(int j = 0; j < height; j++) {
+      for(int j = 0; j < height; j++)
         SetPixel(i, j);
-      }
     }
   }
 
@@ -101,25 +100,21 @@ public class SVGGraphics {
 
     cy1 = _ihalf1 * dtx / (float)Math.Sqrt(temp) + p1.y;
     if(dtx == 0) {
-      if(dty > 0) {
+      if(dty > 0)
         cx1 = p1.x - _ihalf1;
-      } else {
+      else
         cx1 = p1.x + _ihalf1;
-      }
-    } else {
+    } else
       cx1 = (-(cy1 - p1.y) * dty) / dtx + p1.x;
-    }
 
     cy2 = -(_ihalf2 * dtx / (float)Math.Sqrt(temp)) + p1.y;
     if(dtx == 0) {
-      if(dty > 0) {
+      if(dty > 0)
         cx2 = p1.x + _ihalf2;
-      } else {
+      else
         cx2 = p1.x - _ihalf2;
-      }
-    } else {
+    } else
       cx2 = (-(cy2 - p1.y) * dty) / dtx + p1.x;
-    }
 
     dtx = p1.x - p2.x;
     dty = p1.y - p2.y;
@@ -127,26 +122,22 @@ public class SVGGraphics {
 
     cy3 = _ihalf1 * dtx / (float)Math.Sqrt(temp) + p2.y;
     if(dtx == 0) {
-      if(dty > 0) {
+      if(dty > 0)
         cx3 = p2.x - _ihalf1;
-      } else {
+      else
         cx3 = p2.x + _ihalf1;
-      }
-    } else {
+    } else
       cx3 = (-(cy3 - p2.y) * dty) / dtx + p2.x;
-    }
 
     cy4 = -(_ihalf2 * dtx / (float)Math.Sqrt(temp)) + p2.y;
 
     if(dtx == 0) {
-      if(dty > 0) {
+      if(dty > 0)
         cx4 = p2.x + _ihalf2;
-      } else {
+      else
         cx4 = p2.x - _ihalf2;
-      }
-    } else {
+    } else
       cx4 = (-(cy4 - p2.y) * dty) / dtx + p2.x;
-    }
 
     rp1.x = cx1;
     rp1.y = cy1;
@@ -162,26 +153,22 @@ public class SVGGraphics {
       if(_ihalf1 != _ihalf2) {
         cy3 = _ihalf2 * dtx / (float)Math.Sqrt(temp) + p2.y;
         if(dtx == 0) {
-          if(dty > 0) {
+          if(dty > 0)
             cx3 = p2.x - _ihalf2;
-          } else {
+          else
             cx3 = p2.x + _ihalf2;
-          }
-        } else {
+        } else
           cx3 = (-(cy3 - p2.y) * dty) / dtx + p2.x;
-        }
 
         cy4 = -(_ihalf1 * dtx / (float)Math.Sqrt(temp)) + p2.y;
 
         if(dtx == 0) {
-          if(dty > 0) {
+          if(dty > 0)
             cx4 = p2.x + _ihalf1;
-          } else {
+          else
             cx4 = p2.x - _ihalf1;
-          }
-        } else {
+        } else
           cx4 = (-(cy4 - p2.y) * dty) / dtx + p2.x;
-        }
       }
 
       rp3.x = cx4;
@@ -300,9 +287,8 @@ public class SVGGraphics {
   }
 
   public void Line(Vector2 p1, Vector2 p2, SVGColor? strokeColor) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Line(p1, p2);
   }
 
@@ -311,9 +297,8 @@ public class SVGGraphics {
   }
 
   public void Line(Vector2 p1, Vector2 p2, SVGColor? strokeColor, float width) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Line(p1, p2, width);
   }
 
@@ -322,9 +307,8 @@ public class SVGGraphics {
   }
 
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, SVGColor? strokeColor) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Rect(p1, p2, p3, p4);
   }
 
@@ -334,9 +318,8 @@ public class SVGGraphics {
 
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
                    SVGColor? strokeColor, float width) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Rect(p1, p2, p3, p4, width);
   }
 
@@ -349,9 +332,8 @@ public class SVGGraphics {
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
                           Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
                           float r1, float r2, float angle, SVGColor? strokeColor) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle);
   }
 
@@ -368,9 +350,8 @@ public class SVGGraphics {
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4,
                           Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
                           float r1, float r2, float angle, SVGColor? strokeColor, float width) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     RoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2, angle, width);
   }
 
@@ -472,9 +453,8 @@ public class SVGGraphics {
   }
 
   public void Circle(Vector2 p, float r, SVGColor? strokeColor) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Circle(p, r);
   }
 
@@ -484,9 +464,8 @@ public class SVGGraphics {
 
   public void Circle(Vector2 p, float r,
                      SVGColor? strokeColor, float width) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Circle(p, r, width);
   }
 
@@ -535,9 +514,8 @@ public class SVGGraphics {
   }
 
   public void Ellipse(Vector2 p, float rx, float ry, float angle, SVGColor? strokeColor) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Ellipse(p, rx, ry, angle);
   }
 
@@ -547,9 +525,8 @@ public class SVGGraphics {
 
   public void Ellipse(Vector2 p, float rx, float ry, float angle,
                       SVGColor? strokeColor, float width) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Ellipse(p, rx, ry, angle, width);
   }
 
@@ -599,9 +576,8 @@ public class SVGGraphics {
   }
 
   public void Polygon(Vector2[] points, SVGColor? strokeColor) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Polygon(points);
   }
 
@@ -610,9 +586,8 @@ public class SVGGraphics {
   }
 
   public void Polygon(Vector2[] points, SVGColor? strokeColor, float width) {
-    if(strokeColor != null) {
+    if(strokeColor != null)
       SetColor(strokeColor.Value.color);
-    }
     Polygon(points, width);
   }
 

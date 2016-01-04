@@ -173,9 +173,8 @@ public struct SVGColorExtractor {
   public static bool IsHexColor(string colorStr) {
     if(colorStr.Length > 0) {
       if(colorStr[0] == '#') {
-        if((colorStr.Length == 4) || (colorStr.Length == 7)) {
+        if((colorStr.Length == 4) || (colorStr.Length == 7))
           return true;
-        }
       }
     }
     return false;

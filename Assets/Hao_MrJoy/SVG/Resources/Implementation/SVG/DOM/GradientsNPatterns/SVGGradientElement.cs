@@ -35,18 +35,16 @@ public class SVGGradientElement {
     _stopList = new List<SVGStopElement>();
     _id = _attrList.GetValue("id");
     _gradientUnits = SVGGradientUnit.ObjectBoundingBox;
-    if(_attrList.GetValue("gradiantUnits") == "userSpaceOnUse") {
+    if(_attrList.GetValue("gradiantUnits") == "userSpaceOnUse")
       _gradientUnits = SVGGradientUnit.UserSpaceOnUse;
-    }
 
     //------
     // TODO: It's probably a bug that the value is not innoculated for CaSe VaRiAtIoN in GetValue, below:
     _spreadMethod = SVGSpreadMethod.Pad;
-    if(_attrList.GetValue("spreadMethod") == "reflect") {
+    if(_attrList.GetValue("spreadMethod") == "reflect")
       _spreadMethod = SVGSpreadMethod.Reflect;
-    } else if(_attrList.GetValue("spreadMethod") == "repeat") {
+    else if(_attrList.GetValue("spreadMethod") == "repeat")
       _spreadMethod = SVGSpreadMethod.Repeat;
-    }
 
     GetElementList();
   }

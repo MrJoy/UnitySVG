@@ -242,9 +242,8 @@ public class SmallXmlParser {
 
   public void ReadContent() {
     string name;
-    if(IsWhitespace(Peek())) {
+    if(IsWhitespace(Peek()))
       HandleWhitespaces();
-    }
     if(Peek() == '<') {
       Read();
       switch(Peek()) {

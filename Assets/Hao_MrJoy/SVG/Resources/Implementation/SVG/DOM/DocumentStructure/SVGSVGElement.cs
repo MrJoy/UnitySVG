@@ -6,7 +6,7 @@ using UnitySVG;
 public class SVGSVGElement : SVGTransformable, ISVGDrawable {
   private SVGLength _width, _height;
   private Rect _viewport;
-  private readonly Dictionary<string,string> _attrList;
+  private readonly Dictionary<string, string> _attrList;
   private readonly List<ISVGDrawable> _elementList = new List<ISVGDrawable>();
   private readonly SVGGraphics _render;
 
@@ -37,9 +37,8 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
 
     for(int i = 0; i < _elementList.Count; ++i) {
       ISVGDrawable temp = _elementList[i];
-      if(temp != null) {
+      if(temp != null)
         temp.BeforeRender(summaryTransformList);
-      }
     }
   }
 
@@ -47,9 +46,8 @@ public class SVGSVGElement : SVGTransformable, ISVGDrawable {
     _render.SetSize(_width.value, _height.value);
     for(int i = 0; i < _elementList.Count; ++i) {
       ISVGDrawable temp = _elementList[i];
-      if(temp != null) {
+      if(temp != null)
         temp.Render();
-      }
     }
   }
 

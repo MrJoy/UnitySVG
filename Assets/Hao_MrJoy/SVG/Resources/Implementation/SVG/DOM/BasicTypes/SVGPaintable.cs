@@ -71,24 +71,21 @@ public class SVGPaintable {
     Initialize(attrList);
 
     if(IsFillX() == false) {
-      if(inheritPaintable.IsLinearGradiantFill()) {
+      if(inheritPaintable.IsLinearGradiantFill())
         _gradientID = inheritPaintable.gradientID;
-      } else if(inheritPaintable.IsRadialGradiantFill()) {
+      else if(inheritPaintable.IsRadialGradiantFill())
         _gradientID = inheritPaintable.gradientID;
-      } else
+      else
         _fillColor = inheritPaintable.fillColor;
     }
-    if(!IsStroke() && inheritPaintable.IsStroke()) {
+    if(!IsStroke() && inheritPaintable.IsStroke())
       _strokeColor = inheritPaintable.strokeColor;
-    }
 
-    if(_strokeLineCap == SVGStrokeLineCapMethod.Unknown) {
+    if(_strokeLineCap == SVGStrokeLineCapMethod.Unknown)
       _strokeLineCap = inheritPaintable.strokeLineCap;
-    }
 
-    if(_strokeLineJoin == SVGStrokeLineJoinMethod.Unknown) {
+    if(_strokeLineJoin == SVGStrokeLineJoinMethod.Unknown)
       _strokeLineJoin = inheritPaintable.strokeLineJoin;
-    }
 
     if(isStrokeWidth == false)
       _strokeWidth.NewValueSpecifiedUnits(inheritPaintable.strokeWidth);
@@ -207,9 +204,8 @@ public class SVGPaintable {
     if(_strokeColor == null)
       return false;
     if((_strokeColor.Value.colorType == SVGColorType.Unknown) ||
-       (_strokeColor.Value.colorType == SVGColorType.None)) {
+        (_strokeColor.Value.colorType == SVGColorType.None))
       return false;
-    }
     return true;
   }
 

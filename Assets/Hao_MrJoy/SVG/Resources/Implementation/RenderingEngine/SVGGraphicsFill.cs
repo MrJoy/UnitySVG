@@ -165,9 +165,8 @@ public class SVGGraphicsFill : ISVGPathDraw {
 
     Fill(_inZoneL, _inZoneT);
     // This seems buggy:
-    if((_inZoneL == 0) && (_inZoneT == 0)) {
+    if((_inZoneL == 0) && (_inZoneT == 0))
       Fill(_subW - 1, _subH - 1);
-    }
   }
 
   private void FillInZone() {
@@ -302,7 +301,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
   }
 
   private void PreRoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7,
-                             Vector2 p8, float r1, float r2, float angle) {
+                              Vector2 p8, float r1, float r2, float angle) {
     float dxy = ((r1 > r2) ? (int)r1 : (int)r2);
 
     ResetSubBuffer();
@@ -334,28 +333,28 @@ public class SVGGraphicsFill : ISVGPathDraw {
   }
 
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                         float r1, float r2,
-                         float angle) {
+                          float r1, float r2,
+                          float angle) {
     PreRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2,
-                 angle);
+                   angle);
     EndSubBuffer();
   }
 
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                         float r1, float r2,
-                         float angle, SVGColor? strokeColor) {
+                          float r1, float r2,
+                          float angle, SVGColor? strokeColor) {
     PreRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2,
-                 angle);
+                   angle);
     EndSubBuffer(strokeColor);
   }
 
 
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
-                         float r1, float r2,
-                         float angle, SVGColor fillColor, SVGColor? strokeColor) {
+                          float r1, float r2,
+                          float angle, SVGColor fillColor, SVGColor? strokeColor) {
     SetColor(fillColor.color);
     PreRoundedRect(p1, p2, p3, p4, p5, p6, p7, p8, r1, r2,
-                 angle);
+                   angle);
     EndSubBuffer(strokeColor);
   }
 
@@ -460,11 +459,10 @@ public class SVGGraphicsFill : ISVGPathDraw {
   public void FillPath(SVGColor fillColor, SVGColor? strokePathColor, SVGGraphicsPath graphicsPath) {
     ResetSubBuffer();
     graphicsPath.RenderPath(this, true);
-    if(strokePathColor != null) {
+    if(strokePathColor != null)
       EndSubBuffer(strokePathColor);
-    } else {
+    else
       EndSubBuffer();
-    }
   }
 
   public void FillPath(SVGLinearGradientBrush linearGradientBrush, SVGGraphicsPath graphicsPath) {
@@ -474,14 +472,13 @@ public class SVGGraphicsFill : ISVGPathDraw {
   }
 
   public void FillPath(SVGLinearGradientBrush linearGradientBrush, SVGColor? strokePathColor,
-                      SVGGraphicsPath graphicsPath) {
+                       SVGGraphicsPath graphicsPath) {
     ResetSubBuffer();
     graphicsPath.RenderPath(this, true);
-    if(strokePathColor != null) {
+    if(strokePathColor != null)
       EndSubBuffer(linearGradientBrush, strokePathColor);
-    } else {
+    else
       EndSubBuffer(linearGradientBrush);
-    }
   }
 
   public void FillPath(SVGRadialGradientBrush radialGradientBrush, SVGGraphicsPath graphicsPath) {
@@ -492,14 +489,13 @@ public class SVGGraphicsFill : ISVGPathDraw {
 
 
   public void FillPath(SVGRadialGradientBrush radialGradientBrush, SVGColor? strokePathColor,
-                      SVGGraphicsPath graphicsPath) {
+                       SVGGraphicsPath graphicsPath) {
     ResetSubBuffer();
     graphicsPath.RenderPath(this, true);
-    if(strokePathColor != null) {
+    if(strokePathColor != null)
       EndSubBuffer(radialGradientBrush, strokePathColor);
-    } else {
+    else
       EndSubBuffer(radialGradientBrush);
-    }
   }
 
   public void CircleTo(Vector2 p, float r) {

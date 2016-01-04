@@ -222,72 +222,72 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
     //_segList = new SVGPathSegList(_charList.Count);
     //for (int i = 0; i < _charList.Count; i++)
     //{
-    //	char _char = _charList[i];
-    //	string _value = _valueList[i];
-    //	float[] parms = SVGStringExtractor.ExtractTransformValueAsPX(_value);
-    //	switch (_char)
-    //	{
-    //		case 'Z':
-    //		case 'z':
-    //			_segList.AppendItem(CreateSVGPathSegClosePath());
-    //			break;
-    //		case 'M':
-    //			_segList.AppendItem(new SVGPathSegMovetoAbs(parms[0], parms[1]));
-    //			break;
-    //		case 'm':
-    //			_segList.AppendItem(new SVGPathSegMovetoRel(parms[0], parms[1]));
-    //			break;
-    //		case 'L':
-    //			_segList.AppendItem(new SVGPathSegLinetoAbs(parms[0], parms[1]));
-    //			break;
-    //		case 'l':
-    //			_segList.AppendItem(new SVGPathSegLinetoRel(parms[0], parms[1]));
-    //			break;
-    //		case 'C':
-    //			_segList.AppendItem(new SVGPathSegCurvetoCubicAbs(parms[0], parms[1], parms[2], parms[3], parms[4], parms[5]));
-    //			break;
-    //		case 'c':
-    //			_segList.AppendItem(new SVGPathSegCurvetoCubicRel(parms[0], parms[1], parms[2], parms[3], parms[4], parms[5]));
-    //			break;
-    //		case 'S':
-    //			_segList.AppendItem(new SVGPathSegCurvetoCubicSmoothAbs(parms[0], parms[1], parms[2], parms[3]));
-    //			break;
-    //		case 's':
-    //			_segList.AppendItem(new SVGPathSegCurvetoCubicSmoothRel(parms[0], parms[1], parms[2], parms[3]));
-    //			break;
-    //		case 'Q':
-    //			_segList.AppendItem(new SVGPathSegCurvetoQuadraticAbs(parms[0], parms[1], parms[2], parms[3]));
-    //			break;
-    //		case 'q':
-    //			_segList.AppendItem(new SVGPathSegCurvetoQuadraticRel(parms[0], parms[1], parms[2], parms[3]));
-    //			break;
-    //		case 'T':
-    //			_segList.AppendItem(new SVGPathSegCurvetoQuadraticSmoothAbs(parms[0], parms[1]));
-    //			break;
-    //		case 't':
-    //			_segList.AppendItem(new SVGPathSegCurvetoQuadraticSmoothRel(parms[0], parms[1]));
-    //			break;
-    //		case 'A':
-    //			_segList.AppendItem(new SVGPathSegArcAbs(parms[0], parms[1], parms[2], parms[3] == 1f, parms[4] == 1f, parms[5],
-    //				parms[6]));
-    //			break;
-    //		case 'a':
-    //			_segList.AppendItem(new SVGPathSegArcRel(parms[0], parms[1], parms[2], parms[3] == 1f, parms[4] == 1f, parms[5],
-    //				parms[6]));
-    //			break;
-    //		case 'H':
-    //			_segList.AppendItem(new SVGPathSegLinetoHorizontalAbs(parms[0]));
-    //			break;
-    //		case 'h':
-    //			_segList.AppendItem(new SVGPathSegLinetoHorizontalRel(parms[0]));
-    //			break;
-    //		case 'V':
-    //			_segList.AppendItem(new SVGPathSegLinetoVerticalAbs(parms[0]));
-    //			break;
-    //		case 'v':
-    //			_segList.AppendItem(new SVGPathSegLinetoVerticalRel(parms[0]));
-    //			break;
-    //	}
+    //  char _char = _charList[i];
+    //  string _value = _valueList[i];
+    //  float[] parms = SVGStringExtractor.ExtractTransformValueAsPX(_value);
+    //  switch (_char)
+    //  {
+    //    case 'Z':
+    //    case 'z':
+    //      _segList.AppendItem(CreateSVGPathSegClosePath());
+    //      break;
+    //    case 'M':
+    //      _segList.AppendItem(new SVGPathSegMovetoAbs(parms[0], parms[1]));
+    //      break;
+    //    case 'm':
+    //      _segList.AppendItem(new SVGPathSegMovetoRel(parms[0], parms[1]));
+    //      break;
+    //    case 'L':
+    //      _segList.AppendItem(new SVGPathSegLinetoAbs(parms[0], parms[1]));
+    //      break;
+    //    case 'l':
+    //      _segList.AppendItem(new SVGPathSegLinetoRel(parms[0], parms[1]));
+    //      break;
+    //    case 'C':
+    //      _segList.AppendItem(new SVGPathSegCurvetoCubicAbs(parms[0], parms[1], parms[2], parms[3], parms[4], parms[5]));
+    //      break;
+    //    case 'c':
+    //      _segList.AppendItem(new SVGPathSegCurvetoCubicRel(parms[0], parms[1], parms[2], parms[3], parms[4], parms[5]));
+    //      break;
+    //    case 'S':
+    //      _segList.AppendItem(new SVGPathSegCurvetoCubicSmoothAbs(parms[0], parms[1], parms[2], parms[3]));
+    //      break;
+    //    case 's':
+    //      _segList.AppendItem(new SVGPathSegCurvetoCubicSmoothRel(parms[0], parms[1], parms[2], parms[3]));
+    //      break;
+    //    case 'Q':
+    //      _segList.AppendItem(new SVGPathSegCurvetoQuadraticAbs(parms[0], parms[1], parms[2], parms[3]));
+    //      break;
+    //    case 'q':
+    //      _segList.AppendItem(new SVGPathSegCurvetoQuadraticRel(parms[0], parms[1], parms[2], parms[3]));
+    //      break;
+    //    case 'T':
+    //      _segList.AppendItem(new SVGPathSegCurvetoQuadraticSmoothAbs(parms[0], parms[1]));
+    //      break;
+    //    case 't':
+    //      _segList.AppendItem(new SVGPathSegCurvetoQuadraticSmoothRel(parms[0], parms[1]));
+    //      break;
+    //    case 'A':
+    //      _segList.AppendItem(new SVGPathSegArcAbs(parms[0], parms[1], parms[2], parms[3] == 1f, parms[4] == 1f, parms[5],
+    //        parms[6]));
+    //      break;
+    //    case 'a':
+    //      _segList.AppendItem(new SVGPathSegArcRel(parms[0], parms[1], parms[2], parms[3] == 1f, parms[4] == 1f, parms[5],
+    //        parms[6]));
+    //      break;
+    //    case 'H':
+    //      _segList.AppendItem(new SVGPathSegLinetoHorizontalAbs(parms[0]));
+    //      break;
+    //    case 'h':
+    //      _segList.AppendItem(new SVGPathSegLinetoHorizontalRel(parms[0]));
+    //      break;
+    //    case 'V':
+    //      _segList.AppendItem(new SVGPathSegLinetoVerticalAbs(parms[0]));
+    //      break;
+    //    case 'v':
+    //      _segList.AppendItem(new SVGPathSegLinetoVerticalRel(parms[0]));
+    //      break;
+    //  }
     //}
     Profiler.EndSample();
   }
@@ -299,9 +299,9 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
     int start = i;
     int l = 0;
     for(; i < s.Length; ++i, ++l) {
-      if(((s[i] >= 'a') && (s[i] <= 'z')) || ((s[i] >= 'A') && (s[i] <= 'Z')) || (s[i] == ' ') || (s[i] == ',') || (s[i] == '\n') || (s[i] == '\t') || (s[i] == '\r')) {
+      if(((s[i] >= 'a') && (s[i] <= 'z')) || ((s[i] >= 'A') && (s[i] <= 'Z')) || (s[i] == ' ') || (s[i] == ',')
+          || (s[i] == '\n') || (s[i] == '\t') || (s[i] == '\r'))
         break;
-      }
     }
     return float.Parse(s.Substring(start, l));
   }
@@ -312,9 +312,8 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
       SVGPathSegMovetoRel _firstPoint1 = _segList.GetItem(0) as SVGPathSegMovetoRel;
       if(_firstPoint1 != null)
         return new SVGPathSegClosePath(_firstPoint1.x, _firstPoint1.y);
-    } else {
+    } else
       return new SVGPathSegClosePath(_firstPoint.x, _firstPoint.y);
-    }
 
     return new SVGPathSegClosePath(-1f, -1f);
   }

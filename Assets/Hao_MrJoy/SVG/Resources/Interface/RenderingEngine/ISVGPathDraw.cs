@@ -17,7 +17,8 @@ public interface ISVGPathDraw {
 
   void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4);
 
-  void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8, float r1, float r2, float angle);
+  void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
+                   float r1, float r2, float angle);
 
   void Circle(Vector2 p, float r);
 

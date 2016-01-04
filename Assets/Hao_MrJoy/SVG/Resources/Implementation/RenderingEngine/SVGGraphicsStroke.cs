@@ -28,7 +28,7 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     if((int)width == 1)
       return;
     if((_graphics.strokeLineCap == SVGStrokeLineCapMethod.Unknown) ||
-       (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
+        (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
       return;
     if(((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)) <= 4f)
       return;
@@ -63,7 +63,7 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     if((int)width == 1)
       return;
     if((_graphics.strokeLineCap == SVGStrokeLineCapMethod.Unknown) ||
-       (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
+        (_graphics.strokeLineCap == SVGStrokeLineCapMethod.Butt))
       return;
 
     if(((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)) <= 4f)
@@ -95,7 +95,7 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   }
 
   private static Vector2[] joint_points = new Vector2[8],
-    joint_points_small = new Vector2[6];
+  joint_points_small = new Vector2[6];
 
   private void StrokeLineJoin(Vector2 p1, Vector2 p2, Vector2 p3, float width) {
     if((int)width == 1)
@@ -108,7 +108,7 @@ public class SVGGraphicsStroke : ISVGPathDraw {
     }
 
     if((_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Miter) ||
-       (_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Unknown)) {
+        (_graphics.strokeLineJoin == SVGStrokeLineJoinMethod.Unknown)) {
       Vector2 _p1 = Vector2.zero;
       Vector2 _p2 = Vector2.zero;
       Vector2 _p3 = Vector2.zero;
@@ -468,9 +468,9 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   }
 
   public void Line(Vector2 p1, Vector2 p2, float width) {
-    if((int)width == 1) {
+    if((int)width == 1)
       Line(p1, p2);
-    } else {
+    else {
       if(((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)) <= 4f)
         return;
       StrokeLineCapLeft(p1, p2, width);
@@ -500,9 +500,8 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   }
 
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float width) {
-    if((int)width == 1) {
+    if((int)width == 1)
       Rect(p1, p2, p3, p4);
-    }
     //Vector2[] points = new Vector2[4];
     rect_points[0] = p1;
     rect_points[1] = p2;
@@ -623,9 +622,9 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   }
 
   public void Circle(Vector2 p, float r, float width) {
-    if((int)width == 1) {
+    if((int)width == 1)
       Circle(p, r);
-    } else {
+    else {
       int r1 = (int)(width / 2f);
       int r2 = (int)width - r1;
 
@@ -649,9 +648,9 @@ public class SVGGraphicsStroke : ISVGPathDraw {
   }
 
   public void Ellipse(Vector2 p, float rx, float ry, float angle, float width) {
-    if((int)width == 1) {
+    if((int)width == 1)
       Ellipse(p, rx, ry, angle);
-    } else {
+    else {
       int r1 = (int)(width / 2f);
       int r2 = (int)width - r1;
 

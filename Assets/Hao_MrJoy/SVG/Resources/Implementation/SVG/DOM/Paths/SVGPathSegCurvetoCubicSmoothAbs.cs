@@ -36,7 +36,7 @@ public class SVGPathSegCurvetoCubicSmoothAbs : SVGPathSegCurvetoCubic, ISVGDrawa
 
   public override Vector2 controlPoint2 { get { return new Vector2(this._x2, this._y2); } }
 
-  public void Render(SVGGraphicsPath _graphicsPath) { 
-    _graphicsPath.AddCubicCurveTo(controlPoint1, controlPoint2, currentPoint); 
+  public void Render(SVGGraphicsPath _graphicsPath) {
+    _graphicsPath.AddCubicCurveTo(controlPoint1, controlPoint2, currentPoint);
   }
 }
