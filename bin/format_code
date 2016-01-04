@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+BASE_DIR=$(
+  cd "$(dirname "$(readlink "$0" || echo "$0")")/.."
+  /bin/pwd
+)
+
+# TODO: Find a solution for when the optional indicator on a type is used on the same line as the ternary operator,
+# TODO: triggering an AStyle bug in which it thinks the indicator is an operator.
+# TODO: E.G. The following:
+# TODO:   public SVGColor? strokeColor { get { return IsStroke() ? _strokeColor : null; } }
+# TODO: Gets reformatted to:
+# TODO:   public SVGColor ? strokeColor { get { return IsStroke() ? _strokeColor : null; } }
+astyle \
+  -n \
+  --mode=cs \
+  --recursive "${BASE_DIR}/Assets/*.cs" \
+  --exclude="${BASE_DIR}/Assets/UnityGUIExtensions" \
+  --exclude="${BASE_DIR}/Assets/Editor/UnityREPL" \
+  --style=google \
+  --indent=spaces=2 \
+  --lineend=linux \
+  --remove-brackets \
+  --keep-one-line-blocks \
+  --keep-one-line-statements \
+  --convert-tabs \
+  --min-conditional-indent=2 \
+  --max-instatement-indent=80 \
+  --unpad-paren \
+  --unpad-method-prefix \
+  --indent-classes \
+  --indent-labels \
+  --indent-namespaces \
+  --indent-preproc-block \
+  --indent-preproc-define \
+  --remove-brackets \
+  --align-pointer=type \
+  --align-reference=type \
+  --pad-oper

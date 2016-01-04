@@ -29,6 +29,39 @@
     "translate_tabs_to_spaces": true,
     "trim_trailing_white_space_on_save": true,
     "ensure_newline_at_eof_on_save": true,
-    "rulers": [120]
+    "rulers": [120],
+
+    "AStyleFormatter": {
+      "autoformat_on_save": true,
+
+      "options_default": {
+        "style": "google",
+
+        "indent": "spaces",
+        "indent-spaces": 2,
+        "lineend": "linux",
+        "convert-tabs": true,
+
+        "indent-classes": true,
+        "indent-labels": true,
+        "indent-namespaces": true,
+        "indent-preproc-block": true,
+        "indent-preproc-define": true,
+
+        "align-pointer": "type",
+        "align-reference": "type",
+        "remove-brackets": true,
+        "keep-one-line-blocks": true,
+        "keep-one-line-statements": true,
+
+        "min-conditional-indent": 2,
+        "max-instatement-indent": 80,
+
+        "unpad-paren": true,
+        "unpad-method-prefix": true,
+        "pad-oper": true,
+        "pad-header": false
+      }
+    }
   }
 }
