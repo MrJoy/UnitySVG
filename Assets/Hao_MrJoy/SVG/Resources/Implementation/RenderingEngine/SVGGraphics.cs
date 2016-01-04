@@ -13,10 +13,10 @@ public class SVGGraphics {
 
   public Vector2 Size {
     set {
-      int width = (int)value.x,
-          height = (int)value.y;
+      int width   = (int)value.x,
+          height  = (int)value.y;
       device.SetDevice(width, height);
-      graphicsFill.SetSize(width, height);
+      graphicsFill.Size = new Vector2(width, height);
       Clean();
     }
   }

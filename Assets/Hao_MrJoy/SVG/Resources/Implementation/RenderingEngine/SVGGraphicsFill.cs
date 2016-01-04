@@ -8,73 +8,75 @@ public class SVGGraphicsFill : ISVGPathDraw {
   private const sbyte FILL_FLAG = -1;
   private readonly int[,] _neighbor = { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
 
-  private readonly SVGGraphics _graphics;
-  private readonly SVGBasicDraw _basicDraw;
+  private readonly SVGGraphics graphics;
+  private readonly SVGBasicDraw basicDraw;
 
-  private sbyte _flagStep;
-  private sbyte[,] _flag;
+  private sbyte flagStep;
+  private sbyte[,] flag;
 
-  private int _width, _height;
+  private int width, height;
 
-  private int _subW, _subH;
-  private int _inZoneL, _inZoneT;
+  private int subW, subH;
+  private int inZoneL, inZoneT;
 
-  private Vector2 _boundTopLeft, _boundBottomRight;
+  private Vector2 boundTopLeft, boundBottomRight;
 
-  public SVGGraphicsFill(SVGGraphics graphics) {
-    _graphics = graphics;
-    _flagStep = 0;
-    _width = 0;
-    _height = 0;
+  public SVGGraphicsFill(SVGGraphics _graphics) {
+    graphics = _graphics;
+    flagStep = 0;
+    width = 0;
+    height = 0;
 
-    _subW = _subH = 0;
+    subW = subH = 0;
     //Basic Draw
-    _basicDraw = new SVGBasicDraw { SetPixelMethod = SetPixelForFlag };
+    basicDraw = new SVGBasicDraw { SetPixelMethod = SetPixelForFlag };
   }
 
-  public void SetSize(float width, float height) {
-    _width = (int)width;
-    _height = (int)height;
-    _subW = _width;
-    _subH = _height;
-    _flag = new sbyte[(int)width + 1, (int)height + 1];
+  public Vector2 Size {
+    set {
+      width   = (int)value.x;
+      height  = (int)value.y;
+      subW    = width;
+      subH    = height;
+      flag    = new sbyte[(int)width + 1, (int)height + 1];
+    }
   }
 
   public void SetColor(Color color) {
-    _graphics.SetColor(color);
+    graphics.SetColor(color);
   }
 
   private void SetPixelForFlag(int x, int y) {
     if(isInZone(x, y))
-      _flag[x, y] = _flagStep;
+      flag[x, y] = flagStep;
   }
 
   private bool isInZone(int x, int y) {
-    return ((x >= _inZoneL && x < _subW + _inZoneL) && (y >= _inZoneT && y < _subH + _inZoneT));
+    return ((x >= inZoneL && x < subW + inZoneL) && (y >= inZoneT && y < subH + inZoneT));
   }
 
   private void ExpandBounds(Vector2 point) {
-    if(point.x < _boundTopLeft.x)
-      _boundTopLeft.x = point.x;
-    if(point.y < _boundTopLeft.y)
-      _boundTopLeft.y = point.y;
+    if(point.x < boundTopLeft.x)
+      boundTopLeft.x = point.x;
+    if(point.y < boundTopLeft.y)
+      boundTopLeft.y = point.y;
 
-    if(point.x > _boundBottomRight.x)
-      _boundBottomRight.x = point.x;
-    if(point.y > _boundBottomRight.y)
-      _boundBottomRight.y = point.y;
+    if(point.x > boundBottomRight.x)
+      boundBottomRight.x = point.x;
+    if(point.y > boundBottomRight.y)
+      boundBottomRight.y = point.y;
   }
 
   private void ExpandBounds(Vector2 point, float dx, float dy) {
-    if(point.x - dy < _boundTopLeft.x)
-      _boundTopLeft.x = point.x - dx;
-    if(point.y - dx < _boundTopLeft.y)
-      _boundTopLeft.y = point.y - dy;
+    if(point.x - dy < boundTopLeft.x)
+      boundTopLeft.x = point.x - dx;
+    if(point.y - dx < boundTopLeft.y)
+      boundTopLeft.y = point.y - dy;
 
-    if(point.x + dx > _boundBottomRight.x)
-      _boundBottomRight.x = point.x + dx;
-    if(point.y + dy > _boundBottomRight.y)
-      _boundBottomRight.y = point.y + dy;
+    if(point.x + dx > boundBottomRight.x)
+      boundBottomRight.x = point.x + dx;
+    if(point.y + dy > boundBottomRight.y)
+      boundBottomRight.y = point.y + dy;
   }
 
   private void ExpandBounds(Vector2[] points) {
@@ -91,12 +93,12 @@ public class SVGGraphicsFill : ISVGPathDraw {
   }
 
   private void Fill(int x, int y) {
-    // Debug.LogFormat("Fill called: w:{0}, h:{1}, subW:{2}, subH:{3}, inZoneL:{4}, inZoneT:{5}, x:{6}, y:{7}", _width, _height, _subW, _subH, _inZoneL, _inZoneT, x, y);
+    // Debug.LogFormat("Fill called: w:{0}, h:{1}, subW:{2}, subH:{3}, inZoneL:{4}, inZoneT:{5}, x:{6}, y:{7}", width, height, subW, subH, inZoneL, inZoneT, x, y);
     Profiler.BeginSample("SVGGraphicsFill.Fill");
-    if(!isInZone(x, y) || _flag[x, y] != 0)
+    if(!isInZone(x, y) || flag[x, y] != 0)
       return;
 
-    _flag[x, y] = FILL_FLAG;
+    flag[x, y] = FILL_FLAG;
     _stack.Clear();
 
     IntVector2 temp = new IntVector2 { x = x, y = y };
@@ -109,8 +111,8 @@ public class SVGGraphicsFill : ISVGPathDraw {
       for(int t = 0; t < 4; ++t) {
         int tx = temp.x + _neighbor[t, 0];
         int ty = temp.y + _neighbor[t, 1];
-        if(isInZone(tx, ty) && _flag[tx, ty] == 0) {
-          _flag[tx, ty] = FILL_FLAG;
+        if(isInZone(tx, ty) && flag[tx, ty] == 0) {
+          flag[tx, ty] = FILL_FLAG;
           _stack.Push(new IntVector2 { x = tx, y = ty });
         }
       }
@@ -124,61 +126,61 @@ public class SVGGraphicsFill : ISVGPathDraw {
   }
 
   public void ResetSubBuffer() {
-    _boundTopLeft = new Vector2(+10000f, +10000f);
-    _boundBottomRight = new Vector2(-10000f, -10000f);
+    boundTopLeft = new Vector2(+10000f, +10000f);
+    boundBottomRight = new Vector2(-10000f, -10000f);
 
-    _subW = _width;
-    _subH = _height;
-    _inZoneL = 0;
-    _inZoneT = 0;
+    subW = width;
+    subH = height;
+    inZoneL = 0;
+    inZoneT = 0;
 
-    for(int i = 0; i < _width; i++)
-      for(int j = 0; j < _height; j++)
-        _flag[i, j] = 0;
-    _flagStep = 1;
+    for(int i = 0; i < width; i++)
+      for(int j = 0; j < height; j++)
+        flag[i, j] = 0;
+    flagStep = 1;
   }
 
   private void PreEndSubBuffer() {
-    if(_boundTopLeft.x < 0f)
-      _boundTopLeft.x = 0f;
-    if(_boundTopLeft.y < 0f)
-      _boundTopLeft.y = 0f;
-    if(_boundBottomRight.x >= _width)
-      _boundBottomRight.x = _width - 1f;
-    if(_boundBottomRight.y >= _height)
-      _boundBottomRight.y = _height - 1f;
+    if(boundTopLeft.x < 0f)
+      boundTopLeft.x = 0f;
+    if(boundTopLeft.y < 0f)
+      boundTopLeft.y = 0f;
+    if(boundBottomRight.x >= width)
+      boundBottomRight.x = width - 1f;
+    if(boundBottomRight.y >= height)
+      boundBottomRight.y = height - 1f;
 
-    _subW = Math.Abs((int)_boundTopLeft.x - (int)_boundBottomRight.x) + 3;
-    _subH = Math.Abs((int)_boundTopLeft.y - (int)_boundBottomRight.y) + 3;
+    subW = Math.Abs((int)boundTopLeft.x - (int)boundBottomRight.x) + 3;
+    subH = Math.Abs((int)boundTopLeft.y - (int)boundBottomRight.y) + 3;
 
-    _inZoneL = (int)_boundTopLeft.x - 1;
-    _inZoneT = (int)_boundTopLeft.y - 1;
+    inZoneL = (int)boundTopLeft.x - 1;
+    inZoneT = (int)boundTopLeft.y - 1;
 
-    _inZoneL = (_inZoneL < 0) ? 0 : _inZoneL;
-    _inZoneT = (_inZoneT < 0) ? 0 : _inZoneT;
+    inZoneL = (inZoneL < 0) ? 0 : inZoneL;
+    inZoneT = (inZoneT < 0) ? 0 : inZoneT;
 
-    _inZoneL = (_inZoneL >= _width) ? (_width - 1) : _inZoneL;
-    _inZoneT = (_inZoneT >= _height) ? (_height - 1) : _inZoneT;
+    inZoneL = (inZoneL >= width) ? (width - 1) : inZoneL;
+    inZoneT = (inZoneT >= height) ? (height - 1) : inZoneT;
 
-    _subW = (_subW + _inZoneL > _width) ? (_width - _inZoneL) : _subW;
-    _subH = (_subH + _inZoneT > _height) ? (_height - _inZoneT) : _subH;
+    subW = (subW + inZoneL > width) ? (width - inZoneL) : subW;
+    subH = (subH + inZoneT > height) ? (height - inZoneT) : subH;
 
-    Fill(_inZoneL, _inZoneT);
+    Fill(inZoneL, inZoneT);
     // TODO: This seems buggy:
-    if((_inZoneL == 0) && (_inZoneT == 0))
-      Fill(_subW - 1, _subH - 1);
+    if((inZoneL == 0) && (inZoneT == 0))
+      Fill(subW - 1, subH - 1);
   }
 
   private void FillInZone() {
-    for(int i = _inZoneL; i < _subW + _inZoneL; i++)
-      for(int j = _inZoneT; j < _subH + _inZoneT; j++)
-        if(_flag[i, j] != FILL_FLAG)
-          _graphics.SetPixel(i, j);
+    for(int i = inZoneL; i < subW + inZoneL; i++)
+      for(int j = inZoneT; j < subH + inZoneT; j++)
+        if(flag[i, j] != FILL_FLAG)
+          graphics.SetPixel(i, j);
   }
 
   public void EndSubBuffer() {
     PreEndSubBuffer();
-    Fill(_inZoneL, _inZoneT);
+    Fill(inZoneL, inZoneT);
     FillInZone();
   }
 
@@ -201,19 +203,19 @@ public class SVGGraphicsFill : ISVGPathDraw {
 
     FillInZone();
 
-    _graphics.SetColor(strokePathColor.Value.color);
+    graphics.SetColor(strokePathColor.Value.color);
 
     FillInZone();
   }
 
   public void EndSubBuffer(SVGLinearGradientBrush linearGradientBrush) {
     PreEndSubBuffer();
-    for(int i = _inZoneL; i < _subW + _inZoneL; i++) {
-      for(int j = _inZoneT; j < _subH + _inZoneT; j++) {
-        if(_flag[i, j] == 0) {
+    for(int i = inZoneL; i < subW + inZoneL; i++) {
+      for(int j = inZoneT; j < subH + inZoneT; j++) {
+        if(flag[i, j] == 0) {
           Color _color = linearGradientBrush.GetColor(i, j);
-          _graphics.SetColor(_color);
-          _graphics.SetPixel(i, j);
+          graphics.SetColor(_color);
+          graphics.SetPixel(i, j);
         }
       }
     }
@@ -222,17 +224,17 @@ public class SVGGraphicsFill : ISVGPathDraw {
   public void EndSubBuffer(SVGLinearGradientBrush linearGradientBrush, SVGColor? strokePathColor) {
     PreEndSubBuffer();
 
-    for(int i = _inZoneL; i < _subW + _inZoneL; i++) {
-      for(int j = _inZoneT; j < _subH + _inZoneT; j++) {
-        if(_flag[i, j] != FILL_FLAG) {
+    for(int i = inZoneL; i < subW + inZoneL; i++) {
+      for(int j = inZoneT; j < subH + inZoneT; j++) {
+        if(flag[i, j] != FILL_FLAG) {
           Color _color = linearGradientBrush.GetColor(i, j);
-          _graphics.SetColor(_color);
-          _graphics.SetPixel(i, j);
+          graphics.SetColor(_color);
+          graphics.SetPixel(i, j);
         }
       }
     }
 
-    _graphics.SetColor(strokePathColor.Value.color);
+    graphics.SetColor(strokePathColor.Value.color);
 
     FillInZone();
   }
@@ -240,12 +242,12 @@ public class SVGGraphicsFill : ISVGPathDraw {
   public void EndSubBuffer(SVGRadialGradientBrush radialGradientBrush) {
     PreEndSubBuffer();
 
-    for(int i = _inZoneL; i < _subW + _inZoneL; i++) {
-      for(int j = _inZoneT; j < _subH + _inZoneT; j++) {
-        if(_flag[i, j] == 0) {
+    for(int i = inZoneL; i < subW + inZoneL; i++) {
+      for(int j = inZoneT; j < subH + inZoneT; j++) {
+        if(flag[i, j] == 0) {
           Color _color = radialGradientBrush.GetColor(i, j);
-          _graphics.SetColor(_color);
-          _graphics.SetPixel(i, j);
+          graphics.SetColor(_color);
+          graphics.SetPixel(i, j);
         }
       }
     }
@@ -254,17 +256,17 @@ public class SVGGraphicsFill : ISVGPathDraw {
   public void EndSubBuffer(SVGRadialGradientBrush radialGradientBrush, SVGColor? strokePathColor) {
     PreEndSubBuffer();
 
-    for(int i = _inZoneL; i < _subW + _inZoneL; ++i) {
-      for(int j = _inZoneT; j < _subH + _inZoneT; ++j) {
-        if(_flag[i, j] != FILL_FLAG) {
+    for(int i = inZoneL; i < subW + inZoneL; ++i) {
+      for(int j = inZoneT; j < subH + inZoneT; ++j) {
+        if(flag[i, j] != FILL_FLAG) {
           Color _color = radialGradientBrush.GetColor(i, j);
-          _graphics.SetColor(_color);
-          _graphics.SetPixel(i, j);
+          graphics.SetColor(_color);
+          graphics.SetPixel(i, j);
         }
       }
     }
 
-    _graphics.SetColor(strokePathColor.Value.color);
+    graphics.SetColor(strokePathColor.Value.color);
 
     FillInZone();
   }
@@ -277,11 +279,11 @@ public class SVGGraphicsFill : ISVGPathDraw {
     ExpandBounds(p3);
     ExpandBounds(p4);
 
-    _basicDraw.MoveTo(p1);
-    _basicDraw.LineTo(p2);
-    _basicDraw.LineTo(p3);
-    _basicDraw.LineTo(p4);
-    _basicDraw.LineTo(p1);
+    basicDraw.MoveTo(p1);
+    basicDraw.LineTo(p2);
+    basicDraw.LineTo(p3);
+    basicDraw.LineTo(p4);
+    basicDraw.LineTo(p1);
   }
 
   public void Rect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) {
@@ -315,21 +317,21 @@ public class SVGGraphicsFill : ISVGPathDraw {
     ExpandBounds(p7, dxy, dxy);
     ExpandBounds(p8, dxy, dxy);
 
-    _basicDraw.MoveTo(p1);
-    _basicDraw.LineTo(p2);
-    _basicDraw.ArcTo(r1, r2, angle, false, true, p3);
+    basicDraw.MoveTo(p1);
+    basicDraw.LineTo(p2);
+    basicDraw.ArcTo(r1, r2, angle, false, true, p3);
 
-    _basicDraw.MoveTo(p3);
-    _basicDraw.LineTo(p4);
-    _basicDraw.ArcTo(r1, r2, angle, false, true, p5);
+    basicDraw.MoveTo(p3);
+    basicDraw.LineTo(p4);
+    basicDraw.ArcTo(r1, r2, angle, false, true, p5);
 
-    _basicDraw.MoveTo(p5);
-    _basicDraw.LineTo(p6);
-    _basicDraw.ArcTo(r1, r2, angle, false, true, p7);
+    basicDraw.MoveTo(p5);
+    basicDraw.LineTo(p6);
+    basicDraw.ArcTo(r1, r2, angle, false, true, p7);
 
-    _basicDraw.MoveTo(p7);
-    _basicDraw.LineTo(p8);
-    _basicDraw.ArcTo(r1, r2, angle, false, true, p1);
+    basicDraw.MoveTo(p7);
+    basicDraw.LineTo(p8);
+    basicDraw.ArcTo(r1, r2, angle, false, true, p1);
   }
 
   public void RoundedRect(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p5, Vector2 p6, Vector2 p7, Vector2 p8,
@@ -362,7 +364,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
     ResetSubBuffer();
     ExpandBounds(p, (int)r + 2, (int)r + 2);
 
-    _basicDraw.Circle(p, r);
+    basicDraw.Circle(p, r);
   }
 
   public void Circle(Vector2 p, float r) {
@@ -385,7 +387,7 @@ public class SVGGraphicsFill : ISVGPathDraw {
     int d = (rx > ry) ? (int)rx : (int)ry;
     ExpandBounds(p, d, d);
 
-    _basicDraw.Ellipse(p, (int)rx, (int)ry, angle);
+    basicDraw.Ellipse(p, (int)rx, (int)ry, angle);
   }
 
   public void Ellipse(Vector2 p, float rx, float ry, float angle) {
@@ -409,11 +411,11 @@ public class SVGGraphicsFill : ISVGPathDraw {
       ResetSubBuffer();
       ExpandBounds(points);
 
-      _basicDraw.MoveTo(points[0]);
+      basicDraw.MoveTo(points[0]);
       int _length = points.GetLength(0);
       for(int i = 1; i < _length; i++)
-        _basicDraw.LineTo(points[i]);
-      _basicDraw.LineTo(points[0]);
+        basicDraw.LineTo(points[i]);
+      basicDraw.LineTo(points[0]);
     }
   }
 
@@ -500,40 +502,40 @@ public class SVGGraphicsFill : ISVGPathDraw {
 
   public void CircleTo(Vector2 p, float r) {
     ExpandBounds(p, (int)r + 1, (int)r + 1);
-    _basicDraw.Circle(p, r);
+    basicDraw.Circle(p, r);
   }
 
   public void EllipseTo(Vector2 p, float rx, float ry, float angle) {
     int d = (rx > ry) ? (int)rx + 2 : (int)ry + 2;
     ExpandBounds(p, d, d);
-    _basicDraw.Ellipse(p, (int)rx, (int)ry, angle);
+    basicDraw.Ellipse(p, (int)rx, (int)ry, angle);
   }
 
   public void LineTo(Vector2 p) {
     ExpandBounds(p);
-    _basicDraw.LineTo(p);
+    basicDraw.LineTo(p);
   }
 
   public void MoveTo(Vector2 p) {
     ExpandBounds(p);
-    _basicDraw.MoveTo(p);
+    basicDraw.MoveTo(p);
   }
 
   public void ArcTo(float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag, Vector2 p) {
     ExpandBounds(p, (r1 > r2) ? 2 * (int)r1 + 2 : 2 * (int)r2 + 2, (r1 > r2) ? 2 * (int)r1 + 2 : 2 * (int)r2 + 2);
-    _basicDraw.ArcTo(r1, r2, angle, largeArcFlag, sweepFlag, p);
+    basicDraw.ArcTo(r1, r2, angle, largeArcFlag, sweepFlag, p);
   }
 
   public void CubicCurveTo(Vector2 p1, Vector2 p2, Vector2 p) {
     ExpandBounds(p1);
     ExpandBounds(p2);
     ExpandBounds(p);
-    _basicDraw.CubicCurveTo(p1, p2, p);
+    basicDraw.CubicCurveTo(p1, p2, p);
   }
 
   public void QuadraticCurveTo(Vector2 p1, Vector2 p) {
     ExpandBounds(p1);
     ExpandBounds(p);
-    _basicDraw.QuadraticCurveTo(p1, p);
+    basicDraw.QuadraticCurveTo(p1, p);
   }
 }
