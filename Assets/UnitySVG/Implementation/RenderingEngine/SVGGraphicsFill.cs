@@ -104,6 +104,10 @@ public class SVGGraphicsFill : ISVGPathDraw {
     flag[x, y] = FILL_FLAG;
     _stack.Clear();
 
+    int anticipatedCapacityNeed = ((width + height) / 2) * 5;
+    if(_stack.Capacity < anticipatedCapacityNeed)
+      _stack.Capacity = anticipatedCapacityNeed;
+
     IntVector2 temp = new IntVector2 { x = x, y = y };
     _stack.Push(temp);
 
