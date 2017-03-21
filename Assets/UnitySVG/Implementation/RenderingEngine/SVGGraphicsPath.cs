@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public enum SVGFillRule : ushort {
   NoneZero = 0,

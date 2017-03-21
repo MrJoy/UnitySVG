@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnitySVG;
+using UnityEngine.Profiling;
 
 public class SVGPathElement : SVGTransformable, ISVGDrawable {
   private readonly SVGPathSegList _segList;

@@ -1,36 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
-SceneSettings:
+OcclusionCullingSettings:
   m_ObjectHideFlags: 0
-  m_PVSData: 
-  m_PVSObjectsArray: []
-  m_PVSPortalsArray: []
+  serializedVersion: 2
   m_OcclusionBakeSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!196 &2
 NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
+    agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
-    accuratePlacement: 0
     minRegionArea: 2
-    cellSize: 0.16666666
     manualCellSize: 0
+    cellSize: 0.16666666
+    accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!104 &13
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 6
+  serializedVersion: 7
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -54,12 +55,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &17
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 6
+  serializedVersion: 7
   m_GIWorkflowMode: 1
-  m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -70,17 +71,22 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 3
+    serializedVersion: 4
     m_Resolution: 1
     m_BakeResolution: 50
     m_TextureWidth: 1024
     m_TextureHeight: 1024
+    m_AO: 0
     m_AOMaxDistance: 1
-    m_Padding: 2
     m_CompAOExponent: 0
+    m_CompAOExponentDirect: 0
+    m_Padding: 2
     m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
     m_TextureCompression: 0
+    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
+    m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
   m_LightingDataAsset: {fileID: 0}
@@ -90,13 +96,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 24}
-  - 33: {fileID: 23}
-  - 64: {fileID: 22}
-  - 23: {fileID: 21}
-  - 114: {fileID: 20}
+  - component: {fileID: 24}
+  - component: {fileID: 23}
+  - component: {fileID: 22}
+  - component: {fileID: 21}
+  - component: {fileID: 20}
   m_Layer: 0
   m_Name: tiger
   m_TagString: Untagged
@@ -116,7 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 5526ef80d6d7342859fad7964808fdca, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!23 &21
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,17 +135,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -154,6 +168,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &23
 MeshFilter:
@@ -174,18 +190,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &25
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 30}
-  - 20: {fileID: 29}
-  - 92: {fileID: 28}
-  - 124: {fileID: 27}
-  - 81: {fileID: 26}
+  - component: {fileID: 30}
+  - component: {fileID: 29}
+  - component: {fileID: 28}
+  - component: {fileID: 27}
+  - component: {fileID: 26}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -260,18 +277,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &243507134
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 243507135}
-  - 33: {fileID: 243507137}
-  - 64: {fileID: 243507138}
-  - 23: {fileID: 243507136}
-  - 114: {fileID: 243507139}
+  - component: {fileID: 243507135}
+  - component: {fileID: 243507137}
+  - component: {fileID: 243507138}
+  - component: {fileID: 243507136}
+  - component: {fileID: 243507139}
   m_Layer: 0
   m_Name: path1
   m_TagString: Untagged
@@ -291,6 +309,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &243507136
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -300,17 +319,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -335,6 +359,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &243507139
 MonoBehaviour:
@@ -348,19 +374,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 2268932f9d8c84ae28ffd0a78885f00e, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &346929311
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 346929312}
-  - 33: {fileID: 346929314}
-  - 64: {fileID: 346929315}
-  - 23: {fileID: 346929313}
-  - 114: {fileID: 346929316}
+  - component: {fileID: 346929312}
+  - component: {fileID: 346929314}
+  - component: {fileID: 346929315}
+  - component: {fileID: 346929313}
+  - component: {fileID: 346929316}
   m_Layer: 0
   m_Name: arc1
   m_TagString: Untagged
@@ -380,6 +409,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &346929313
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -389,17 +419,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -424,6 +459,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &346929316
 MonoBehaviour:
@@ -437,19 +474,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 9c11505acd3334dd49c26981ad8853a9, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &392277589
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 392277590}
-  - 33: {fileID: 392277592}
-  - 64: {fileID: 392277593}
-  - 23: {fileID: 392277591}
-  - 114: {fileID: 392277594}
+  - component: {fileID: 392277590}
+  - component: {fileID: 392277592}
+  - component: {fileID: 392277593}
+  - component: {fileID: 392277591}
+  - component: {fileID: 392277594}
   m_Layer: 0
   m_Name: rect2
   m_TagString: Untagged
@@ -469,6 +509,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &392277591
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -478,17 +519,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -513,6 +559,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &392277594
 MonoBehaviour:
@@ -526,19 +574,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: c2545c8d9994746c092fb7a7023206e2, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &496905653
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 496905654}
-  - 33: {fileID: 496905656}
-  - 64: {fileID: 496905657}
-  - 23: {fileID: 496905655}
-  - 114: {fileID: 496905658}
+  - component: {fileID: 496905654}
+  - component: {fileID: 496905656}
+  - component: {fileID: 496905657}
+  - component: {fileID: 496905655}
+  - component: {fileID: 496905658}
   m_Layer: 0
   m_Name: circle1
   m_TagString: Untagged
@@ -558,6 +609,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &496905655
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -567,17 +619,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -602,6 +659,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &496905658
 MonoBehaviour:
@@ -615,19 +674,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 4b1d125e9c8d84780a99629ca0a7d768, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &587760788
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 587760789}
-  - 33: {fileID: 587760791}
-  - 64: {fileID: 587760792}
-  - 23: {fileID: 587760790}
-  - 114: {fileID: 587760793}
+  - component: {fileID: 587760789}
+  - component: {fileID: 587760791}
+  - component: {fileID: 587760792}
+  - component: {fileID: 587760790}
+  - component: {fileID: 587760793}
   m_Layer: 0
   m_Name: path3
   m_TagString: Untagged
@@ -647,6 +709,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &587760790
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -656,17 +719,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -691,6 +759,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &587760793
 MonoBehaviour:
@@ -704,19 +774,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: a040285ffb356451198844403cc242b3, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &593286091
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 593286092}
-  - 33: {fileID: 593286094}
-  - 64: {fileID: 593286095}
-  - 23: {fileID: 593286093}
-  - 114: {fileID: 593286096}
+  - component: {fileID: 593286092}
+  - component: {fileID: 593286094}
+  - component: {fileID: 593286095}
+  - component: {fileID: 593286093}
+  - component: {fileID: 593286096}
   m_Layer: 0
   m_Name: radgrad1
   m_TagString: Untagged
@@ -736,6 +809,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &593286093
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -745,17 +819,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -780,6 +859,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &593286096
 MonoBehaviour:
@@ -793,19 +874,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: c7b0d77386e2b426dbc764553e601799, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &881726710
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 881726711}
-  - 33: {fileID: 881726713}
-  - 64: {fileID: 881726714}
-  - 23: {fileID: 881726712}
-  - 114: {fileID: 881726715}
+  - component: {fileID: 881726711}
+  - component: {fileID: 881726713}
+  - component: {fileID: 881726714}
+  - component: {fileID: 881726712}
+  - component: {fileID: 881726715}
   m_Layer: 0
   m_Name: none
   m_TagString: Untagged
@@ -825,6 +909,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &881726712
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -834,17 +919,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -869,6 +959,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &881726715
 MonoBehaviour:
@@ -882,19 +974,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 4769247eb286a4faabbd21567ef7d5d2, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &1260368763
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1260368764}
-  - 33: {fileID: 1260368766}
-  - 64: {fileID: 1260368767}
-  - 23: {fileID: 1260368765}
-  - 114: {fileID: 1260368768}
+  - component: {fileID: 1260368764}
+  - component: {fileID: 1260368766}
+  - component: {fileID: 1260368767}
+  - component: {fileID: 1260368765}
+  - component: {fileID: 1260368768}
   m_Layer: 0
   m_Name: lines1
   m_TagString: Untagged
@@ -914,6 +1009,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1260368765
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -923,17 +1019,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -958,6 +1059,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1260368768
 MonoBehaviour:
@@ -971,19 +1074,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 9ed41d2b626b344d2bd96a4f792485b5, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &1346698413
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1346698414}
-  - 33: {fileID: 1346698416}
-  - 64: {fileID: 1346698417}
-  - 23: {fileID: 1346698415}
-  - 114: {fileID: 1346698418}
+  - component: {fileID: 1346698414}
+  - component: {fileID: 1346698416}
+  - component: {fileID: 1346698417}
+  - component: {fileID: 1346698415}
+  - component: {fileID: 1346698418}
   m_Layer: 0
   m_Name: arc2
   m_TagString: Untagged
@@ -1003,6 +1109,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1346698415
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1012,17 +1119,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1047,6 +1159,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1346698418
 MonoBehaviour:
@@ -1060,19 +1174,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: f7a83dad7eccd4f39812661fee7bf285, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &1405422295
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1405422296}
-  - 33: {fileID: 1405422298}
-  - 64: {fileID: 1405422299}
-  - 23: {fileID: 1405422297}
-  - 114: {fileID: 1405422300}
+  - component: {fileID: 1405422296}
+  - component: {fileID: 1405422298}
+  - component: {fileID: 1405422299}
+  - component: {fileID: 1405422297}
+  - component: {fileID: 1405422300}
   m_Layer: 0
   m_Name: lion
   m_TagString: Untagged
@@ -1092,6 +1209,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1405422297
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1101,17 +1219,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1136,6 +1259,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1405422300
 MonoBehaviour:
@@ -1149,19 +1274,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 8a395d64ef14b443a87fd383c19bb58c, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &1500756937
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1500756938}
-  - 33: {fileID: 1500756940}
-  - 64: {fileID: 1500756941}
-  - 23: {fileID: 1500756939}
-  - 114: {fileID: 1500756942}
+  - component: {fileID: 1500756938}
+  - component: {fileID: 1500756940}
+  - component: {fileID: 1500756941}
+  - component: {fileID: 1500756939}
+  - component: {fileID: 1500756942}
   m_Layer: 0
   m_Name: lineargradient1
   m_TagString: Untagged
@@ -1181,6 +1309,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1500756939
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1190,17 +1319,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1225,6 +1359,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1500756942
 MonoBehaviour:
@@ -1238,19 +1374,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: e3f6aaf8394bc4ed7b78185625feac37, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &1720699317
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1720699318}
-  - 33: {fileID: 1720699320}
-  - 64: {fileID: 1720699321}
-  - 23: {fileID: 1720699319}
-  - 114: {fileID: 1720699322}
+  - component: {fileID: 1720699318}
+  - component: {fileID: 1720699320}
+  - component: {fileID: 1720699321}
+  - component: {fileID: 1720699319}
+  - component: {fileID: 1720699322}
   m_Layer: 0
   m_Name: path2
   m_TagString: Untagged
@@ -1270,6 +1409,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1720699319
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1279,17 +1419,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1314,6 +1459,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1720699322
 MonoBehaviour:
@@ -1327,19 +1474,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 1805eee13a2014d5ea9a586e0d0560ee, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &1727401827
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1727401828}
-  - 33: {fileID: 1727401830}
-  - 64: {fileID: 1727401831}
-  - 23: {fileID: 1727401829}
-  - 114: {fileID: 1727401832}
+  - component: {fileID: 1727401828}
+  - component: {fileID: 1727401830}
+  - component: {fileID: 1727401831}
+  - component: {fileID: 1727401829}
+  - component: {fileID: 1727401832}
   m_Layer: 0
   m_Name: arc3
   m_TagString: Untagged
@@ -1359,6 +1509,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1727401829
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1368,17 +1519,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1403,6 +1559,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1727401832
 MonoBehaviour:
@@ -1416,19 +1574,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: e4c0cc2d4572f45a1b29a021feb7e1b9, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &1780094373
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1780094374}
-  - 33: {fileID: 1780094376}
-  - 64: {fileID: 1780094377}
-  - 23: {fileID: 1780094375}
-  - 114: {fileID: 1780094378}
+  - component: {fileID: 1780094374}
+  - component: {fileID: 1780094376}
+  - component: {fileID: 1780094377}
+  - component: {fileID: 1780094375}
+  - component: {fileID: 1780094378}
   m_Layer: 0
   m_Name: polyline1
   m_TagString: Untagged
@@ -1448,6 +1609,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1780094375
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1457,17 +1619,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1492,6 +1659,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1780094378
 MonoBehaviour:
@@ -1505,19 +1674,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: bdd68603fbf20464fa6d8ecffbb07690, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &1888689892
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1888689893}
-  - 33: {fileID: 1888689895}
-  - 64: {fileID: 1888689896}
-  - 23: {fileID: 1888689894}
-  - 114: {fileID: 1888689897}
+  - component: {fileID: 1888689893}
+  - component: {fileID: 1888689895}
+  - component: {fileID: 1888689896}
+  - component: {fileID: 1888689894}
+  - component: {fileID: 1888689897}
   m_Layer: 0
   m_Name: polyline2
   m_TagString: Untagged
@@ -1537,6 +1709,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1888689894
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1546,17 +1719,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1581,6 +1759,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1888689897
 MonoBehaviour:
@@ -1594,19 +1774,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 421a8db9b6ed841c394c51edd695620e, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &1911835905
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1911835906}
-  - 33: {fileID: 1911835908}
-  - 64: {fileID: 1911835909}
-  - 23: {fileID: 1911835907}
-  - 114: {fileID: 1911835910}
+  - component: {fileID: 1911835906}
+  - component: {fileID: 1911835908}
+  - component: {fileID: 1911835909}
+  - component: {fileID: 1911835907}
+  - component: {fileID: 1911835910}
   m_Layer: 0
   m_Name: test1
   m_TagString: Untagged
@@ -1626,6 +1809,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1911835907
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1635,17 +1819,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1670,6 +1859,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1911835910
 MonoBehaviour:
@@ -1683,19 +1874,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 1a881d02cd6d34d0f8814e6a92b19c2f, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &2024987706
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2024987707}
-  - 33: {fileID: 2024987709}
-  - 64: {fileID: 2024987710}
-  - 23: {fileID: 2024987708}
-  - 114: {fileID: 2024987711}
+  - component: {fileID: 2024987707}
+  - component: {fileID: 2024987709}
+  - component: {fileID: 2024987710}
+  - component: {fileID: 2024987708}
+  - component: {fileID: 2024987711}
   m_Layer: 0
   m_Name: test2
   m_TagString: Untagged
@@ -1715,6 +1909,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2024987708
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1724,17 +1919,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1759,6 +1959,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &2024987711
 MonoBehaviour:
@@ -1772,19 +1974,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: 97cc7aa9aaa064cb38b78afc029b5aac, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9
 --- !u!1 &2049339317
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2049339318}
-  - 33: {fileID: 2049339320}
-  - 64: {fileID: 2049339321}
-  - 23: {fileID: 2049339319}
-  - 114: {fileID: 2049339322}
+  - component: {fileID: 2049339318}
+  - component: {fileID: 2049339320}
+  - component: {fileID: 2049339321}
+  - component: {fileID: 2049339319}
+  - component: {fileID: 2049339322}
   m_Layer: 0
   m_Name: rect1
   m_TagString: Untagged
@@ -1804,6 +2009,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2049339319
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1813,17 +2019,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 51edb96bdd118a63d000decb613f5639, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1848,6 +2059,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &2049339322
 MonoBehaviour:
@@ -1861,4 +2074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SVGFile: {fileID: 4900000, guid: bd68f1af0cd774dc4bde7d2e161fea35, type: 3}
-  useFastButBloatedRenderer: 1
+  fastRenderer: 0
+  wrapMode: 1
+  filterMode: 2
+  anisoLevel: 9

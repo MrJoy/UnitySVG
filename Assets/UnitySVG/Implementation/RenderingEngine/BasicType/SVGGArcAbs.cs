@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class SVGGArcAbs : ISVGPathSegment {
   private readonly Vector2 point;
