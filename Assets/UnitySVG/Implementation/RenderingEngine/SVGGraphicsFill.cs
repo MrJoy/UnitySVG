@@ -128,10 +128,6 @@ public class SVGGraphicsFill : ISVGPathDraw {
     Profiler.EndSample();
   }
 
-  public void Fill(float x, float y) {
-    Fill((int)x, (int)y);
-  }
-
   public void ResetSubBuffer() {
     boundTopLeft = new Vector2(+10000f, +10000f);
     boundBottomRight = new Vector2(-10000f, -10000f);
@@ -194,14 +190,14 @@ public class SVGGraphicsFill : ISVGPathDraw {
   public void EndSubBuffer(Vector2[] points) {
     PreEndSubBuffer();
     for(int i = 0; i < points.GetLength(0); i++)
-      Fill(points[i].x, points[i].y);
+      Fill((int)points[i].x, (int)points[i].y);
     FillInZone();
   }
 
   public void EndSubBuffer(Vector2 point) {
     PreEndSubBuffer();
 
-    Fill(point.x, point.y);
+    Fill((int)point.x, (int)point.y);
     FillInZone();
   }
 
