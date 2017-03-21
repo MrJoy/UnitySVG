@@ -96,8 +96,10 @@ public class SVGGraphicsFill : ISVGPathDraw {
   private void Fill(int x, int y) {
     // Debug.LogFormat("Fill called: w:{0}, h:{1}, subW:{2}, subH:{3}, inZoneL:{4}, inZoneT:{5}, x:{6}, y:{7}", width, height, subW, subH, inZoneL, inZoneT, x, y);
     Profiler.BeginSample("SVGGraphicsFill.Fill");
-    if(!isInZone(x, y) || flag[x, y] != 0)
+    if(!isInZone(x, y) || flag[x, y] != 0) {
+      Profiler.EndSample();
       return;
+    }
 
     flag[x, y] = FILL_FLAG;
     _stack.Clear();
