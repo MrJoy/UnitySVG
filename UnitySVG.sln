@@ -1,9 +1,9 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{C825E391-339B-34F5-AA31-4CB7ADB4FDF1}") = "UnitySVG", "Assembly-CSharp.csproj", "{BC613454-DFE0-776F-0E71-475893EB0160}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitySVG", "Assembly-CSharp.csproj", "{BC613454-DFE0-776F-0E71-475893EB0160}"
 EndProject
-Project("{C825E391-339B-34F5-AA31-4CB7ADB4FDF1}") = "UnitySVG", "Assembly-CSharp-Editor.csproj", "{6D054D44-9FEA-FDD9-EA1B-35B8981E0B0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitySVG", "Assembly-CSharp-Editor.csproj", "{6D054D44-9FEA-FDD9-EA1B-35B8981E0B0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
