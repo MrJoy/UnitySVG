@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnitySVG;
+using UnityEngine.Profiling;
 
 public class SVGPathElement : SVGTransformable, ISVGDrawable {
   private readonly SVGPathSegList _segList;
@@ -19,6 +20,7 @@ public class SVGPathElement : SVGTransformable, ISVGDrawable {
     string dstr = attrList.GetValue("d");
     int nbSegments = 0;
     for(int i = 0; i < dstr.Length; ++i) {
+      // TODO: Make safety-checking optional, and on-by-default in development.
       switch(dstr[i]) {
       case 'Z':
       case 'z':

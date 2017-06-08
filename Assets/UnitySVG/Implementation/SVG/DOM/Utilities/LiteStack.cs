@@ -4,7 +4,15 @@ using System.Collections.Generic;
 // System.Collections.Generic.Stack<T> pulls in an extra DLL on the webplayer.
 public class LiteStack<T> {
   private int idx = 0;
-  private readonly List<T> stack = new List<T>();
+  private readonly List<T> stack;
+
+  public LiteStack() {
+    stack = new List<T>();
+  }
+
+  public LiteStack(int cap) {
+    stack = new List<T>(cap);
+  }
 
   public void Push(T obj) {
     idx++;
@@ -36,5 +44,10 @@ public class LiteStack<T> {
   public void Clear() {
     stack.Clear();
     idx = 0;
+  }
+
+  public int Capacity {
+    get { return stack.Capacity; }
+    set { stack.Capacity = value; }
   }
 }

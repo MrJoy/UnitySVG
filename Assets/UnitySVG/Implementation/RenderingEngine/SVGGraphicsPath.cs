@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public enum SVGFillRule : ushort {
   NoneZero = 0,
@@ -24,24 +25,20 @@ public class SVGGraphicsPath {
 
   public Matrix2x3 matrixTransform {
     get {
-      Profiler.BeginSample("SVGGraphicsPath.matrixTranform");
       if(_matrixTransform == null)
         _matrixTransform = transformList.Consolidate().matrix;
-      Profiler.EndSample();
       return _matrixTransform;
     }
   }
 
   public float transformAngle {
     get {
-      Profiler.BeginSample("SVGGraphicsPath.transformAngle");
       float angle = 0.0f;
       for(int i = 0; i < transformList.Count; ++i) {
         SVGTransform temp = transformList[i];
         if(temp.type == SVGTransformMode.Rotate)
           angle += temp.angle;
       }
-      Profiler.EndSample();
       return angle;
     }
   }
@@ -173,29 +170,34 @@ public class SVGGraphicsPath {
   }
 
   public Rect GetBound() {
+    Profiler.BeginSample("SVGGraphicsPath.GetBound");
     for(int i = 0; i < listObject.Count; ++i) {
       ISVGPathSegment seg = listObject[i];
       seg.ExpandBounds(this);
     }
 
     Rect tmp = new Rect(boundUL.x - 1, boundUL.y - 1, boundBR.x - boundUL.x + 2, boundBR.y - boundUL.y + 2);
+    Profiler.EndSample();
     return tmp;
   }
 
   public void RenderPath(ISVGPathDraw pathDraw, bool isClose) {
     Profiler.BeginSample("SVGGraphicsPath.RenderPath");
     isClose = !isClose;
-    Profiler.BeginSample("SVGGraphicsPath.RenderPath[for]");
+    Profiler.BeginSample("SVGGraphicsPath.RenderPath[for...]");
     for(int i = 0; i < listObject.Count; i++) {
+      Profiler.BeginSample("SVGGraphicsPath.RenderPath[...each]");
       ISVGPathSegment seg = listObject[i];
       isClose = seg.Render(this, pathDraw) || isClose;
+      Profiler.EndSample();
     }
     Profiler.EndSample();
 
-    Profiler.BeginSample("SVGPathSegment.Render[LineTo]");
-    if(!isClose)
+    if(!isClose) {
+      Profiler.BeginSample("SVGPathSegment.Render[LineTo]");
       pathDraw.LineTo(matrixTransform.Transform(beginPoint));
-    Profiler.EndSample();
+      Profiler.EndSample();
+    }
     Profiler.EndSample();
   }
 }

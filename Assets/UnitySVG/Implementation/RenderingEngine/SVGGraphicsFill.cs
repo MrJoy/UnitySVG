@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Profiling;
 using System;
 
 // TODO: Find a way to break this the hell up.
@@ -95,11 +96,17 @@ public class SVGGraphicsFill : ISVGPathDraw {
   private void Fill(int x, int y) {
     // Debug.LogFormat("Fill called: w:{0}, h:{1}, subW:{2}, subH:{3}, inZoneL:{4}, inZoneT:{5}, x:{6}, y:{7}", width, height, subW, subH, inZoneL, inZoneT, x, y);
     Profiler.BeginSample("SVGGraphicsFill.Fill");
-    if(!isInZone(x, y) || flag[x, y] != 0)
+    if(!isInZone(x, y) || flag[x, y] != 0) {
+      Profiler.EndSample();
       return;
+    }
 
     flag[x, y] = FILL_FLAG;
     _stack.Clear();
+
+    int anticipatedCapacityNeed = ((width + height) / 2) * 5;
+    if(_stack.Capacity < anticipatedCapacityNeed)
+      _stack.Capacity = anticipatedCapacityNeed;
 
     IntVector2 temp = new IntVector2 { x = x, y = y };
     _stack.Push(temp);
@@ -119,10 +126,6 @@ public class SVGGraphicsFill : ISVGPathDraw {
     }
     // Debug.LogFormat("NbIter:{0}", nbIterations);
     Profiler.EndSample();
-  }
-
-  public void Fill(float x, float y) {
-    Fill((int)x, (int)y);
   }
 
   public void ResetSubBuffer() {
@@ -187,14 +190,14 @@ public class SVGGraphicsFill : ISVGPathDraw {
   public void EndSubBuffer(Vector2[] points) {
     PreEndSubBuffer();
     for(int i = 0; i < points.GetLength(0); i++)
-      Fill(points[i].x, points[i].y);
+      Fill((int)points[i].x, (int)points[i].y);
     FillInZone();
   }
 
   public void EndSubBuffer(Vector2 point) {
     PreEndSubBuffer();
 
-    Fill(point.x, point.y);
+    Fill((int)point.x, (int)point.y);
     FillInZone();
   }
 
