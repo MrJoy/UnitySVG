@@ -10,6 +10,7 @@ In order for this to be viable, three things must be true:
 * The resultant visual quality must be acceptable for a significant set of visual styles.  (Both with regard to the complexity of SVG image that can be used and the result of runtime texture compression.)
 * The net user experience must be positive.  (Long pauses == bad, swap thrashing == bad, etc.)
 
+On unity versions 2018.1 or later try using SVG importer by unity which provides more functionality; it can be installed into unity project by going into package manager -> Vector Graphics. More details can be found [here](https://docs.unity3d.com/Packages/com.unity.vectorgraphics@2.0/manual/index.html#using-vector-graphics)
 
 ## Compatibility
 
